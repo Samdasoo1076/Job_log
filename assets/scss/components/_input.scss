@@ -1,0 +1,133 @@
+@charset "utf-8";
+
+/*-------------------------------------------------------------------
+	분류그룹 : 텍스트박스
+	속성순서 : 레이아웃, 크기간격, 박스모양, 글자모양, 문단모양, 기타모양
+-------------------------------------------------------------------*/
+/*-------------------------------------------------------------------
+	@@ Label
+-------------------------------------------------------------------*/
+.form-tit {
+	display: inline-block;
+}
+
+/*-------------------------------------------------------------------
+	@@ Input
+-------------------------------------------------------------------*/
+/* 스타일1 */
+.ui-inp {
+	display: inline-block;
+	position: relative;
+	height: 40px;
+	.inp {
+		height: 100%;
+		line-height: 1.5;
+		padding: 0 10px;
+		border: 1px solid #ddd;
+		border-radius: 0;
+
+		// 기본상태 인터렉션
+		&:focus,
+		&:hover,
+		&.is-focused {
+			border-color: #0089b3;
+		}
+		&:read-only,
+		&:disabled {
+			background-color: #f8f8f8;
+		}
+
+		// 입력상태 인터렉션
+		&:not(:placeholder-shown) + .on-right .btn-clear {
+			display: block;
+		}
+
+		&:not(:placeholder-shown):disabled + .on-right .btn-clear {
+			display: none;
+		}
+
+		&:not(:placeholder-shown):read-only + .on-right .btn-clear {
+			display: none;
+		}
+	}
+
+	.on-right {
+		display: flex;
+		align-items: center;
+		gap: 4rem;
+		position: absolute;
+		right: 0;
+		top: 0;
+		height: 100%;
+	}
+
+	.btn-clear {
+		display: none;
+	}
+}
+
+
+
+/*-------------------------------------------------------------------
+	@@ Textarea
+-------------------------------------------------------------------*/
+/* 스타일 */
+.ui-textarea {
+	.textarea {
+		display: block;
+		padding: 0 10px;
+		width: 100%;
+		border: 1px solid #ddd;
+		border-radius: 0;
+		line-height: 1.5;
+	}
+	&:focus,
+	&:hover,
+	&.is-focused {
+		border-color: #0089b3;
+	}
+}
+
+
+/*-------------------------------------------------------------------
+	@@ Select
+-------------------------------------------------------------------*/
+/* 스타일 */
+.ui-sel {
+	.sel {
+		height: 40px;
+		padding: 0 30px 0 10px;
+		border: 1px solid #ddd;
+		background: url('../demo/ico_select01_black.png') no-repeat right 10px center;
+
+		&:disabled.demo1 {
+			background-color: #f7f7f7;
+		}
+	}
+}
+
+
+
+/*-------------------------------------------------------------------
+	@@ 유형
+-------------------------------------------------------------------*/
+/* File Attach */
+.frm-file {
+	position: relative;
+	display: inline-flex;
+}
+
+.frm-file input.file {
+	position: absolute;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+}
+
+.frm-file input.inp {
+	display: inline-table;
+}
+
+.frm-file .btn-file {
+	display: inline-table;
+}

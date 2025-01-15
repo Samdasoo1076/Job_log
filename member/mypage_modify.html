@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta name="keywords" content="원주미래산업진흥원" />
+	<meta name="description" content="원주미래산업진흥원" />
+	<title>마이페이지 | 원주미래산업진흥원</title>
+	<link rel="stylesheet" type="text/css" href="../../assets/css/WFI.css" />
+
+	<script src="../../assets/js/libs/jquery.min.js"></script>
+	<script src="../../assets/js/libs/librurys.min.js"></script>
+	<script src="../../assets/js/ui/ui.common.js"></script>
+	<script src="../../assets/js/ui/ui.publish.js"></script><!-- 퍼블리싱 전용 (개발적용안함) -->
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+	<!-- 페이지 스크립트 영역 -->
+	<script></script>
+</head>
+
+<body>
+	<!-- 레이아웃 유형구분
+		메인: main-wrapper,
+		서브: sub-wrapper,
+		기타: [기타]-wrapper
+	 -->
+	<div class="wrapper sub-wrapper">
+		<!-- include_header.html -->
+		<header class="header"></header>
+		<!-- // include_header.html -->
+
+		<!-- Container -->
+		<main role="main" class="container">
+			<!-- content -->
+			<div id="content" class="content notice-list-page">
+				<!-- content-header -->
+				<div class="content-header">
+					<!-- Sub Visual -->
+					<div class="visual-wrap visual-05">
+						<div class="inner">
+							<h1>마이페이지</h1>
+							<div class="location">
+								<span class="lc-home"><span class="blind">홈</span></span>
+								<span class="lc-split"><span class="blind">&gt;</span></span>
+								<span class="lc-cate"><span>마이페이지</span></span>
+								<span class="lc-split"><span class="blind">&gt;</span></span> 
+								<span class="lc-current" aria-current="page">나의 회원정보</span>
+							</div>
+						</div>
+					</div>
+					<!-- // Sub Visual -->
+					<!-- Sub Nav -->
+					<div class="snb-wrap">
+						<nav class="nav dep2-nav swiper-container">
+							<ul class="dep2-list swiper-wrapper">
+								<li class="dep2-item swiper-slide">
+									<a href="#" class="dep2-link is-current">나의 회원정보</a>
+								</li>
+								<li class="dep2-item swiper-slide">
+									<a href="#" class="dep2-link">나의 예약현황</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+					<!-- // Sub Nav -->
+				</div>
+				<!-- // content-header -->
+				<!-- content-body -->
+				<div class="content-body">
+					<!-- 게시판목록 페이지 -->
+					<div class="member-page">
+						<!-- 타이틀 영역 -->
+						<div class="title-wrap">
+							<h2 class="title">나의 회원정보</h2>
+						</div>
+						<!-- // 타이틀 영역 -->
+
+						<div class="mypage-wrap">
+							<!-- 첫화면 -->
+							<div class="list-cont">
+								<div class="list-item">
+									<div class="labels">
+										아이디
+									</div>
+									<div class="value">
+										<p class="bold">woonju1234</p>
+									</div>
+								</div>
+								<div class="list-item">
+									<div class="labels">
+										전화번호
+									</div>
+									<div class="value">
+										<div class="info-inp-wrap">
+											<div class="inp-wrap">
+												<div class="frm-inp h-48">
+													<input type="text" name="" id="" placeholder="“-”없이 숫자만 입력해주세요​" title="" class="inp">
+												</div>
+												<button type="button" class="btn-basic h-48 black">
+													<span>인증번호 받기</span>
+												</button>
+											</div>
+											<div class="inp-wrap">
+												<div class="frm-inp h-48">
+													<input type="text" name="" id="" placeholder="" title="" class="inp">
+													<span class="red-time">02:59</span>
+												</div>
+												<button type="button" class="btn-basic h-48 black">
+													<span>인증번호 확인</span>
+												</button>
+											</div> 
+										</div>
+									</div>
+								</div>
+								<div class="list-item">
+									<div class="labels">
+										이메일
+									</div>
+									<div class="value">
+										<p>Hihi****@naver.com</p>
+										<button type="button" class="btn-basic h-48">
+											<span>변경하기</span>
+										</button>
+									</div>
+									<!-- 변경하기 누르면 인풋 생성 -->
+									<!-- <div class="value">
+										<div class="info-inp-wrap">
+											<div class="inp-wrap email">
+												<div class="frm-inp h-48">
+													<input type="text" name="" id="" placeholder="" title="" class="inp">
+												</div>
+												@
+												<div class="frm-inp h-48">
+													<input type="text" name="" id="" placeholder="" title="" class="inp">
+												</div>
+												<div class="frm-sel h-48">
+													<select name="" title="검색 구분" class="sel">
+														<option value="" data-placeholder="true">직접입력</option>
+														<option value="" >콤보상자1</option>
+														<option value="">콤보상자2</option>
+													</select>
+												</div>
+											</div>
+										</div>
+										<button type="button" class="btn-basic h-48">
+											<span>저장하기</span>
+										</button>
+									</div> -->
+									<!-- //변경하기 누르면 인풋 생성 -->
+								</div>
+								<div class="list-item">
+									<div class="labels">
+										비밀번호
+									</div>
+									<div class="value">
+										<p>************</p>
+										<button type="button" class="btn-basic h-48">
+											<span>변경하기</span>
+										</button>
+									</div>
+									<!-- 변경하기 누르면 인풋 생성 -->
+									<!-- <div class="value">
+										<div class="info-inp-wrap">
+											<div class="inp-wrap">
+												<div class="frm-inp h-48">
+													<input type="text" name="" id="" placeholder="비밀번호를 입력해주세요" title="" class="inp">
+												</div>
+											</div>
+											<p class="info-txt">최소 8자리 이상, 영문 대/소문자, 숫자, 특수문자(!, @, # 등) 포함​​</p>
+										</div>
+									</div> -->
+									<!-- //변경하기 누르면 인풋 생성 -->
+								</div>
+								<!-- 비밀번호 인풋 생성시 나타남
+								<div class="list-item">
+									<div class="labels">
+										비밀번호 확인
+									</div>
+									<div class="value">
+										<div class="info-inp-wrap">
+											<div class="inp-wrap">
+												<div class="frm-inp h-48">
+													<input type="text" name="" id="" placeholder="위와 동일한 비밀번호를 입력해주세요.​" title="" class="inp">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div> -->
+								<div class="list-item">
+									<div class="labels">
+										사업자등록번호
+									</div>
+									<div class="value">
+										<p>132-45-67890</p>
+										<button type="button" class="btn-basic h-48">
+											<span>변경하기</span>
+										</button>
+									</div>
+									<!-- 변경하기 누르면 인풋 생성 -->
+									<!-- <div class="value">
+										<div class="info-inp-wrap">
+											<div class="inp-wrap">
+												<div class="frm-inp h-48">
+													<input type="text" name="" id="" placeholder="" title="" class="inp">
+												</div>
+												-
+												<div class="frm-inp h-48">
+													<input type="text" name="" id="" placeholder="" title="" class="inp">
+												</div>
+												-
+												<div class="frm-inp h-48">
+													<input type="text" name="" id="" placeholder="" title="" class="inp">
+												</div>
+											</div>
+										</div>
+										<button type="button" class="btn-basic h-48">
+											<span>저장하기</span>
+										</button>
+									</div> -->
+									<!-- //변경하기 누르면 인풋 생성 -->
+								</div>
+								<div class="list-item">
+									<div class="labels">
+										회원가입날짜
+									</div>
+									<div class="value">
+										<p>2024-11-01</p>
+									</div>
+								</div>
+								
+								<div class="list-item">
+									<div class="labels">
+										주소
+									</div>
+									<div class="value align-end">
+										<p>서울시 강남구 강남동 123-3 강남빌딩</p>
+										<button type="button" class="btn-basic h-48">
+											<span>변경하기</span>
+										</button>
+									</div>
+									<!-- 변경하기 누르면 인풋 생성 -->
+									<!-- <div class="value">
+										<div class="info-inp-wrap">
+											<div class="inp-wrap">
+												<div class="frm-inp h-48">
+													<input type="text" name="" id="" placeholder="" title="" class="inp">
+												</div>
+												<button type="button" class="btn-basic h-48 black">
+													<span>주소 검색</span>
+												</button>
+											</div>
+											<div class="inp-wrap">
+												<div class="frm-inp h-48">
+													<input type="text" name="" id="" placeholder="" title="" class="inp">
+												</div>
+											</div>
+											<div class="inp-wrap">
+												<div class="frm-inp h-48">
+													<input type="text" name="" id="" placeholder="" title="" class="inp">
+												</div>
+											</div>
+										</div>
+										<button type="button" class="btn-basic h-48">
+											<span>확인</span>
+										</button>
+									</div> -->
+									<!-- //변경하기 누르면 인풋 생성 -->
+								</div>
+								<div class="list-item">
+									<div class="labels">
+										표준산업분류
+									</div>
+									<div class="value">
+										<div class="info-inp-wrap">
+											<div class="inp-wrap">
+												<div class="frm-sel h-48 w300">
+													<select name="" title="검색 구분" class="sel">
+														<option value="" data-placeholder="true">A.농업, 임업 및 어업(01~03)</option>
+														<option value="" >콤보상자1</option>
+														<option value="">콤보상자2</option>
+													</select>
+												</div>
+												<div class="frm-sel h-48 w232">
+													<select name="" title="검색 구분" class="sel">
+														<option value="" data-placeholder="true">01.농업</option>
+														<option value="" >콤보상자1</option>
+														<option value="">콤보상자2</option>
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="list-item">
+									<div class="labels">
+										이메일 수신동의
+									</div>
+									<div class="value">
+										<div class="inp-wrap">
+											<div class="frm-rdo">
+												<input type="radio" name="sRadio2" id="sRadio33" checked>
+												<label for="sRadio33"><span>예</span></label>
+											</div>
+											<div class="frm-rdo">
+												<input type="radio" name="sRadio2" id="sRadio44">
+												<label for="sRadio44"><span>아니요</span></label>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="list-item">
+									<div class="labels">
+										문자 수신동의
+									</div>
+									<div class="value">
+										<div class="inp-wrap">
+											<div class="frm-rdo">
+												<input type="radio" name="sRadio3" id="sRadio55" checked>
+												<label for="sRadio55"><span>예</span></label>
+											</div>
+											<div class="frm-rdo">
+												<input type="radio" name="sRadio3" id="sRadio66">
+												<label for="sRadio66"><span>아니요</span></label>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="btn-wrap">
+									<button type="button" class="btn-basic h-56 primary center-w360">
+										<span>변경 내용 저장</span>
+									</button>
+								</div>
+							</div>
+							<!-- //첫화면 -->
+						</div>
+						
+					</div>
+					<!-- // 게시판목록 페이지 -->
+				</div>
+				<!-- // content-body -->
+			</div>
+			<!-- // content -->
+		</main>
+		<!-- // Container -->
+
+		<!-- include_footer.html -->
+		<footer class="footer"></footer>
+		<!-- // include_footer.html -->
+	</div>
+</body>
+
+</html>

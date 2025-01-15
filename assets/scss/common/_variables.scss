@@ -1,0 +1,112 @@
+@charset 'utf-8';
+//-------------------------------------------------------------------
+//    Variables
+//-------------------------------------------------------------------
+// 웹폰트
+$font-primary: 'Pretendard Variable', 'sans-serif';
+$font-secondary: ''; // 미정
+
+// 레이아웃 프레임
+$pc-width-content: 1388rem;
+$pc-sidespacer: 40rem;
+$mobile-width-content: 320rem;
+$mobile-sidespacer: 20rem;
+
+// IOS Safe Area Bottom 대응 (웹에서 상단은 필요 없음, 띠의 상하여백 동일한 비율 1.7)
+$safe-area-bottom: (env(safe-area-inset-bottom, 0)/1.7);
+
+// 컬러 맥락
+$color-body: #444; // 내용 임시값 (body 기본값으로 사용)
+
+// 컬러 강조
+$color-primary: #BA141A; // 첫번째 임시값
+$color-secondary: #dcff4b; // 두번째 임시값
+$color-point: purple; // 기타 임시값
+
+// 컬러 상태
+$color-success: green; // 성공 임시값
+$color-fail: #ff0000; // 실패 임시값
+$color-complete: skyblue; // 완료 임시값
+$color-error: #ff0000; // 에러 임시값
+$color-warning: orange; // 경고 임시값
+$color-caution: orange; // 주의 임시값
+$color-danger: orange; // 위험 임시값
+
+// 컬러 아이템
+$color-item1: green; // item1 임시값
+$color-item2: burlywood; // item2 임시값
+$color-item3: coral; // item3 임시값
+
+//-------------------------------------------------------------------
+//    Mixins
+//-------------------------------------------------------------------
+// 여백/너비 설정
+@mixin out-sec {
+	padding-left: $pc-sidespacer;
+	padding-right: $pc-sidespacer;
+
+	@include media-mobile-xl {
+		padding-left: $mobile-sidespacer;
+		padding-right: $mobile-sidespacer;
+	}
+}
+
+@mixin in-sec {
+	position: relative;
+	max-width: $pc-width-content;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+// 폰트규칙
+@mixin font-body-10 {
+	font-size: 10px;
+	line-height: 12px;
+}
+
+@mixin font-body-12 {
+	font-size: 12px;
+	line-height: 16px;
+}
+
+@mixin font-body-14 {
+	font-size: 14px;
+	line-height: 20px;
+}
+
+@mixin font-body-16 {
+	font-size: 16px;
+	line-height: 24px;
+}
+
+@mixin font-body-16 {
+	font-size: 18px;
+	line-height: 28px;
+}
+
+/* 말줄임 */
+@mixin ellipsis1 {
+	overflow: hidden;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+@mixin ellipsis2 {
+	overflow: hidden;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+
+@mixin ellipsis3 {
+	overflow: hidden;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+}

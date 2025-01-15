@@ -1,0 +1,295 @@
+@charset 'utf-8';
+
+/*-------------------------------------------------------------------
+	분류그룹 : 유틸리티
+	속성순서 : 레이아웃, 크기간격, 박스모양, 글자모양, 문단모양, 기타모양
+-------------------------------------------------------------------*/
+/*-------------------------------------------------------------------
+    @General
+-------------------------------------------------------------------*/
+/* System */
+.blind {
+	position: fixed;
+	overflow: hidden;
+	border: 0;
+	margin: -1px;
+	width: 1px;
+	height: 1px;
+	clip: rect(1px, 1px, 1px, 1px);
+	-webkit-clip-path: inset(50%);
+	clip-path: inset(50%);
+}
+
+.only-pc {
+	display: block;
+	@include media-mobile-xl {
+		display: none !important;
+	}
+}
+
+.only-mobile {
+	display: none;
+	@include media-mobile-xl {
+		display: none !important;
+	}
+}
+
+.is-scroll-hidden {
+	overflow: hidden;
+}
+
+.is-scroll-hidden-ios {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+/* Bootstrap Transition */
+.fade {
+	transition: opacity .15s linear;
+	&:not(.show){
+		opacity: 0;
+	}
+}
+
+/* full width */
+.fluid {
+	max-width: 100%;
+	width: 100%;
+}
+
+/* Margin */
+.mar-0 {
+	margin: 0 !important;
+}
+
+.mar-t0 {
+	margin-top: 0 !important;
+}
+
+.mar-r0 {
+	margin-right: 0 !important;
+}
+
+.mar-b0 {
+	margin-bottom: 0 !important;
+}
+
+.mar-l0 {
+	margin-left: 0 !important;
+}
+
+/* Padding */
+.pad-0 {
+	padding: 0 !important
+}
+
+.pad-t0 {
+	padding-top: 0 !important
+}
+
+.pad-r0 {
+	padding-right: 0 !important
+}
+
+.pad-b0 {
+	padding-bottom: 0 !important
+}
+
+.pad-l0 {
+	padding-left: 0 !important
+}
+
+/* Border */
+.line-0 {
+	border-width: 0 !important;
+}
+
+.line-t0 {
+	border-top-width: 0 !important;
+}
+
+.line-r0 {
+	border-right-width: 0 !important;
+}
+
+.line-b0 {
+	border-bottom-width: 0 !important;
+}
+
+.line-l0 {
+	border-left-width: 0 !important;
+}
+
+/* Align - Inline */
+.align-t {
+	vertical-align: top !important;
+}
+
+.align-m {
+	vertical-align: middle !important;
+}
+
+.align-b {
+	vertical-align: bottom !important;
+}
+
+.align-l {
+	text-align: left !important;
+}
+
+.align-c {
+	text-align: center !important;
+}
+
+.align-r {
+	text-align: right !important;
+}
+
+.align-j {
+	text-align: justify;
+	-moz-text-align-last: justify;
+	-webkit-text-align-last: justify;
+	text-align-last: justify;
+}
+
+/* 말줄임 */
+.ellipsis1 {
+	overflow: hidden;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.ellipsis2 {
+	overflow: hidden;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+
+.ellipsis3 {
+	overflow: hidden;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+}
+
+/*-------------------------------------------------------------------
+	@Colors
+-------------------------------------------------------------------*/
+$colors: (
+	// 강조
+	primary: $color-primary,
+	secondary: $color-secondary,
+	point: $color-point,
+
+	// 상태
+	success: $color-success,
+	fail: $color-fail,
+	complete: $color-complete,
+	error: $color-error,
+	warning: $color-warning,
+	caution: $color-warning,
+	danger: $color-danger,
+
+	// 아이템
+	item1: $color-item1,
+	item2: $color-item2,
+	item3: $color-item3,
+
+);
+
+@each $name, $color in $colors {
+	.bg-#{$name} {
+		background-color: $color;
+	}
+
+	.txt-#{$name} {
+		color: $color;
+	}
+
+	.line-#{$name} {
+		border-color: $color;
+	}
+}
+
+/*-------------------------------------------------------------------
+	@Grid
+-------------------------------------------------------------------*/
+/* Grid */
+.grid {
+	display: -webkit-flex;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+}
+
+.col {
+	-webkit-box-flex: 0;
+	-ms-flex: none;
+	flex: none;
+}
+
+/* Column */
+.col.auto {
+	width: auto;
+	flex: 1 1 auto;
+}
+
+.col.col-1 {
+	width: calc(100%/12 * 1);
+}
+
+.col.col-2 {
+	width: calc(100%/12 * 2);
+}
+
+.col.col-3 {
+	width: calc(100%/12 * 3);
+}
+
+.col.col-4 {
+	width: calc(100%/12 * 4);
+}
+
+.col.col-5 {
+	width: calc(100%/12 * 5);
+}
+
+.col.col-6 {
+	width: calc(100%/12 * 6);
+}
+
+.col.col-7 {
+	width: calc(100%/12 * 7);
+}
+
+.col.col-8 {
+	width: calc(100%/12 * 8);
+}
+
+.col.col-9 {
+	width: calc(100%/12 * 9);
+}
+
+.col.col-10 {
+	width: calc(100%/12 * 10);
+}
+
+.col.col-11 {
+	width: calc(100%/12 * 11);
+}
+
+.col.col-12 {
+	width: calc(100%/12 * 12);
+}

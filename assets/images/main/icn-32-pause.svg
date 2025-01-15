@@ -1,0 +1,8 @@
+<<<<<<< HEAD
+<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M11.667 19V11M18.3337 19V11M28.3337 15C28.3337 22.3638 22.3641 28.3333 15.0003 28.3333C7.63653 28.3333 1.66699 22.3638 1.66699 15C1.66699 7.63621 7.63653 1.66667 15.0003 1.66667C22.3641 1.66667 28.3337 7.63621 28.3337 15Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+=======
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.667 20V12M19.3337 20V12M29.3337 16C29.3337 23.3638 23.3641 29.3333 16.0003 29.3333C8.63653 29.3333 2.66699 23.3638 2.66699 16C2.66699 8.63621 8.63653 2.66667 16.0003 2.66667C23.3641 2.66667 29.3337 8.63621 29.3337 16Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+>>>>>>> 45cbd4232d9cb40aef0583bee17659676b384835
+</svg>

@@ -1,0 +1,253 @@
+@charset "utf-8";
+/*-------------------------------------------------------------------
+	분류그룹 : 버튼
+	속성순서 : 레이아웃, 크기간격, 박스모양, 글자모양, 문단모양, 기타모양
+-------------------------------------------------------------------*/
+/*-------------------------------------------------------------------
+	@@ 공통
+-------------------------------------------------------------------*/
+/* 기본 */
+.ui-btn {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+@mixin btn-default {
+	position: relative;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
+@mixin btn-h-72 {
+	padding: 21rem 23rem;
+	font-weight: 700;
+	font-size: 20rem;
+	line-height: 28rem;
+	border-radius: 8rem;
+
+	&.icn-arrow {
+		&::after {
+			width: 24rem;
+			height: 24rem;
+			background-image: url('../images/common/icn-24-arw-right-bk.svg');
+		}
+
+		&.primary::after,
+		&.primary:active::after,
+		&.primary:focus-visible::after,
+		&.primary:hover::after {
+			background-image: url('../images/common/icn-24-arw-right-wh.svg');
+		}
+
+		&.primary:disabled::after,
+		&:disabled::after {
+			background-image: url('../images/common/icn-24-arw-right-gr.svg');
+		}
+	}
+}
+
+@mixin btn-h-56 {
+	padding: 15rem 23rem;
+	font-weight: 700;
+	font-size: 16rem;
+	line-height: 24rem;
+	border-radius: 4rem;
+
+	&.icn-arrow {
+		&::after {
+			width: 24rem;
+			height: 24rem;
+			background-image: url('../images/common/icn-24-arw-right-bk.svg');
+		}
+
+		&.primary::after,
+		&.primary:active::after,
+		&.primary:focus-visible::after,
+		&.primary:hover::after {
+			background-image: url('../images/common/icn-24-arw-right-wh.svg');
+		}
+
+		&.primary:disabled::after,
+		&:disabled::after {
+			background-image: url('../images/common/icn-24-arw-right-gr.svg');
+		}
+	}
+}
+
+@mixin btn-h-48 {
+	padding: 11rem 15rem;
+	font-weight: 700;
+	font-size: 16rem;
+	line-height: 24rem;
+	border-radius: 4rem;
+
+	&.icn-arrow {
+		&::after {
+			width: 24rem;
+			height: 24rem;
+			background-image: url('../images/common/icn-24-arw-right-bk.svg');
+		}
+
+		&.primary::after,
+		&.primary:active::after,
+		&.primary:focus-visible::after,
+		&.primary:hover::after {
+			background-image: url('../images/common/icn-24-arw-right-wh.svg');
+		}
+
+		&.primary:disabled::after,
+		&:disabled::after {
+			background-image: url('../images/common/icn-24-arw-right-gr.svg');
+		}
+	}
+}
+
+@mixin btn-h-40 {
+	padding: 9rem 15rem;
+	font-weight: 400;
+	font-size: 14rem;
+	line-height: 20rem;
+	border-radius: 4rem;
+
+	&.icn-arrow {
+		&::after {
+			width: 20rem;
+			height: 20rem;
+			background-image: url('../images/common/icn-20-arw-right-bk.svg');
+		}
+
+		&.primary::after,
+		&.primary:active::after,
+		&.primary:focus-visible::after,
+		&.primary:hover::after {
+			background-image: url('../images/common/icn-20-arw-right-wh.svg');
+		}
+
+		&.primary:disabled::after,
+		&:disabled::after {
+			background-image: url('../images/common/icn-20-arw-right-gr.svg');
+		}
+	}
+}
+
+@mixin btn-h-32 {
+	padding: 7rem 11rem;
+	font-weight: 400;
+	font-size: 12rem;
+	line-height: 16rem;
+	border-radius: 2rem;
+
+	&.icn-arrow {
+		&::after {
+			width: 16rem;
+			height: 16rem;
+			background-image: url('../images/common/icn-16-arw-right-bk.svg');
+		}
+
+		&.primary::after,
+		&.primary:active::after,
+		&.primary:focus-visible::after,
+		&.primary:hover::after {
+			background-image: url('../images/common/icn-16-arw-right-wh.svg');
+		}
+
+		&.primary:disabled::after,
+		&:disabled::after {
+			background-image: url('../images/common/icn-16-arw-right-gr.svg');
+		}
+	}
+}
+/*-------------------------------------------------------------------
+	@@ 유형
+-------------------------------------------------------------------*/
+/* Basic */
+.btn-basic {
+	@include btn-default;
+
+	// Style Normal
+	border:1px solid #DFDFDF;
+	background-color: #fff;
+	color: #000000;
+	transition: all 0.2s ease;
+
+	&:focus-visible,
+	&:active,
+	&:hover {
+		border-color: rgba(0,0,0,0.2);
+
+	}
+	&:disabled {
+		color: #BEBEBE;
+	}
+
+	&.primary {
+		border-color: transparent;
+		background-color: $color-primary;
+		color: #fff;
+		&:focus-visible,
+		&:active,
+		&:hover {
+			border-color: rgba(0,0,0,0.2);
+			background-color: #951015;
+		}
+		&:disabled {
+			border-color: #DFDFDF;
+			background-color: #F5F5F5;
+			color: #BEBEBE;
+		}
+	}
+
+	&.black {
+		background-color: #333;
+		color: #fff;
+		&:disabled {
+			border-color: #DFDFDF;
+			background-color: #F5F5F5;
+			color: #BEBEBE;
+		}
+	}
+
+	// has Icons
+	&.icn-arrow {
+		&::after {
+			content:'';
+			display: block;
+			background: no-repeat center center / contain;
+		}
+	}
+
+	// Sizes
+	&.h-72 {
+		@include btn-h-72;
+	}
+	&.h-56 {
+		@include btn-h-56;
+	}
+	&.h-48 {
+		@include btn-h-48;
+	}
+	&.h-40 {
+		@include btn-h-40;
+	}
+
+	@include media-mobile-xl {
+		&.h-72 {
+			@include btn-h-56;
+		}
+		&.h-56 {
+			@include btn-h-48;
+		}
+		&.h-48 {
+			padding: 10rem 11rem;
+			font-weight: 400;
+			font-size: 14rem;
+			line-height: 20rem;
+		}
+		&.h-40 {
+			@include btn-h-32;
+		}
+	}
+}

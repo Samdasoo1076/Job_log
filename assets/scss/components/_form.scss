@@ -1,0 +1,491 @@
+@charset "utf-8";
+/*-------------------------------------------------------------------
+	분류그룹 : 폼
+	속성순서 : 레이아웃, 크기간격, 박스모양, 글자모양, 문단모양, 기타모양
+-------------------------------------------------------------------*/
+/*-------------------------------------------------------------------
+	@@ 공통
+-------------------------------------------------------------------*/
+// 공통 스타일
+@mixin frm-style {
+	width: 100%;
+	border:1px solid #DFDFDF;
+	background-color: #fff;
+	transition: all 0.2s ease;
+	font-weight: 400;
+	color: #000000;
+
+	.ss-placeholder,
+	&::placeholder {
+		color: #959595;
+	}
+
+	&:hover {
+		border-color: $color-primary;
+	}
+
+	&:focus {
+		border-color: #000;
+		outline: none;
+	}
+
+	&.ss-disabled,
+	&:disabled {
+		color: #CCCCCC;
+		background-color: #F5F5F5 !important;
+		opacity: 1;
+	}
+}
+
+// 공통 사이즈
+@mixin frm-h-56 {
+	.sel,
+	.textarea,
+	.inp {
+		padding: 15rem 19rem;
+		border-radius: 8rem;
+		font-size: 16rem;
+		line-height: 24rem;
+	}
+}
+@mixin frm-h-48 {
+	.sel,
+	.textarea,
+	.inp {
+		padding: 11rem 15rem;
+		border-radius: 4rem;
+		font-size: 16rem;
+		line-height: 24rem;
+	}
+}
+@mixin frm-h-40 {
+	.sel,
+	.textarea,
+	.inp {
+		padding: 9rem 15rem;
+		border-radius: 4rem;
+		font-size: 14rem;
+		line-height: 20rem;
+	}
+}
+
+/*-------------------------------------------------------------------
+	@@ Form Group
+-------------------------------------------------------------------*/
+.form-elements {
+	display: flex;
+	gap: 8rem;
+}
+
+/*-------------------------------------------------------------------
+	@@ Input
+-------------------------------------------------------------------*/
+// 인풋 사이즈
+@mixin inp-h-56 {
+	@include frm-h-56;
+	.on-right {
+		right: 12rem;
+	}
+	.on-right .btn-srch {
+		width: 24rem;
+		height: 24rem;
+		background: url('../images/common/icn-24-inp-srch.svg') no-repeat center center / contain;
+	}
+}
+@mixin inp-h-48 {
+	@include frm-h-48;
+	.on-right {
+		right: 8rem;
+	}
+	.on-right .btn-srch {
+		width: 24rem;
+		height: 24rem;
+		background: url('../images/common/icn-24-inp-srch.svg') no-repeat center center / contain;
+	}
+}
+@mixin inp-h-40 {
+	@include frm-h-40;
+	.on-right {
+		right: 8rem;
+	}
+	.on-right .btn-srch {
+		width: 20rem;
+		height: 20rem;
+		background: url('../images/common/icn-20-inp-srch.svg') no-repeat center center / contain;
+	}
+}
+
+// 인풋 스타일
+.frm-inp {
+	position: relative;
+	display: inline-flex;
+
+	.inp {
+		@include frm-style;
+	}
+
+	.on-right {
+		display: flex;
+		gap: 4rem;
+	}
+
+	&.has-on-right {
+		.inp {
+			padding-right: 56rem;
+		}
+		.on-right {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+	}
+
+	&.h-56 {
+		@include inp-h-56;
+	}
+
+	&.h-48 {
+		@include inp-h-48;
+	}
+	@include media-mobile-xl {
+		&.h-56 {
+			@include inp-h-48;
+		}
+
+		&.h-48 {
+			@include inp-h-40;
+		}
+	}
+	&.full {
+		flex: 1 auto;
+	}
+}
+
+.frm-textarea {
+	width: 100%;
+	textarea {
+		@include frm-style;
+	}
+
+	&.h-56 {
+		@include inp-h-56;
+		height: auto;
+	}
+
+	&.h-48 {
+		@include inp-h-48;
+		height: auto;
+	}
+	@include media-mobile-xl {
+		&.h-56 {
+			@include inp-h-48;
+			height: auto;
+		}
+
+		&.h-48 {
+			@include inp-h-40;
+			height: auto;
+		}
+	}
+}
+
+/*-------------------------------------------------------------------
+	@@ Select
+-------------------------------------------------------------------*/
+// 셀렉트 사이즈
+@mixin sel-h-56 {
+	@include frm-h-56;
+	.sel {
+		padding-right: calc((12rem * 2) + 24rem);
+
+	}
+	&::after {
+		top: calc(50% - 12rem);
+		right: 12rem;
+		width: 24rem;
+		height: 24rem;
+		background-image: url('../images/common/icn-24-select-arw.svg');
+	}
+}
+@mixin sel-h-48 {
+	@include frm-h-48;
+	.sel {
+		padding-right: calc((8rem * 2) + 24rem);
+		&::after {
+			top: calc(50% - 12rem);
+			right: 8rem;
+			width: 24rem;
+			height: 24rem;
+			background-image: url('../images/common/icn-24-select-arw.svg');
+		}
+	}
+}
+@mixin sel-h-40 {
+	@include frm-h-40;
+	.sel {
+		padding-right: calc((8rem * 2) + 20rem);
+		&::after {
+			top: calc(50% - 10rem);
+			right: 8rem;
+			width: 20rem;
+			height: 20rem;
+			background-image: url('../images/common/icn-20-select-arw.svg');
+		}
+	}
+}
+.frm-sel {
+	position: relative;
+	display: inline-flex;
+
+	.sel {
+		@include frm-style;
+		&:focus {
+			box-shadow: none;
+		}
+		&.ss-open-above {
+			&:not(.ss-disabled):focus {
+				border-top-right-radius: 0 !important;
+				border-top-left-radius: 0 !important;
+			}
+			&::after {
+				transform: rotate(180deg);
+			}
+		}
+		&.ss-open-below {
+			&::after {
+				transform: rotate(180deg);
+			}
+		}
+		.ss-values {
+			overflow: hidden;
+		}
+		.ss-single {
+			display: block;
+			@include ellipsis1;
+		}
+		.ss-placeholder {
+			padding: 0;
+			margin: 0;
+			line-height: inherit;
+		}
+		&::after {
+			content:'';
+			display: block;
+			position: absolute;
+			background: no-repeat center center / contain;
+			pointer-events: none;
+			transition: all 0.2s ease;
+		}
+	}
+	.ss-arrow {
+		display: none;
+	}
+
+	&.h-56 {
+		@include sel-h-56;
+	}
+	&.h-48 {
+		@include sel-h-48;
+	}
+	@include media-mobile-xl {
+		&.h-56 {
+			@include sel-h-48;
+		}
+
+		&.h-48 {
+			@include sel-h-40;
+		}
+	}
+}
+
+@mixin option-h-56 {
+	padding: 15rem 19rem;
+	font-weight: 400;
+	font-size: 16rem;
+	line-height: 24rem;
+}
+
+@mixin option-h-48 {
+	padding: 11rem 15rem;
+	font-weight: 400;
+	font-size: 16rem;
+	line-height: 24rem;
+}
+
+@mixin option-h-40 {
+	padding: 9rem 15rem;
+	font-weight: 400;
+	font-size: 14rem;
+	line-height: 20rem;
+}
+.ss-content {
+	border:1px solid #000000;
+	.ss-search {
+		display: none;
+	}
+	.ss-list {
+		.ss-option {
+			color: #000;
+			// 호버시에만 강조
+			&:not(.ss-disabled):focus,
+			&:not(.ss-disabled):hover,
+			&:not(.ss-disabled):active {
+				background-color: #FFF4F5 !important;
+				color: $color-primary !important;
+			}
+			// 선택된 상태는 기본값 동일
+			&:not(.ss-disabled).ss-selected {
+				background-color: #fff;
+				color: #000;
+			}
+		}
+	}
+	&.h-56 .ss-list .ss-option {
+		@include option-h-56;
+	}
+	&.h-48 .ss-list .ss-option {
+		@include option-h-48;
+	}
+	@include media-mobile-xl {
+		&.h-56 .ss-list .ss-option {
+			@include option-h-48;
+		}
+
+		&.h-48 .ss-list .ss-option {
+			@include option-h-40;
+		}
+	}
+}
+
+
+/*-------------------------------------------------------------------
+	@@ Radio
+-------------------------------------------------------------------*/
+.frm-rdo {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 10rem;
+	label {
+		cursor: pointer;
+	}
+	span {
+		font-size: 18rem;
+		line-height: 28rem;
+		color: #999;
+		&.bold {
+			font-weight: 700;
+		}
+	}
+
+	input {
+		&::before {
+			content:'';
+			display: block;
+			width: 20rem;
+			height: 20rem;
+			background-color: transparent;
+			border: 1px solid #DDDDDD;
+			background: #fff;
+			border-radius: 50%;
+			box-sizing:border-box;
+			position: relative;
+			cursor: pointer;
+		}
+		&:checked {
+			&::before {
+				content:'';
+				display: block;
+				width: 20rem;
+				height: 20rem;
+				background-color: transparent;
+				border: 5rem solid $color-primary;
+				border-radius: 50%;
+				box-sizing:border-box;
+				position: relative;
+				cursor: pointer;
+			}
+			+ label {
+				span {
+					color: #000;
+				}
+			}
+		}
+	}
+	// 기능별 반응형 대응
+	@include media-tablet-xs {
+		span {
+			font-size: 14rem;
+			line-height: 20rem;
+			color: #999;
+			&.bold {
+				font-weight: 700;
+			}
+		}
+	}
+}
+/*-------------------------------------------------------------------
+	@@ Checkbox
+-------------------------------------------------------------------*/
+.frm-chk {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 10rem;
+	label {
+		cursor: pointer;
+	}
+	span {
+		font-size: 18rem;
+		line-height: 28rem;
+		color: #999;
+		&.bold {
+			font-weight: 700;
+		}
+	}
+
+	input {
+		&::before {
+			content:'';
+			display: block;
+			width: 24rem;
+			height: 24rem;
+			background: url(../images/common/icn-20-checkbox-off.svg) no-repeat;
+			background-size: 100%;
+			box-sizing:border-box;
+			position: relative;
+			cursor: pointer;
+		}
+		&:checked {
+			&::before {
+				content:'';
+				display: block;
+				width: 24rem;
+				height: 24rem;
+				background: url(../images/common/icn-20-checkbox-on.svg) no-repeat;
+				background-size: 100%;
+				box-sizing:border-box;
+				position: relative;
+				cursor: pointer;
+			}
+			+ label {
+				span {
+					color: #000;
+				}
+			}
+		}
+		&:disabled {
+			&::before {
+				content:'';
+				display: block;
+				width: 24rem;
+				height: 24rem;
+				background: url(../images/common/icn-20-checkbox-disabled.svg) no-repeat;
+				background-size: 100%;
+				box-sizing:border-box;
+				position: relative;
+				cursor: pointer;
+			}
+		}
+	}
+}

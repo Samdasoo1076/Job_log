@@ -1,0 +1,234 @@
+		<colgroup>
+			<col style="width:3%" /> <!-- chk -->
+			<col style="width:3%" /> <!-- 번호-->
+			<col style="width:23%" /> <!-- 제목-->
+			<col style="width:4%" /> <!-- 작성자--> 
+			<col style="width:12%" /> <!-- 등록일-->
+			<col style="width:5%" /> <!-- 답변여부--> 
+			<col style="width:12%" /> <!-- 답변일--> 
+			<col style="width:10%" /> <!-- 노출여부--> 
+			<col style="width:10%" /> <!-- 작성자IP-->
+		</colgroup>
+		<tbody>
+		<tr>
+			<th scope="col"><input type="checkbox" class="checkbox" id="all_chk_no" name="all_chk_no" alt="chk_no" onClick="js_check()" /></th>
+			<th scope="col">No.</th>
+			<th scope="col">제목</th>
+			<th scope="col">작성자</th>
+			<th scope="col">등록일</th>
+			<th scope="col">답변여부</th>
+			<th scope="col">답변일</th>
+			<th scope="col">노출여부</th>
+			<th scope="col">작성자IP</th>
+		</tr>
+	<?
+		$nCnt = 0;
+		
+		if (sizeof($arr_rs) > 0) {
+			
+			for ($j = 0 ; $j < sizeof($arr_rs); $j++) {
+				
+				$rn							= trim($arr_rs[$j]["rn"]);
+				$B_NO						= trim($arr_rs[$j]["B_NO"]);
+				$B_RE						= trim($arr_rs[$j]["B_RE"]);
+				$B_PO						= trim($arr_rs[$j]["B_PO"]);
+				$B_CODE					= trim($arr_rs[$j]["B_CODE"]);
+				$CATE_01				= trim($arr_rs[$j]["CATE_01"]);
+				$CATE_02				= trim($arr_rs[$j]["CATE_02"]);
+				$CATE_03				= trim($arr_rs[$j]["CATE_03"]);
+				$CATE_04				= trim($arr_rs[$j]["CATE_04"]);
+				$WRITER_NM			= trim($arr_rs[$j]["WRITER_NM"]);
+				$TITLE					= SetStringFromDB($arr_rs[$j]["TITLE"]);
+				$REG_ADM				= trim($arr_rs[$j]["REG_ADM"]);
+				$HIT_CNT				= trim($arr_rs[$j]["HIT_CNT"]);
+				$REF_IP					= trim($arr_rs[$j]["REF_IP"]);
+				$MAIN_TF				= trim($arr_rs[$j]["MAIN_TF"]);
+				$USE_TF					= trim($arr_rs[$j]["USE_TF"]);
+				$COMMENT_TF			= trim($arr_rs[$j]["COMMENT_TF"]);
+				$REG_DATE				= trim($arr_rs[$j]["REG_DATE"]);
+				$SECRET_TF			= trim($arr_rs[$j]["SECRET_TF"]);
+				$F_CNT					= trim($arr_rs[$j]["F_CNT"]);
+				$REPLY_DATE			= trim($arr_rs[$j]["REPLY_DATE"]);
+				$REPLY_STATE		= trim($arr_rs[$j]["REPLY_STATE"]);
+				$FILE_NM				= trim($arr_rs[$j]["FILE_NM"]);
+				$FILE_RNM				= trim($arr_rs[$j]["FILE_RNM"]);
+				$CONTENTS				= SetStringFromDB($arr_rs[$j]["CONTENTS"]);
+				$REPLY					= SetStringFromDB($arr_rs[$j]["REPLY"]);
+
+				//$INFO_01				= trim($arr_rs[$j]["INFO_01"]);
+
+				$TOP_TF					= trim($arr_rs[$j]["TOP_TF"]);
+				$VIEW_TF				= trim($arr_rs[$j]["VIEW_TF"]);
+
+				$rs_admin = "";
+				$rs_adm_name = "";
+
+				if ($REG_ADM) { 
+					$rs_admin			= selectAdmin($conn, $REG_ADM);
+					$rs_adm_name	= SetStringFromDB($rs_admin[0]["ADM_NAME"]);
+				}
+
+				$CATE_01 = str_replace("^"," & ",$CATE_01);
+
+				$is_new = "";
+				if ($REG_DATE >= date("Y-m-d H:i:s", (strtotime("0 day") - ($b_new_hour * 3600)))) {
+					if ($MAIN_TF <> "N") {
+						$is_new = "<img src='../images/bu/ic_new.png' alt='새글' width='35'/> ";
+					}
+				}
+
+				$REG_DATE = date("Y-m-d H:i",strtotime($REG_DATE));
+
+				if ($b_board_type == "EVENT") {
+					$TITLE = $TITLE." (기간 : ".$CATE_03." ~ ".$CATE_04.")";
+				}
+
+				if ($USE_TF == "Y") {
+					$STR_USE_TF = "<font color='navy'>보이기</font>";
+				} else {
+					$STR_USE_TF = "<font color='red'>보이지않기</font>";
+				}
+				
+				if ($COMMENT_TF == "Y") {
+					$STR_COMMENT_TF = "<font color='navy'>사용</font>";
+				} else {
+					$STR_COMMENT_TF = "<font color='red'>사용안함</font>";
+				}
+
+				$STR_REPLY_STATE = "";
+				if ($REPLY_STATE == "Y") {
+					$STR_REPLY_STATE = "<font color='navy'>답변 완료</font>";
+				} else {
+					$STR_REPLY_STATE = "<font color='red'>답변 대기</font>";
+				}
+
+				$R_CNT = getReplyCount($conn, $B_CODE, $B_NO);
+
+				if ($R_CNT > 0) {
+					$reply_cnt = "<span class=\"orange f11\">(".$R_CNT.")</span>";
+				} else {
+					$reply_cnt = "";
+				}
+
+				$space = "";
+				
+				$DEPTH = strlen($B_PO);
+
+				
+				if ($SECRET_TF == "Y") 
+					$str_lock = "<img src='../images/bu/ic_lock.jpg' alt='' />";
+				else 
+					$str_lock = "";
+
+				if ($F_CNT > 0) 
+					$str_file = "<img src='../images/bu/ic_file2.gif' alt='' />";
+				else 
+					$str_file = "";
+
+				if ($TOP_TF == "Y") 
+					$top_style = "background: #f5f5f5;";
+				else 
+					$top_style = "";
+
+				if (($VIEW_TF == "1") && ($USE_TF =="Y")) 
+					$view_style = "font-weight:bold;";
+				else 
+					$view_style = "";
+
+
+	?>
+		<tr style="<?=$top_style?> <?=$view_style?>"> 
+			<td><input type="checkbox" name="chk[]" value="<?=$B_NO?>"></td>
+			<td><a href="javascript:js_view('<?=$B_CODE?>','<?=$B_NO?>');"><?= $rn ?></a></td>
+			<td style="text-align:left"><?=$space?>
+			<?=$is_new?>
+			<a href="javascript:js_view('<?=$B_CODE?>','<?=$B_NO?>');"><?=$TITLE?></a> <?=$reply_cnt?> <?=$str_lock?> <?=$str_file?></td>
+			<td><?= $WRITER_NM ?></td>
+			<td><?= $REG_DATE ?></td>
+			<td class="filedown">
+				<?=$STR_REPLY_STATE?>
+			</td>
+			<td>
+				<?= $REPLY_DATE?>
+			</td>
+			<td class="filedown">
+				<a href="javascript:js_toggle('<?=$B_NO?>','<?=$USE_TF?>');"><span><?=$STR_USE_TF?></span></a>
+			</td>
+			<td class="filedown">
+				<?=$REF_IP?>
+			</td>
+		</tr>
+		<tr id="sub_info<?=$j?>" style="display:none">
+			<td colspan="9" style="padding:0px">
+				<div class="sp15"></div>
+				<div style="width:100%;text-align:left;padding-bottom:10px;padding-left:10px"><strong>* 상세내용</strong></div>
+				<table width="100%" class="tb_con" style="width:100%">
+					<colgroup>
+						<col style="width:8.05%;" />
+						<col style="width:91.85%;" />
+					</colgroup>
+					<tr>
+						<td>문의내용</td>
+						<td style="text-align:left;padding:10px 10px 10px 10px">
+							<? if(stristr($CONTENTS, '<p>') === FALSE) { ?>
+								<?=nl2br($CONTENTS)?>
+							<? } else { ?>
+								<?=$CONTENTS?>
+							<? } ?>
+						</td>
+					</tr>
+					<!--
+					<tr>
+						<td>첨부파일</td>
+						<td style="text-align:left;padding:5px 10px 5px 10px">
+							<a href="/_common/new_download_file.php?menu=board&b_code=<?= $B_CODE ?>&b_no=<?= $B_NO ?>&field=file_nm"><?=$FILE_RNM?></a>
+						</td>
+					</tr>
+					-->
+					<tr>
+						<td>답변</td>
+						<td style="text-align:left;padding:10px 10px 10px 10px">
+							<?
+								$REPLY = str_replace("<br />","\r",$REPLY);
+								$REPLY = str_replace("<br>","\r",$REPLY);
+								$REPLY = str_replace("</p>","\r",$REPLY);
+								$REPLY = strip_tags($REPLY);
+							?>
+							<textarea style="width:95%;height:180px" name="reply_<?=$B_NO?>" id="reply_<?=$B_NO?>"><?=$REPLY?></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td>답변여부</td>
+						<td style="text-align:left;padding:5px 10px 5px 10px">
+							<input type="radio" class="radio cl_reply_state" data-bno='<?=$B_NO?>' name="rd_reply_state_<?=$B_NO?>" value="N" <? if (($REPLY_STATE =="N") || ($REPLY_STATE =="")) echo "checked"; ?>> 답변대기<span style="width:20px;"></span>
+							<input type="radio" class="radio cl_reply_state" data-bno='<?=$B_NO?>' name="rd_reply_state_<?=$B_NO?>" value="Y" <? if ($REPLY_STATE =="Y")echo "checked"; ?>> 답변완료
+							<input type="hidden" name="reply_state_<?=$B_NO?>" id="reply_state_<?=$B_NO?>" value="<?= $REPLY_STATE ?>">
+						</td>
+					</tr>
+					<tr>
+						<td>답변일</td>
+						<td style="text-align:left;padding:5px 10px 5px 10px">
+							<?=$REPLY_DATE?>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" style="padding:15px 15px 15px 15px">
+							<button type="button" class="button type02" onClick="js_reply_save('<?=$B_CODE?>', '<?=$B_NO?>');">답변저장</button>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+
+
+	<?			
+			}
+		} else { 
+	?> 
+		<tr>
+			<td height="50" align="center" colspan="9">데이터가 없습니다. </td>
+		</tr>
+	<? 
+		}
+	?>
+		</tbody>

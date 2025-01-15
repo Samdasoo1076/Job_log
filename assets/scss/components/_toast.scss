@@ -1,0 +1,48 @@
+@charset "utf-8";
+/*-------------------------------------------------------------------
+	분류그룹 : 토스트
+	속성순서 : 레이아웃, 크기간격, 박스모양, 글자모양, 문단모양, 기타모양
+-------------------------------------------------------------------*/
+/*-------------------------------------------------------------------
+	@@ 공통
+-------------------------------------------------------------------*/
+/* 기본 */
+.toast-container {
+    position: fixed;
+	left: 50%;
+	bottom: 20rem;
+	transform: translateX(-50%);
+    z-index: 2000;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    max-width: 100%;
+    pointer-events: none;
+}
+
+.ui-toast {
+    max-width: 100%;
+	padding: 5rem 10rem;
+    pointer-events: auto;
+    background-color: #fff;
+	box-shadow: 2rem 2rem 10rem 0 rgba(0,0,0,0.2);
+	border-radius: 8rem;
+
+	&:not(.show) {
+		display: none;
+	}
+}
+
+.ui-toast.showing {
+    opacity: 0;
+}
+
+/* 강조 */
+
+/*-------------------------------------------------------------------
+	@@ 유형
+-------------------------------------------------------------------*/
+/* 스타일1 */
+
+
+/* 스타일2 */

@@ -1,0 +1,108 @@
+@charset "utf-8";
+/*-------------------------------------------------------------------
+	분류그룹 : 팝업
+	속성순서 : 레이아웃, 크기간격, 박스모양, 글자모양, 문단모양, 기타모양
+-------------------------------------------------------------------*/
+/*-------------------------------------------------------------------
+	@@ 공통
+-------------------------------------------------------------------*/
+/* 기본 */
+body.modal-open {
+	overflow: hidden;
+	height: 100%;
+}
+.modal {
+	position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1100;
+    display: none;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    outline: 0;
+	// background: rgba(0, 0, 0, 0.6);
+	.modal-dialog {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 100%;
+		transition: transform .3s ease-out;
+		transform: translate(0, 50px);
+		pointer-events: none;
+		.btn-close {
+			position: absolute;
+			top: 10rem;
+			right: 10rem;
+		}
+	}
+	// 인터렉션
+	&.show .modal-dialog {
+		transform: none;
+	}
+	&.modal-static .modal-dialog {
+		transform: scale(1.02);
+	}
+}
+.modal-backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	width: 100vw;
+	height: 100vh;
+	background-color: #000;
+	opacity: 0;
+	&.show {
+		opacity: 0.6;
+	}
+}
+// 1023 이하
+// @include media-tablet-xs {
+// 	.modal {
+// 		background: rgba(0, 0, 0, 0.6);
+// 	}
+// 	.modal-backdrop {
+// 		&.show {
+// 			opacity: 0;
+// 		}
+// 	}
+// }
+.modal-content {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	min-width: 280px;
+	max-width: calc(100% - 40px);
+	max-height: calc(100% - 40px);
+	min-height: 150px;
+	background-color: #fff;
+	border-radius: 16px;
+	pointer-events: auto;
+	box-shadow: 2px 2px 10px 0px rgba(0,0,0, 0.2);
+	.modal-header {
+		flex:none;
+	}
+	.modal-body {
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+		flex-basis: auto;
+		overflow: auto;
+		> div {
+			flex: none;
+		}
+	}
+	.modal-footer {
+		flex:none;
+	}
+}
+/*-------------------------------------------------------------------
+	@@ 유형
+-------------------------------------------------------------------*/
+/* 스타일1 */
+
+
+/* 스타일2 */
