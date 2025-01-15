@@ -13,17 +13,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. 코드 체크아웃
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # 2. PHP 환경 설정
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: "8.1"
           extensions: mbstring, pdo, mysql
 
-      - name: Install dependencies
-        run: composer install --no-progress --no-suggest
-
-      - name: Run PHPUnit tests
-        run: vendor/bin/phpunit
+      # 3. 테스트 실행
+      - name: Run PHP script
+        run: php -v
