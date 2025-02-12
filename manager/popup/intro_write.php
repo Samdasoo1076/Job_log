@@ -73,6 +73,7 @@ $reg_date = isset($_POST["reg_date"]) && $_POST["reg_date"] !== '' ? $_POST["reg
 $search_field = isset($_POST["search_field"]) && $_POST["search_field"] !== '' ? $_POST["search_field"] : (isset($_GET["search_field"]) ? $_GET["search_field"] : '');
 $search_str = isset($_POST["search_str"]) && $_POST["search_str"] !== '' ? $_POST["search_str"] : (isset($_GET["search_str"]) ? $_GET["search_str"] : '');
 
+$flag01						= isset($_POST["flag01"]) && $_POST["flag01"] !== '' ? $_POST["flag01"] : (isset($_GET["flag01"]) ? $_GET["flag01"] : '');
 
 	if ($date_use_tf <> "N") {
 		$start_date = $s_date." ".$s_hour.":".$s_min.":00";
@@ -89,41 +90,40 @@ $search_str = isset($_POST["search_str"]) && $_POST["search_str"] !== '' ? $_POS
 #====================================================================
 
 	$result = false;
-
-	$intro_title		= SetStringToDB($intro_title);
 	$search_field		= SetStringToDB($search_field);
 	$search_str			= SetStringToDB($search_str);
+
+	$rs_intro_no = ""; 
+	$rs_intro_title = ""; 
+	$rs_intro_memo = "";
+	$rs_file_nm = "";
+	$rs_file_rnm = "";
+	$rs_intro_hit_cnt = ""; 
+	$rs_start_date = ""; 
+	$rs_end_date = ""; 
+	$rs_date_use_tf = ""; 
+	$rs_use_tf = ""; 
+	$rs_del_tf = ""; 
+	$rs_reg_adm = ""; 
+	$rs_reg_date = ""; 
+	$rs_up_adm = ""; 
+	$rs_up_date = ""; 
+
+	$arr_start_date = array();
+	$arr_end_date = array();
+
+	$arr_start_time = array();
+	$arr_end_time = array();
+
+	$rs_s_date = "";
+	$rs_e_date = "";
+
+	$rs_s_hour = "";
+	$rs_e_hour = "";
+
+	$rs_s_min = "";
+	$rs_e_min = "";
 	
-	if($mode == "") {
-		$rs_intro_no = ""; 
-		$rs_intro_title = ""; 
-		$rs_intro_memo = ""; 
-		$rs_intro_hit_cnt = ""; 
-		$rs_start_date = ""; 
-		$rs_end_date = ""; 
-		$rs_date_use_tf = ""; 
-		$rs_use_tf = ""; 
-		$rs_del_tf = ""; 
-		$rs_reg_adm = ""; 
-		$rs_reg_date = ""; 
-		$rs_up_adm = ""; 
-		$rs_up_date = ""; 
-
-		$arr_start_date = array();
-		$arr_end_date = array();
-
-		$arr_start_time = array();
-		$arr_end_time = array();
-
-		$rs_s_date = "";
-		$rs_e_date = "";
-
-		$rs_s_hour = "";
-		$rs_e_hour = "";
-
-		$rs_s_min = "";
-		$rs_e_min = "";
-	}
 
 
 	$REG_INSERT_DATE = date("Y-m-d H:i:s",strtotime("0 day"));
@@ -152,68 +152,9 @@ $search_str = isset($_POST["search_str"]) && $_POST["search_str"] !== '' ? $_POS
 			"UP_DATE"=>$REG_INSERT_DATE
 		);
 
-	//추가
-	// 현재 날짜 기반 폴더 설정
-    // $current_date = date("Ymd");
-    // $upload_dir = $savedir1 . "/" . $current_date;
-
-    // if (!is_dir($upload_dir)) {
-    //     mkdir($upload_dir, 0777, true); // 디렉토리 생성
-    // }
-
-    // // 파일 업로드 처리
-    // if (isset($_FILES['file_nm']) && $_FILES['file_nm']['error'] === UPLOAD_ERR_OK) {
-	// 	$REG_INSERT_DATE = date("Y-m-d H:i:s",strtotime("0 day"));
-
-    //     $file_tmp_name = $_FILES['file_nm']['tmp_name'];
-    //     $original_file_name = $_FILES['file_nm']['name'];
-    //     $file_size = $_FILES['file_nm']['size'];
-    //     $file_extension = pathinfo($original_file_name, PATHINFO_EXTENSION);
-
-    //     // 고유한 파일 이름 생성
-    //     //$new_file_name = uniqid() . "." . $file_extension;
-    //     //$target_file = $upload_dir . "/" . $new_file_name;
-
-    //     // 파일 이동
-    //     if (move_uploaded_file($file_tmp_name, $target_file)) {
-
-    //         $file_nm = $new_file_name; // 저장된 파일명
-    //         $file_rnm = $original_file_name; // 원본 파일명
-    //         $file_path = $current_date; // 파일 저장 경로
-
-	// 		$arr_data = array("INTRO_TITLE"=>$intro_title,
-	// 		"INTRO_MEMO"=>$intro_memo,
-	// 		"HIT_CNT"=>0,
-	// 		"INTRO_DISP_SEQ"=>0,
-	// 		"FILE_NM"=> $file_nm,
-	// 		"FILE_RNM"=> $file_rnm,
-	// 		"FILE_PATH"=> $file_nm,
-	// 		"START_DATE"=>$start_date,
-	// 		"END_DATE"=>$end_date,
-	// 		"DATE_USE_TF"=>$date_use_tf,
-	// 		"USE_TF"=>$use_tf,
-	// 		"REG_ADM"=>$_SESSION["s_adm_no"],
-	// 		"UP_DATE"=>$REG_INSERT_DATE
-	// 	);
-	// 	$new_intro_no	= insertIntro($conn, $arr_data);
-	// 	$result =$new_intro_no; 
-
-	// 	echo "<script>alert('파일이 성공적으로 업로드되었습니다.');</script>";
-
-    //         if ($result) {
-    //             echo "<script>alert('파일이 성공적으로 업로드되었습니다.');</script>";
-    //         } else {
-    //             echo "<script>alert('DB 저장 중 오류가 발생했습니다.');</script>";
-    //         }
-    //     } else {
-    //         echo "<script>alert('파일 업로드 중 문제가 발생했습니다.');</script>";
-    //     }
-    // } else {
-    //     echo "<script>alert('파일이 업로드되지 않았습니다.');</script>";
-    // }
- //추가
 		$new_room_no	= insertIntro($conn, $arr_data);
-		$result =$new_room_no;			
+
+		$result = $new_room_no;			
 		
 		$result_log	= insertUserLog($conn, 'admin', $_SESSION['s_adm_id'], $_SERVER['REMOTE_ADDR'], '메인 팝업 등록 (제목 : '.$intro_title.') ', 'Insert');
    
@@ -221,61 +162,49 @@ $search_str = isset($_POST["search_str"]) && $_POST["search_str"] !== '' ? $_POS
 
 	if ($mode == "U") {
 
+		// flag01 값으로 I인지 U인지 구분
+		switch ($flag01) {
+			case "insert" :
+				$file_nm					= upload($_FILES["file_nm"], $savedir1, 100 , array('jpg','png','gif','jpeg','tif'));
+				$file_rnm					= $_FILES["file_rnm"]["name"];
+			break;
+			case "keep" :
+				$file_nm		= $old_file_nm;
+				$file_rnm		= $old_file_rnm;
+			break;
+			case "delete" :
+				$file_nm		= "";
+				$file_rnm		= "";
+			break;
+			case "update" :
+				$file_nm					= upload($_FILES["file_nm"], $savedir1, 100 , array('jpg','png','gif','jpeg','tif'));
+				$file_rnm					= $_FILES["file_rnm"]["name"];
+			break;
+		}
+		
+		
 		$arr_data = array("INTRO_TITLE"=>$intro_title,
-											"INTRO_MEMO"=>$intro_memo,
-											"START_DATE"=>$start_date,
-											"END_DATE"=>$end_date,
-											"DATE_USE_TF"=>$date_use_tf,
-											"USE_TF"=>$use_tf,
-											"REG_ADM"=>$_SESSION["s_adm_no"],
-											"UP_DATE"=>$REG_INSERT_DATE
-										);
+			"INTRO_MEMO"=>$intro_memo,
+			"HIT_CNT"=>0,
+			"INTRO_DISP_SEQ"=>0,
+			"FILE_NM"=> $file_nm,
+			"FILE_RNM"=> $file_rnm,
+			"START_DATE"=>$start_date,
+			"END_DATE"=>$end_date,
+			"DATE_USE_TF"=>$date_use_tf,
+			"USE_TF"=>$use_tf,
+			"REG_ADM"=>$_SESSION["s_adm_no"],
+			"UP_DATE"=>$REG_INSERT_DATE
+		);
 
 		$result =  updateIntro($conn, $arr_data, $intro_no);
 
-		//세부정보 update
-		if (sizeof($i_no) > 0) {
-			for ($j = 0 ; $j < sizeof($i_no); $j++) {
-
-				$arr_data_detail = array("I_TITLE_S"=>$i_title_s[$j],
-														"I_TITLE"=>$i_title[$j],
-														"I_URL"=>$i_url[$j],
-														"I_TARGET"=>$i_target[$j],
-														"DISP_SEQ"=>0,
-														"USE_TF"=>$use_tf,
-														"REG_ADM"=>$_SESSION["s_adm_no"],
-														"UP_DATE"=>$REG_INSERT_DATE
-				);
-				$result_detail = updateIntroDetail($conn, $arr_data_detail, $i_no[$j]);
-			}
-		}
-
-		$arr_rs_detail_num	= selectIntroDetailNum($conn, $intro_no);
-
-		//페이지 세부정보를 update로 추가시 
-		if (sizeof($i_title) > $arr_rs_detail_num) {
-			for ($j =$arr_rs_detail_num ; $j < sizeof($i_title); $j++) {
-
-				$arr_data_detail = array("INTRO_NO"=>$intro_no,
-														"I_TITLE_S"=>$i_title_s[$j],
-														"I_TITLE"=>$i_title[$j],
-														"I_URL"=>$i_url[$j],
-														"I_TARGET"=>$i_target[$j],
-														"DISP_SEQ"=>0,
-														"USE_TF"=>$use_tf,
-														"REG_ADM"=>$_SESSION["s_adm_no"],
-														"UP_DATE"=>$REG_INSERT_DATE
-				);
-				$result_detail = insertIntroDetail($conn, $arr_data_detail);
-			}
-		}
-		$result_log = insertUserLog($conn, 'admin', $_SESSION['s_adm_id'], $_SERVER['REMOTE_ADDR'], '인트로 수정 (제목 : '.$i_title.') ', 'Update');
+		$result_log = insertUserLog($conn, 'admin', $_SESSION['s_adm_id'], $_SERVER['REMOTE_ADDR'], '메인 팝업 수정 (제목 : '.$intro_title.') ', 'Update');
 	}
 
 	if ($mode == "D") {
 		$result = deleteIntro($conn, $_SESSION['s_adm_no'], (int)$intro_no);
-		$result = deleteIntroDetail($conn, $_SESSION['s_adm_no'], (int)$intro_no);
-		$result_log = insertUserLog($conn, 'admin', $_SESSION['s_adm_id'], $_SERVER['REMOTE_ADDR'], '인트로 삭제 처리 (제목 : '.$intro_title.') ', 'Delete');
+		$result_log = insertUserLog($conn, 'admin', $_SESSION['s_adm_id'], $_SERVER['REMOTE_ADDR'], '메인 팝업 삭제 처리 (제목 : '.$intro_title.') ', 'Delete');
 	}
 
 	if ($mode == "ITEM") {
@@ -289,12 +218,14 @@ $search_str = isset($_POST["search_str"]) && $_POST["search_str"] !== '' ? $_POS
 		$arr_rs = selectIntro($conn, (int)$intro_no);
 
 		$rs_intro_no						= trim($arr_rs[0]["INTRO_NO"]); 
-		$rs_intro_title					= SetStringFromDB($arr_rs[0]["INTRO_TITLE"]); 
-		$rs_intro_memo					= SetStringFromDB($arr_rs[0]["INTRO_MEMO"]); 
-		$rs_intro_hit_cnt				= trim($arr_rs[0]["HIT_CNT"]); 
-		$rs_start_date					= trim($arr_rs[0]["START_DATE"]); 
+		$rs_intro_title						= SetStringFromDB($arr_rs[0]["INTRO_TITLE"]); 
+		$rs_intro_memo						= SetStringFromDB($arr_rs[0]["INTRO_MEMO"]); 
+		$rs_file_nm							= trim($arr_rs[0]["FILE_NM"]); 
+		$rs_file_rnm						= trim($arr_rs[0]["FILE_RNM"]); 
+		$rs_intro_hit_cnt					= trim($arr_rs[0]["HIT_CNT"]); 
+		$rs_start_date						= trim($arr_rs[0]["START_DATE"]); 
 		$rs_end_date						= trim($arr_rs[0]["END_DATE"]); 
-		$rs_date_use_tf					= trim($arr_rs[0]["DATE_USE_TF"]); 
+		$rs_date_use_tf						= trim($arr_rs[0]["DATE_USE_TF"]); 
 		$rs_use_tf							= trim($arr_rs[0]["USE_TF"]); 
 		$rs_del_tf							= trim($arr_rs[0]["DEL_TF"]); 
 		$rs_reg_adm							= trim($arr_rs[0]["REG_ADM"]); 
@@ -388,16 +319,10 @@ function js_save() {
 		return false;
 	}
 
-/*
-	$("input[name='i_title_s[]']").each(function(idx, item){
-			if(!$(item).val().trim()){
-				ret=false;
-				alert(idx+1+"번째 항목 소제목을 입력해주세요.");
-				$(item).focus();
-				return false;
-			}
-	});
-*/
+	function file_change(file) { 
+		document.getElementById("file_nm").value = file; 
+	}
+
 
 	$("input[name='i_title[]']").each(function(idx, item){
 			if(!$(item).val().trim()){
@@ -476,6 +401,28 @@ function js_delete_1(ii) {
 	}
 }
 
+function js_fileView(obj, idx) {
+	var frm = document.frm;
+	
+	if (idx == 01) {
+		if (obj.selectedIndex == 1) {
+			document.getElementById("file_change01").style.display = "inline";
+		} else {
+			document.getElementById("file_change01").style.display = "none";
+		}
+	}
+
+	if (idx == 02) {
+		if (obj.selectedIndex == 1) {
+			document.getElementById("file_change02").style.display = "inline";
+		} else {
+			document.getElementById("file_change02").style.display = "none";
+		}
+	}
+}
+
+
+
 
 </script>
 </head>
@@ -500,7 +447,7 @@ function js_delete_1(ii) {
 ?>
 			</div>
 			<div class="contents">
-<tr?
+<?
 	#====================================================================
 	# common location_area
 	#====================================================================
@@ -520,7 +467,7 @@ function js_delete_1(ii) {
 <input type="hidden" name="search_str" value="<?=$search_str?>">
 
 				<div class="cont">
-					<div class="tit_h4 first"><h4>메인 비주얼 공지 등록 <?= $mode ?></h4></div>
+					<div class="tit_h4 first"><h4>메인 팝업 등록</h4></div>
 					<div class="tbl_style01 left">
 						<table>
 							<colgroup>
@@ -530,17 +477,21 @@ function js_delete_1(ii) {
 							<tbody>
 
 								<tr>
-									<th>제목 <img src="../images/img_essen.gif" alt="필수입력" /></th>
-									<td>
+									<th>팝업 제목 <img src="../images/img_essen.gif" alt="필수입력" /></th>
+									<!-- <td>
 										<textarea name="intro_title" style=" width:300px;height:55px;padding:2px;" style="vertical-align:bottom"><? if($mode == "S") {?> 
-										
 										<? echo $rs_intro_title; 
 											} else {
 											echo $intro_title;
 										}?>
 										</textarea>
 										<font style="vertical-align:bottom;color:rgb(251,177,50)"> &nbsp;&nbsp;2줄 입력</font>
+									</td> -->
+									<td>
+										<input type="text" name="intro_title" id="intro_title" value="<?=$rs_intro_title?>" style="width:80%"/>
+                                    </td>
 									</td>
+
 								</tr>
 
 								<tr>
@@ -549,13 +500,13 @@ function js_delete_1(ii) {
 										<input type="text" name="intro_memo" id="intro_memo" value="<?=$rs_intro_memo?>" style="width:80%"/>
 									</td>
 								</tr>
-
+<!-- 
 								<tr>
 									<th>바로가기 URL</th>
 									<td>
 										<input type="text" name="intro_memo" id="intro_memo" value="<?=$rs_intro_memo?>" style="width:80%"/>
 									<td>
-								</tr>
+								</tr> -->
 
 								<tr id="dateclass">
 									<th>게시 기간 <img src="../images/img_essen.gif" alt="필수입력" /></th>
@@ -604,49 +555,54 @@ function js_delete_1(ii) {
 										</div>
 									</td>
 								</tr>
-													<?
+												<?
 													$nCnt = 0;
 													
 													if (sizeof($arr_rs_detail) > 0) {
 														
 														for ($j = 0 ; $j < sizeof($arr_rs_detail); $j++) {
 														
-															$file_nm				= trim($arr_rs_detail[$j]["FILE_NM"]);	
+															$rs_file_nm				= trim($arr_rs_detail[$j]["FILE_NM"]);
+															$rs_file_rnm				= trim($arr_rs_detail[$j]["FILE_RNM"]);
 												?>
 															
 															
 												<? } } ?>
-							
+						    
 								<tr>
-								<th scope="row">첨부파일</th>
-								<td colspan="3">
-									<div id="item_add" style="padding-top:10px">
-											<input type="hidden" name="file_flag[]" value=""> 
-											<input type="file" name="file_nm" id="upload_org_file" value="" style="display:none">
-											<input type="hidden" name="old_file_no[]" value="">
-											<input type="hidden" name="old_file_nm[]" value="">
-											<input type="hidden" name="old_file_rnm[]" value="">
-												<?php if (!empty($file_nm)) { ?>
-                <!-- 업로드된 파일이 있는 경우 -->
-                <div style="padding-bottom:10px;">
-                    <span class="tbl_txt">이미지</span>
-                    <img src="/upload_data/popup/<?=$file_nm?>" width="150px" alt="Uploaded Image">&nbsp;&nbsp;
-                    <button type="button" onclick="deleteUploadedFile()">삭제</button>
-                    <input type="hidden" name="old_file_nm" value="<?=$file_nm?>">
-                    <input type="hidden" name="old_file_rnm" value="<?=$file_rnm?>">
-                </div>
-            <?php } else { ?>
-                <!-- 업로드된 파일이 없는 경우 -->
-                <div style="padding-bottom:10px;">
-                    <span class="tbl_txt">이미지</span>
-                    <input type="file" name="file_nm" accept="image/*" style="display:block;">
-                    <span class="tbl_txt">이미지 크기: 800 x 600 (권장)</span>
-                </div>
-            <?php } ?>
-											</div>
-											<!--<span class="txt_c02" style="padding-left:10px">※ Drag & Drop 으로 순서를 조정 하실 수 있습니다.</span> !-->
-								</td>
-							</tr>
+									<th scope="row">팝업 이미지</th>
+									<td colspan="3">
+									<?
+										if (strlen($rs_file_nm) > 3) {
+									?>
+										<span class="tbl_txt">
+											<img src="/upload_data/popup/<?=$rs_file_nm?>" width="200px" alt="Uploaded Image">&nbsp;&nbsp;
+										</span>
+										&nbsp;&nbsp;
+										<select name="flag01" style="width:100px;" onchange="js_fileView(this,'01')">
+											<option value="keep">유지</option>
+											<option value="update">수정</option>
+											<option value="delete">삭제</option>
+										</select>
+						
+										<input type="hidden" name="old_file_nm" value="<?= $rs_file_nm?>">
+										<input type="hidden" name="old_file_rnm" value="<?= $rs_file_rnm?>">
+										<div id="file_change01" style="display:none;">
+											<input type="file" name="file_nm" size="40%" />
+										</div>
+
+									<?
+										} else {
+									?>
+										<input type="file" size="40%" name="file_nm">
+										<input type="hidden" name="old_file_nm" value="">
+										<input type="hidden" name="old_file_rnm" value="">
+										<input TYPE="hidden" name="flag01" value="insert">
+									<?
+										}	
+									?>
+									</td>
+								</tr>
 
 								<tr>
 									<th>공개여부</th>
@@ -665,14 +621,14 @@ function js_delete_1(ii) {
 						<a href="javascript:js_list();" class="button type02">목록</a>
 						<? if ($intro_no == "") {?>
 						<?	if ($sPageRight_I == "Y") {?>
-						<button type="button" class="button" onClick="js_save()">등록</button>
+							<button type="button" class="button" onClick="js_save()">등록</button>
 						<?	} ?>
 						<? } else {  ?>
 						<?	if ($sPageRight_U == "Y") {?>
-						<button type="button" class="button" onClick="js_save()">수정</button>
+							<button type="button" class="button" onClick="js_save()">수정</button>
 						<?	} ?>
 						<?	if ($sPageRight_D == "Y") {?>
-						<!--<button type="button" class="button" onClick="js_delete()">삭제</button>-->
+							<button type="button" class="button" onClick="js_delete()">삭제</button>
 						<?	} ?>
 						<? } ?>
 					</div>

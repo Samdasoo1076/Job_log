@@ -6,8 +6,8 @@
 # =============================================================================
 # File Name    : config.php
 # Modlue       : 
-# Writer       : Park Chan Ho 
-# Create Date  : 2023-08-16
+# Writer       : Lee Ji Min
+# Create Date  : 2025-01-31
 # Modify Date  : 
 #	Copyright : Copyright @UCOMP Corp. All Rights Reserved.
 # =============================================================================
@@ -70,7 +70,7 @@ define('_SPECIAL_', 64); // 특수문자
 	$g_site_domain	= "www.wfi.or.kr";
  
 	Global  $g_site_url;
-	$g_site_url	= "http://183.111.138.153";
+	$g_site_url	= "https://180.210.76.103/";
  
 	//재가입기간 설정
 	Global  $g_site_re_enter_period;
@@ -87,19 +87,20 @@ define('_SPECIAL_', 64); // 특수문자
 	$g_site_nick_period	= 1;
  
 	Global  $g_admin_email_01;
-	$g_admin_email_01	= "park@ucomp.co.kr";
+	$g_admin_email_01	= "myucheu0617@ucomp.co.kr";
  
 	Global  $g_admin_email_02;
-	$g_admin_email_02	= "park@ucomp.co.kr";
+	$g_admin_email_02	= "myucheu0617@ucomp.co.kr";
  
 	Global  $g_admin_email_03;
-	$g_admin_email_03	= "park@ucomp.co.kr";
+	$g_admin_email_03	= "myucheu0617@ucomp.co.kr";
  
 	//모바일로 접속했는지 여부
 	$mobile_is_all=false;
 	if(preg_match('/(iPhone|Android|Opera Mini|SymbianOS|Windows CE|BlackBerry|Nokia|SonyEricsson|webOS|PalmOS)/i', $_SERVER['HTTP_USER_AGENT'])) {
 		$mobile_is_all=true;
 	}
+	
 	//if ($_SERVER['HTTPS'] == "off") {
 	//	$ssl_is_on = "F";
 	//} else {
@@ -110,9 +111,9 @@ define('_SPECIAL_', 64); // 특수문자
 	Global  $g_site_url;
  
 	if ($ssl_is_on == "F") {
-		$g_site_url	= "http://".$_SERVER['HTTP_HOST'];
+		$g_site_url	= "https://".$_SERVER['HTTP_HOST'];
 	} else {
-		$g_site_url	= "http://".$_SERVER['HTTP_HOST'];
+		$g_site_url	= "https://".$_SERVER['HTTP_HOST'];
 	}
  
 	$urlencode = urlencode($_SERVER["REQUEST_URI"]);

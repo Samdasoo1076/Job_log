@@ -62,13 +62,13 @@ $(document).ready(function() {
 								<p class="title">대중교통 이용 시</p>
 								<ul class="lists">
 									<li class="train">
-										<p class="bold">기차</p>
+										<p class="bold">원주역(KTX) 기준</p>
 										<p>원주역 하차 후 도보로 6분</p>
 									</li>
 									<li class="bus">
-										<p class="bold">버스</p>
-										<p>원주 하차: 34-1 (35분 소요), 111 (40분 소요)</p>
-										<p>마전 하차: 5 (22분 소요), 18 (20분 소요), 30 (20분 소요)</p>
+										<p class="bold">원주고속버스터미널 기준</p>
+										<p>. 원주역 하차: 34-1 (35분 소요), 111 (40분 소요)</p>
+										<p>. 마재길 하차: 5 (22분 소요), 18 (20분 소요), 30 (20분 소요)</p>
 									</li>
 								</ul>
 							</div>
@@ -136,12 +136,28 @@ $(document).ready(function() {
 	var routeUrl = "https://map.kakao.com/link/to/원주미래산업진흥원​," + destinationXY.x + "," + destinationXY.y;
 	var CircumFerenceUrl = "https://map.kakao.com/link/search/원주미래산업진흥원​";
 
-/*
+	/* 
+		지도 클릭시 길찾기
+	*/
+
+	// $("#map").on("click", function(e) {
+	// 	e.preventDefault();
+
+	// 	if (routeUrl) {
+	// 			window.open(routeUrl, '_blank');
+	// 		} else {
+	// 			alert("URL 생성에 실패했습니다. 다시 시도해주세요.");
+	// 		}
+
+	// });
+
+
+/* 
+	원주미래산업진흥원 좌표값.
 	위도: 37.3142624092727,
 	경도: 127.921742279
 */
 
-	// 기존 버튼에 클릭 이벤트 추가
 	/*
 	var mapLoad = document.getElementById('map');
 	var CircumFerenceButton = document.getElementById('CircumFerenceButton');

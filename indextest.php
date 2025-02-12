@@ -1,13 +1,14 @@
 <? session_start(); ?>
 <?
 	$nonce = base64_encode(random_bytes(16));
-	
+	header("Content-Security-Policy: script-src 'self' 'nonce-$nonce' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net;");
 ?>
 <?
 $_PAGE_NO = "2";
 require $_SERVER['DOCUMENT_ROOT'] . "/_common/common_inc.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/_classes/biz/main/main.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/_classes/biz/board/board.php";
+
 // 게시물 가져오기 (4개씩 제한)
 $posts = selectBoardList($conn, 1, 4); // 1 페이지, 4개씩 가져오기
 
@@ -44,6 +45,9 @@ $nListCnt = totalCntBoardFront($conn, $b, $m_type, $con_cate_02, $con_cate_03, $
 
 
 $arr_rs = listBoardFront($conn, $b, $m_type, $con_cate_02, $con_cate_03, $con_cate_04, $con_writer_id, $keyword, $con_reply_state, $con_use_tf, $con_del_tf, $f, $s, $nPage, $nPageSize, $nListCnt);
+$banner_type = "MAINVISUAL";
+$banners = getMainlistBanner($conn, $banner_type);
+
 ?>
 
 <main role="main" class="container">
@@ -148,7 +152,7 @@ $arr_rs = listBoardFront($conn, $b, $m_type, $con_cate_02, $con_cate_03, $con_ca
 							<div class="inner-area">
 								<div class="notice-wrap">
 									<ul class="notice-list">
-										<?php
+										<?
 										$posts = selectBoardList($conn, 1, 4);
 										if (!empty($posts)) {
 											foreach ($posts as $post) {
@@ -170,7 +174,7 @@ $arr_rs = listBoardFront($conn, $b, $m_type, $con_cate_02, $con_cate_03, $con_ca
 														<span class="date"><?= $post['REG_DATE']; ?></span>
 													</a>
 												</li>
-												<?php
+												<?
 											}
 										} else {
 											?>
@@ -190,6 +194,25 @@ $arr_rs = listBoardFront($conn, $b, $m_type, $con_cate_02, $con_cate_03, $con_ca
 						</div>
 					</div>
 					<!-- e: 03_소통마당 -->
+							<!-- 2025-01-21 홍보배너 변경 -->
+							<div class="inner adBanner">
+								<div class="swiper swiper-ad">
+									<div class="swiper-wrapper">
+										<div class="swiper-slide">
+											<a href="#">
+												<img src="https://img.freepik.com/premium-vector/anxiety-concept-illustration-mental-disorders-sad-desperate-flat-vector-design_722351-22.jpg?w=826" alt="" />
+											</a>
+										</div>
+										<div class="swiper-slide">
+											<a href="#">
+												<img src="https://img.freepik.com/free-vector/savings-concept-illustration_114360-1526.jpg?t=st=1736470862~exp=1736474462~hmac=7d078aff48c21b6bb722faf4049d831439531024da5035a3510134b110de04ac&w=826" alt="" />
+											</a>
+										</div>
+									</div>
+									<div class="swiper-pagination"></div>
+								</div>
+							</div>
+							<!-- //홍보배너 변경 -->
 
 					<!-- s: 04_시설임대 -->
 					<div class="inner rent">
@@ -260,7 +283,9 @@ $arr_rs = listBoardFront($conn, $b, $m_type, $con_cate_02, $con_cate_03, $con_ca
 					</div>
 					<!-- e: 05_보도자료 -->
 
-					<!-- s: 06_푸터 -->
+<!-- e: 03_소통마당 -->
+
+<!-- s: 06_푸터 -->
 
 					<div class="inner">
 						<footer class="footer">
@@ -307,54 +332,41 @@ $arr_rs = listBoardFront($conn, $b, $m_type, $con_cate_02, $con_cate_03, $con_ca
 <!-- include_footer.html -->
 <!-- // include_footer.html -->
 
-<!-- 홍보배너 팝업 -->
-<div class="modal fade" id="adModal" tabindex="-1" role="dialog" aria-labelledby="adModalLabel" aria-hidden="true">
-    <div class="modal-dialog ad-modal">
-        <div class="modal-content">
-            <div class="modal-header blind">
-                <h3 class="modal-title" id="adModalLabel">배너모음</h3>
-            </div>
-            <div class="modal-body">
-                <div class="swiper swiper-ad">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <a href="#">
-                                <img src="https://img.freepik.com/premium-vector/anxiety-concept-illustration-mental-disorders-sad-desperate-flat-vector-design_722351-22.jpg?w=826" alt="" />
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="#">
-                                <img src="https://img.freepik.com/free-vector/savings-concept-illustration_114360-1526.jpg?t=st=1736470862~exp=1736474462~hmac=7d078aff48c21b6bb722faf4049d831439531024da5035a3510134b110de04ac&w=826" alt="" />
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="#">
-                                <img src="https://img.freepik.com/free-vector/savings-concept-illustration_114360-1526.jpg?t=st=1736470862~exp=1736474462~hmac=7d078aff48c21b6bb722faf4049d831439531024da5035a3510134b110de04ac&w=826" alt="" />
-                            </a>
-                        </div>
-						<div class="swiper-slide">
-                            <a href="#">
-								<p>반복해야 하는 img 태그</p>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="swiper-pagination"></div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn" id="todayModalHidden">오늘 하루 보지않기</button>
-                <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">닫기</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- // 홍보배너 팝업 -->
-
-</div>
+	<!-- 홍보배너 팝업 -->
+	<div class="modal fade" id="adModal" tabindex="-1" role="dialog" aria-labelledby="adModalLabel" aria-hidden="true">
+		<div class="modal-dialog ad-modal">
+			<div class="modal-content">
+				<div class="modal-header blind">
+					<h3 class="modal-title" id="adModalLabel">배너모음</h3>
+				</div>
+				<div class="modal-body">
+					<div class="swiper swiper-ad">
+						<div class="swiper-wrapper">
+						<?
+							foreach ($poplist as $item) {
+								echo '<div class="swiper-slide">';
+								echo '    <a href="#">';
+								echo '        <img src="/upload_data/popup/' . htmlspecialchars($item['FILE_NM']) . '" alt="" />';
+								echo '    </a>';
+								echo '</div>';
+							}
+						?>
+						</div>
+						<div class="swiper-pagination"></div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn" id="todayModalHidden">오늘 하루 보지않기</button>
+					<button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">닫기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- // 홍보배너 팝업 -->
 </body>
 <script stype="text/javascript" nonce="<?php echo $nonce; ?>">
-	// 비주얼 슬라이드
-	let slideVisual = new Swiper('.swiper-visual .swiper-container', {
+ // 비주얼 슬라이드
+ let slideVisual = new Swiper('.swiper-visual .swiper-container', {
 		autoplay:
 		{
 			delay: 4000,
@@ -374,28 +386,29 @@ $arr_rs = listBoardFront($conn, $b, $m_type, $con_cate_02, $con_cate_03, $con_ca
 		pagination: {
 			el: '.swiper-visual .swiper-pagination',
 			clickable: true,
-			renderBullet: function (index, className) {
-				return `<li class="${className}"><span>${index + 1}</span></li>`;
+			renderBullet: function(index, className) {
+				return `<li class="${className}"><span>${index+1}</span></li>`;
 			}
 		},
 	});
 	var sw = 0;
-	$('.btn-pause').click(function () {
-		if (sw == 0) {
+	$('.btn-pause').click(function(){
+		if(sw==0){
 			$('.btn-pause').addClass('on');
 			slideVisual.autoplay.stop();
 			sw = 1;
-		} else {
+		}else{
 			$('.btn-pause').removeClass('on');
 			slideVisual.autoplay.start();
 			sw = 0;
 		}
 	});
 
-	slideVisual.on('slideChange', function () {
+	slideVisual.on('slideChange', function() {
 		$('.swiper-pagination-bullet').removeClass('current');
 		$('.swiper-pagination-bullet').eq(slideVisual.realIndex).addClass('current');
 	});
+	
 
 
 	//시설 예약
@@ -584,9 +597,7 @@ $arr_rs = listBoardFront($conn, $b, $m_type, $con_cate_02, $con_cate_03, $con_ca
 
 		// 쿠키 확인
 		if (!getCookie("hideAdModal")) {
-			setTimeout(() => {
-				adModal.show();
-			}, 50);
+			adModal.show();
 		}
 
 		// "오늘 하루 보지 않기" 버튼 클릭 이벤트

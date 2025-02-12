@@ -14,9 +14,7 @@
 	$msg						= isset($_POST["msg"]) && $_POST["msg"] !== '' ? $_POST["msg"] : (isset($_GET["msg"]) ? $_GET["msg"] : '');
 	$rphone					= isset($_POST["rphone"]) && $_POST["rphone"] !== '' ? $_POST["rphone"] : (isset($_GET["rphone"]) ? $_GET["rphone"] : '');
 
-
 	//$str_result = send_sms ($conn, "01052264159", "", "찬호의 폰으로 테스트를 합니다.", "초기테스트");
-
 
 	if ($mode == "SEND_SMS") {
 		

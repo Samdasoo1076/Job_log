@@ -141,7 +141,7 @@ if($mode == "registeQNA") {
 										<div class="info-inp-wrap">
 											<div class="inp-wrap">
 												<div class="frm-inp h-48">
-													<input type="text" name="title" id="title" placeholder="제목을 입력해주세요" title="" class="inp">
+													<input type="text" name="title" id="title" placeholder="제목을 입력해주세요" title="" class="inp" maxlength="30">
 												</div>
 											</div>
 										</div>

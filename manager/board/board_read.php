@@ -881,7 +881,7 @@ if ($result) {
 													break;
 											}
 
-											$copy_url = "//" . $_SERVER['HTTP_HOST'] . "/" . $b_folder . "/view.php?bn=" . $b_no . "&m_type=" . $rs_cate_01;
+											$copy_url = $_SERVER['HTTP_HOST'] . "/" . "communication/view.php?b=" . $b_code . "&bn=" . $b_no . "&m_type=" . $rs_cate_01;
 											$go_url = "../../communication/view.php?b=$b_code&bn=" . $b_no . "&m_type=" . $rs_cate_01 . "&&nPage=1";
 											?>
 											<button type="button" class="button" onClick="board_copy_url('<?= $copy_url ?>');">링크복사</button>

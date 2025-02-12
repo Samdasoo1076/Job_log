@@ -1,5 +1,4 @@
-<script>
-
+<script nonce="<?= $nonce; ?>">
 	$(function(){
 		// PC Header
 		$('#input_search_header').on('keydown', function (event) {
@@ -9,14 +8,16 @@
 		});
 
 		$('#btn_search_header').on('click', function (event) {
-			
 			const searchKeyword = $("#input_search_header").val();
+			// 디버깅 로그 추가
+			console.log("PC Header searchKeyword:", searchKeyword);  // searchKeyword 값 출력
 			
 			if (!searchKeyword) {
 				alert('검색어를 입력해주세요.');
 				return;
 			} else {
 				$("#input_hidden_search_header").val($("#input_search_header").val());
+				console.log("Form will be submitted with searchKeyword:", searchKeyword); // 폼 제출 전 로그
 				searchForm.submit();
 			}
 		});
@@ -29,19 +30,20 @@
 		});
 
 		$('#mobile_btn_search_header').on('click', function (event) {
-			
 			const searchKeyword = $("#mobile_input_search_header").val();
+			// 디버깅 로그 추가
+			console.log("Mobile Header searchKeyword:", searchKeyword);  // searchKeyword 값 출력
 			
 			if (!searchKeyword) {
 				alert('검색어를 입력해주세요.');
 				return;
 			} else {
 				$("#input_hidden_search_header").val($("#mobile_input_search_header").val());
+				console.log("Mobile Form will be submitted with searchKeyword:", searchKeyword); // 모바일 폼 제출 전 로그
 				searchForm.submit();
 			}
 		});
 	});
-
 </script>
 
 
@@ -69,7 +71,7 @@
 		<div class="gnb-area">
 			<!-- 로고 -->
 			<div class="header-logo">
-				<a href="/index.do">
+				<a href="/">
 					<img class="down" src="/assets/images/common/img-logo-wh.svg" alt="WFI (재)원주미래산업진흥원" />
 					<img class="up" src="/assets/images/common/img-logo-bk.svg" alt="WFI (재)원주미래산업진흥원" />
 					<span class="blind">WFI (재)원주미래산업진흥원</span>
@@ -118,8 +120,7 @@
 								$depth_01_page_name = $PAGE_NAME;
 							?>
 							<li class="dep1-item">
-								<a href="<?= $PAGE_URL ?>" <? if ($URL_TYPE == "Y") { ?>target="_blank" title="새창열기" <? } ?>
-									class="dep1-link"><?= $PAGE_NAME ?></a>
+								<a href="<?= $PAGE_URL ?>" <? if ($URL_TYPE == "Y") { ?>target="_blank" title="새창열기" <? } ?> class="dep1-link"><?= $PAGE_NAME ?></a>
 								<?
 								if (sizeof($arr_menu_rs_02) > 0) {
 									?>
@@ -224,7 +225,7 @@
 								<div class="input">
 									<input id="input_search_header" type="search" name="searchKeyword" placeholder="검색어를 입력하세요">
 									<!-- <span class="delete"><span class="blind">delete</span></span>  -->
-									<button id="btn_search_header" type="submit" class="btn_search"><span class="blind">search</span></button>
+									<button id="btn_search_header" type="submit" class="btn_search"><span class="blind">seatton>
 								</div>
 							</div>
 						</div>
@@ -253,7 +254,7 @@
 	<div class="header-mobile-sec">
 		<div class="gnb-area">
 			<div class="header-logo">
-				<a href="/index.do">
+				<a href="/">
 					<img class="down" src="/assets/images/common/img-logo-wh.svg" alt="WFI (재)원주미래산업진흥원 로고">
 					<img class="up" src="/assets/images/common/img-logo-bk.svg" alt="WFI (재)원주미래산업진흥원 로고">
 					<span class="blind">WFI (재)원주미래산업진흥원</span>
@@ -273,8 +274,7 @@
 						<div class="input">
 							<input id="mobile_input_search_header" type="search" name="" placeholder="검색어를 입력하세요">
 							<!-- <span class="delete"><span class="blind">delete</span></span>  -->
-							<button id="mobile_btn_search_header" type="button" class="btn_search"><span
-									class="blind">search</span></button>
+							<button id="mobile_btn_search_header" type="button" class="btn_search"><span class="blind">search</span></button>
 						</div>
 					</div>
 				</div>
@@ -465,7 +465,7 @@
 		<div class="modal-dialog sitemap">
 			<div class="modal-content">
 				<h2 class="sitemap-logo">
-					<a href="/index.do">
+					<a href="/">
 						<img class="up" src="/assets/images/common/img-logo-bk.svg" alt="WFI (재)원주미래산업진흥원 로고">
 						<span class="blind">WFI (재)원주미래산업진흥원</span>
 					</a>

@@ -189,7 +189,7 @@
 						</div>
 					</div>
 
-					<button type="button" class="button <? if ($sel_page_lang <> "KOR") echo "type02"; ?> " onClick="javascript:document.location='page_list.php?sel_page_lang=KOR'">국문</button>
+					<!--<button type="button" class="button <? if ($sel_page_lang <> "KOR") echo "type02"; ?> " onClick="javascript:document.location='page_list.php?sel_page_lang=KOR'">국문</button> !-->
 					<!--
 					<button type="button" class="button <? if ($sel_page_lang <> "ENG") echo "type02"; ?>" onClick="javascript:document.location='page_list.php?sel_page_lang=ENG'">영문</button>
 					<button type="button" class="button <? if ($sel_page_lang <> "CHN") echo "type02"; ?>" onClick="javascript:document.location='page_list.php?sel_page_lang=CHN'">중문</button>

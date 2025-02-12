@@ -126,7 +126,7 @@ error_reporting(E_ALL);
 
 	#echo sizeof($arr_rs);
 
-	$result_log = insertUserLog($conn, "admin", $_SESSION['s_adm_id'], $_SERVER['REMOTE_ADDR'], "SMS", "List");
+	$result_log = insertUserLog($conn, "admin", $_SESSION['s_adm_id'], $_SERVER['REMOTE_ADDR'], "SMS 로그 리스트 조회", "List");
 	
 ?>
 <!doctype html>
@@ -161,7 +161,7 @@ error_reporting(E_ALL);
 
 		var frm = document.frm;
 		frm.method = "post";
-		frm.action = "admin_log_excel_list.php";
+		frm.action = "sms_log_excel_list.php";
 		frm.submit();
 	}
 
@@ -230,8 +230,8 @@ error_reporting(E_ALL);
 											<option value="0" <? if ($task_type == "0") echo "selected"; ?>>아이디 찾기</option>
 											<option value="1" <? if ($task_type == "1") echo "selected"; ?>>비밀번호 찾기</option>
 											<option value="2" <? if ($task_type == "2") echo "selected"; ?>>회원가입</option>
-											<option value="3" <? if ($task_type == "3") echo "selected"; ?>>정보 수정</option>
-											<option value="4" <? if ($task_type == "4") echo "selected"; ?>>시설 예약</option>
+											<option value="3" <? if ($task_type == "3") echo "selected"; ?>>시설 예약</option>
+											<option value="4" <? if ($task_type == "4") echo "selected"; ?>>정보 수정</option>
 										</select>
 									</td>
 									<th>검색조건</th>
@@ -288,9 +288,10 @@ error_reporting(E_ALL);
 												} elseif ($row['TASK'] == 2) {
 													echo htmlspecialchars("회원가입");
 												} elseif ($row['TASK'] == 3) {
-													echo htmlspecialchars("내 정보 수정");
-												} elseif ($row['TASK'] == 4) {
 													echo htmlspecialchars("시설 예약");
+												} elseif ($row['TASK'] == 4) {
+													echo htmlspecialchars("내 정보 수정");
+
 												} else {
 													echo htmlspecialchars("알 수 없음"); // 기본값
 												}

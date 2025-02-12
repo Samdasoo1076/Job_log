@@ -117,7 +117,7 @@ header("Content-Type: text/html; charset=UTF-8");
 		var frm = document.frm;
 		frm.target = "";
 		frm.action = "<?=str_replace("list","excel_list",$_SERVER["PHP_SELF"])?>";
-		//frm.submit();
+		frm.submit();
 
 	}
 

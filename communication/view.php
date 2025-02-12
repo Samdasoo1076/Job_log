@@ -27,7 +27,9 @@ if ($b == "B_1_1") {
 	$_PAGE_NO = "109";
 } else if ($b == "B_1_11"){
 	$_PAGE_NO = "112";
-} 
+} else if ($b == "B_1_5") {
+	$_PAGE_NO = "22";
+}
 else {
 	$_PAGE_NO = "21";
 }

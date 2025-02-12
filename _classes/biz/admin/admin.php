@@ -633,7 +633,7 @@
 	}
 
 	function listSMSLog($db, $start_date, $end_date, $task_type, $search_field, $search_str, $nPage, $nRowCount) {
-    $offset = $nRowCount * ($nPage - 1);
+		$offset = (int) $nRowCount * ((int) $nPage - 1); 
     if ($offset < 0) $offset = 0;
     
     $query = "set @rownum = ".$offset."; ";

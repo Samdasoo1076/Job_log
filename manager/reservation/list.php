@@ -36,9 +36,6 @@ require "../../_classes/biz/admin/admin.php";
 #==============================================================================
 # Request Parameter
 #==============================================================================
-#==============================================================================
-# Request Parameter
-#==============================================================================
 $m_no = isset($_POST["m_no"]) && $_POST["m_no"] !== '' ? $_POST["m_no"] : (isset($_GET["m_no"]) ? $_GET["m_no"] : '');
 $rv_no = isset($_POST["rv_no"]) && $_POST["rv_no"] !== '' ? $_POST["rv_no"] : (isset($_GET["rv_no"]) ? $_GET["rv_no"] : '');
 
@@ -73,9 +70,9 @@ if ($mode == "D") {
     if ($del_ok == "Y") {
         $row_cnt = is_null($chk) ? 0 : count($chk);
         for ($k = 0; $k < $row_cnt; $k++) {
-            $tmp_r_no = (int)$chk[$k];
-            $result = deleteReservationTF($conn, $_SESSION['s_adm_no'], $tmp_r_no);
-            $result_log = insertUserLog($conn, 'admin', $_SESSION['s_adm_id'], $_SERVER['REMOTE_ADDR'], "".$m_id." 예약 내용 삭제 (예약 번호 : ".$tmp_r_no.") ", "Delete");
+            $tmp_rv_no = (int)$chk[$k];
+            $result = deleteReservationTF($conn, $_SESSION['s_adm_no'], $tmp_rv_no);
+            $result_log = insertUserLog($conn, 'admin', $_SESSION['s_adm_id'], $_SERVER['REMOTE_ADDR'], "".$m_id." 예약 내용 삭제 (예약 번호 : ".$tmp_rv_no.") ", "Delete");
         }
     }
 }
@@ -438,7 +435,7 @@ $arr_rs = listReservations2($conn, $m_no, $use_tf, $del_tf, $search_field, $sear
 
                                     <tr style="<?= $top_style ?> <?= $view_style ?>">
 
-                                        <td><input type="checkbox" name="chk[]" value="<?= $R_NO ?>"></td>
+                                        <td><input type="checkbox" name="chk[]" value="<?= $RV_NO ?>"></td>
                                         <td><a href="detail.php?rv_no=<?= $RV_NO ?>"><?= $R_NO ?></a></td>
                                         <td><?= $M_ID ?></td>
                                         <td><?= $ROOM_NAME ?></td>

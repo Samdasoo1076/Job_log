@@ -17,11 +17,6 @@
 		$sms['sphone2'] = base64_encode("764");
 		$sms['sphone3'] = base64_encode("9020");
 
-		//$sms['rphone'] = base64_encode($_POST['rphone']);
-		//$sms['sphone1'] = base64_encode($_POST['sphone1']);
-		//$sms['sphone2'] = base64_encode($_POST['sphone2']);
-		//$sms['sphone3'] = base64_encode($_POST['sphone3']);
-
 		$sms['rdate'] = base64_encode($_POST['rdate']);
 		$sms['rtime'] = base64_encode($_POST['rtime']);
 		$sms['mode'] = base64_encode("1"); // base64 사용시 반드시 모드값을 1로 주셔야 합니다.

@@ -566,14 +566,14 @@ function updateReservationAgree($conn, $rv_no, $rv_agree_tf)
     return true;
 }
 
-function deleteReservationTF($db, $del_adm, $r_no)
+function deleteReservationTF($db, $del_adm, $rv_no)
 {
     $query = "UPDATE TBL_RESERVATION SET
 						DEL_TF				= 'Y',
 						DEL_ADM				= '$del_adm',
 						DEL_DATE			= now()
 					WHERE 
-                        R_NO				= '$r_no'";
+                        RV_NO				= '$rv_no'";
 
     if (!mysqli_query($db, $query)) {
         return false;

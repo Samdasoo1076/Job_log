@@ -1093,9 +1093,7 @@ function stopTimer() {
 			}
 
 			if (!ksic_detail) {
-				alert("2차 산업 분류를 선택해주세요.");
-				document.getElementById("ksic_detail_selector").focus();
-				return;
+				frm.m_ksic_detail.value = "<?= $user_data['M_KSIC_DETAIL'] ?>";
 			}
 
 			var bUpdateChangeOK = confirm('변경 내용을 저장하시겠습니까?');

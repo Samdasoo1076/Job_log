@@ -182,6 +182,35 @@
 			&.community {
 				padding-top: 240rem;
 			}
+			&.adBanner {
+				padding-top: 200rem;
+				.swiper-ad {
+					width: 100%;
+					height: 20vw;
+					.swiper-slide,
+					.swiper-slide a,
+					.swiper-slide img {
+						display: block;
+						width: 100%;
+						height: 100%;
+					}
+					.swiper-pagination {
+						display: flex;
+						justify-content: center;
+						gap: 8rem;
+						bottom: 16rem !important;
+					}
+					.swiper-pagination-bullet {
+						border-radius: 8rem;
+						margin: 0 !important;
+						transition: all 0.2s ease;
+					}
+					.swiper-pagination-bullet-active {
+						width: 16rem;
+						background-color: $color-primary;
+					}
+				}
+			}
 			&.rent {
 				padding-top: 200rem;
 				.fp-overflow {
@@ -639,7 +668,7 @@
 		right: 0;
 		bottom: 0;
 		width: 960rem;
-		z-index: 1009;
+		z-index: 900;
 		transition: .2s all;
 		.reservation-top {
 			position: relative;
@@ -782,6 +811,9 @@
 				}
 				&.community {
 					padding-top: calc(100vw * (240 / 1590));
+				}
+				&.adBanner {
+					padding-top: calc(100vw * (200 / 1590));
 				}
 				&.rent {
 					padding-top: calc(100vw * (200 / 1590));
@@ -1181,6 +1213,9 @@
 					padding-top: calc(100vw * (240 / 1280));
 					padding-left: calc(100vw * (50 / 1280));
 					padding-right: calc(100vw * (50 / 1280));
+				}
+				&.adBanner {
+					padding-top: calc(100vw * (200 / 1280));
 				}
 				&.rent {
 					padding-top: calc(100vw * (200 / 1280));
@@ -1782,8 +1817,15 @@
 					padding-left: 20rem;
 					padding-right: 20rem;
 				}
+				&.adBanner {
+					padding-top: 60rem;
+					.swiper-ad {
+						width: 100%;
+						height: 40vw;
+					}
+				}
 				&.rent {
-					padding-top: 120rem;
+					padding-top: 60rem;
 					padding-left: 20rem;
 					padding-right: 20rem;
 				}
@@ -2678,51 +2720,4 @@
 		}
 	}
 
-}
-
-/* 홍보배너 */
-.ad-modal {
-	.modal-content {
-		width: 320rem;
-		overflow: hidden;
-		border-radius: 16rem;
-	}
-	.modal-footer {
-		display: flex;
-		gap: 1rem;
-		background-color: #EAEAEA;
-		.btn {
-			width: 50%;
-			height: 52rem;
-			text-align: center;
-			background-color: #F4F6F9;
-			font-weight: 500;
-		}
-	}
-	.swiper-ad {
-		width: 320rem;
-		height: 400rem;
-		.swiper-slide,
-		.swiper-slide a,
-		.swiper-slide img {
-			display: block;
-			width: 320rem;
-			height: inherit;
-		}
-		.swiper-pagination {
-			display: flex;
-			justify-content: center;
-			gap: 8rem;
-			bottom: 16rem !important;
-		}
-		.swiper-pagination-bullet {
-			border-radius: 8rem;
-			margin: 0 !important;
-			transition: all 0.2s ease;
-		}
-		.swiper-pagination-bullet-active {
-			width: 16rem;
-			background-color: $color-primary;
-		}
-	}
 }

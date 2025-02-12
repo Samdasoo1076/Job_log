@@ -22,6 +22,9 @@
 									</thead>
 									<tbody>
 										<?
+										$session_m_id = isset($_SESSION['m_id']) ? $_SESSION['m_id'] : null;
+										error_reporting(E_ALL);
+										ini_set('display_errors', 1);
 									$nCnt = 0;
 									if (sizeof($arr_rs) > 0) {
 
@@ -123,24 +126,26 @@
 													<? } ?>
 												</td>
 												<td class="tbl-tit">
-													<p>
-														<a href="<? if ($_SESSION['m_id'] == $WRITER_ID) { ?>view.do?b=<?= $b ?>&bn=<?= $B_NO ?>&m_type=<?= $m_type ?>&nPage=<?= $nPage ?>&f=<?= $f ?>&s=<?= $s ?>
-														<? } else { ?>
-														javascript:void(0);<? } ?>" 
-															class="link"
-															<? if ($_SESSION['m_id'] != $WRITER_ID) { ?>
-																onclick="alert('자신이 작성한 문의만 보실수 있습니다.'); return false;"
-															<? } ?>
-														>
-															<?= $highlightedTitle ?>
-														</a>
-														<? if ($F_CNT > 0) { ?>
-															<a href="view.do?b=<?= $b ?>&bn=<?= $B_NO ?>&m_type=<?= $m_type ?>&nPage=<?= $nPage ?>&f=<?= $f ?>&s=<?= $s ?>" class="file">
-																<span class="blind">첨부파일</span>
-															</a>
-														<? } ?>
-													</p>
-												</td>
+										<p>
+											<a href="<? if ($session_m_id == $WRITER_ID || empty($session_m_id)) { ?>
+												view.do?b=<?= $b ?>
+												&bn=<?= $B_NO ?>
+												&m_type=<?= $m_type ?>
+												&nPage=<?= $nPage ?>
+												&f=<?= $f ?>
+												&s=<?= $s ?>
+											<? } else { ?>
+												javascript:void(0);
+											<? } ?>"
+												class="link"
+												<? if ($session_m_id !== $WRITER_ID && !empty($session_m_id)) { ?>
+													onclick="alert('자신이 작성한 문의만 보실 수 있습니다.'); return false;"
+												<? } ?>
+											>
+												<?= $highlightedTitle ?>
+											</a>
+										</p>
+									</td>
 												<td class="tbl-writer">
 													<p><?= maskName($WRITER_NM) ?></p>
 												</td>

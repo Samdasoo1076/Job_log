@@ -1318,13 +1318,20 @@ function deleteBoard($db, $del_adm, $b_code, $b_no)
 	mysqli_query($db, $query);
 
 	if ($del_flag == "N") {
+		
+		$query = "UPDATE TBL_BOARD SET
+							 DEL_TF				= 'Y',
+							 DEL_ADM			= '$del_adm',
+							 DEL_DATE			= now()
+						WHERE B_CODE		= '$b_code' 
+							AND B_NO			= '$b_no' ";
 
-		$query = "UPDATE TBL_BOARD SET 
-									THUMB_IMG = '',
-									TITLE = '작성자 또는 관리자에 의해 삭제 되었습니다.', 
-									CONTENTS = '답변글이 남아 있어 내용만 삭제 되었습니다.'
-								WHERE B_CODE	= '$b_code' 
-									AND B_NO		= '$b_no' ";
+		//$query = "UPDATE TBL_BOARD SET 
+									//THUMB_IMG = '',
+									//TITLE = '작성자 또는 관리자에 의해 삭제 되었습니다.', 
+									//CONTENTS = '답변글이 남아 있어 내용만 삭제 되었습니다.'
+								//WHERE B_CODE	= '$b_code' 
+									//AND B_NO		= '$b_no' ";
 	} else {
 
 		$query = "UPDATE TBL_BOARD SET

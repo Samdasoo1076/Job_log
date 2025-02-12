@@ -1,30 +1,9 @@
 <?session_start();?>
 <?
-$_PAGE_NO = "13";
+$_PAGE_NO = "116";
 require $_SERVER['DOCUMENT_ROOT'] . "/_common/common_inc.php";
 ?>
-<script>
-	function list1(b_code, b_no) {
-        window.location.href = "/intro/greetings_chairman.do?b=" + b_code + "&bn=" + b_no;
-    }
 
-	function list2(b_code, b_no) {
-        window.location.href = "/intro/greetings_ledger.do?b=" + b_code + "&bn=" + b_no;
-    }
-
-	function list3(b_code, b_no) {
-        window.location.href = "/intro/vision.do?b=" + b_code + "&bn=" + b_no;
-    }
-	function list4(b_code, b_no) {
-        window.location.href = "/intro/history.do?b=" + b_code + "&bn=" + b_no;
-    }
-	function list5(b_code, b_no) {
-        window.location.href = "/intro/organization.do?b=" + b_code + "&bn=" + b_no;
-    }
-	function list6(b_code, b_no) {
-        window.location.href = "/intro/find_map.do?b=" + b_code + "&bn=" + b_no;
-    }
-</script>
 		<!-- Container -->
 		<main role="main" class="container">
 			<!-- content -->

@@ -12,12 +12,9 @@
 				<div class="reservation-choice">
 				</div>
 				<div class="btn-wrap">
-					<button type="button" class="btn white-bor"
-						onclick="location.href='/facility/reservation_status.php'"><span class="txt">시설
-							예약현황</span></button>
-					<button type="button" class="btn red"
-						onclick="location.href='/facility/reservation_form.php'"><span class="txt">시설
-							예약하기</span></button>
+					<button type="button" class="btn white-bor" id="btnReservationStatus">
+					<span class="txt">시설 예약현황</span></button>
+					<button type="button" class="btn red" id="btnReservationForm"><span class="txt">시설 예약하기</span></button>
 				</div>
 			</div>
 		</div>

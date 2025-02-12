@@ -118,11 +118,9 @@ header("Content-Type: text/html; charset=UTF-8");
 
 		// 삭제 권한 관련 입니다.
 		$del_ok = "N";
-		if ($_SESSION['s_adm_no'] && $arr_page_nm[1] == "manager") {
 			if ($sPageRight_D == "Y") {
 				$del_ok = "Y";
 			}
-		}
 		
 		if ($del_ok == "Y") {
 			$row_cnt = is_null($chk) ? 0 : count($chk);
@@ -237,8 +235,9 @@ header("Content-Type: text/html; charset=UTF-8");
 			if (bDelOK==true) {
 				frm.mode.value = "D";
 				frm.target = "";
-				frm.action = "<?=$_SERVER['PHP_SELF']?>?b_code=<?=$b_code?>";
+				frm.action = "<?=$_SERVER['PHP_SELF']?>?b_code=<?= $b_code?>";
 				frm.submit();
+			
 			}
 		}
 	}

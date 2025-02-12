@@ -62,10 +62,12 @@
 		$sms_flag = isset($_POST["sms_flag"]) ? $_POST["sms_flag"] : "";
 		$authCode = str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT);
 		$_SESSION['authCode'] = $authCode;
+ 		$phone = $m_phone;
 
-		$str_result = send_sms($conn, $m_phone, "", "[원주미래산업진흥원] 인증번호 : ".$authCode." 를 입력해 주세요.", $sms_flag);
+		//$str_result = send_sms($conn, $m_phone, "", "[원주미래산업진흥원] 인증번호 : ".$authCode." 를 입력해 주세요.", $sms_flag);
+		$str_result = biz_send_sms($conn, $phone, $subject, "[원주미래산업진흥원] 인증번호 : ".$authCode." 를 입력해 주세요.", $sms_flag);
 
-		echo json_encode(['success' => true, 'authCode' => $authCode]);
+		echo json_encode(['success' => true, 'authCode' => $authCode, 'token' => $token, $str_result => '$msg']);
 		exit;
 	}
 

@@ -94,9 +94,7 @@ $arr_data = array(
 		$("#reservation_confirm").trigger("Click");
 	}
 
-
 	function js_save() {
-
 		// AJAX 요청 보내기
 		$.ajax({
 			url: '/_common/ajax_reservation_dml.php', // 데이터를 처리할 PHP 파일
@@ -105,9 +103,7 @@ $arr_data = array(
 			data: $("#reservationform").serialize(),
 
 			success: function (response) {
-
-				//console.log("response : " + response.reservation_no);
-
+				
 				if (response.success == true) {
 					$("#reservation_no").html(response.reservation_no);
 					$("#conf_msg").html("시설 예약 신청서가 제출되었습니다.<br />업무일 기준 48시간내 예약자 연락처로 문자 발송드립니다.");

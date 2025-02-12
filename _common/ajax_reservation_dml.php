@@ -14,6 +14,8 @@ require "../_classes/com/util/AES2.php";
 require "../_classes/com/util/ImgUtil.php";
 require "../_classes/com/etc/etc.php";
 require "../_classes/biz/reservation/reservation.php";
+require "../_classes/biz/member/member.php";
+
 
 $mode = isset($_POST["mode"]) && $_POST["mode"] !== '' ? $_POST["mode"] : (isset($_GET["mode"]) ? $_GET["mode"] : '');
 $m_no = isset($_POST["m_no"]) && $_POST["m_no"] !== '' ? $_POST["m_no"] : (isset($_GET["m_no"]) ? $_GET["m_no"] : '');
@@ -74,6 +76,10 @@ if ($mode == "REVSERVATION") {
 	$totalPrice = isset($_POST["totalPrice"]) && $_POST["totalPrice"] !== '' ? $_POST["totalPrice"] : (isset($_GET["totalPrice"]) ? $_GET["totalPrice"] : '');
 
 	$cnt = chkDupReservation ($conn, $room_no, $rv_date, $rv_start_time);
+	$member_info = selectMember($conn, $m_no);
+	$m_phone = $member_info[0]['M_PHONE'];
+	$m_phone_dec = decrypt($key, $iv, $m_phone);
+	$m_phone_dec = str_replace('-', '', $m_phone_dec);
 
 	if ($cnt == 0) {
 
@@ -93,10 +99,16 @@ if ($mode == "REVSERVATION") {
 		);
 
 		$reservation_no = insertReservation($conn, $arr_data);
-	
+
+		$sms_flag = '3';
+
+		// 예약할시 문자 발송 추가 멘트는 콘텐츠 수급이되면 수정
+		$str_result = biz_send_sms($conn, $m_phone_dec, $subject, "[원주미래산업진흥원] 예약이 완료되었습니다. 고객님의 예약번호는 ".$reservation_no." 입니다.", $sms_flag);
+
 		echo json_encode([
 			"success" => true,
 			"reservation_no" => $reservation_no,
+			"str_result" => $str_result,
 			"message" => ""
 		]);
 
@@ -108,8 +120,6 @@ if ($mode == "REVSERVATION") {
 		]);
 
 	}
-
-
 
 	db_close($conn);
 	exit;

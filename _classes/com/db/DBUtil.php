@@ -14,15 +14,15 @@
 	function db_connection($usr_type) {
 		
 		if ($usr_type == "w") {
-			$servername = "localhost";
-			$username = "wfiwfi";
+			$servername = "192.168.0.24:3306";
+			$username = "wfi";
 			$password = "wfiasdf1!";
-			$dbname = "wfiwfi";
+			$dbname = "wfi";
 		} else {
-			$servername = "localhost";
-			$username = "wfiwfi";
+			$servername = "192.168.0.24:3306";
+			$username = "wfi";
 			$password = "wfiasdf1!";
-			$dbname = "wfiwfi";
+			$dbname = "wfi";
 		}
 		
 		$link = new mysqli($servername, $username, $password, $dbname);

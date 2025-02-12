@@ -14,16 +14,14 @@ password : ucomrt
 
 ## 운영서버 정보
 
-domain : http:wfi.or.kr/index.php  
-관리자 : http:wfi.or.kr/manager/login.php
-FTP 서버 : wfi.or.kr
-Usernae : wfiwfi
-Password : wfiasdf1!
+domain : http:wfi.or.kr/
+관리자 : http:wfi.or.kr/manager/login.php  
+FTP 서버 : 198.19.117.50  
+Usernae : ucomp  
+Password : ucp87411
 
 ## 운영서버 DB 정보
-db : 183.111.138.153  
-user : wfiwfi  
-password : wfiasdf1!
 
-
-
+db : 198.19.108.69  
+user : ubuntu
+password : C:\Users\ucomp\.ssh\wonju-homepage.pem

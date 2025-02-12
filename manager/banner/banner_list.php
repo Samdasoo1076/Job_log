@@ -1,6 +1,9 @@
 <?session_start();?>
 <?
 header("x-xss-Protection:0");
+ini_set('display_errors', 1); // 오류를 브라우저에 표시
+ini_set('display_startup_errors', 1); // 시작 오류 표시
+error_reporting(E_ALL); // 모든 오류 표시
 # =============================================================================
 # File Name    : banner_list.php
 # Modlue       : 
@@ -20,7 +23,7 @@ header("x-xss-Protection:0");
 #==============================================================================
 # Confirm right
 #==============================================================================
-	$menu_right = "PO009"; // 메뉴마다 셋팅 해 주어야 합니다
+	$menu_right = "PO002"; // 메뉴마다 셋팅 해 주어야 합니다
 
 	$con_banner_type = "MAINVISUAL";
 

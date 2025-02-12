@@ -812,7 +812,7 @@ html {
 							line-height: 48rem;
 							font-weight: 700;
 							color: #000;
-							margin-top: 32rem;
+							// margin-top: 32rem;
 						}
 						.login-menu {
 							margin-top: 48rem;
@@ -2820,7 +2820,7 @@ html {
 		// sub visual
 		.visual-wrap {
 			@include out-sec;
-			height: 520rem;
+			height: 420rem;
 			background: #000 no-repeat center center / cover;
 			.inner {
 				display: flex;

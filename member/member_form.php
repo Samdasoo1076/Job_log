@@ -118,6 +118,13 @@
 			// "USE_TF" => $use_tf,
 			//"REG_ADM" => $_SESSION['m_id']
 		);
+
+		//echo json_encode($arr_data);
+		// echo "<pre>";
+		// print_r($arr_data);
+		// echo "</pre>";
+		//exit;
+
 		$result =  insertMember($conn, $arr_data);
 	}
 
@@ -163,7 +170,7 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script language="javascript">
 
-	$(document).ready(function() {
+$(document).ready(function() {
 
 		$("#biz_no_area").hide();
 		$("#m_name_area").hide();
@@ -259,6 +266,9 @@
 				if (response.result === "T") {
 					alert(response.message);
 					isDuplicateChecked = true;
+					$("#m_id").prop('readonly', true);
+					$("#id_dup_chk").prop('disabled', true);
+					$("#id_dup_chk").text('중복체크 완료');					
 				} else if (response.result === "F") {
 					alert(response.message);
 					isDuplicateChecked = false;
@@ -360,6 +370,8 @@
 			},
 			dataType: "json",
 			success: function(response) {
+				//console.log("성공 응답 데이터:", response);
+
 			if (response.success) {
 				$("#phone_auth_area").show();
 				alert(`인증번호가 발송되었습니다`);
@@ -428,8 +440,10 @@
         success: function (response) {
             if (response.success) {
                 alert("인증에 성공하였습니다!");
+				$("#m_phone").prop('readonly', true);
 				$("#m_phone_rq").prop('disabled', true);
 				$("#auth_phone_chk").prop('disabled', true);
+				$("#auth_code").prop('disabled', true);
 				$('#setTimer').hide();
 				$("#auth_status").val("Y");
             } else {
@@ -666,7 +680,6 @@
     	return;
     }
 
-
 		const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 		// 이메일 조합 검증
 		if (frm.email01.value == "") {
@@ -797,6 +810,7 @@
 
 		frm.target = "";
 		frm.action = "member_form.do";
+
 		frm.submit();
 	}
 </script>
@@ -810,7 +824,15 @@
 		text-indent: -20px; /* 번호를 드려쓰기 */
 		margin-left: 20px; /* 본문 위치 조정 */
 	}
+
+	.input-disabled {
+    pointer-events: none; /* 클릭 및 입력 비활성화 */
+    background-color: #f0f0f0; /* 배경색 변경 */
+    color: #777; /* 글자색 변경 */
+	}
 </style>
+
+
 
 </head>
 <main role="main" class="container">

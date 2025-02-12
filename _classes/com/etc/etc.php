@@ -1,4 +1,8 @@
 <?
+
+
+
+
 function sql_password($db, $value)
 {
 	$query = "select password('$value') as pass";
@@ -2726,7 +2730,101 @@ function highlightKeyword($text, $keyword) { // 검색 결과에서 검색 키�
     return $text;
 }
 
+function Auth_Token() {
+    $url = "https://api.bizppurio.com/v1/token";
+    $username = "wfiwfi";
+    $password = "wfiqwer1!";
 
+    // Basic Auth 값 생성
+    $auth_header = "Basic " . base64_encode("$username:$password");
+
+    // cURL 요청
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        "Authorization: $auth_header",
+        "Content-Type: application/json; charset=utf-8"
+    ]);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    
+    $result = curl_exec($ch);
+    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if ($http_code !== 200 || !$result) {
+        return false; // 토큰 발급 실패
+    }
+
+    $response = json_decode($result, true);
+    return $response['accesstoken'] ?? false;
+}
+
+function biz_send_sms($db, $phone, $subject, $msg, $task) {
+	$token = Auth_Token();
+	if ($token == NULL) {
+			return "토큰 발급 실패";
+	}
+	
+	$url = "https://api.bizppurio.com/v3/message";
+	
+	$sms_data = [
+			"account"   => "wfiwfi",
+			"refkey"    => "test",
+			"type"      => "sms",
+			"from"      => "0337649020",
+			"to"        => $phone,
+			"content"   => [
+            "sms" => [
+                "message" => $msg
+            ]
+        ]
+	];
+	
+	if (strlen($msg) > 90) {
+			$sms_data["title"] = $subject;
+	}
+
+	// cURL 요청 설정
+	$ch = curl_init($url);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, [
+			"Content-Type: application/json",
+			"Authorization: Bearer $token"
+	]);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_POST, true);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($sms_data));
+	
+	$result = curl_exec($ch);
+	$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+	curl_close($ch);
+
+	if ($http_code !== 200 || !$result) {
+			return "❌ 메시지 전송 실패, HTTP 상태 코드: " . $result;
+	}
+
+	$response = json_decode($result, true);
+	if (isset($response['code']) && $response['code'] == "1000") {
+			$result_status = "T";
+			$message = "문자를 전송하였습니다.";
+	} else {
+			$result_status = "F";
+			$message = "문자 전송 실패: " . ($response['message'] ?? '알 수 없는 오류');
+	}
+
+	// DB 저장
+	$query = "INSERT INTO TBL_SMS_LOG (RPHONE, MSG, TASK, SEND_RESULT, ERR, SEND_DATE) 
+						VALUES ('$phone', '$msg', '$task', '$result_status', '$message', NOW())";
+
+	if(!mysqli_query($db,$query)) {
+		return false;
+		echo "<script>alert(\"[1]오류가 발생하였습니다.\"); //history.go(-1);</script>";
+		exit;
+	}
+
+	return $msg;
+}
+
+// Cafe24
 function send_sms($db, $rphone, $subject, $msg, $task) {
 
 	$str_msg = $msg;

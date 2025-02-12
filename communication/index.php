@@ -8,7 +8,6 @@
 # Modify Date  :
 #	Copyright : Copyright @Ucomp Corp. All Rights Reserved.
 # =============================================================================
-error_reporting(E_ALL & ~E_NOTICE);
 
 // 공지사항
 //$b = "B_1_1";
@@ -116,7 +115,15 @@ $arr_rs = listBoardFront($conn, $b, $m_type, $con_cate_02, $con_cate_03, $con_ca
         }
     }
 
+$rssTotalCount = isset($_GET['rssTotalCount']) ? $_GET['rssTotalCount'] : 0;
+
+//rss data 세션으로 받아서 처리
+//$rssTotalCount = isset($_SESSION['rssTotalCount']) ? $_SESSION['rssTotalCount'] : 0;
+
+echo "RSS Total Count: " . $rssTotalCount;
+
 ?>
+
 <!-- Container -->
 <main role="main" class="container">
 	<!-- content -->
@@ -145,70 +152,53 @@ $arr_rs = listBoardFront($conn, $b, $m_type, $con_cate_02, $con_cate_03, $con_ca
 				</div>
 				<!-- // 타이틀 영역 -->
 
-				<!-- 게시판목록 영역 -->
+				<!-- 게시판목록 영역 --> 
 				<div class="board-list-wrap">
 					<div class="board-toolbar">
+					 <? if ($b != "B_1_5") { ?>
 						<p class="board-count">전체 <em><?= number_format($nListCnt) ?></em>건</p>
+					<? } else if ($b == "B_1_5") { ?>
+						<p class="board-count">전체 <em><?= number_format($rssTotalCount) ?></em>건</p>
+					<? } ?>
 						<form class="board-srch" id="form" name="frm" onSubmit="js_board_search();" method="get">
 							<input type="hidden" name="b" id="b" value="<?= $b ?>" />
 							<input type="hidden" name="bn" id="bn" value="" />
 							<input type="hidden" name="nPage" id="nPage" value="<?= $nPage ?>" />
 							<input type="hidden" name="m_type" id="m_type" value="<?= $m_type ?>" />
-						<? if($b == "B_1_11") {?>
-						<div class="frm-sel h-48">
-							<select name="writer_id" id="writer_id" onChange="blur();" title="검색 구분" class="sel">
-									<option value="ALL" <? if ($f == "ALL")
-										echo "selected"; ?>>전체</option>
-									<option value="<?= $_SESSION['m_id']?>" <? if ($writer_id == $_SESSION['m_id'])
-										echo "selected"; ?>>내 문의</option>
-									
-								</select>
+
+							<? if ($b == "B_1_5") { ?>
+								<div class="frm-sel h-48">
+									<select name="f" id="f" onChange="blur();" title="검색 구분" class="sel">
+										<option value="ALL" <? if ($f == "ALL") echo "selected"; ?>>전체</option>
+										<option value="RSS" <? if ($f == "RSS") echo "selected"; ?>>공고명</option>
+									</select>
 								</div>
-								
-						<div class="frm-sel h-48">
-							<?if($b == "B_1_11") {?>
-							<select name="f" id="f" onChange="blur();" title="검색 구분" class="sel">
-									<option value="ALL" <? if ($f == "ALL")
-										echo "selected"; ?>>전체</option>
-									<option value="TITLE" <? if ($f == "TITLE")
-										echo "selected"; ?>>제목</option>
-								</select>
+							<? } else if ($b == "B_1_11") { ?>
+								<div class="frm-sel h-48">
+									<select name="writer_id" id="writer_id" onChange="blur();" title="검색 구분" class="sel">
+										<option value="ALL" <? if ($f == "ALL") echo "selected"; ?>>전체</option>
+										<option value="<?= $_SESSION['m_id'] ?>" <? if ($writer_id == $_SESSION['m_id']) echo "selected"; ?>>내 문의</option>
+									</select>
+								</div>
+								<div class="frm-sel h-48">
+									<select name="f" id="f" onChange="blur();" title="검색 구분" class="sel">
+										<option value="ALL" <? if ($f == "ALL") echo "selected"; ?>>전체</option>
+										<option value="TITLE" <? if ($f == "TITLE") echo "selected"; ?>>제목</option>
+									</select>
+								</div>
 							<? } else { ?>
-							<select name="f" id="f" onChange="blur();" title="검색 구분" class="sel">
-									<option value="ALL" <? if ($f == "ALL")
-										echo "selected"; ?>>전체</option>
-									<option value="TITLE" <? if ($f == "TITLE")
-										echo "selected"; ?>>제목</option>
-									<option value="WRITER_ID" <? if ($f == "WRITER_ID")
-										echo "selected"; ?>>작성자
-									</option>
-									<option value="CONTENTS" <? if ($f == "CONTENTS")
-										echo "selected"; ?>>내용</option>
-								</select>
-								<? } ?>
-							</div>
-							
-							
-							<? }  else { ?>
-								
-							<div class="frm-sel h-48">
-								<select name="f" id="f" onChange="blur();" title="검색 구분" class="sel">
-									<option value="ALL" <? if ($f == "ALL")
-										echo "selected"; ?>>전체</option>
-									<option value="TITLE" <? if ($f == "TITLE")
-										echo "selected"; ?>>제목</option>
-									<option value="WRITER_ID" <? if ($f == "WRITER_ID")
-										echo "selected"; ?>>작성자
-									</option>
-									<option value="CONTENTS" <? if ($f == "CONTENTS")
-										echo "selected"; ?>>내용</option>
-								</select>
-							</div>
-								<? }?>
-							
+								<div class="frm-sel h-48">
+									<select name="f" id="f" onChange="blur();" title="검색 구분" class="sel">
+										<option value="ALL" <? if ($f == "ALL") echo "selected"; ?>>전체</option>
+										<option value="TITLE" <? if ($f == "TITLE") echo "selected"; ?>>제목</option>
+										<option value="WRITER_ID" <? if ($f == "WRITER_ID") echo "selected"; ?>>작성자</option>
+										<option value="CONTENTS" <? if ($f == "CONTENTS") echo "selected"; ?>>내용</option>
+									</select>
+								</div>
+							<? } ?>
+
 							<div class="frm-inp h-48 has-on-right">
-								<input type="text" name="s" id="s" value="<?= $s ?>" autocomplete="off"
-									placeholder="검색어를 입력해주세요." title="검색 키워드" class="inp" />
+								<input type="text" name="s" id="s" value="<?= $s ?>" autocomplete="off" placeholder="검색어를 입력해주세요." title="검색 키워드" class="inp" />
 								<div class="on-right">
 									<button type="button" class="btn-srch" onclick="js_board_search();">
 										<span class="blind">검색</span>
@@ -217,6 +207,7 @@ $arr_rs = listBoardFront($conn, $b, $m_type, $con_cate_02, $con_cate_03, $con_ca
 							</div>
 						</form>
 					</div>
+				
 
 					<div class="board-list">
 						<? if ($b == "B_1_1") { ?>
@@ -273,6 +264,7 @@ $arr_rs = listBoardFront($conn, $b, $m_type, $con_cate_02, $con_cate_03, $con_ca
 											$REPLY_STATE = trim($arr_rs[$j]["REPLY_STATE"]);
 											$REPLY_ADM = trim($arr_rs[$j]["REPLY_ADM"]);
 											$TOP_TF = trim($arr_rs[$j]["TOP_TF"]);
+											$RSS = trim($arr_rs[$j]["RSS"]);
 
 											$COLOR_TAG = "";
 											$highlightedTitle = highlightKeyword($TITLE, $s); // 검색어 강조 적용
@@ -329,8 +321,9 @@ $arr_rs = listBoardFront($conn, $b, $m_type, $con_cate_02, $con_cate_03, $con_ca
 													$space .= "&nbsp;";
 
 												if ($l == ($DEPTH - 1))
-													$space .= "&nbsp;┗";
-
+													//$space .= "&nbsp;┗";
+													$space .= "&nbsp;";
+													
 												$space .= "&nbsp;";
 											}
 
@@ -391,7 +384,7 @@ $arr_rs = listBoardFront($conn, $b, $m_type, $con_cate_02, $con_cate_03, $con_ca
 					<? } ?>
 
 					<? if ($b == "B_1_5") { ?>
-						<? require "../communication/annou_list.php"; ?>
+						<? require "../communication/annou_list.php"; //공고 안내 ?>
 					<? } ?>
 						
 					<? if ($b == "B_1_11") { ?>
@@ -402,7 +395,6 @@ $arr_rs = listBoardFront($conn, $b, $m_type, $con_cate_02, $con_cate_03, $con_ca
 						<? require "../communication/manage_nav.php"; // 문의 사항 ?> 
 					<? } ?>
 					
-
 					<? if($b !== "B_1_11") {?>
 					<? if (sizeof($arr_rs) > 0) { ?>
 						<?
@@ -437,6 +429,7 @@ $arr_rs = listBoardFront($conn, $b, $m_type, $con_cate_02, $con_cate_03, $con_ca
 			</div>
 			<!-- // 게시판목록 페이지 -->
 		</div>
+	</div>
 		<!-- // content-body -->
 	</div>
 	<!-- // content -->
