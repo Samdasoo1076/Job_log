@@ -1,0 +1,28 @@
+name: Deploy to Ubuntu Server
+
+# main 브랜치에 push될 때마다 실행
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1) 코드 체크아웃
+      - uses: actions/checkout@v3
+
+      # 2) SSH 키 에이전트에 등록
+      - name: Setup SSH key
+        uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      # 3) rsync로 /home/web 에 동기화
+      - name: Rsync to server
+        run: |
+          rsync -avz --delete \
+            --exclude '_PHPExcel/' \
+            ./ ubuntu@144.24.85.101:/home/web/
