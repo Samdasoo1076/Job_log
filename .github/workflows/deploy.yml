@@ -1,28 +1,32 @@
-name: Deploy to Ubuntu Server
+name: CI-CD
 
-# main 브랜치에 push될 때마다 실행
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1) 코드 체크아웃
-      - uses: actions/checkout@v3
+      # 1) 저장소 체크아웃
+      - name: Check out repository
+        uses: actions/checkout@v3
 
-      # 2) SSH 키 에이전트에 등록
-      - name: Setup SSH key
-        uses: webfactory/ssh-agent@v0.5.4
+      # 2) 서버로 파일 복사 (SCP)
+      #    • .gitignore에 이미 _PHPExcel/를 추가해 두셨으므로
+      #      워크스페이스에는 해당 디렉토리가 없고,
+      #    • appleboy/scp-action은 기본적으로 원격의 다른 파일을 삭제하지 않습니다.
+      #    → 결국 _PHPExcel 폴더는 서버에 그대로 남습니다.
+      - name: Copy files to server
+        uses: appleboy/scp-action@v0.1.6
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      # 3) rsync로 /home/web 에 동기화
-      - name: Rsync to server
-        run: |
-          rsync -avz --delete \
-            --exclude '_PHPExcel/' \
-            ./ ubuntu@144.24.85.101:/home/web/
+          host: 144.24.85.101 # 예: 144.24.85.101
+          username: ubuntu # 서버 접속 유저명
+          key: ${{ secrets.SSH_PRIVATE_KEY }} # SSH 개인키 (GitHub Secrets)
+          port: 22
+          source: "." # 전체 파일(숨김 제외)
+          target: "/home/web" # 서버의 배포 디렉터리
+          overwrite: true # 같은 파일은 덮어쓰기
