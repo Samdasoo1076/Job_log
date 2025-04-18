@@ -1,9 +1,9 @@
 <?session_start();?>
 <?
 header("x-xss-Protection:0");
-ini_set('display_errors', 1); // ì˜¤ë¥˜ë¥¼ ë¸Œë¼ìš°ì €ì— í‘œì‹œ
-ini_set('display_startup_errors', 1); // ì‹œì‘ ì˜¤ë¥˜ í‘œì‹œ
-error_reporting(E_ALL); // ëª¨ë“  ì˜¤ë¥˜ í‘œì‹œ
+ini_set('display_errors', 1); // ¿À·ù¸¦ ºê¶ó¿ìÀú¿¡ Ç¥½Ã
+ini_set('display_startup_errors', 1); // ½ÃÀÛ ¿À·ù Ç¥½Ã
+error_reporting(E_ALL); // ¸ğµç ¿À·ù Ç¥½Ã
 # =============================================================================
 # File Name    : banner_list.php
 # Modlue       : 
@@ -23,7 +23,7 @@ error_reporting(E_ALL); // ëª¨ë“  ì˜¤ë¥˜ í‘œì‹œ
 #==============================================================================
 # Confirm right
 #==============================================================================
-	$menu_right = "PO002"; // ë©”ë‰´ë§ˆë‹¤ ì…‹íŒ… í•´ ì£¼ì–´ì•¼ í•©ë‹ˆë‹¤
+	$menu_right = "CP002"; // ¸Ş´º¸¶´Ù ¼ÂÆÃ ÇØ ÁÖ¾î¾ß ÇÕ´Ï´Ù
 
 	$con_banner_type = "MAINVISUAL";
 
@@ -32,7 +32,7 @@ error_reporting(E_ALL); // ëª¨ë“  ì˜¤ë¥˜ í‘œì‹œ
 #	$sPageRight_I		= "Y";
 #	$sPageRight_U		= "Y";
 #	$sPageRight_D		= "Y";
-#   $sPageRight_F		= "Y";
+#$sPageRight_F		= "Y";
 
 #====================================================================
 # common_header Check Session
@@ -110,7 +110,7 @@ error_reporting(E_ALL); // ëª¨ë“  ì˜¤ë¥˜ í‘œì‹œ
 		
 			$tmp_idx = $chk[$k];
 			$result = deleteBanner($conn, $_SESSION['s_adm_no'], $tmp_idx);
-			$result_log = insertUserLog($conn, 'admin', $_SESSION['s_adm_id'], $_SERVER['REMOTE_ADDR'], "ë°°ë„ˆ ì‚­ì œ (".$tmp_idx.") ", "Delete");
+			$result_log = insertUserLog($conn, 'admin', $_SESSION['s_adm_id'], $_SERVER['REMOTE_ADDR'], "¹è³Ê »èÁ¦ (".$tmp_idx.") ", "Delete");
 		}
 	}
 
@@ -162,7 +162,7 @@ error_reporting(E_ALL); // ëª¨ë“  ì˜¤ë¥˜ í‘œì‹œ
 
 	$arr_rs = listBanner($conn, $con_banner_type, $con_cate_01, $use_tf, $del_tf, $search_field, $search_str, $nPage, $nListCnt);
 
-	$result_log = insertUserLog($conn, "admin", $_SESSION['s_adm_id'], $_SERVER['REMOTE_ADDR'], "ë°°ë„ˆ ì¡°íšŒ", "List");
+	$result_log = insertUserLog($conn, "admin", $_SESSION['s_adm_id'], $_SERVER['REMOTE_ADDR'], "¹è³Ê Á¶È¸", "List");
 
 ?>
 <!doctype html>
@@ -190,7 +190,7 @@ error_reporting(E_ALL); // ëª¨ë“  ì˜¤ë¥˜ í‘œì‹œ
 		});
 	});
 
-	// ì¡°íšŒ ë²„íŠ¼ í´ë¦­ ì‹œ 
+	// Á¶È¸ ¹öÆ° Å¬¸¯ ½Ã 
 	function js_search() {
 		var frm = document.frm;
 		
@@ -229,10 +229,10 @@ error_reporting(E_ALL); // ëª¨ë“  ì˜¤ë¥˜ í‘œì‹œ
 		}
 		
 		if (chk_cnt == 0) {
-			alert("ì„ íƒ í•˜ì‹  ìë£Œê°€ ì—†ìŠµë‹ˆë‹¤.");
+			alert("¼±ÅÃ ÇÏ½Å ÀÚ·á°¡ ¾ø½À´Ï´Ù.");
 		} else {
 
-			bDelOK = confirm('ì„ íƒí•˜ì‹  ìë£Œë¥¼ ì‚­ì œ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?');
+			bDelOK = confirm('¼±ÅÃÇÏ½Å ÀÚ·á¸¦ »èÁ¦ ÇÏ½Ã°Ú½À´Ï±î?');
 			
 			if (bDelOK==true) {
 				frm.mode.value = "D";
@@ -275,7 +275,7 @@ function js_up(n) {
 		js_change_order();
 
 	} else {
-		alert("ê°€ì¥ ìƒìœ„ì— ìˆìŠµë‹ˆë‹¤. ");
+		alert("°¡Àå »óÀ§¿¡ ÀÖ½À´Ï´Ù. ");
 	}
 }
 
@@ -313,14 +313,14 @@ function js_down(n) {
 		js_change_order();
 
 	} else{
-		alert("ê°€ì¥ í•˜ìœ„ì— ìˆìŠµë‹ˆë‹¤. ");
+		alert("°¡Àå ÇÏÀ§¿¡ ÀÖ½À´Ï´Ù. ");
 	}
 }
 
 function js_change_order() {
 	
 	if(document.getElementById("t").rows.length < 2) {
-		alert("ìˆœì„œë¥¼ ì €ì¥í•  ë©”ë‰´ê°€ ì—†ìŠµë‹ˆë‹¤");//ìˆœì„œë¥¼ ì €ì¥í•  ë©”ë‰´ê°€ ì—†ìŠµë‹ˆë‹¤");
+		alert("¼ø¼­¸¦ ÀúÀåÇÒ ¸Ş´º°¡ ¾ø½À´Ï´Ù");//¼ø¼­¸¦ ÀúÀåÇÒ ¸Ş´º°¡ ¾ø½À´Ï´Ù");
 		return;
 	}
 	document.frm.mode.value = "O";
@@ -333,7 +333,7 @@ function js_change_order() {
 function js_toggle(banner_no, use_tf) {
 	var frm = document.frm;
 
-	bDelOK = confirm('ê³µê°œ ì—¬ë¶€ë¥¼ ë³€ê²½ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?');
+	bDelOK = confirm('°ø°³ ¿©ºÎ¸¦ º¯°æ ÇÏ½Ã°Ú½À´Ï±î?');
 	
 	if (bDelOK==true) {
 
@@ -391,40 +391,40 @@ function js_toggle(banner_no, use_tf) {
 
 					<div class="tbl_top">
 						<div class="left">
-							<span class="txt">ì´ <span class="txt_c01"><?=number_format($nListCnt)?></span> ê±´</span>
+							<span class="txt">ÃÑ <span class="txt_c01"><?=number_format($nListCnt)?></span> °Ç</span>
 						</div>
 						<div class="right">
 							<select name="search_field" id="search_field">
-							<option value="BANNER_NM" <? if ($search_field == "BANNER_NM") echo "selected"; ?> >ì œëª©</option>
+							<option value="BANNER_NM" <? if ($search_field == "BANNER_NM") echo "selected"; ?> >Á¦¸ñ</option>
 							</select>
-							<input type="text" value="<?=$search_str?>" name="search_str"  id="search_str" placeholder="ê²€ìƒ‰ì–´ ì…ë ¥" />
-							<button type="button" class="button" onClick="js_search();">ê²€ìƒ‰</button>
+							<input type="text" value="<?=$search_str?>" name="search_str"  id="search_str" placeholder="°Ë»ö¾î ÀÔ·Â" />
+							<button type="button" class="button" onClick="js_search();">°Ë»ö</button>
 						</div>
 					</div>
 					<div class="tbl_style01">
 						<table id='t'>
 							<colgroup>
 								<col width="5%" />
-								<col width="5%" /><!-- ìˆœì„œ -->
-								<col width="10%" /><!-- ì´ë¯¸ì§€ -->
-								<!--<col width="10%" />--><!-- ëª¨ë°”ì¼ ì´ë¯¸ì§€ -->
-								<col width="15%" /><!-- ì œëª© -->
-								<col width="17%" /><!-- ìŠ¬ë¡œê±´ ìƒë‹¨ -->
-								<col width="27%" /><!-- ìŠ¬ë¡œê±´ í•˜ë‹¨ -->
-								<col width="8%" /><!-- ê³µê°œì—¬ë¶€ -->
-								<col width="13%" /><!-- ë“±ë¡ì¼ -->
+								<col width="5%" /><!-- ¼ø¼­ -->
+								<col width="10%" /><!-- ÀÌ¹ÌÁö -->
+								<!--<col width="10%" />--><!-- ¸ğ¹ÙÀÏ ÀÌ¹ÌÁö -->
+								<col width="15%" /><!-- Á¦¸ñ -->
+								<col width="17%" /><!-- ½½·Î°Ç »ó´Ü -->
+								<col width="27%" /><!-- ½½·Î°Ç ÇÏ´Ü -->
+								<col width="8%" /><!-- °ø°³¿©ºÎ -->
+								<col width="13%" /><!-- µî·ÏÀÏ -->
 							</colgroup>
 							<thead>
 								<tr>
 									<th><input type="checkbox" class="checkbox" id="all_chk_no" name="all_chk_no" alt="chk_no"/></th>
-									<th>ìˆœì„œ</th>
-									<th>ì´ë¯¸ì§€</th>
-									<!--<th>ëª¨ë°”ì¼ì´ë¯¸ì§€</th>-->
-									<th>ì œëª©</th>
-									<th>ìŠ¬ë¡œê±´ ìƒë‹¨</th>
-									<th>ìŠ¬ë¡œê±´ í•˜ë‹¨</th>
-									<th>ê³µê°œì—¬ë¶€</th>
-									<th>ë“±ë¡ì¼</th>
+									<th>¼ø¼­</th>
+									<th>ÀÌ¹ÌÁö</th>
+									<!--<th>¸ğ¹ÙÀÏÀÌ¹ÌÁö</th>-->
+									<th>Á¦¸ñ</th>
+									<th>½½·Î°Ç »ó´Ü</th>
+									<th>½½·Î°Ç ÇÏ´Ü</th>
+									<th>°ø°³¿©ºÎ</th>
+									<th>µî·ÏÀÏ</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -465,9 +465,9 @@ function js_toggle(banner_no, use_tf) {
 										$UP_DATE					= trim($arr_rs[$j]["UP_DATE"]);
 
 										if ($USE_TF == "Y") {
-											$STR_USE_TF = "<font color='blue'>ê³µê°œ</font>";
+											$STR_USE_TF = "<font color='blue'>°ø°³</font>";
 										} else {
-											$STR_USE_TF = "<font color='red'>ë¹„ê³µê°œ</font>";
+											$STR_USE_TF = "<font color='red'>ºñ°ø°³</font>";
 										}
 
 										$REG_DATE = date("Y-m-d",strtotime($REG_DATE));
@@ -498,7 +498,7 @@ function js_toggle(banner_no, use_tf) {
 										</td>
 										<td><?=$TITLE_NM?></td>
 										<td><?=nl2br($SUB_TITLE_NM)?></td>
-										<td><!--tdì— í´ë˜ìŠ¤ on/offë¡œ ê³µê°œ/ë¹„ê³µê°œ ì œì–´-->
+										<td><!--td¿¡ Å¬·¡½º on/off·Î °ø°³/ºñ°ø°³ Á¦¾î-->
 										<a href="javascript:js_toggle('<?=$BANNER_NO?>','<?=$USE_TF?>');"><span><?=$STR_USE_TF?></span></a>
 										</td>
 										<td><?=$REG_DATE?></td>
@@ -510,7 +510,7 @@ function js_toggle(banner_no, use_tf) {
 							?> 
 								<tr>
 									<td colspan="9">
-										<div class="nodata">ë°ì´í„°ê°€ ì—†ìŠµë‹ˆë‹¤.</div>
+										<div class="nodata">µ¥ÀÌÅÍ°¡ ¾ø½À´Ï´Ù.</div>
 									</td>
 								</tr>
 							<? 
@@ -521,15 +521,15 @@ function js_toggle(banner_no, use_tf) {
 					</div>
 					<div class="tbl_top">
 						<div class="right">
-							<!-- ë²„íŠ¼ ìë¦¬ -->
+							<!-- ¹öÆ° ÀÚ¸® -->
 							<? if ($sPageRight_I == "Y") { ?>
-							<button type="button" class="button" onClick="js_add_banner();" >ë“±ë¡</button>						
+							<button type="button" class="button" onClick="js_add_banner();" >µî·Ï</button>						
 							<? } ?>
 							<?	if ($sPageRight_D == "Y") { ?>
-							<button type="button" class="button type02" onClick="js_delete();">ì‚­ì œ</button>
+							<button type="button" class="button type02" onClick="js_delete();">»èÁ¦</button>
 							<?  } ?>
 							<?	if ($sPageRight_F == "Y") { ?>
-							<!--<button type="button" class="button" onClick="js_execl();">ì—‘ì…€</button>-->
+							<!--<button type="button" class="button" onClick="js_execl();">¿¢¼¿</button>-->
 							<?  } ?>
 						</div>
 					</div>

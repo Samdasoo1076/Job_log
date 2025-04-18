@@ -79,4 +79,52 @@ function getMainlistBanner($db, $banner_type) {
 		}
 		return $record;
 	}
+
+
+
+    function ReservationStatusAll($db)
+{
+    $query = "
+        SELECT 
+            R.RV_DATE, 
+            COUNT(*) as COUNT
+        FROM 
+            TBL_RESERVATION R
+        JOIN 
+            TBL_MEETING_ROOM M ON R.ROOM_NO = M.ROOM_NO
+        WHERE 
+            R.USE_TF = 'Y'
+            AND R.DEL_TF = 'N'
+            AND M.USE_TF = 'Y'  
+            AND M.DEL_TF = 'N'
+        GROUP BY 
+            R.RV_DATE
+        ORDER BY 
+            R.RV_DATE ASC;
+    ";
+
+    $stmt = mysqli_prepare($db, $query);
+    if (!$stmt) {
+        echo "<script>alert('DB 오류: 준비된 문장을 생성할 수 없습니다. - " . mysqli_error($db) . "');</script>";
+        return false;
+    }
+
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    $arr_rs = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $arr_rs[] = [
+            "date" => $row["RV_DATE"],
+            "count" => $row["COUNT"]
+        ];
+    }
+
+    mysqli_stmt_close($stmt);
+    return $arr_rs;
+}
+
+
+
+
 ?>

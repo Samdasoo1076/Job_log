@@ -807,7 +807,10 @@ if ($result) {
 													$str_pcode_name = "MA_TYPE";
 												} else if($b_code == "B_1_12") {
 													$str_pcode_name = "RESEARCH_REPORT";
-												} else {
+												} else if($b_code == "B_1_1"){
+													$str_pcode_name = "NOTICE";
+												} 
+												else {
 													$str_pcode_name = "MOJIB_TYPE";
 												}
 												?>

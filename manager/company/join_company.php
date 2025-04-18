@@ -5,12 +5,12 @@ ini_set('display_errors', 1); // 오류를 브라우저에 표시
 ini_set('display_startup_errors', 1); // 시작 오류 표시
 error_reporting(E_ALL); // 모든 오류 표시
 # =============================================================================
-# File Name    : banner_list.php
+# File Name    : join_company.php
 # Modlue       : 
-# Writer       : Park Chan Ho / JeGal Jeong
-# Create Date  : 2020-02-10
-# Modify Date  : 2021-05-03
-#	Copyright : Copyright @UCOM Corp. All Rights Reserved.
+# Writer       : 
+# Create Date  : 2025-04-08
+# Modify Date  : 2025-04-08
+#	Description : 회사 회원가입 리스트 페이지
 # =============================================================================
 
 #====================================================================
@@ -23,7 +23,7 @@ error_reporting(E_ALL); // 모든 오류 표시
 #==============================================================================
 # Confirm right
 #==============================================================================
-	$menu_right = "PO002"; // 메뉴마다 셋팅 해 주어야 합니다
+	$menu_right = "CP002"; // 메뉴마다 셋팅 해 주어야 합니다
 
 	$con_banner_type = "MAINVISUAL";
 
@@ -32,7 +32,7 @@ error_reporting(E_ALL); // 모든 오류 표시
 #	$sPageRight_I		= "Y";
 #	$sPageRight_U		= "Y";
 #	$sPageRight_D		= "Y";
-#   $sPageRight_F		= "Y";
+#$sPageRight_F		= "Y";
 
 #====================================================================
 # common_header Check Session
@@ -46,89 +46,50 @@ error_reporting(E_ALL); // 모든 오류 표시
 	require "../../_classes/com/util/Util.php";
 	require "../../_classes/com/etc/etc.php";
 	require "../../_classes/biz/admin/admin.php";
-	require "../../_classes/biz/banner/banner.php";
+	require "../../_classes/biz/company/join_company.php";
 //	require "../js/common.js";
 
 #====================================================================
 # Request Parameter
 #====================================================================
+$mode       = isset($_POST["mode"]) && $_POST["mode"] !== '' ? $_POST["mode"] : (isset($_GET["mode"]) ? $_GET["mode"] : '');
+$seq        = isset($_POST["seq"]) && $_POST["seq"] !== '' ? $_POST["seq"] : (isset($_GET["seq"]) ? $_GET["seq"] : '');
+$jcp_no     = isset($_POST["jcp_no"]) && $_POST["jcp_no"] !== '' ? $_POST["jcp_no"] : (isset($_GET["jcp_no"]) ? $_GET["jcp_no"] : '');
+$c_nm       = isset($_POST["c_nm"]) && $_POST["c_nm"] !== '' ? $_POST["c_nm"] : (isset($_GET["c_nm"]) ? $_GET["c_nm"] : '');
+$phone      = isset($_POST["phone"]) && $_POST["phone"] !== '' ? $_POST["phone"] : (isset($_GET["phone"]) ? $_GET["phone"] : '');
+$content    = isset($_POST["content"]) && $_POST["content"] !== '' ? $_POST["content"] : (isset($_GET["content"]) ? $_GET["content"] : '');
+$url        = isset($_POST["url"]) && $_POST["url"] !== '' ? $_POST["url"] : (isset($_GET["url"]) ? $_GET["url"] : '');
+$use_tf     = isset($_POST["use_tf"]) && $_POST["use_tf"] !== '' ? $_POST["use_tf"] : (isset($_GET["use_tf"]) ? $_GET["use_tf"] : 'Y');
+$del_tf     = isset($_POST["del_tf"]) && $_POST["del_tf"] !== '' ? $_POST["del_tf"] : (isset($_GET["del_tf"]) ? $_GET["del_tf"] : 'N');
+$reg_date   = isset($_POST["reg_date"]) && $_POST["reg_date"] !== '' ? $_POST["reg_date"] : (isset($_GET["reg_date"]) ? $_GET["reg_date"] : '');
+$up_date    = isset($_POST["up_date"]) && $_POST["up_date"] !== '' ? $_POST["up_date"] : (isset($_GET["up_date"]) ? $_GET["up_date"] : '');
+$del_date   = isset($_POST["del_date"]) && $_POST["del_date"] !== '' ? $_POST["del_date"] : (isset($_GET["del_date"]) ? $_GET["del_date"] : '');
+$reg_adm    = isset($_POST["reg_adm"]) && $_POST["reg_adm"] !== '' ? $_POST["reg_adm"] : (isset($_GET["reg_adm"]) ? $_GET["reg_adm"] : '');
+$up_adm     = isset($_POST["up_adm"]) && $_POST["up_adm"] !== '' ? $_POST["up_adm"] : (isset($_GET["up_adm"]) ? $_GET["up_adm"] : '');
+$el_adm     = isset($_POST["el_adm"]) && $_POST["el_adm"] !== '' ? $_POST["el_adm"] : (isset($_GET["el_adm"]) ? $_GET["el_adm"] : ''); //del_adm <- 테이블 오타임
+$ho         = isset($_POST["ho"]) && $_POST["ho"] !== '' ? $_POST["ho"] : (isset($_GET["ho"]) ? $_GET["ho"] : '');  // 호실
 
-	$mode							= isset($_POST["mode"]) && $_POST["mode"] !== '' ? $_POST["mode"] : (isset($_GET["mode"]) ? $_GET["mode"] : '');
-	$banner_no				= isset($_POST["banner_no"]) && $_POST["banner_no"] !== '' ? $_POST["banner_no"] : (isset($_GET["banner_no"]) ? $_GET["banner_no"] : '');
-	$banner_nm				= isset($_POST["banner_nm"]) && $_POST["banner_nm"] !== '' ? $_POST["banner_nm"] : (isset($_GET["banner_nm"]) ? $_GET["banner_nm"] : '');
-	$banner_img				= isset($_POST["banner_img"]) && $_POST["banner_img"] !== '' ? $_POST["banner_img"] : (isset($_GET["banner_img"]) ? $_GET["banner_img"] : '');
-	$banner_img_m			= isset($_POST["banner_img_m"]) && $_POST["banner_img_m"] !== '' ? $_POST["banner_img_m"] : (isset($_GET["banner_img_m"]) ? $_GET["banner_img_m"] : '');
-	$banner_url				= isset($_POST["banner_url"]) && $_POST["banner_url"] !== '' ? $_POST["banner_url"] : (isset($_GET["banner_url"]) ? $_GET["banner_url"] : '');
-	$url_type					= isset($_POST["url_type"]) && $_POST["url_type"] !== '' ? $_POST["url_type"] : (isset($_GET["url_type"]) ? $_GET["url_type"] : '');
-	$banner_button		= isset($_POST["banner_button"]) && $_POST["banner_button"] !== '' ? $_POST["banner_button"] : (isset($_GET["banner_button"]) ? $_GET["banner_button"] : '');
+// 정리 또는 보안 처리가 필요하다면 여기서 추가 처리
+$jcp_no     = trim($jcp_no);
+$c_nm       = trim($c_nm);
+$phone      = trim($phone);
+$content    = trim($content);
+$url        = trim($url);
+$ho         = trim($ho);
 
-	$banner_real_img	= isset($_POST["banner_real_img"]) && $_POST["banner_real_img"] !== '' ? $_POST["banner_real_img"] : (isset($_GET["banner_real_img"]) ? $_GET["banner_real_img"] : '');
-	$banner_real_img_m= isset($_POST["banner_real_img_m"]) && $_POST["banner_real_img_m"] !== '' ? $_POST["banner_real_img_m"] : (isset($_GET["banner_real_img_m"]) ? $_GET["banner_real_img_m"] : '');
+// 필요한 모드에 따른 처리 예시
+if ($mode == "D") {
+    // 삭제 처리
+    $result = deleteCompany($conn, $_SESSION['s_adm_no'], $jcp_no);
+    $result_log = insertUserLog($conn, 'admin', $_SESSION['s_adm_id'], $_SERVER['REMOTE_ADDR'], "기업 삭제 (".$jcp_no.")", "Delete");
+} else if ($mode == "U") {
+    // 수정 처리
+    $result = updateCompany($conn, $jcp_no, $seq, $c_nm, $phone, $content, $url, $use_tf, $_SESSION['s_adm_no'], $ho);
+} else if ($mode == "I") {
+    // 등록 처리
+    $result = insertCompany($conn, $seq, $c_nm, $phone, $content, $url, $use_tf, $_SESSION['s_adm_no'], $ho);
+}
 
-	$title_nm					= isset($_POST["title_nm"]) && $_POST["title_nm"] !== '' ? $_POST["title_nm"] : (isset($_GET["title_nm"]) ? $_GET["title_nm"] : '');
-	$sub_title_nm			= isset($_POST["sub_title_nm"]) && $_POST["sub_title_nm"] !== '' ? $_POST["sub_title_nm"] : (isset($_GET["sub_title_nm"]) ? $_GET["sub_title_nm"] : '');
-
-	$disp_seq					= isset($_POST["disp_seq"]) && $_POST["disp_seq"] !== '' ? $_POST["disp_seq"] : (isset($_GET["disp_seq"]) ? $_GET["disp_seq"] : '');
-	$use_tf						= isset($_POST["use_tf"]) && $_POST["use_tf"] !== '' ? $_POST["use_tf"] : (isset($_GET["use_tf"]) ? $_GET["use_tf"] : '');
-	$reg_date					= isset($_POST["reg_date"]) && $_POST["reg_date"] !== '' ? $_POST["reg_date"] : (isset($_GET["reg_date"]) ? $_GET["reg_date"] : '');
-
-	$s_date						= isset($_POST["s_date"]) && $_POST["s_date"] !== '' ? $_POST["s_date"] : (isset($_GET["s_date"]) ? $_GET["s_date"] : '');
-	$s_hour						= isset($_POST["s_hour"]) && $_POST["s_hour"] !== '' ? $_POST["s_hour"] : (isset($_GET["s_hour"]) ? $_GET["s_hour"] : '');
-	$s_min						= isset($_POST["s_min"]) && $_POST["s_min"] !== '' ? $_POST["s_min"] : (isset($_GET["s_min"]) ? $_GET["s_min"] : '');
-	$e_date						= isset($_POST["e_date"]) && $_POST["e_date"] !== '' ? $_POST["e_date"] : (isset($_GET["e_date"]) ? $_GET["e_date"] : '');
-	$e_hour						= isset($_POST["e_hour"]) && $_POST["e_hour"] !== '' ? $_POST["e_hour"] : (isset($_GET["e_hour"]) ? $_GET["e_hour"] : '');
-	$e_min						= isset($_POST["e_min"]) && $_POST["e_min"] !== '' ? $_POST["e_min"] : (isset($_GET["e_min"]) ? $_GET["e_min"] : '');
-
-	$nPage						= isset($_POST["nPage"]) && $_POST["nPage"] !== '' ? $_POST["nPage"] : (isset($_GET["nPage"]) ? $_GET["nPage"] : '');
-	$nPageSize				= isset($_POST["nPageSize"]) && $_POST["nPageSize"] !== '' ? $_POST["nPageSize"] : (isset($_GET["nPageSize"]) ? $_GET["nPageSize"] : '');
-	$search_field			= isset($_POST["search_field"]) && $_POST["search_field"] !== '' ? $_POST["search_field"] : (isset($_GET["search_field"]) ? $_GET["search_field"] : '');
-	$search_str				= isset($_POST["search_str"]) && $_POST["search_str"] !== '' ? $_POST["search_str"] : (isset($_GET["search_str"]) ? $_GET["search_str"] : '');
-	$con_cate_01			= isset($_POST["con_cate_01"]) && $_POST["con_cate_01"] !== '' ? $_POST["con_cate_01"] : (isset($_GET["con_cate_01"]) ? $_GET["con_cate_01"] : '');
-
-	$chk							= isset($_POST["chk"]) && $_POST["chk"] !== '' ? $_POST["chk"] : (isset($_GET["chk"]) ? $_GET["chk"] : '');
-
-	if ($mode == "T") {
-		updateBannerUseTF($conn, $use_tf, $_SESSION['s_adm_no'], $banner_no);
-	}
-
-	if ($mode == "O") {
-
-		$row_cnt = is_null($banner_seq_no) ? 0 : count($banner_seq_no);
-		
-		for ($k = 0; $k < $row_cnt; $k++) {
-		
-			$tmp_banner_no = $banner_seq_no[$k];
-
-			$result = updateOrderBanner($conn, $k, $tmp_banner_no);
-		
-		}
-	}
-
-	if ($mode == "D") {
-		$row_cnt = is_null($chk) ? 0 : count($chk);
-		for ($k = 0; $k < $row_cnt; $k++) {
-		
-			$tmp_idx = $chk[$k];
-			$result = deleteBanner($conn, $_SESSION['s_adm_no'], $tmp_idx);
-			$result_log = insertUserLog($conn, 'admin', $_SESSION['s_adm_id'], $_SERVER['REMOTE_ADDR'], "배너 삭제 (".$tmp_idx.") ", "Delete");
-		}
-	}
-
-
-	#List Parameter
-	$nPage			= SetStringToDB($nPage);
-	$nPageSize	= SetStringToDB($nPageSize);
-	$nPage			= trim($nPage);
-	$nPageSize	= trim($nPageSize);
-
-	$search_field		= SetStringToDB($search_field);
-	$search_str			= SetStringToDB($search_str);
-	$search_field		= trim($search_field);
-	$search_str			= trim($search_str);
-	
-	$use_tf				= ""; //SetStringToDB($use_tf);
-	
-	$del_tf = "N";
 #============================================================
 # Page process
 #============================================================
@@ -146,28 +107,31 @@ error_reporting(E_ALL); // 모든 오류 표시
 	}
 
 	$nPageBlock	= 10;
-
+	
 #===============================================================
 # Get Search list count
 #===============================================================
 
+// 총 레코드 수
+$nListCnt = totalCntJoinCompany($conn, $use_tf, $del_tf, $search_field, $search_str);
 
-	$nListCnt =totalCntBanner($conn, $con_banner_type, $con_cate_01, $use_tf, $del_tf, $search_field, $search_str);
+// 총 페이지 수 계산
+$nTotalPage = (int)(($nListCnt - 1) / $nPageSize + 1);
 
-	$nTotalPage = (int)(($nListCnt - 1) / $nPageSize + 1) ;
+if ((int)($nTotalPage) < (int)($nPage)) {
+    $nPage = $nTotalPage;
+}
 
-	if ((int)($nTotalPage) < (int)($nPage)) {
-		$nPage = $nTotalPage;
-	}
+// 회사 리스트 조회
+$arr_rs = listJoinCompany($conn, $use_tf, $del_tf, $search_field, $search_str, $order_field, $order_str, $nPage, $nPageSize);
 
-	$arr_rs = listBanner($conn, $con_banner_type, $con_cate_01, $use_tf, $del_tf, $search_field, $search_str, $nPage, $nListCnt);
-
-	$result_log = insertUserLog($conn, "admin", $_SESSION['s_adm_id'], $_SERVER['REMOTE_ADDR'], "배너 조회", "List");
+// 로그 기록 등 필요한 작업 (예: 회사 리스트 조회 로그)
+// $result_log = insertUserLog($conn, "admin", $_SESSION['s_adm_id'], $_SERVER['REMOTE_ADDR'], "참여 기업 조회", "List");
 
 ?>
 <!doctype html>
 <html lang="ko">
-<head>
+<head>A
 <meta charset="<?=$g_charset?>">
 <title><?=$g_title?></title>
 <link rel="shortcut icon" href="/manager/images/mobile.png" />
@@ -413,16 +377,18 @@ function js_toggle(banner_no, use_tf) {
 								<col width="27%" /><!-- 슬로건 하단 -->
 								<col width="8%" /><!-- 공개여부 -->
 								<col width="13%" /><!-- 등록일 -->
+								<col width="10%" />
 							</colgroup>
 							<thead>
 								<tr>
 									<th><input type="checkbox" class="checkbox" id="all_chk_no" name="all_chk_no" alt="chk_no"/></th>
 									<th>순서</th>
-									<th>이미지</th>
+									<th>회사명</th>
 									<!--<th>모바일이미지</th>-->
-									<th>제목</th>
-									<th>슬로건 상단</th>
-									<th>슬로건 하단</th>
+									<th>입주호실</th>
+									<th>대표번호</th>
+									<th>주요업무</th>
+									<th>홈페이지 URL</th>
 									<th>공개여부</th>
 									<th>등록일</th>
 								</tr>

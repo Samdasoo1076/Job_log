@@ -547,37 +547,82 @@
 		return $record;
 	}
 
-
 	function listPagePeriod($db, $start_date, $end_date, $divicetype) {
 
-		$query = "SELECT PAGE_NO,
-										(SELECT PAGE_NAME FROM TBL_PAGES WHERE PAGE_NO = TBL_LOG.DEPTH01) AS CATE,
-										(SELECT PAGE_NAME FROM TBL_PAGES WHERE PAGE_NO = TBL_LOG.PAGE_NO) AS PAGE_NAME,
-										 COUNT(*) AS CNT 
-							 FROM TBL_LOG 
-							WHERE YMD >= '".$start_date."'
-								AND YMD <= '".$end_date."' ";
-		
-		if ($divicetype <> "") {
-			$query .= " AND DIVICETYPE = '".$divicetype."' ";
+		$query = "
+			SELECT 
+				log.PAGE_NO,
+				CASE 
+					WHEN pg.PAGE_NAME IN ('시설 예약', '시설예약', '입주기업 소개​', '예약 현황', '시설안내', '시설 및 입주 안내') THEN '시설안내'
+					WHEN pg.PAGE_NAME IN ('로그인', '회원가입') THEN '회원 가입 및 로그인'
+					WHEN pg.PAGE_NAME IN ('나의 회원정보', '나의 예약현황') THEN '마이페이지'
+					WHEN pg.PAGE_NAME IN ('통합검색') THEN '통합검색'
+					WHEN dp1.PAGE_NAME IS NOT NULL THEN dp1.PAGE_NAME
+					WHEN dp2.PAGE_NAME IS NOT NULL THEN dp2.PAGE_NAME
+					ELSE '기타'
+				END AS CATE,
+				pg.PAGE_NAME AS PAGE_NAME,
+				COUNT(*) AS CNT
+			FROM TBL_LOG log
+			LEFT JOIN TBL_PAGES dp1 ON log.DEPTH01 = dp1.PAGE_NO
+			LEFT JOIN TBL_PAGES dp2 ON log.DEPTH02 = dp2.PAGE_NO
+			LEFT JOIN TBL_PAGES pg ON log.PAGE_NO = pg.PAGE_NO
+			WHERE log.YMD >= '".$start_date."'
+				AND log.YMD <= '".$end_date."'";
+	
+		if ($divicetype !== "") {
+			$query .= " AND log.DIVICETYPE = '".$divicetype."'";
 		}
-
-		$query .= "GROUP BY PAGE_NO
-							 ORDER BY CNT DESC, YMD DESC, HH DESC, MI DESC ";
-		
-		//echo $query;
-
+	
+		$query .= "
+			GROUP BY log.PAGE_NO, dp1.PAGE_NAME, dp2.PAGE_NAME, pg.PAGE_NAME
+			ORDER BY CNT DESC;
+		";
+	
+		// echo $query;
+	
 		$result = mysqli_query($db, $query);
 		$record = array();
-		
-
-		if ($result <> "") {
-			for($i=0;$i < mysqli_num_rows($result);$i++) {
-				$record[$i] = sql_result_array($db,$result,$i);
+	
+		if ($result !== false) {
+			for ($i = 0; $i < mysqli_num_rows($result); $i++) {
+				$record[$i] = sql_result_array($db, $result, $i);
 			}
 		}
 		return $record;
 	}
+
+
+	// function listPagePeriod($db, $start_date, $end_date, $divicetype) {
+
+	// 	$query = "SELECT PAGE_NO,
+	// 									(SELECT PAGE_NAME FROM TBL_PAGES WHERE PAGE_NO = TBL_LOG.DEPTH01) AS CATE,
+	// 									(SELECT PAGE_NAME FROM TBL_PAGES WHERE PAGE_NO = TBL_LOG.PAGE_NO) AS PAGE_NAME,
+	// 									 COUNT(*) AS CNT 
+	// 						 FROM TBL_LOG 
+	// 						WHERE YMD >= '".$start_date."'
+	// 							AND YMD <= '".$end_date."' ";
+		
+	// 	if ($divicetype <> "") {
+	// 		$query .= " AND DIVICETYPE = '".$divicetype."' ";
+	// 	}
+
+	// 	$query .= "GROUP BY PAGE_NO
+	// 						 ORDER BY CNT DESC, YMD DESC, HH DESC, MI DESC ";
+		
+	// 	//echo $query;
+
+	// 	$result = mysqli_query($db, $query);
+	// 	$record = array();
+		
+
+	// 	if ($result <> "") {
+	// 		for($i=0;$i < mysqli_num_rows($result);$i++) {
+	// 			$record[$i] = sql_result_array($db,$result,$i);
+	// 		}
+	// 	}
+	// 	return $record;
+	// }
 
 	function listNoticePeriod($db, $start_date, $end_date, $divicetype) {
 

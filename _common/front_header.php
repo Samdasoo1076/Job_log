@@ -83,6 +83,11 @@
 			<nav class="header-nav">
 				<ul class="dep1-list">
 					<?
+						// echo "<pre>";
+						// print_r ($arr_menu_rs_03);
+						// echo "</pre>";
+						// exit;
+
 					if (sizeof($arr_menu_rs_01) > 0) {
 
 						for ($j = 0; $j < sizeof($arr_menu_rs_01); $j++) {
@@ -162,6 +167,74 @@
 													?>
 													<li class="dep2-item"><a href="<?= $SUB_PAGE_URL ?>" <? if ($SUB_URL_TYPE == "Y") { ?>target="_blank" title="새창열기" <? } ?>
 															class="dep2-link"><?= $SUB_PAGE_NAME ?></a>
+
+
+														<!--  3뎁스 처리 시작-->
+														<?
+															// 2뎁스가 "공지사항"인 경우만 3뎁스 출력
+															if ($SUB_PAGE_NO == 21) {
+																$has_dep3 = false; // 3뎁스 존재 여부 확인
+
+																for ($kk = 0; $kk < sizeof($arr_menu_rs_03); $kk++) {
+																	$DEP3_PAGE_NO = trim($arr_menu_rs_03[$kk]["PAGE_NO"]);
+																	$DEP3_PAGE_CD = trim($arr_menu_rs_03[$kk]["PAGE_CD"]);
+																	$DEP3_PAGE_NAME = trim($arr_menu_rs_03[$kk]["PAGE_NAME"]);
+																	$DEP3_PAGE_URL = trim($arr_menu_rs_03[$kk]["PAGE_URL"]);
+																	$DEP3_URL_TYPE = trim($arr_menu_rs_03[$kk]["URL_TYPE"]);
+
+																	// 3뎁스가 공지사항(2뎁스)와 같은 그룹인지 확인
+																	if (substr($DEP3_PAGE_CD, 0, strlen($SUB_PAGE_CD)) == $SUB_PAGE_CD) {
+																		if (!$has_dep3) { // 첫 번째 3뎁스가 나오면 리스트를 시작
+																			echo '<ul class="dep3-list">';
+																			$has_dep3 = true;
+																		}
+																		?>
+																		<li class="dep3-item">
+																			<a href="<?= $DEP3_PAGE_URL ?>" <? if ($DEP3_URL_TYPE == "Y") { ?>target="_blank" title="새창열기" <? } ?> class="dep3-link">
+																				<?= $DEP3_PAGE_NAME ?>
+																			</a>
+																		</li>
+																		<?
+																	}
+																}
+																if ($has_dep3) {
+																	echo '</ul>'; // 3뎁스가 존재했다면 리스트 닫기
+																}
+															}
+
+
+															// 2뎁스가 "연구보고서"인 경우만 3뎁스 출력
+															if ($SUB_PAGE_NO == 125) {
+																$has_dep3 = false; // 3뎁스 존재 여부 확인
+
+																for ($kk = 0; $kk < sizeof($arr_menu_rs_03); $kk++) {
+																	$DEP3_PAGE_NO = trim($arr_menu_rs_03[$kk]["PAGE_NO"]);
+																	$DEP3_PAGE_CD = trim($arr_menu_rs_03[$kk]["PAGE_CD"]);
+																	$DEP3_PAGE_NAME = trim($arr_menu_rs_03[$kk]["PAGE_NAME"]);
+																	$DEP3_PAGE_URL = trim($arr_menu_rs_03[$kk]["PAGE_URL"]);
+																	$DEP3_URL_TYPE = trim($arr_menu_rs_03[$kk]["URL_TYPE"]);
+
+																	// 3뎁스가 공지사항(2뎁스)와 같은 그룹인지 확인
+																	if (substr($DEP3_PAGE_CD, 0, strlen($SUB_PAGE_CD)) == $SUB_PAGE_CD) {
+																		if (!$has_dep3) { // 첫 번째 3뎁스가 나오면 리스트를 시작
+																			echo '<ul class="dep3-list">';
+																			$has_dep3 = true;
+																		}
+																		?>
+																		<li class="dep3-item">
+																			<a href="<?= $DEP3_PAGE_URL ?>" <? if ($DEP3_URL_TYPE == "Y") { ?>target="_blank" title="새창열기" <? } ?> class="dep3-link">
+																				<?= $DEP3_PAGE_NAME ?>
+																			</a>
+																		</li>
+																		<?
+																	}
+																}
+																if ($has_dep3) {
+																	echo '</ul>'; // 3뎁스가 존재했다면 리스트 닫기
+																}
+															}
+															?>
+														<!-- 3뎁스 처리 끝 !-->
 													</li>
 												<?
 												}

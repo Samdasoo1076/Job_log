@@ -261,11 +261,13 @@
 			</td>
 			<? if ($b_board_cate) {?>
 			<td>
-			<? if ($B_CODE == "B_1_12") {?>
-			[<?=getDcodeName($conn,"RESEARCH_REPORT", $CATE_01)?>]&nbsp;
-			<? } else { ?>
-			[<?=getDcodeName($conn,"MA_TYPE", $CATE_01)?>]&nbsp;
-			<? } ?>
+				<? if ($B_CODE == "B_1_12") { ?>
+					[<?= getDcodeName($conn, "RESEARCH_REPORT", $CATE_01) ?>]&nbsp;
+				<? } elseif ($B_CODE == "B_1_1") { ?>
+					[<?= getDcodeName($conn, "NOTICE", $CATE_01) ?>]&nbsp;
+				<? } else { ?>
+					[<?= getDcodeName($conn, "MA_TYPE", $CATE_01) ?>]&nbsp;
+				<? } ?>
 			</td>
 			<? } ?>
 				

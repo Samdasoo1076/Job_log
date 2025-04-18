@@ -26,14 +26,7 @@ require "../_classes/com/util/ImgUtil.php";
 require "../_classes/com/etc/etc.php";
 require "../_classes/biz/reservation/reservation.php";
 
-$selected_date = $_GET['rv_date'] ?? '';
+$reservation_counts = ReservationStatusAll($conn); // 함수 호출
 
-if (!empty($selected_date)) {
-    $reservations = ReservationStatus($conn, $selected_date);
-
-    echo json_encode($reservations);
-} else {
-    echo json_encode([]);
-}
-
+echo json_encode($reservation_counts);
 ?>

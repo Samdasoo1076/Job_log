@@ -5,7 +5,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="format-detection" content="telephone=no" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<?
+	// echo "<pre>";
+	// print_r($g_url);
+	// echo "</pre>";
 
+	// exit;
+
+?>
 <meta name="description" content="<?=$seo_description?>" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="<?=$seo_title?>" />
@@ -24,6 +31,9 @@
 
 <link rel="shortcut icon" href="/manager/images/mobile.png" />
 <link rel="apple-touch-icon" href="/manager/images/mobile.png" />
+
+<link rel="icon" href="/mobile.png" type="image/png">
+<link rel="shortcut icon" href="/mobile.png" type="image/png">
 
 <? if ($_PAGE_NO == "2") { ?>
 <title><?=$g_front_title?></title>
@@ -64,6 +74,17 @@
 <script src="/assets/js/fontzoom.js"></script>
 <script src="/assets/js/jquery.form.js"></script>
 <script src="/assets/js/common.js"></script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-74F08PRTEN"></script>
+<script nonce="<?= $nonce; ?>">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-74F08PRTEN');
+</script>
+<!-- Google tag (gtag.js) -->
 
 <!-- 페이지 스크립트 영역 -->
 <script></script>

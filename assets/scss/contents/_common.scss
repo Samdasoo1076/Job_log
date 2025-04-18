@@ -41,6 +41,121 @@
 		}
 	}
 }
+.bul.dot.dep2 {
+	li {
+		position: relative;
+		padding-left: 12rem;
+		font-size: 16rem;
+		line-height: 24rem;
+		color: #666;
+		&::before {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 9rem;
+			width: 3rem;
+			height: 3rem;
+			border-radius: 100%;
+			background: #666;
+		}
+		+li {
+			margin-top: 4rem;
+		}
+	}
+	// 기능별 반응형 대응
+	@include media-tablet-xs {
+		li {
+			position: relative;
+			padding-left: 10rem;
+			font-size: 12rem;
+			line-height: 18rem;
+			color: #666;
+			&::before {
+				top: 9rem;
+				width: 3rem;
+				height: 3rem;
+			}
+		}
+	}
+}
+
+/* 스텝공통 */
+.step {
+	display: flex;
+	gap: 8rem;
+
+	li {
+		flex:1 1 auto;
+		width: 100%;
+		border-top: 8rem solid transparent;
+		padding-top: 8rem;
+		.num {
+			font-weight: 400;
+			font-size: 16rem;
+			line-height: 24rem;
+			color: #000;
+		}
+		.txt {
+			margin-top: 20rem;
+			font-weight: 700;
+			font-size: 20rem;
+			line-height: 28rem;
+			color: #000;
+			word-break: keep-all;
+		}
+	}
+
+	&.steps-4 {
+		li {
+			&:nth-child(1) {
+				border-color: rgba(186, 20, 26, 0.4);
+			}
+			&:nth-child(2) {
+				border-color: rgba(186, 20, 26, 0.6);
+			}
+			&:nth-child(3) {
+				border-color: rgba(186, 20, 26, 0.8);
+			}
+			&:nth-child(4) {
+				border-color: rgba(186, 20, 26, 1.0);
+			}
+		}
+	}
+	&.steps-5 {
+		li {
+			&:nth-child(1) {
+				border-color: rgba(186, 20, 26, 0.2);
+			}
+			&:nth-child(2) {
+				border-color: rgba(186, 20, 26, 0.4);
+			}
+			&:nth-child(3) {
+				border-color: rgba(186, 20, 26, 0.6);
+			}
+			&:nth-child(4) {
+				border-color: rgba(186, 20, 26, 0.8);
+			}
+			&:nth-child(5) {
+				border-color: rgba(186, 20, 26, 1.0);
+			}
+		}
+	}
+
+	@include media-mobile-xl {
+		li {
+			.num {
+				font-size: 12rem;
+				line-height: 16rem;
+			}
+			.txt {
+				margin-top: 12rem;
+				font-size: 12rem;
+				line-height: 16rem;
+			}
+		}
+	}
+}
+
 /*-------------------------------------------------------------------
 	@@ 게시판
 -------------------------------------------------------------------*/
@@ -777,6 +892,33 @@
 								width: 19rem;
 								height: 4rem;
 								background: #0367EE;
+							}
+						}
+					}
+					&.blue {
+						background: #F4F6F9;
+						.fc-daygrid-day-top > a {
+							color:#0367EE;
+							&::after {
+								background: #0367ee;
+							}
+						}
+					}
+					&.red {
+						background: #f9f4f4;
+						.fc-daygrid-day-top > a {
+							color:#ed0202;
+							&::after {
+								background: #ed0202;
+							}
+						}
+					}
+					&.purple {
+						background: #f7f4f9;
+						.fc-daygrid-day-top > a {
+							color:#9803ee;
+							&::after {
+								background: #9803ee;
 							}
 						}
 					}
@@ -2718,12 +2860,48 @@
 	}
 }
 
+/* table-bg-wrap */
+.table-cont-wrap {
+	display: flex;
+	flex-wrap: wrap;
+	&.mo {
+		display: none;
+	}
+	.table-cont-sec {
+		width: 100%;
+		padding: 60rem;
+		background-color: #fff;
+	}
+	@include media-tablet-xs {
+		&.pc {
+			display: none;
+		}
+		&.mo {
+			display: flex;
+		}
+		gap: 12rem;
+		.table-cont-sec {
+			padding: 24rem;
+		}
+	}
+}
+
 /* table-wrap */
+.table-scroll {
+	width: 100%;
+	overflow: auto;
+	.table-wrap {
+		min-width: 720rem;
+	}
+}
 .table-wrap {
 	position: relative;
 	width: 100%;
 	border-top: 1px solid #000;
 	table {
+		&.fixed {
+			table-layout: fixed;
+		}
 		thead {
 			background: #F9F9F9;
 			border-bottom: 1px solid #EAEAEA;
@@ -2747,7 +2925,21 @@
 		}
 		tbody {
 			tr{
+				th {
+					padding: 15rem;
+					height: 64rem;
+					font-size: 16rem;
+					line-height: 24rem;
+					color: #000;
+					font-weight: 500;
+					background: #F9F9F9;
+					word-break: keep-all;
+					.frm-chk {
+						justify-content: center;
+					}
+				}
 				td {
+					padding: 15rem;
 					height: 64rem;
 					font-size: 16rem;
 					line-height: 24rem;
@@ -2788,6 +2980,13 @@
 			}
 			tbody {
 				tr{
+					th {
+						height: 48rem;
+						font-size: 12rem;
+						line-height: 16rem;
+						border-bottom: 1px solid #EAEAEA;
+						text-align: center;
+					}
 					td {
 						height: 48rem;
 						font-size: 12rem;
@@ -2801,6 +3000,36 @@
 		}
 		.bul {
 			margin-top: 12rem;
+		}
+
+		&.table-responsive-wrap {
+			table {
+				colgroup {
+					display: none;
+				}
+				thead {
+					display: none;
+				}
+				tbody {
+					display: block;
+					tr {
+						display: block;
+						td {
+							display: flex;
+							&::before {
+								content:attr(data-th);
+								display: flex;
+								height: 48rem;
+								font-size: 12rem;
+								line-height: 16rem;
+								color: #666;
+								border-bottom: 1px solid #EAEAEA;
+								text-align: center;
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }
@@ -3352,10 +3581,10 @@
 	}
 }
 
-/* 주요업무 */
+/* 비전 및 미션 - 주요업무 */
 .main-task-wrap {
 	position: relative;
-	margin-top: 120rem;
+	margin-top: 60rem;
 	.buisness-item {
 		position: relative;
 		display: flex;
@@ -3363,6 +3592,7 @@
 		box-sizing: border-box;
 		+.buisness-item {
 			padding-top: 100rem;
+			height: 620rem;
 		}
 		.img-wrap {
 			position: relative;
@@ -3558,6 +3788,197 @@
 						}
 					}
 				}
+			}
+		}
+	}
+}
+
+/* 주요업무 */
+.main-business-wrap {
+	.mo {
+		display: none;
+	}
+
+	.img-wrap {
+		display: flex;
+	}
+	.buisness-item {
+		margin-top: 80rem;
+	}
+	.cont-wrap {
+		.title {
+			margin-top: 40rem;
+			font-weight: 700;
+			font-size: 32rem;
+			line-height: 48rem;
+			word-break: keep-all;
+			color: #000;
+			span {
+				display: inline-block;
+			}
+		}
+		.cont {
+			margin-top: 30rem;
+			+ .cont {
+				margin-top: 60rem;
+			}
+			.tit {
+				margin-bottom: 20rem;
+				font-weight: 700;
+				font-size: 24rem;
+				line-height: 30rem;
+				color: #000;
+			}
+			.bul li {
+				font-weight: 400;
+				font-size: 20rem;
+				line-height: 28rem;
+				color: #000;
+				&::before {
+					top: 12rem;
+				}
+				+ li {
+					margin-top: 12rem;
+				}
+			}
+		}
+	}
+
+	// 모바일 반응형 대응
+	@include media-mobile-xl {
+		.pc {
+			display: none;
+		}
+		.mo {
+			display: block;
+		}
+
+		.buisness-item {
+			margin-top: 40rem;
+		}
+
+		.cont-wrap {
+			.title {
+				margin-top: 20rem;
+				font-size: 24rem;
+				line-height: 36rem;
+			}
+			.cont {
+				margin-top: 20rem;
+				+ .cont {
+					margin-top: 24rem;
+				}
+
+				.tit {
+					margin-bottom: 12rem;
+					font-size: 16rem;
+					line-height: 24rem;
+				}
+
+				.bul li {
+					font-size: 14rem;
+					line-height: 20rem;
+					&::before {
+						top: 8rem;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+/* 시설 및 입주 안내 */
+.facilities-info-wrap {
+	.facilities-sec {
+		margin-top: 60rem;
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+	.cont-wrap {
+		.title {
+			font-weight: 700;
+			font-size: 28rem;
+			line-height: 32rem;
+			word-break: keep-all;
+			color: #000;
+			span {
+				display: inline-block;
+			}
+		}
+		.cont {
+			margin-top: 24rem;
+			.bul li {
+				font-weight: 400;
+				font-size: 20rem;
+				line-height: 28rem;
+				color: #000;
+				&::before {
+					top: 12rem;
+				}
+				+ li {
+					margin-top: 12rem;
+				}
+			}
+			.bul.dep2 li {
+				color: #666;
+			}
+			.table-scroll {
+				margin-top: 32rem;
+			}
+		}
+	}
+
+	.btn-wrap {
+		margin-top: 60rem;
+		justify-content: center;
+		gap: 8rem;
+		.btn-basic {
+			padding-left: 30rem;
+			padding-right: 30rem;
+			font-weight: 700;
+			&::before {
+				content: '';
+				display: block;
+				width: 24rem;
+				height: 24rem;
+				margin-right: 4rem;
+				background: url('../images/common/icn-24-download-bk.svg') no-repeat 0 0 / contain;
+			}
+			&.primary::before {
+				background-image: url('../images/common/icn-24-download-wh.svg');
+			}
+		}
+	}
+
+	// 모바일 반응형 대응
+	@include media-mobile-xl {
+		.facilities-sec {
+			margin-top: 40rem;
+		}
+
+		.cont-wrap {
+			.title {
+				font-size: 16rem;
+				line-height: 24rem;
+			}
+			.cont {
+				margin-top: 12rem;
+
+				.bul li {
+					font-size: 14rem;
+					line-height: 20rem;
+					&::before {
+						top: 8rem;
+					}
+				}
+			}
+		}
+		.btn-wrap {
+			flex-wrap: wrap;
+			.btn-basic {
+				width: 100%;
 			}
 		}
 	}
@@ -4277,6 +4698,102 @@
 	img.mo {
 		display: none;
 	}
+
+	.sec {
+		+ .sec {
+			margin-top: 80rem;
+		}
+		.sec-header {
+			margin-bottom: 40rem;
+			.sec-title {
+				font-weight: 700;
+				font-size: 32rem;
+				line-height: 44rem;
+				color: #000;
+			}
+		}
+	}
+
+	// 미션 및 비전 섹션
+	.vision-sec {
+		padding-bottom: 80rem;
+		border-bottom: 1px solid #eaeaea;
+	}
+
+	// 추진목표 섹션
+	.task-sec {
+		.task-list {
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr;
+			gap: 24rem;
+		}
+		.task-card {
+			display: flex;
+			flex-direction: column;
+			height: 100%;
+			.task-img {
+				flex: none;
+				position: relative;
+				width: 100%;
+				aspect-ratio: 388/280;
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+				}
+			}
+			.task-cont {
+				flex: 1 1 auto;
+				width: 100%;
+				padding: 32rem;
+				background-color: #F9F9F9;
+				.task-tit {
+					margin-bottom: 12rem;
+					font-weight: 700;
+					font-size: 24rem;
+					line-height: 36rem;
+					color: #BA141A;
+					word-break: keep-all;
+				}
+				.bul.dot li {
+					font-size: 18rem;
+					line-height: 28rem;
+					color: #000;
+					word-break: keep-all;
+					&::before {
+						top: 11rem;
+					}
+				}
+			}
+		}
+	}
+
+	// 태블릿 반응형 대응
+	@include media-tablet-xs {
+		.task-sec {
+			.task-list {
+				gap: 20rem;
+			}
+			.task-card {
+				.task-cont {
+					padding: 24rem;
+					.task-tit {
+						margin-bottom: 8rem;
+						font-size: 18rem;
+						line-height: 28rem;
+					}
+					.bul.dot li {
+						font-size: 14rem;
+						line-height: 20rem;
+						&::before {
+							top: 8rem;
+						}
+					}
+				}
+			}
+
+		}
+	}
 	// 모바일 반응형 대응
 	@include media-mobile-xl {
 		img.pc {
@@ -4285,8 +4802,32 @@
 		img.mo {
 			display: block;
 		}
+		.task-sec {
+			.task-list {
+				grid-template-columns: 1fr;
+			}
+			.task-card {
+				.task-img {
+					max-height: 196rem;
+				}
+			}
+		}
+		.sec {
+			+ .sec {
+				margin-top: 40rem;
+			}
+			.sec-header {
+				margin-bottom: 16rem;
+				.sec-title {
+					font-size: 20rem;
+					line-height: 28rem;
+				}
+			}
+		}
 	}
 }
+
+
 /* 조직도 */
 .organization-wrap {
 	img {
@@ -4360,6 +4901,183 @@
 				overflow: auto;
 				.tbl {
 					width: 720rem;
+				}
+			}
+		}
+	}
+}
+
+/* CI소개 */
+.ci-intro-wrap {
+	.ci-intro-sec {
+		.sec-header {
+			margin-bottom: 60rem;
+			text-align: center;
+			.sec-title {
+				font-weight: 700;
+				font-size: 28rem;
+				line-height: 32rem;
+				color: #000;
+			}
+			.sec-explain {
+				max-width: 840rem;
+				margin: auto;
+				margin-top: 24rem;
+				font-weight: 400;
+				font-size: 18rem;
+				line-height: 28rem;
+				word-break: keep-all;
+				color: #666;
+			}
+		}
+		.sec-body {
+			.ci-list {
+				display: grid;
+				grid-template-columns: 1fr 1fr 1fr;
+				gap: 24rem;
+				.ci-item {
+					&:nth-child(1) {
+						.ci-box-img {
+							min-width: 36%;
+							max-width: 36%;
+						}
+					}
+					&:nth-child(2) {
+						.ci-box-img {
+							min-width: 70%;
+							max-width: 73%;
+						}
+					}
+					&:nth-child(3) {
+						.ci-box-img {
+							min-width: 51.546%;
+							max-width: 66.176%;
+						}
+					}
+				}
+				.ci-box {
+					position: relative;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					width: 100%;
+					aspect-ratio: 388/340;
+					border: 1px solid #eaeaea;
+					border-radius: 20rem;
+					.ci-box-img {
+						img {
+							width: 100%;
+						}
+					}
+					.ci-box-type {
+						position: absolute;
+						left: 0;
+						bottom: 20rem;
+						display: block;
+						width: 100%;
+						padding: 0 20rem;
+						font-weight: 700;
+						font-size: 16rem;
+						line-height: 24rem;
+						color: #999;
+						text-align: center;
+					}
+				}
+			}
+			.ci-summary {
+				margin-top: 40rem;
+				.ci-title {
+					margin-bottom: 10rem;
+					font-size: 20rem;
+					font-weight: 500;
+					color: #000;
+				}
+				.ci-gray {
+					color: #666;
+				}
+				.ci-black {
+					color: #000;
+				}
+				.ci-red {
+					color: $color-primary;
+				}
+				@include media-mobile-xl {
+					margin-top: 24rem;
+					.ci-title {
+						margin-bottom: 8rem;
+						font-size: 16rem;
+					}
+				}
+			}
+			.ci-download {
+				margin-top: 60rem;
+				text-align: center;
+				.btn-basic {
+					width: 160rem;
+				}
+			}
+		}
+	}
+	@include media-tablet-xs {
+		.ci-intro-sec {
+			.sec-body {
+				.ci-list {
+					gap: 16rem;
+				}
+			}
+		}
+	}
+	@include media-mobile-xl {
+		.ci-intro-sec {
+			.sec-header {
+				margin-bottom: 28rem;
+				text-align: center;
+				.sec-title {
+					font-size: 20rem;
+					line-height: 28rem;
+				}
+				.sec-explain {
+					margin-top: 16rem;
+					font-size: 14rem;
+					line-height: 20rem;
+				}
+			}
+
+			.sec-body {
+				.ci-list {
+					grid-template-columns: 1fr;
+					gap: 12rem;
+					.ci-item {
+						&:nth-child(1) {
+							.ci-box-img {
+								min-width: 94rem;
+								max-width: 94rem;
+							}
+						}
+						&:nth-child(2) {
+							.ci-box-img {
+								min-width: 200rem;
+								max-width: 200rem;
+							}
+						}
+						&:nth-child(3) {
+							.ci-box-img {
+								min-width: 180rem;
+								max-width: 180rem;
+							}
+						}
+					}
+
+					.ci-box {
+						height: 200rem;
+						.ci-box-type {
+							font-size: 14rem;
+							line-height: 20rem;
+						}
+					}
+				}
+				.ci-download {
+					display: none;
 				}
 			}
 		}

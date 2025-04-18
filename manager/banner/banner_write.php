@@ -470,7 +470,7 @@ function js_delete() {
 									<td colspan="3"><input type="text" name="banner_nm" value="<?=$rs_banner_nm?>" style="width:30%"/></td>
 								</tr>
 								<tr>
-									<th scope="row">이미지</th>
+									<th scope="row">PC 이미지</th>
 									<td colspan="3">
 								<?
 									if (strlen($rs_banner_img) > 3) {
@@ -484,14 +484,14 @@ function js_delete() {
 									</select>
 					
 									<input type="hidden" name="banner_real_img" value="<?= $rs_banner_img?>">
-									<div id="file_change01" style="display:none;"><span class="txt_c02">※ 1920 x 970</span>
+									<div id="file_change01" style="display:none;"><span class="txt_c02">※ 1388 x 384</span>
 										<input type="file" name="banner_img" size="40%" /> 
 									</div>
 
 								<?
 									} else {
 								?>
-									<input type="file" size="40%" name="banner_img"> <span class="txt_c02">※ 1920 x 970</span>
+									<input type="file" size="40%" name="banner_img"> <span class="txt_c02">※ 1388 x 384</span>
 									<input type="hidden" name="banner_real_img" value="">
 									<input TYPE="hidden" name="flag01" value="insert">
 								<?
@@ -499,7 +499,7 @@ function js_delete() {
 								?>
 									</td>
 								</tr>
-<!--
+
 								<tr>
 									<th scope="row">모바일 이미지</th>
 									<td colspan="3">
@@ -515,14 +515,14 @@ function js_delete() {
 									</select>
 					
 									<input type="hidden" name="banner_real_img_m" value="<?= $rs_banner_img_m?>">
-									<div id="file_change02" style="display:none;"><span class="txt_c02">※ 360 x 720</span>
+									<div id="file_change02" style="display:none;"><span class="txt_c02">※ 1080 x 432</span>
 										<input type="file" name="banner_img_m" size="40%" /> 
 									</div>
 
 								<?
 									} else {
 								?>
-									<input type="file" size="40%" name="banner_img_m"> <span class="txt_c02">※ 360 x 720</span>
+									<input type="file" size="40%" name="banner_img_m"> <span class="txt_c02">※ 1080 x 432</span>
 									<input type="hidden" name="banner_real_img_m" value="">
 									<input TYPE="hidden" name="flag02" value="insert">
 								<?
@@ -530,7 +530,7 @@ function js_delete() {
 								?>
 									</td>
 								</tr>
--->
+
 								<tr>
 									<th>슬로건 상단<img src="../images/img_essen.gif" alt="필수입력" /></th>
 									<td colspan="3">

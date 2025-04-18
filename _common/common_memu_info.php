@@ -1,6 +1,12 @@
 <?
 	$arr_page_rs = selectPage($conn, $p);
 
+	// echo "<pre>";
+	// print_r($arr_page_rs);
+	// echo "</pre>";	
+
+	// exit;
+
 	if (sizeof($arr_page_rs) > 0) {
 
 		$rs_page_no					= trim($arr_page_rs[0]["PAGE_NO"]); 
@@ -26,11 +32,24 @@
 		$rs_up_date					= trim($arr_page_rs[0]["UP_DATE"]); 
 		
 		//echo $rs_reg_date;
+		// echo $rs_page_name;
+		// exit;
+
 		//echo $rs_up_date;
+
+		// echo "<pre>";
+		// print_r($arr_page_rs);
+		// echo "</pre>";	
+
+		// exit;
+
+
+
 		$seo_title						= $rs_page_name;
-		$seo_description			= $rs_page_info02;
+		//$seo_title				    = trim($arr_page_rs[0]["PAGE_INFO03"]); 
+		$seo_description				= $rs_page_info02;
 		$seo_keywords					= $rs_page_info03;
-		$rs_iso_up_date				= $rs_up_date;
+		$rs_iso_up_date					= $rs_up_date;
 		
 		/*
 		if ($rs_title_img == "") {
@@ -82,7 +101,10 @@
 	// 3 depth
 	$arr_menu_rs_03 = listSubPage($conn, $l, "6", $menu_tf, $use_tf, $del_tf);
 
-	//print_r($arr_menu_rs_02);
+	// echo "<pre>";
+	// print_r ($arr_menu_rs_03);
+	// echo "</pre>";
+	// exit;
 
 	if (sizeof($arr_menu_rs_01) > 0) {
 		for ($j = 0 ; $j < sizeof($arr_menu_rs_01); $j++) {

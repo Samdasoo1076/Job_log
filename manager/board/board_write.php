@@ -1,5 +1,6 @@
 <?session_start();?>
 <?
+
 header("x-xss-Protection:0");
 header('Content-Type: text/html; charset=UTF-8');
 # =============================================================================
@@ -649,6 +650,8 @@ function js_fileView(obj,idx) {
 									$str_pcode_name = "RESEARCH_REPORT";
 								} else if($b_code == "B_1_3") {
 									$str_pcode_name = "MA_TYPE";
+								} else if($b_code == "B_1_1") {
+									$str_pcode_name = "NOTICE";
 								} else {
 									$str_pcode_name = "MA_TYPE";
 								}

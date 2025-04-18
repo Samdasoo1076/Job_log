@@ -38,7 +38,7 @@ $color-item2: burlywood; // item2 임시값
 $color-item3: coral; // item3 임시값
 
 //-------------------------------------------------------------------
-//    Mixins
+//    Utilities
 //-------------------------------------------------------------------
 // 여백/너비 설정
 @mixin out-sec {
@@ -57,32 +57,6 @@ $color-item3: coral; // item3 임시값
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
-}
-
-// 폰트규칙
-@mixin font-body-10 {
-	font-size: 10px;
-	line-height: 12px;
-}
-
-@mixin font-body-12 {
-	font-size: 12px;
-	line-height: 16px;
-}
-
-@mixin font-body-14 {
-	font-size: 14px;
-	line-height: 20px;
-}
-
-@mixin font-body-16 {
-	font-size: 16px;
-	line-height: 24px;
-}
-
-@mixin font-body-16 {
-	font-size: 18px;
-	line-height: 28px;
 }
 
 /* 말줄임 */

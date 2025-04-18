@@ -1,13 +1,14 @@
 <? session_start(); ?>
 <?
 	$nonce = base64_encode(random_bytes(16));
-	header("Content-Security-Policy: script-src 'self' 'nonce-$nonce' https://wfi.or.kr https://cdnjs.cloudflare.com https://cdn.jsdelivr.net;");
+	header("Content-Security-Policy: script-src 'self' 'nonce-$nonce' https://wfi.or.kr https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.googletagmanager.com;");
 ?>
 <?
 $_PAGE_NO = "2";
 require $_SERVER['DOCUMENT_ROOT'] . "/_common/common_inc.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/_classes/biz/main/main.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/_classes/biz/board/board.php";
+
 
 
 // 게시물 가져오기 (4개씩 제한)
@@ -48,6 +49,14 @@ $nListCnt = totalCntBoardFront($conn, $b, $m_type, $con_cate_02, $con_cate_03, $
 $arr_rs = listBoardFront($conn, $b, $m_type, $con_cate_02, $con_cate_03, $con_cate_04, $con_writer_id, $keyword, $con_reply_state, $con_use_tf, $con_del_tf, $f, $s, $nPage, $nPageSize, $nListCnt);
 $banner_type = "MAINVISUAL";
 $banners = getMainlistBanner($conn, $banner_type);
+
+$reservation_list = ReservationStatusAll($conn);
+
+// echo "<pre>";
+// print_r($reservation_list);
+// echo "</pre>";
+// exit;
+
 
 ?>
 <?
@@ -104,28 +113,28 @@ $banners = getMainlistBanner($conn, $banner_type);
 										WFI의 주요업무를<br />
 										소개합니다.</em>
 								</h2>
-								<a href="/task/digital_industry.php" class="btn-more-view">
+								<a href="/task/digital_industry.do" class="btn-more-view">
 									<span class="txt">더보기</span>
 								</a>
 							</div>
 							<div class="team-card-wrap">
 								<ul class="team-card-list">
 									<li>
-										<a href="/task/digital_industry.php#main_task_01" class="team-card active">
+										<a href="/task/digital_industry.do#main_task_01" class="team-card active">
 											<p class="num">01</p>
 											<p class="subject">미래성장 동력<br />
 												확보사업</p>
 										</a>
 									</li>
 									<li>
-										<a href="/task/digital_industry.php#main_task_02" class="team-card">
+										<a href="/task/digital_industry.do#main_task_02" class="team-card">
 											<p class="num">02</p>
 											<p class="subject">산업고도화 및<br />
 												경쟁력 강화사업</p>
 										</a>
 									</li>
 									<li>
-										<a href="/task/digital_industry.php#main_task_03" class="team-card">
+										<a href="/task/digital_industry.do#main_task_03" class="team-card">
 											<p class="num">03</p>
 											<p class="subject">융합·혁신 생태계<br />
 												조성사업​</p>
@@ -161,7 +170,7 @@ $banners = getMainlistBanner($conn, $banner_type);
 											foreach ($posts as $post) {
 												?>
 												<li>
-													<a href="/communication/view.php?b=<?= urlencode($post['B_CODE']); ?>&bn=<?= urlencode($post['B_NO']); ?>">
+													<a href="/communication/view.do?b=<?= urlencode($post['B_CODE']); ?>&bn=<?= urlencode($post['B_NO']); ?>">
 														<span class="group">
 															<?php
 															if ($post['B_CODE'] === 'B_1_1') {
@@ -199,7 +208,7 @@ $banners = getMainlistBanner($conn, $banner_type);
 					<!-- e: 03_소통마당 -->
 					
 					
-					<!-- 2025-01-21 홍보배너 변경 -->
+<!-- 					2025-01-21 홍보배너 변경
 						<div class="inner adBanner">
 							<div class="sec-inner">
 								<div class="swiper swiper-ad">
@@ -222,7 +231,7 @@ $banners = getMainlistBanner($conn, $banner_type);
 								</div>
 							</div>
 						</div>
-					<!-- //홍보배너 변경 -->
+					//홍보배너 변경 -->
 
 					<!-- s: 04_시설임대 -->
 					<div class="inner rent">
@@ -232,7 +241,7 @@ $banners = getMainlistBanner($conn, $banner_type);
 									<img src="/assets/images/main/img-rent-bg.jpg" alt="">
 								</div>
 								<div class="rent-card">
-									<a href="/facility/reservation_form.php" class="btn-more-view">
+									<a href="/facility/reservation_form.do" class="btn-more-view">
 										<p class="tit">시설 예약</p>
 										<p class="txt">회의 및 세미나 등을 위한 공간을 제공합니다.</p>
 									</a>
@@ -423,6 +432,7 @@ $banners = getMainlistBanner($conn, $banner_type);
 
 	//시설 예약
 	document.addEventListener('DOMContentLoaded', function () {
+
 		const calendarEl = document.getElementById('calendar');
 		const today = new Date().toISOString().slice(0, 10); //오늘 날짜 검색
 		var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -502,7 +512,6 @@ $banners = getMainlistBanner($conn, $banner_type);
 				}
 			});
 		}
-
 		// 예약 현황 업데이트
 		function updateReservationChoice(reservations) {
 			const choiceWrap = document.querySelector('.reservation-choice-wrap .reservation-choice');

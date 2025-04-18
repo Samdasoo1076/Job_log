@@ -396,7 +396,7 @@ function upload($filearray, $targetdir, $max_size/* MByte */, $allowext) {
 
 function multiupload($filearray, $cnt, $targetdir, $max_size/* MByte */, $allowext) {
 
-	if ($max_size == "") $max_size = 4;
+	if ($max_size == "") $max_size = 100;
 
 	$max_size = $max_size * 1024 * 1024;    // 바이트로 계산한다. 1MB = 1024KB = 1048576Byte
 	
@@ -2975,4 +2975,84 @@ function html_quote_smart($value) {
 		return $str;
 	}
 
+?>
+
+
+
+
+
+<?
+	function Front_Image_PageList_rss ($URL, $nPage, $TPage, $PBlock, $Ext) {
+
+	$str = "<div class='board-page'>\n";
+
+	$SPage = (int)(($nPage - 1) / $PBlock) * $PBlock + 1;
+	$EPage = $SPage + $PBlock - 1;
+
+	if ($TPage > 1 ) {
+
+		$intTemp = (int)(($nPage - 1) / $PBlock) * $PBlock + 1;
+		$intLoop = 1;
+
+		if ($TPage < $EPage) {
+			$EPage = $TPage;
+		}
+		
+		# 이전 블록
+		
+		if ($intTemp == 1) {
+			$str .= "<button type='button' class='btn-page-first' disabled><span class='blind'>이전".$PBlock."개</span></button>\n";
+		} else {
+			$str .= "<button type='button' class='btn-page-first' onClick='location=\"".$URL."?nPage=".($intTemp - $PBlock)."&".$Ext."\"'><span class='blind'>이전".$PBlock."개'></span></button>\n";
+		}
+		
+		
+		# 이전 페이지
+		if ($nPage == 1) {
+			$str .= "<button type='button' class='btn-page-prev' disabled><span class='blind'>이전 페이지</span></button>\n";
+		} else {
+			$str .= "<button type='button' class='btn-page-prev' onClick='location=\"".$URL."?nPage=".($nPage - 1)."&".$Ext."\"'><span class='blind'>이전 페이지</span></button>\n";
+		}
+		
+		# 페이지
+
+		$Cnt = 1;  # 숫자로 인식시킴 현재 페이지 볼드체 되게 수정	
+		for ($Cnt = $SPage; $Cnt <= $EPage ; $Cnt++) {
+			if ($Cnt == (int)($nPage)) {
+				$str .= "<button type='button' class='btn-page-number is-current' aria-current='page' onClick='return false;'>".$Cnt."<span class='blind'>&nbsp;페이지</span></button>\n";
+			} else {
+				$str .= "<button type='button' class='btn-page-number' onClick='location=\"".$URL."?nPage=".$Cnt."&".$Ext."\"' >".$Cnt."<span class='blind'>&nbsp;페이지</span></button>\n";
+			}
+			$intTemp++;
+		}
+
+		# 다음 페이지
+		if ($nPage >= $TPage) {
+			$str .= "<button type='button' class='btn-page-next' disabled onClick='return false;'><span class='blind'>다음 페이지</span></button>\n";
+		} else {
+			$str .= "<button type='button' class='btn-page-next' onClick='location=\"".$URL."?nPage=".($nPage + 1)."&".$Ext."\"' ><span class='blind'>다음 페이지</span></button>\n";
+		}
+		
+		# 다음 블록
+
+		if ($intTemp > $TPage) {
+			$str .= "<button type='button' class='btn-page-last' disabled><span class='blind'>다음".$PBlock."개</span></button>\n";
+		} else {
+			$str .= "<button type='button' class='btn-page-last' onClick='location=\"".$URL."?nPage=".$intTemp."&".$Ext."\"'><span class='blind'>다음".$PBlock."개</span></button>";
+		}
+
+		
+	} else {
+
+		$str .= "<button type='button' class='btn-page-first' disabled><span class='blind'>처음 페이지</span></button>";
+		$str .= "<button type='button' class='btn-page-prev' disabled><span class='blind'>이전 페이지</span></button>";
+		$str .= "<button type='button' class='btn-page-number is-current' aria-current='page'>1<span class='blind'>&nbsp;페이지</span></button>";
+		$str .= "<button type='button' class='btn-page-next' disabled><span class='blind'>다음 페이지</span></button>";
+		$str .= "<button type='button' class='btn-page-last' disabled><span class='blind'>마지막 페이지</span></button>";
+	}
+
+	$str .= "</div>";
+
+	return $str;
+}
 ?>

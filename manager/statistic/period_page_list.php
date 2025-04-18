@@ -72,6 +72,12 @@ header("Content-Type: text/html; charset=UTF-8");
 #==============================================================================
 
 	$arr_rs = listPagePeriod($conn, $start_date, $end_date, $con_divicetype);
+
+	// echo "<pre>";
+	// print_r($arr_rs);
+	// echo "</pre>";
+
+	// exit;
 	
 	$result_log = insertUserLog($conn, 'admin', $_SESSION['s_adm_id'], $_SERVER['REMOTE_ADDR'], "기간별 접속통계 조회", "List");
 

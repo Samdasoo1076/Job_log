@@ -90,7 +90,7 @@ define('_SPECIAL_', 64); // 특수문자
 	$g_admin_email_01	= "myucheu0617@ucomp.co.kr";
  
 	Global  $g_admin_email_02;
-	$g_admin_email_02	= "myucheu0617@ucomp.co.kr";
+	$g_admin_email_02	= "aodhzld45@ucomp.co.kr";
  
 	Global  $g_admin_email_03;
 	$g_admin_email_03	= "myucheu0617@ucomp.co.kr";
@@ -122,12 +122,12 @@ define('_SPECIAL_', 64); // 특수문자
 	$request_uri = $_SERVER['REQUEST_URI'];
  
 	if ($ssl_is_on == "F") {
-		$g_url = 'http://' . $http_host . $request_uri;
+		$g_url = 'https://' . $http_host . $request_uri;
 	} else {
  
 ?>
 <script>
-	document.location = "http://<?=$http_host?><?=$request_uri?>";
+	document.location = "https://<?=$http_host?><?=$request_uri?>";
 </script>
 <?
 		db_close($conn);

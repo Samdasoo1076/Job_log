@@ -2245,7 +2245,7 @@ html {
 						.dep1-link {
 							display: block;
 							line-height: calc(100vw * (88 / 1280));
-							margin-right: calc(100vw * (80 / 1280));
+							margin-right: 0 calc(100vw * (80 / 1280));
 							font-size: calc(100vw * (20 / 1280));
 							color: #fff;
 							font-weight: 700;
@@ -2692,7 +2692,6 @@ html {
 		display: block;
 	}
 }
-
 // Footer
 .footer {
 	@include out-sec;
@@ -3014,7 +3013,6 @@ html {
 					font-size: 20rem;
 					line-height: 28rem;
 					color: #333;
-					text-align: center;
 					&.is-current {
 						font-weight: 700;
 						color: $color-primary;
@@ -3234,8 +3232,10 @@ html {
 			.snb-wrap {
 				.dep2-nav {
 					height: 60rem;
-					.dep2-list {
+					.dep2-list:has(li:nth-child(5)) {
+						justify-content: flex-start;
 					}
+
 
 					.dep2-link {
 						padding: 0 12rem 1rem 12rem;
@@ -3257,6 +3257,10 @@ html {
 					.dep3-item {
 						height: auto;
 						text-align: left;
+
+						@include media-mobile-xs {
+							width: calc(50% - 12rem);
+						}
 					}
 					.dep3-link {
 						height: auto;
@@ -3265,28 +3269,6 @@ html {
 						line-height: 20rem;
 					}
 				}
-				@include media-mobile-xs {
-					.dep2-nav {
-						.dep2-list {
-							justify-content: flex-start;
-						}
-					}
-					.dep3-nav {
-						padding-left: 32rem;
-						padding-right: 32rem;
-						.dep3-list {
-							justify-content: flex-start;
-							gap: 16rem 24rem;
-						}
-						.dep3-item {
-							width: calc(50% - 18rem);
-						}
-						.dep3-link {
-							text-align: left;
-						}
-					}
-				}
-
 			}
 		}
 

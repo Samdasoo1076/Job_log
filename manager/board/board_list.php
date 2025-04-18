@@ -709,11 +709,15 @@ function js_online_modify() {
 						<div class="right">
 
 							<div class="fl_wrap">
+
 							<? if ($b_code == "B_1_3") { ?>
-								 <?= makeSelectBox($conn, "MA_TYPE", "전체", "", "", "style='width:200px'", $con_cate_01); ?>	
-							<? } else if($b_code == "B_1_12") { ?>
+								<?= makeSelectBox($conn, "MA_TYPE", "전체", "", "", "style='width:200px'", $con_cate_01); ?>	
+							<? } elseif ($b_code == "B_1_1") { ?>
+								<?= makeSelectBox($conn, "NOTICE", "전체", "", "", "style='width:200px'", $con_cate_01); ?>	
+							<? } elseif ($b_code == "B_1_12") { ?>
 								<?= makeSelectBox($conn, "RESEARCH_REPORT", "전체", "", "", "style='width:200px'", $con_cate_01); ?>	
 							<? } ?>
+
 								<select name="search_field" id="search_field">
 									<option value="ALL" <? if ($search_field == "ALL") echo "selected"; ?> >전체</option>
 									<option value="title" <? if ($search_field == "title") echo "selected"; ?> >제목</option>
