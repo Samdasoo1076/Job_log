@@ -14,14 +14,14 @@
 	function db_connection($usr_type) {
 		
 		if ($usr_type == "w") {
-			$servername = "192.168.0.24:3306";
-			$username = "wfi";
-			$password = "wfiasdf1!";
+			$servername = "158.179.168.106:3306";
+			$username = "admin";
+			$password = "2134";
 			$dbname = "wfi";
 		} else {
-			$servername = "192.168.0.24:3306";
-			$username = "wfi";
-			$password = "wfiasdf1!";
+			$servername = "158.179.168.106:3306";
+			$username = "admin";
+			$password = "2134";
 			$dbname = "wfi";
 		}
 		
