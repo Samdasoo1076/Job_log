@@ -5,6 +5,8 @@ on:
     branches: ["main"]
   pull_request:
     branches: ["main"]
+  schedule:
+    - cron: "30 13 * * *"
 
 jobs:
   build-and-deploy:
@@ -15,11 +17,6 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
 
-      # 2) 서버로 파일 복사 (SCP)
-      #    • .gitignore에 이미 _PHPExcel/를 추가해 두셨으므로
-      #      워크스페이스에는 해당 디렉토리가 없고,
-      #    • appleboy/scp-action은 기본적으로 원격의 다른 파일을 삭제하지 않습니다.
-      #    → 결국 _PHPExcel 폴더는 서버에 그대로 남습니다.
       - name: Copy files to server
         uses: appleboy/scp-action@v0.1.6
         with:
@@ -30,3 +27,40 @@ jobs:
           source: "." # 전체 파일(숨김 제외)
           target: "/home/web" # 서버의 배포 디렉터리
           overwrite: true # 같은 파일은 덮어쓰기
+
+  backup:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up SSH key
+        uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Add server to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Fetch code from server
+        run: |
+          rsync -avz \
+            --exclude='_PHPExcel/' \
+            -e "ssh -o StrictHostKeyChecking=yes" \
+            ubuntu@${{ secrets.SERVER_HOST }}:/home/web/ \
+            ./
+
+      - name: Commit & push if changed
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name  "${{ secrets.GIT_USER_NAME }}"
+            git config user.email "${{ secrets.GIT_USER_EMAIL }}"
+            git add -A
+            git commit -m "Auto backup from server: $(date '+%F %T')"
+            git push origin main
+          else
+            echo "No changes to commit."
+          fi

@@ -68,34 +68,34 @@
 
 	$arr_config_info = selectConfig($conn, '1');
 
-	$config_no					= trim($arr_config_info["C_NO"]);
-	$config_intro_tf		= trim($arr_config_info["C_INTRO_TF"]);
-	$config_notice_tf		= trim($arr_config_info["C_NOTICE_TF"]);
-	$config_info_01			= SetStringFromDB($arr_config_info["C_INFO_01"]);  // 입학상담 안내 문구
-	$config_info_02			= SetStringFromDB($arr_config_info["C_INFO_02"]);
-	$config_info_03			= SetStringFromDB($arr_config_info["C_INFO_03"]);
-	$config_info_04			= SetStringFromDB($arr_config_info["C_INFO_04"]);
-	$config_info_05			= SetStringFromDB($arr_config_info["C_INFO_05"]);
+	// $config_no					= trim($arr_config_info["C_NO"]);
+	// $config_intro_tf		= trim($arr_config_info["C_INTRO_TF"]);
+	// $config_notice_tf		= trim($arr_config_info["C_NOTICE_TF"]);
+	// $config_info_01			= SetStringFromDB($arr_config_info["C_INFO_01"]);  // 입학상담 안내 문구
+	// $config_info_02			= SetStringFromDB($arr_config_info["C_INFO_02"]);
+	// $config_info_03			= SetStringFromDB($arr_config_info["C_INFO_03"]);
+	// $config_info_04			= SetStringFromDB($arr_config_info["C_INFO_04"]);
+	// $config_info_05			= SetStringFromDB($arr_config_info["C_INFO_05"]);
 
-	$config_briefing_start					= SetStringFromDB($arr_config_info["BRIEFING_START"]);
-	$config_briefing_end						= SetStringFromDB($arr_config_info["BRIEFING_END"]);
-	$config_briefing_alert					= SetStringFromDB($arr_config_info["BRIEFING_ALERT"]);
-	$config_briefing_disabled_date	= SetStringFromDB($arr_config_info["BRIEFING_DISABLED_DATE"]);
-	$config_briefing_tf							= SetStringFromDB($arr_config_info["BRIEFING_TF"]);
-	$config_tour_start							= SetStringFromDB($arr_config_info["TOUR_START"]);
-	$config_tour_end								= SetStringFromDB($arr_config_info["TOUR_END"]);
-	$config_tour_alert							= SetStringFromDB($arr_config_info["TOUR_ALERT"]);
-	$config_tour_disabled_date			= SetStringFromDB($arr_config_info["TOUR_DISABLED_DATE"]);
-	$config_tour_tf									= SetStringFromDB($arr_config_info["TOUR_TF"]);
+	// $config_briefing_start					= SetStringFromDB($arr_config_info["BRIEFING_START"]);
+	// $config_briefing_end						= SetStringFromDB($arr_config_info["BRIEFING_END"]);
+	// $config_briefing_alert					= SetStringFromDB($arr_config_info["BRIEFING_ALERT"]);
+	// $config_briefing_disabled_date	= SetStringFromDB($arr_config_info["BRIEFING_DISABLED_DATE"]);
+	// $config_briefing_tf							= SetStringFromDB($arr_config_info["BRIEFING_TF"]);
+	// $config_tour_start							= SetStringFromDB($arr_config_info["TOUR_START"]);
+	// $config_tour_end								= SetStringFromDB($arr_config_info["TOUR_END"]);
+	// $config_tour_alert							= SetStringFromDB($arr_config_info["TOUR_ALERT"]);
+	// $config_tour_disabled_date			= SetStringFromDB($arr_config_info["TOUR_DISABLED_DATE"]);
+	// $config_tour_tf									= SetStringFromDB($arr_config_info["TOUR_TF"]);
 
 	$this_date = date("Y-m-d",strtotime("0 day"));
 	$next_date = date("Y-m-d",strtotime("1 day"));
 
-	if (($this_date < $config_briefing_start) || ($this_date > $config_briefing_end)) $config_briefing_tf = "N";
-	if (($this_date < $config_tour_start) || ($this_date > $config_tour_end)) $config_tour_tf = "N";
+	// if (($this_date < $config_briefing_start) || ($this_date > $config_briefing_end)) $config_briefing_tf = "N";
+	// if (($this_date < $config_tour_start) || ($this_date > $config_tour_end)) $config_tour_tf = "N";
 
-	if ($this_date > $config_briefing_start) $config_briefing_start = $next_date;
-	if ($this_date > $config_tour_start) $config_tour_start = $next_date;
+	// if ($this_date > $config_briefing_start) $config_briefing_start = $next_date;
+	// if ($this_date > $config_tour_start) $config_tour_start = $next_date;
 
 
 #=====================================================================

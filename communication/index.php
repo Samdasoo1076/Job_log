@@ -115,12 +115,9 @@ $arr_rs = listBoardFront($conn, $b, $m_type, $con_cate_02, $con_cate_03, $con_ca
         }
     }
 
-$rssTotalCount = isset($_GET['rssTotalCount']) ? $_GET['rssTotalCount'] : 0;
 
 //rss data 세션으로 받아서 처리
 //$rssTotalCount = isset($_SESSION['rssTotalCount']) ? $_SESSION['rssTotalCount'] : 0;
-
-echo "RSS Total Count: " . $rssTotalCount;
 
 ?>
 
@@ -264,7 +261,7 @@ echo "RSS Total Count: " . $rssTotalCount;
 											$REPLY_STATE = trim($arr_rs[$j]["REPLY_STATE"]);
 											$REPLY_ADM = trim($arr_rs[$j]["REPLY_ADM"]);
 											$TOP_TF = trim($arr_rs[$j]["TOP_TF"]);
-											$RSS = trim($arr_rs[$j]["RSS"]);
+											// $RSS = trim($arr_rs[$j]["RSS"]);
 
 											$COLOR_TAG = "";
 											$highlightedTitle = highlightKeyword($TITLE, $s); // 검색어 강조 적용
