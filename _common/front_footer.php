@@ -1,6 +1,6 @@
 <div class="footer-sec">
 	<div class="footer-logo">
-		<span class="blind">WFI (재)원주미래산업진흥원</span>
+		<span class="blind">이지민 블로그</span>
 	</div>
 
 	<div class="footer-nav">
@@ -13,14 +13,13 @@
 
 	<div class="footer-contact">
 		<ul>
-			<li>주소 : (26395) 강원특별자치도 원주시 마재2로 10 창업지원허브 2층</li>
-			<li>대표자 : 조영희</li>
-			<li>대표번호 : 033-764-3160​</li>
+			<li>이지민</li>
+			<li>전화번호 : 010-4103-6966​</li>
 		</ul>
 	</div>
 
 	<div class="footer-copyright">
-		<p>Copyright ⓒ WFI. All rights reserved.</p>
+		<p>Copyright ⓒ Lee Ji Min. All rights reserved.</p>
 	</div>
 </div>
 <div class="topBtn">

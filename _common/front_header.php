@@ -71,7 +71,7 @@
 		<div class="gnb-area">
 			<!-- 로고 -->
 			<div class="header-logo">
-				<a href="/">
+				<a href="/indextest.php">
 					<img class="down" src="/assets/images/common/img-logo-wh.svg" alt="WFI (재)원주미래산업진흥원" />
 					<img class="up" src="/assets/images/common/img-logo-bk.svg" alt="WFI (재)원주미래산업진흥원" />
 					<span class="blind">이지민 블로그</span>
@@ -257,35 +257,7 @@
 			<!-- snb메뉴 -->
 			<div class="snb-wrap">
 				<ul class="util pc">
-					<li>
-						<? if (!empty($_SESSION['m_id'])): ?>
-							<div class="btn-user-wrap">
-								<a href="#" class="btn-user dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-									<span class="name"><?= $_SESSION['m_id'] ?></span> 님
-								</a>
-								<div class="user-menu dropdown-menu">
-									<ul class="user-menu-list">
-										<li><a href="/member/mypage.do">나의 회원정보</a></li>
-										<li><a href="/member/mypage_reservation.do">나의 예약현황</a></li>
-									</ul>
-								</div>
-							</div>
-						<? endif; ?>
-					</li>
-					<li>
-						<? if (!empty($_SESSION['m_id'])): ?>
-							<!-- 로그인 상태 -->
-							<div class="btn-log-wrap on">
-								<a href="/member/logout.do" class="btn-log"><span class="blind">사용자메뉴</span></a>
-							</div>
-						<? else: ?>
-							<!-- 비로그인 상태 -->
-							<div class="btn-log-wrap">
-								<a href="/member/login.do" class="btn-log"><span class="blind">로그인</span></a>
-							</div>
-						<? endif; ?>
 
-					</li>
 					<li>
 						<!-- 2024-12-06 헤더 검색 피시 수정 -->
 						<a href="javascript:void(0)" class="ui-btn btn-search" aria-expanded="false">
@@ -381,28 +353,6 @@
 			</div> -->
 				<!-- // Case 로그인 전 -->
 				<!-- Case 로그인 후 -->
-				<div class="mem-area">
-					<? if (!empty($_SESSION['m_id'])): ?>
-						<!-- 로그인 상태 -->
-						<h3><a href="/member/mypage.do"><?= $_SESSION['m_id'] ?>님</a></h3>
-						<div class="mem-area-btn-wrap">
-							<button type="button" class="ui-btn logout" onclick="location.href='/member/logout.do'">
-								<span><a href="/member/logout.do">로그아웃</a></span>
-							</button>
-						</div>
-					<? else: ?>
-						<!-- 비로그인 상태 -->
-						<h3>로그인이 필요합니다.</h3>
-						<div class="mem-area-btn-wrap">
-							<button type="button" class="ui-btn login" onclick="location.href='/member/login.do'">
-								<span><a href="/member/login.do">로그인</a></span>
-							</button>
-							<button type="button" class="ui-btn join" onclick="location.href='/member/member_form.do'">
-								<span><a href="/member/member_form.do">회원가입</a></span>
-							</button>
-						</div>
-					<? endif; ?>
-				</div>
 				<!-- // Case 로그인 후 -->
 				<!-- // Member 영역 -->
 
@@ -508,21 +458,6 @@
 								}
 							}
 							?>
-							<? if (!empty($_SESSION['m_no'])) { ?>
-							<li class="dep1-item">
-								<a href="/member/mypage.do" class="dep1-link">마이페이지</a>
-								<button type="button" class="dep2-open collapsed" data-bs-toggle="collapse" data-bs-target="#dep2-5" aria-controls="dep2-5">
-									<span class="blind">열기</span>
-								</button>
-								<div class="dep2-list-wrap accordion-collapse collapse" id="dep2-5" data-bs-parent="#accordionExample">
-										<ul class="dep2-list">
-											<li class="dep2-item"><a href="/member/mypage.do" class="dep2-link">나의 회원정보</a></li>
-											<li class="dep2-item"><a href="/member/mypage_reservation.do" class="dep2-link">나의 예약정보</a></li>
-										</ul>
-								</div>
-							</li>
-							<? } ?>
-						</ul>
 						<div class="header-nav-bg" aria-hidden="false"></div>
 					</nav>
 				</div>
@@ -550,27 +485,6 @@
 							이지민 블로그에<br />
 							오신 것을 환영합니다
 						</h3>
-						<div class="login-menu">
-							<ul class="login-list">
-								<?php if (!empty($_SESSION['m_no'])): ?>
-									<!-- 로그인 상태 -->
-									<li>
-										<a href="/member/mypage.do"><span class="user-name"><?= $_SESSION['m_id'] ?></span>님</a>
-									</li>
-									<li>
-										<a href="/member/logout.do" class="logout">로그아웃</a>
-									</li>
-								<?php else: ?>
-									<!-- 비로그인 상태 -->
-									<li>
-										<a href="/member/login.do">로그인</a>
-									</li>
-									<li>
-										<a href="/member/member_form.do">회원가입</a>
-									</li>
-								<?php endif; ?>
-							</ul>
-						</div>
 					</div>
 					<div class="all-gnb-menu">
 						<ul class="all-gnb-menu-list">

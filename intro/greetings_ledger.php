@@ -1,7 +1,7 @@
 <?session_start();?>
 <?
 $_PAGE_NO = "117";
-require $_SERVER['DOCUMENT_ROOT'] . "/_common/common_inc.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/_common/v2_common_inc.php";
 ?>
 
 <!-- Container -->
@@ -14,21 +14,6 @@ require $_SERVER['DOCUMENT_ROOT'] . "/_common/common_inc.php";
 					?>
 				<!-- // content-header -->
 
-<div class="content-header">
-	<div class="snb-wrap">
-		<nav class="nav dep3-nav">
-			<ul class="dep3-list">
-			<li class="dep3-item">
-					<a href="greetings_chairman.do" class="dep3-link" title="이사장 인사말">이사장 인사말</a>
-				</li>
-
-				<li class="dep3-item">
-					<a href="greetings_ledger.do" class="dep3-link is-current" title="원장 인사말">원장 인사말</a>
-				</li>
-			</ul>
-		</nav>
-	</div>
-</div>
 
 				<!-- content-body -->
 				<div class="content-body">

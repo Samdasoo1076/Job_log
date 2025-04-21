@@ -41,7 +41,7 @@
 <title><?=$seo_title?> | <?=$g_front_title?></title>
 <? } ?>
 
-<link rel="stylesheet" type="text/css" href="/assets/css/WFI.css" />
+<!-- <link rel="stylesheet" type="text/css" href="/assets/css/WFI.css" /> -->
 <link rel="stylesheet" type="text/css" href="/v1assets/css/v1.css" />
 
 <script src="/assets/js/libs/jquery.min.js"></script>

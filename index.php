@@ -1,11 +1,11 @@
 <? session_start(); ?>
 <?
 	$nonce = base64_encode(random_bytes(16));
-	header("Content-Security-Policy: script-src 'self' 'nonce-$nonce' https://wfi.or.kr https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.googletagmanager.com;");
+	header("Content-Security-Policy: script-src 'self' 'nonce-$nonce' http://dasoo.hopto.org https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.googletagmanager.com;");
 ?>
 <?
 $_PAGE_NO = "2";
-require $_SERVER['DOCUMENT_ROOT'] . "/_common/common_inc.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/_common/v1_common_inc.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/_classes/biz/main/main.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/_classes/biz/board/board.php";
 
@@ -57,6 +57,8 @@ $reservation_list = ReservationStatusAll($conn);
 // echo "</pre>";
 // exit;
 
+$todayCount = 0;
+$monthCount = 0;
 
 ?>
 <?
@@ -66,94 +68,50 @@ $reservation_list = ReservationStatusAll($conn);
 	<!-- content -->
 	<div class="content main-page">
 		<h1 class="blind">원주미래산업진흥원 홈</h1>
-
+		
 		<section class="main-content">
 
 			<div id="fullpage" class="section_fullpage">
-				<!-- s: 01_visual -->
-				<section class="main-visual section sec_01">
-					<div class="swiper-visual">
-						<div class="swiper-container">
-							<div class="swiper-wrapper">
-								<div class="swiper-slide">
-									<div class="inner">
-										<h2>
-											새로운 변화, 큰 행복,<br />
-											더 큰 원주 실현을 위한 <span class="wbr">Think-Tank</span>
-										</h2>
-									</div>
-									<div class="bg">
-										<video class="viewer play" preload="metadata" autoplay playsinline muted loop>
-											<source src="/assets/images/main/main-slide-video01.mp4"
-												type="video/mp4">
-										</video>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="pager-wrap">
-							<div class="swiper-pagination"></div>
-							<button class="btn-pause"><span class="blind">pause</span></button>
-						</div>
+			<section class="dashboard">
+				<div class="card card--primary">
+					<div class="card__icon"><i class="fa fa-users"></i></div>
+					<div class="card__info">
+					<h4>오늘 방문자</h4>
+					<p><?= number_format($todayCount) ?></p>
 					</div>
-					<div class="scroll-down">
-						<span class="txt">SCROLL DOWN</span>
-					</div>
-
-				</section>
-				<!-- e: 01_visual -->
-				<!-- s: 02_인트로 -->
-				<div class="inner section sec_02">
-					<div class="sec-inner">
-						<div class="flex-row">
-							<div class="inner-tit-wrap">
-								<p class="category">주요업무</p>
-								<h2 class="sec-inner-tit">
-									<em>미래와 혁신을 주도하는<br />
-										이지민의 포트폴리오를<br />
-										소개합니다.</em>
-								</h2>
-								<a href="/task/digital_industry.do" class="btn-more-view">
-									<span class="txt">더보기</span>
-								</a>
-							</div>
-							<div class="team-card-wrap">
-								<ul class="team-card-list">
-									<li>
-										<a href="/task/digital_industry.do#main_task_01" class="team-card active">
-											<p class="num">01</p>
-											<p class="subject">미래성장 동력<br />
-												확보사업</p>
-										</a>
-									</li>
-									<li>
-										<a href="/task/digital_industry.do#main_task_02" class="team-card">
-											<p class="num">02</p>
-											<p class="subject">산업고도화 및<br />
-												경쟁력 강화사업</p>
-										</a>
-									</li>
-									<li>
-										<a href="/task/digital_industry.do#main_task_03" class="team-card">
-											<p class="num">03</p>
-											<p class="subject">융합·혁신 생태계<br />
-												조성사업​</p>
-										</a>
-									</li>
-								</ul>
-							</div>
-							<a href="/task/digital_industry.php" class="btn-more-view">
-								<span class="txt">더보기</span>
-							</a>
-						</div>
-					</div>
+					<div class="card__trend"><span class="trend-up">+5%</span></div>
 				</div>
-				<!-- e: 02_인트로 -->
-				<div class="normalScrollElements section sec_03">
-					<div class="bg">
-						<img src="/assets/images/main/img-main-bg1.png">
-						<img class="mo" src="/assets/images/main/img-main-bg2-mo.png">
+
+				<div class="card card--secondary">
+					<div class="card__icon"><i class="fa fa-calendar-alt"></i></div>
+					<div class="card__info">
+					<h4>이번 달 방문자</h4>
+					<p><?= number_format($monthCount) ?></p>
 					</div>
+					<div class="card__trend"><span class="trend-down">−2%</span></div>
+				</div>
+
+				<div class="card card--success">
+					<div class="card__icon"><i class="fa fa-chart-line"></i></div>
+					<div class="card__info">
+					<h4>총 페이지뷰</h4>
+					<p><?= number_format($pageviewCount) ?></p>
+					</div>
+					<div class="card__trend"><span class="trend-up">+12%</span></div>
+				</div>
+
+				<div class="card card--warning">
+					<div class="card__icon"><i class="fa fa-user-plus"></i></div>
+					<div class="card__info">
+					<h4>신규 방문자 비율</h4>
+					<p><?= round($newRatio,1) ?>%</p>
+					</div>
+					<div class="card__trend"><span class="trend-up">+3%</span></div>
+				</div>
+				</section>
+				
+				<div class="normalScrollElements section sec_03">
+
 					<!-- s: 03_소통마당 -->
 					<div class="inner community">
 						<div class="sec-inner">
@@ -208,7 +166,7 @@ $reservation_list = ReservationStatusAll($conn);
 					<!-- e: 03_소통마당 -->
 					
 					
-<!-- 					2025-01-21 홍보배너 변경
+					<!-- 2025-01-21 홍보배너 변경
 						<div class="inner adBanner">
 							<div class="sec-inner">
 								<div class="swiper swiper-ad">
@@ -233,23 +191,6 @@ $reservation_list = ReservationStatusAll($conn);
 						</div>
 					//홍보배너 변경 -->
 
-					<!-- s: 04_시설임대 -->
-					<div class="inner rent">
-						<div class="sec-inner">
-							<div class="main-rent-wrap">
-								<div class="rent-img">
-									<img src="/assets/images/main/img-rent-bg.jpg" alt="">
-								</div>
-								<div class="rent-card">
-									<a href="/facility/reservation_form.do" class="btn-more-view">
-										<p class="tit">시설 예약</p>
-										<p class="txt">회의 및 세미나 등을 위한 공간을 제공합니다.</p>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- e: 04_시설임대 -->
 					<!-- s: 05_보도자료 -->
 					<div class="inner notice">
 						<div class="sec-inner">
@@ -302,9 +243,9 @@ $reservation_list = ReservationStatusAll($conn);
 					</div>
 					<!-- e: 05_보도자료 -->
 
-<!-- e: 03_소통마당 -->
+					<!-- e: 03_소통마당 -->
 
-<!-- s: 06_푸터 -->
+					<!-- s: 06_푸터 -->
 
 					<div class="inner">
 						<footer class="footer">
@@ -337,10 +278,10 @@ $reservation_list = ReservationStatusAll($conn);
 </main>
 <!-- // Container -->
 <!-- 시설현황 모달 -->
-<div class="reservation-modal modal fade" id="carendar" tabindex="-1" aria-labelledby="carendarModalLabel"
+<!-- <div class="reservation-modal modal fade" id="carendar" tabindex="-1" aria-labelledby="carendarModalLabel"
 	aria-hidden="true">
 	<? require $_SERVER['DOCUMENT_ROOT'] . "/_common/reservation_status_modal.php";?>
-</div>
+</div> -->
 <!-- //시설현황 모달 -->
 
 <!-- 이메일무단수집거부 모달 -->

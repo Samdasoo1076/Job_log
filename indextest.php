@@ -5,7 +5,7 @@
 ?>
 <?
 $_PAGE_NO = "2";
-require $_SERVER['DOCUMENT_ROOT'] . "/_common/common_inc.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/_common/v2_common_inc.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/_classes/biz/main/main.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/_classes/biz/board/board.php";
 
@@ -59,89 +59,12 @@ $banners = getMainlistBanner($conn, $banner_type);
 
 			<div id="fullpage" class="section_fullpage">
 				<!-- s: 01_visual -->
-				<section class="main-visual section sec_01">
-					<div class="swiper-visual">
-						<div class="swiper-container">
-							<div class="swiper-wrapper">
-								<div class="swiper-slide">
-									<div class="inner">
-										<h2>
-											새로운 변화, 큰 행복,<br />
-											더 큰 원주 실현을 위한 <span class="wbr">Think-Tank</span>
-										</h2>
-									</div>
-									<div class="bg">
-										<video class="viewer play" preload="metadata" autoplay playsinline muted loop>
-											<source src="/assets/images/main/main-slide-video01.mp4"
-												type="video/mp4">
-										</video>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="pager-wrap">
-							<div class="swiper-pagination"></div>
-							<button class="btn-pause"><span class="blind">pause</span></button>
-						</div>
-					</div>
-					<div class="scroll-down">
-						<span class="txt">SCROLL DOWN</span>
-					</div>
-
-				</section>
+				 
 				<!-- e: 01_visual -->
-				<!-- s: 02_인트로 -->
-				<div class="inner section sec_02">
-					<div class="sec-inner">
-						<div class="flex-row">
-							<div class="inner-tit-wrap">
-								<p class="category">주요업무</p>
-								<h2 class="sec-inner-tit">
-									<em>미래와 혁신을 주도하는<br />
-										WFI의 주요업무를<br />
-										소개합니다.</em>
-								</h2>
-								<a href="/task/digital_industry.php" class="btn-more-view">
-									<span class="txt">더보기</span>
-								</a>
-							</div>
-							<div class="team-card-wrap">
-								<ul class="team-card-list">
-									<li>
-										<a href="/task/digital_industry.php#main_task_01" class="team-card active">
-											<p class="num">01</p>
-											<p class="subject">미래성장 동력<br />
-												확보사업</p>
-										</a>
-									</li>
-									<li>
-										<a href="/task/digital_industry.php#main_task_02" class="team-card">
-											<p class="num">02</p>
-											<p class="subject">산업고도화 및<br />
-												경쟁력 강화사업</p>
-										</a>
-									</li>
-									<li>
-										<a href="/task/digital_industry.php#main_task_03" class="team-card">
-											<p class="num">03</p>
-											<p class="subject">융합·혁신 생태계<br />
-												조성사업​</p>
-										</a>
-									</li>
-								</ul>
-							</div>
-							<a href="/task/digital_industry.php" class="btn-more-view">
-								<span class="txt">더보기</span>
-							</a>
-						</div>
-					</div>
-				</div>
-				<!-- e: 02_인트로 -->
+				<!-- s: 02 visual-->
+				
+				<!-- e: 02_visual -->
 				<div class="normalScrollElements section sec_03">
-					<div class="bg">
-						<img src="/assets/images/main/img-main-bg1.png">
-						<img class="mo" src="/assets/images/main/img-main-bg1-mo.png">
-					</div>
 					<!-- s: 03_소통마당 -->
 					<div class="inner community">
 						<div class="sec-inner">
@@ -194,43 +117,7 @@ $banners = getMainlistBanner($conn, $banner_type);
 						</div>
 					</div>
 					<!-- e: 03_소통마당 -->
-							<!-- 2025-01-21 홍보배너 변경 -->
-							<div class="inner adBanner">
-								<div class="swiper swiper-ad">
-									<div class="swiper-wrapper">
-										<div class="swiper-slide">
-											<a href="#">
-												<img src="https://img.freepik.com/premium-vector/anxiety-concept-illustration-mental-disorders-sad-desperate-flat-vector-design_722351-22.jpg?w=826" alt="" />
-											</a>
-										</div>
-										<div class="swiper-slide">
-											<a href="#">
-												<img src="https://img.freepik.com/free-vector/savings-concept-illustration_114360-1526.jpg?t=st=1736470862~exp=1736474462~hmac=7d078aff48c21b6bb722faf4049d831439531024da5035a3510134b110de04ac&w=826" alt="" />
-											</a>
-										</div>
-									</div>
-									<div class="swiper-pagination"></div>
-								</div>
-							</div>
-							<!-- //홍보배너 변경 -->
 
-					<!-- s: 04_시설임대 -->
-					<div class="inner rent">
-						<div class="sec-inner">
-							<div class="main-rent-wrap">
-								<div class="rent-img">
-									<img src="/assets/images/main/img-rent-bg.jpg" alt="">
-								</div>
-								<div class="rent-card">
-									<a href="/facility/reservation_form.php" class="btn-more-view">
-										<p class="tit">시설 예약</p>
-										<p class="txt">회의 및 세미나 등을 위한 공간을 제공합니다.</p>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- e: 04_시설임대 -->
 					<!-- s: 05_보도자료 -->
 					<div class="inner notice">
 						<div class="sec-inner">
@@ -303,15 +190,6 @@ $banners = getMainlistBanner($conn, $banner_type);
 					2. z-index 이슈로 모달위치 변경.
 					3. modal-body 내부는 수정 없음
 				 -->
-		<div class="reservation-wrap">
-			<div class="reservation-top">
-				<p class="tit">시설 예약현황</p>
-				<button type="button" class="calendar-open" data-bs-toggle="modal" data-bs-target="#carendar"
-					aria-expanded="true" aria-controls="carendar">
-					<span class="blind">열기</span>
-				</button>
-			</div>
-		</div>
 	</div>
 	</div>
 	<!-- // content -->
@@ -333,7 +211,7 @@ $banners = getMainlistBanner($conn, $banner_type);
 <!-- // include_footer.html -->
 
 	<!-- 홍보배너 팝업 -->
-	<div class="modal fade" id="adModal" tabindex="-1" role="dialog" aria-labelledby="adModalLabel" aria-hidden="true">
+	<!-- <div class="modal fade" id="adModal" tabindex="-1" role="dialog" aria-labelledby="adModalLabel" aria-hidden="true">
 		<div class="modal-dialog ad-modal">
 			<div class="modal-content">
 				<div class="modal-header blind">
@@ -361,7 +239,7 @@ $banners = getMainlistBanner($conn, $banner_type);
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	<!-- // 홍보배너 팝업 -->
 </body>
 <script stype="text/javascript" nonce="<?php echo $nonce; ?>">
