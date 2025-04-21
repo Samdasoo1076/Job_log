@@ -69,8 +69,8 @@ $banners = getMainlistBanner($conn, $banner_type);
 					<div class="inner community">
 						<div class="sec-inner">
 							<div class="inner-tit-wrap">
-								<h2 class="sec-inner-tit"><em>소통마당</em></h2>
-								<p class="sec-inner-txt">새로운 소식을 빠르게 만날 수 있습니다.</p>
+								<h2 class="sec-inner-tit"><em>포스트</em></h2>
+								<p class="sec-inner-txt">저의 소식을 접하는 공간입니다.</p>
 							</div>
 							<div class="inner-area">
 								<div class="notice-wrap">
