@@ -47,15 +47,15 @@ define('_SPECIAL_', 64); // 특수문자
  
 	# 사이트 Tile
 	Global  $g_title_name; 
-	$g_title_name = "원주미래산업진흥원";
+	$g_title_name = "이지민 블로그";
  
 	# 사이트 Tile
 	Global  $g_title; 
-	$g_title = "원주미래산업진흥원";
+	$g_title = "이지민 블로그";
  
 	# 사이트 Tile
 	Global  $g_front_title; 
-	$g_front_title = "원주미래산업진흥원"; 
+	$g_front_title = "이지민 블로그"; 
 	# 사이트 절대 경로
 	Global  $g_physical_path; 
 	$g_physical_path = $_SERVER['DOCUMENT_ROOT']."/";
@@ -67,10 +67,10 @@ define('_SPECIAL_', 64); // 특수문자
 	//echo $g_physical_path;
  
 	Global  $g_site_domain;
-	$g_site_domain	= "www.wfi.or.kr";
+	$g_site_domain	= "dasoo.hopto.org";
  
 	Global  $g_site_url;
-	$g_site_url	= "https://180.210.76.103/";
+	$g_site_url	= "http://144.24.85.101";
  
 	//재가입기간 설정
 	Global  $g_site_re_enter_period;
@@ -111,9 +111,9 @@ define('_SPECIAL_', 64); // 특수문자
 	Global  $g_site_url;
  
 	if ($ssl_is_on == "F") {
-		$g_site_url	= "https://".$_SERVER['HTTP_HOST'];
+		$g_site_url	= "http://".$_SERVER['HTTP_HOST'];
 	} else {
-		$g_site_url	= "https://".$_SERVER['HTTP_HOST'];
+		$g_site_url	= "http://".$_SERVER['HTTP_HOST'];
 	}
  
 	$urlencode = urlencode($_SERVER["REQUEST_URI"]);
@@ -122,12 +122,12 @@ define('_SPECIAL_', 64); // 특수문자
 	$request_uri = $_SERVER['REQUEST_URI'];
  
 	if ($ssl_is_on == "F") {
-		$g_url = 'https://' . $http_host . $request_uri;
+		$g_url = 'http://' . $http_host . $request_uri;
 	} else {
  
 ?>
 <script>
-	document.location = "https://<?=$http_host?><?=$request_uri?>";
+	document.location = "http://<?=$http_host?><?=$request_uri?>";
 </script>
 <?
 		db_close($conn);

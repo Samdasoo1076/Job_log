@@ -110,7 +110,7 @@ $reservation_list = ReservationStatusAll($conn);
 								<p class="category">주요업무</p>
 								<h2 class="sec-inner-tit">
 									<em>미래와 혁신을 주도하는<br />
-										WFI의 주요업무를<br />
+										이지민의 포트폴리오를<br />
 										소개합니다.</em>
 								</h2>
 								<a href="/task/digital_industry.do" class="btn-more-view">
