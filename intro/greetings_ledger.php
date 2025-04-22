@@ -36,7 +36,7 @@ require $_SERVER['DOCUMENT_ROOT'] . "/_common/v2_common_inc.php";
 								깊은 감사의<br class="mo" /> 말씀을 드립니다.
 							</h3>
 							<div class="text">
-								<p>원주미래산업진흥원은 원주시의 지속 가능한 발전과 미래산업 육성을 위해 설립된 기관으로,
+								<p>이지민 블로그 원주시의 지속 가능한 발전과 미래산업 육성을 위해 설립된 기관으로,
 									지역 경제 활성화와 일자리 창출을 목표로 디지털, 모빌리티 등 다양한 산업 분야에서
 									혁신적인 지원과 협력의 중심 역할을 수행하고 있습니다.</p>
 								<p>우리 진흥원은 디지털 대전환 시대의 흐름 속에서 첨단 산업 기술의 융합을 이끌어내고
@@ -47,7 +47,7 @@ require $_SERVER['DOCUMENT_ROOT'] . "/_common/v2_common_inc.php";
 								<p>감사합니다.</p>
 							</div>
 							<div class="sign">
-								<p>원주미래산업진흥원 원장</p>
+								<p>이지민 블로그 원장</p>
 								<p class="name">조 영 희</p>
 							</div>
 						</div>

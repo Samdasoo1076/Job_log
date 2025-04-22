@@ -87,13 +87,13 @@ define('_SPECIAL_', 64); // 특수문자
 	$g_site_nick_period	= 1;
  
 	Global  $g_admin_email_01;
-	$g_admin_email_01	= "myucheu0617@ucomp.co.kr";
+	$g_admin_email_01	= "myucheu0617@gmail.com";
  
 	Global  $g_admin_email_02;
-	$g_admin_email_02	= "aodhzld45@ucomp.co.kr";
+	$g_admin_email_02	= "myucheu0617@gmail.com";
  
 	Global  $g_admin_email_03;
-	$g_admin_email_03	= "myucheu0617@ucomp.co.kr";
+	$g_admin_email_03	= "myucheu0617@gmail.com";
  
 	//모바일로 접속했는지 여부
 	$mobile_is_all=false;

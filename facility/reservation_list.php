@@ -133,7 +133,7 @@ require $_SERVER['DOCUMENT_ROOT'] . "/_common/common_inc.php";
 										</p>
 									</td>
 									<td class="tbl-writer">
-										<p>원주미래산업진흥원</p>
+										<p>이지민 블로그</p>
 									</td>
 									<td class="tbl-date">
 										<p>2024-11-01</p>
@@ -153,7 +153,7 @@ require $_SERVER['DOCUMENT_ROOT'] . "/_common/common_inc.php";
 										</p>
 									</td>
 									<td class="tbl-writer">
-										<p>원주미래산업진흥원</p>
+										<p>이지민 블로그</p>
 									</td>
 									<td class="tbl-date">
 										<p>2024-11-01</p>
@@ -173,7 +173,7 @@ require $_SERVER['DOCUMENT_ROOT'] . "/_common/common_inc.php";
 										</p>
 									</td>
 									<td class="tbl-writer">
-										<p>원주미래산업진흥원원주미래산업진흥원원주미래산업진흥원</p>
+										<p>이지민 블로그</p>
 									</td>
 									<td class="tbl-date">
 										<p>2024-11-01</p>
@@ -193,7 +193,7 @@ require $_SERVER['DOCUMENT_ROOT'] . "/_common/common_inc.php";
 										</p>
 									</td>
 									<td class="tbl-writer">
-										<p>원주미래산업진흥원</p>
+										<p>이지민 블로그</p>
 									</td>
 									<td class="tbl-date">
 										<p>2024-11-01</p>
@@ -213,7 +213,7 @@ require $_SERVER['DOCUMENT_ROOT'] . "/_common/common_inc.php";
 										</p>
 									</td>
 									<td class="tbl-writer">
-										<p>원주미래산업진흥원</p>
+										<p>이지민 블로그</p>
 									</td>
 									<td class="tbl-date">
 										<p>2024-11-01</p>
@@ -233,7 +233,7 @@ require $_SERVER['DOCUMENT_ROOT'] . "/_common/common_inc.php";
 										</p>
 									</td>
 									<td class="tbl-writer">
-										<p>원주미래산업진흥원</p>
+										<p>이지민 블로그</p>
 									</td>
 									<td class="tbl-date">
 										<p>2024-11-01</p>
@@ -253,7 +253,7 @@ require $_SERVER['DOCUMENT_ROOT'] . "/_common/common_inc.php";
 										</p>
 									</td>
 									<td class="tbl-writer">
-										<p>원주미래산업진흥원</p>
+										<p>이지민 블로그</p>
 									</td>
 									<td class="tbl-date">
 										<p>2024-11-01</p>
@@ -273,7 +273,7 @@ require $_SERVER['DOCUMENT_ROOT'] . "/_common/common_inc.php";
 										</p>
 									</td>
 									<td class="tbl-writer">
-										<p>원주미래산업진흥원</p>
+										<p>이지민 블로그</p>
 									</td>
 									<td class="tbl-date">
 										<p>2024-11-01</p>
@@ -293,7 +293,7 @@ require $_SERVER['DOCUMENT_ROOT'] . "/_common/common_inc.php";
 										</p>
 									</td>
 									<td class="tbl-writer">
-										<p>원주미래산업진흥원</p>
+										<p>이지민 블로그</p>
 									</td>
 									<td class="tbl-date">
 										<p>2024-11-01</p>
@@ -313,7 +313,7 @@ require $_SERVER['DOCUMENT_ROOT'] . "/_common/common_inc.php";
 										</p>
 									</td>
 									<td class="tbl-writer">
-										<p>원주미래산업진흥원</p>
+										<p>이지민 블로그</p>
 									</td>
 									<td class="tbl-date">
 										<p>2024-11-01</p>

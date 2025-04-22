@@ -1,0 +1,150 @@
+/* styles.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.wrapper {
+    display: flex;
+    flex: 1;
+}
+
+.lnb {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100vh;
+    background-color: #222;
+    padding-top: 40px;
+}
+
+.lnb ul {
+    list-style: none;
+}
+
+
+.lnb ul li {
+    position: relative;
+}
+
+.lnb ul li+li {
+    margin-top: 10px;
+}
+
+.lnb ul li a {
+    display: block;
+    padding: 12px 20px;
+    color: #ddd;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background 0.2s;
+}
+
+.lnb ul li .submenu {
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* 호버 시 2뎁스 보이기 */
+.lnb:hover .submenu {
+    display: block;
+}
+
+/* 2뎁스 메뉴 스타일 */
+.lnb ul li .submenu li a {
+    display: block;
+    padding: 12px 20px 12px 40px;
+    /* 들여쓰기 + 여백 */
+    font-size: 0.95rem;
+    color: #ccc;
+}
+
+.lnb ul li .submenu li a:hover {
+    background-color: #444;
+    color: #fff;
+}
+
+.lnb ul li a:hover,
+.lnb ul li a.active {
+    background-color: #444;
+    color: #fff;
+}
+
+main {
+    margin-left: 200px;
+    padding: 60px 40px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.intro {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.intro h1 {
+    font-size: 2.8rem;
+    margin-bottom: 16px;
+    color: #222;
+}
+
+.intro p {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 30px;
+}
+
+.info-item {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
+}
+
+.info-item:hover {
+    transform: translateY(-4px);
+}
+
+.info-item h2 {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+    color: #222;
+}
+
+.info-item p,
+.info-item ul {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+.info-item ul {
+    list-style: disc inside;
+}
+
+footer {
+    text-align: center;
+    padding: 16px;
+    background-color: #222;
+    color: #aaa;
+    font-size: 0.9rem;
+}

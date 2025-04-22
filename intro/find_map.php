@@ -37,12 +37,12 @@ $(document).ready(function() {
 							<div class="map-box" id="map"></div>
 							<div class="address-box">
 								<div class="logo">
-									<img src="/assets/images/common/icn-logo-bk.svg" alt="(재)원주미래산업진흥원">
+								이지민 블로그
 								</div>
 								<div class="address-info">
 									<dl>
 										<dt>주소</dt>
-										<dd>강원 원주시 마재2로 10 2층 (재)원주미래산업진흥원​</dd>
+										<dd>이지민 블로그</dd>
 									</dl>
 									<dl>
 										<dt>전화번호</dt>

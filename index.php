@@ -67,7 +67,7 @@ $monthCount = 0;
 <main role="main" class="container">
 	<!-- content -->
 	<div class="content main-page">
-		<h1 class="blind">원주미래산업진흥원 홈</h1>
+		<h1 class="blind">이지민 블로그</h1>
 		
 		<section class="main-content">
 

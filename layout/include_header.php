@@ -323,15 +323,15 @@
 		<div class="modal-content">
 			<h2 class="sitemap-logo">
 				<a href="#">
-					<img class="up" src="../../assets/images/common/img-logo-bk.svg" alt="WFI (재)원주미래산업진흥원 로고">
-					<span class="blind">WFI (재)원주미래산업진흥원</span>
+						이지민 블로그
+					<span class="blind">이지민 블로그</span>
 				</a>
 			</h2>
 			<div class="wrap">
 				<div class="all-gnb-intro">
 					<p class="category">Site Map</p>
 					<h3 class="welcome">
-						원주미래산업진흥원에<br />
+					이지민 블로그<br />
 						오신걸 환영합니다
 					</h3>
 					<div class="login-menu">

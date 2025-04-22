@@ -610,7 +610,7 @@ function js_restore(seq_no) {
 								<tr>
 									<th scope="row">페이지 키워드</th>
 									<td colspan="3">
-										<input type="text" name="page_info03" value="<?=$rs_page_info03?>" style="width:60%" /> <span class="tbl_txt">예) 원주미래산업진흥원,미래산업,드론 등 쉼표(,) 로 구분</span>
+										<input type="text" name="page_info03" value="<?=$rs_page_info03?>" style="width:60%" /> <span class="tbl_txt">예) 이지민 블로그,미래산업,드론 등 쉼표(,) 로 구분</span>
 									</td>
 								</tr>
 								<tr>

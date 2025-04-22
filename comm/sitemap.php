@@ -7,9 +7,9 @@
 	<meta name="format-detection" content="telephone=no" />
 	<meta name="viewport"
 		content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-	<meta name="keywords" content="원주미래산업진흥원" />
-	<meta name="description" content="원주미래산업진흥원" />
-	<title>사이트맵 | 원주미래산업진흥원</title>
+	<meta name="keywords" content="이지민 블로그" />
+	<meta name="description" content="이지민 블로그" />
+	<title>사이트맵 | 이지민 블로그</title>
 	<link rel="stylesheet" type="text/css" href="../../assets/css/WFI.css" />
 
 	<script src="../../assets/js/libs/jquery.min.js"></script>

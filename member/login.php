@@ -122,7 +122,7 @@ ob_end_flush();
                 <div class="member-page">
                     <div class="login-form-wrap">
                         <div class="login-form">
-                            <h2>안녕하세요.<br /><em>원주미래산업진흥원</em>입니다.</h2>
+                            <h2>안녕하세요.<br /><em>이지민 블로그</em>입니다.</h2>
                             <form name="frm" class="login-post" method="post" id="login-form">
                                 <!-- 리디렉트 URL을 숨겨진 필드로 전송 -->
                                 <div class="info-inp-wrap login-filed">

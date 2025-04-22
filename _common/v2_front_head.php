@@ -77,13 +77,13 @@
 <script src="/assets/js/common.js"></script>
 
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-74F08PRTEN"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T2JP8HJ850"></script>
 <script nonce="<?= $nonce; ?>">
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-74F08PRTEN');
+  gtag('config', 'G-T2JP8HJ850');
 </script>
 <!-- Google tag (gtag.js) -->
 
@@ -115,7 +115,7 @@
 	$http_host = $g_site_domain;
 
 	if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
-		$log_url = 'https://'.$http_host.$_SERVER['PHP_SELF'];
+		$log_url = 'http://'.$http_host.$_SERVER['PHP_SELF'];
 	} else {
 		$log_url = 'http://'.$http_host.$_SERVER['PHP_SELF'];
 	}
