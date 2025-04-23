@@ -5,9 +5,9 @@
 
 	<div class="footer-nav">
 		<ul>
-			<li><a href="../comm/terms.do" class="nav-link">이용약관</a></li>
+			<!-- <li><a href="../comm/terms.do" class="nav-link">이용약관</a></li> -->
 			<li><a href="javascript:void(0)" class="nav-link" id="emailPolicyModalLink" data-bs-toggle="modal" data-bs-target="#emailPolicyModal">이메일무단수집거부</a></li>
-			<li><a href="../comm/policy.do" class="nav-link bold">개인정보처리방침</a></li>
+			<!-- <li><a href="../comm/policy.do" class="nav-link bold">개인정보처리방침</a></li> -->
 		</ul>
 	</div>
 

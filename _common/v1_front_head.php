@@ -13,6 +13,7 @@
 	// exit;
 
 ?>
+<meta name="naver-site-verification" content="cd95a5e08f9136b587255a1f9529026302b2069d" />
 <meta name="description" content="<?=$seo_description?>" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="<?=$seo_title?>" />

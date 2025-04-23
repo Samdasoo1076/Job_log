@@ -70,7 +70,7 @@ define('_SPECIAL_', 64); // 특수문자
 	$g_site_domain	= "dasoo.hopto.org";
  
 	Global  $g_site_url;
-	$g_site_url	= "http://144.24.85.101";
+	$g_site_url	= "https://144.24.85.101";
  
 	//재가입기간 설정
 	Global  $g_site_re_enter_period;
@@ -113,7 +113,7 @@ define('_SPECIAL_', 64); // 특수문자
 	if ($ssl_is_on == "F") {
 		$g_site_url	= "http://".$_SERVER['HTTP_HOST'];
 	} else {
-		$g_site_url	= "http://".$_SERVER['HTTP_HOST'];
+		$g_site_url	= "https://".$_SERVER['HTTP_HOST'];
 	}
  
 	$urlencode = urlencode($_SERVER["REQUEST_URI"]);
@@ -127,7 +127,7 @@ define('_SPECIAL_', 64); // 특수문자
  
 ?>
 <script>
-	document.location = "http://<?=$http_host?><?=$request_uri?>";
+	document.location = "https://<?=$http_host?><?=$request_uri?>";
 </script>
 <?
 		db_close($conn);
@@ -141,7 +141,7 @@ define('_SPECIAL_', 64); // 특수문자
 	Global  $g_register_level;
 	$g_register_level = 2;
  
-	$g_url = 'http://' . $http_host . $request_uri;
+	$g_url = 'https://' . $http_host . $request_uri;
  
 	$urlencode = urlencode($_SERVER["REQUEST_URI"]);
  
