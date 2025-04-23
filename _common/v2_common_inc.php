@@ -206,6 +206,6 @@
 # common head
 #=====================================================================
 	require $_SERVER['DOCUMENT_ROOT'] . "/_common/v2_front_head.php";
-	require $_SERVER['DOCUMENT_ROOT'] . "/_common/front_header.php";
+	// require $_SERVER['DOCUMENT_ROOT'] . "/_common/front_header.php";
 
 ?>

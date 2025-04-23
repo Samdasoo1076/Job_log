@@ -1,639 +1,181 @@
 <? session_start(); ?>
 <?
 	$nonce = base64_encode(random_bytes(16));
-	header("Content-Security-Policy: script-src 'self' 'nonce-$nonce' http://dasoo.hopto.org https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.googletagmanager.com;");
+	header("Content-Security-Policy: script-src 'self' 'nonce-$nonce' https://leejimin.kr https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://www.googletagmanager.com;");
 ?>
 <?
 $_PAGE_NO = "2";
-require $_SERVER['DOCUMENT_ROOT'] . "/_common/v1_common_inc.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/_common/v2_common_inc.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/_classes/biz/main/main.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/_classes/biz/board/board.php";
 
-
-
-// 게시물 가져오기 (4개씩 제한)
-$posts = selectBoardList($conn, 1, 4); // 1 페이지, 4개씩 가져오기
-
-$b = "B_1_2";
-
-if ($nPage == 0)
-	$nPage = "1";
-
-if (($nPage <> "") && ($b_board_type == "NOTICE")) {
-	$cntPage = (int) ($nPage);
-	$nPage = (int) ($nPage);
-} else {
-	$cntPage = (int) ($nPage);
-	$nPage = (int) ($nPage);
-}
-
-if ($nPageSize <> "") {
-	$nPageSize = (int) ($nPageSize);
-} else {
-	$nPageSize = 20;
-}
-
-if ($mobile_is_all == true) {
-	$nPageBlock = 5;
-} else {
-	$nPageBlock = 5;
-}
-
-$con_use_tf = "Y";
-$con_del_tf = "N";
-$m_type = "";
-
-$nListCnt = totalCntBoardFront($conn, $b, $m_type, $con_cate_02, $con_cate_03, $con_cate_04, $con_writer_id, $keyword, $con_reply_state, $con_use_tf, $con_del_tf, $f, $s);
-
-
-$arr_rs = listBoardFront($conn, $b, $m_type, $con_cate_02, $con_cate_03, $con_cate_04, $con_writer_id, $keyword, $con_reply_state, $con_use_tf, $con_del_tf, $f, $s, $nPage, $nPageSize, $nListCnt);
-$banner_type = "MAINVISUAL";
-$banners = getMainlistBanner($conn, $banner_type);
-
-$reservation_list = ReservationStatusAll($conn);
-
-// echo "<pre>";
-// print_r($reservation_list);
-// echo "</pre>";
-// exit;
-
-$todayCount = 0;
-$monthCount = 0;
-
+$depth_01_page_name = "";
+$depth_02_page_name = "";
+$depth_03_page_name = "";
 ?>
 <?
 ?>
 
 <main role="main" class="container">
-	<!-- content -->
-	<div class="content main-page">
-		<h1 class="blind">이지민 블로그</h1>
-		
-		<section class="main-content">
+			<!-- content -->
+			<div id="content" class="content greeting-chairman-page">
+				<!-- content-header -->
+					<?
+						require "_common/content-header.php";
+					?>
+				<!-- // content-header -->
 
-			<div id="fullpage" class="section_fullpage">
-			<section class="dashboard">
-				<div class="card card--primary">
-					<div class="card__icon"><i class="fa fa-users"></i></div>
-					<div class="card__info">
-					<h4>오늘 방문자</h4>
-					<p><?= number_format($todayCount) ?></p>
+
+				<!-- content-body -->
+				<div class="content-body">
+					<!-- 타이틀 영역 -->
+					<div class="title-wrap">
+						<!-- <h2 class="title">이지민</h2> -->
+					<!-- <p class="explain">설명이 들어가는 경우</p> -->
 					</div>
-					<div class="card__trend"><span class="trend-up">+5%</span></div>
-				</div>
+					<!-- // 타이틀 영역 -->
 
-				<div class="card card--secondary">
-					<div class="card__icon"><i class="fa fa-calendar-alt"></i></div>
-					<div class="card__info">
-					<h4>이번 달 방문자</h4>
-					<p><?= number_format($monthCount) ?></p>
-					</div>
-					<div class="card__trend"><span class="trend-down">−2%</span></div>
-				</div>
+					<!-- 게시판목록 영역 -->
+					<div class="greeting-wrap">
+						<div class="profile-img">
+							<img class="pc" src="../../assets/images/content/이지민이다이.png">
+							<img class="mo" src="../../assets/images/content/이지민이다이.png">
+						</div>
+						<div class="greeting-cont">
+							<h3>안녕하십니까?<br class="pc" /><br class="mo" />
+								먼저 저의 홈페이지에<br class="mo" /> 방문해주신 여러분께 <br class="pc" />
+								깊은 감사의<br class="mo" /> 말씀을 드립니다.
+							</h3>
+							<div class="text">
+								<p>웹 프론트엔드와 백엔드에 모두 관심이 있으며, 여러 환경에서 풀스택 개발자로서 일했습니다.
+									다수의 프로덕션 경험(인하우스 B2C 통합 마케팅 플랫폼, 사내 인트라넷, B2C/B2B 플랫폼 신규 구축 및 리뉴얼, DevOps 등)이 있습니다.
 
-				<div class="card card--success">
-					<div class="card__icon"><i class="fa fa-chart-line"></i></div>
-					<div class="card__info">
-					<h4>총 페이지뷰</h4>
-					<p><?= number_format($pageviewCount) ?></p>
-					</div>
-					<div class="card__trend"><span class="trend-up">+12%</span></div>
-				</div>
+									주어진 시간 내에서 기대 이상의 것을 만들어내는 것을 추구합니다.
+									업무가 주어질 때 100% 빈틈 없는 디자인이나 기획은 존재하지 않는다고 생각하며, 소통과 공부로 그 빈틈을 채우는 것을 중요하게 여깁니다.
+									</p>
+								<p style="font-size: 28rem; line-height: 40rem; font-weight: 700;">직무 경험</p>
+								<p style="font-size: 20rem; line-height: 20rem; font-weight: 600;">유컴패니온 운영TFT팀  |  백엔드 엔지니어 (2024-02 ~ 현재)
+								</p>
+								<p style="font-size: 18rem; line-height: 10rem; font-weight: 500;">
+								롯데렌터카 (홈페이지 고도화) 2024-02 ~ 2025-04
+								</p>
+								<p>- 4개 언어(국문·영문·중문·일문) 다국어 시스템 구축 → 해외 예약 증가 기여
+								- 간편·효율적 다국어 콘텐츠 관리 체계 및 CMS 개발
+								- UX 통계 수집 기능 추가
+								- 프로젝트 평가 A 만점 획득
+								</p>
+							
+								<p style="font-size: 18rem; line-height: 10rem; font-weight: 500;">
+								한양대·건국대 입학처 사이트 (운영·고도화) 2024-07 ~ 2025-03
+								</p>
+								<p>- 입학처 콘텐츠 카테고리 관리 기능 개선
+								- 공지사항 자동 마감 시스템 구축, 관리자 페이지 개선
+								- QR 출입·만족도 조사 기능(반응형 웹) 개발 → 입시 설명회 참여 촉진
+								</p>
 
-				<div class="card card--warning">
-					<div class="card__icon"><i class="fa fa-user-plus"></i></div>
-					<div class="card__info">
-					<h4>신규 방문자 비율</h4>
-					<p><?= round($newRatio,1) ?>%</p>
-					</div>
-					<div class="card__trend"><span class="trend-up">+3%</span></div>
-				</div>
-				</section>
-				
-				<div class="normalScrollElements section sec_03">
+								<!-- 기존 직무 경험 항목 아래에 이어 붙이세요 -->
+								<p style="font-size: 18rem; line-height: 10rem; font-weight: 500;">
+								커넥트 플러스 - SKT 사내 홈페이지(운영 및 신규 기능 개발) 2024-08 ~ 2025-04
+								</p>
+								<p>
+								- SKT 계열사 커뮤니케이션 플랫폼 '커넥트 플러스' 운영·유지보수  
+								- 시스템 모니터링으로 이슈 사전 감지 및 신속 대응  
+								- 관리자 페이지·콘텐츠 관리 기능 유지보수  
+								- 메뉴 개편·UI 개선 등 서비스 개선 요청 대응  
+								- 통계 기능 수정 및 데이터 시각화 개선  
+								</p>
 
-					<!-- s: 03_소통마당 -->
-					<div class="inner community">
-						<div class="sec-inner">
-							<div class="inner-tit-wrap">
-								<h2 class="sec-inner-tit"><em>소통마당</em></h2>
-								<p class="sec-inner-txt">새로운 소식을 빠르게 만날 수 있습니다.</p>
-							</div>
-							<div class="inner-area">
-								<div class="notice-wrap">
-									<ul class="notice-list">
-										<?
-										$posts = selectBoardList($conn, 1, 4);
-										if (!empty($posts)) {
-											foreach ($posts as $post) {
-												?>
-												<li>
-													<a href="/communication/view.do?b=<?= urlencode($post['B_CODE']); ?>&bn=<?= urlencode($post['B_NO']); ?>">
-														<span class="group">
-															<?php
-															if ($post['B_CODE'] === 'B_1_1') {
-																echo '공지사항';
-															} elseif ($post['B_CODE'] === 'B_1_3') {
-																echo '경영공시';
-															} else {
-																echo $post['B_CODE'];
-															}
-															?>
-														</span>
-														<p class="subject"><?= $post['TITLE']; ?></p>
-														<span class="date"><?= $post['REG_DATE']; ?></span>
-													</a>
-												</li>
-												<?
-											}
-										} else {
-											?>
-											<li>
-												<p class="nodata">등록된 게시물이 없습니다.</p>
-											</li>
-											<?php
-										}
-										?>
-									</ul>
+								<p style="font-size: 18rem; line-height: 10rem; font-weight: 500;">
+								중랑구 대형생활폐기물 인터넷 신고센터 (운영) 2024-12 ~ 현재
+								</p>
+								<p>
+								- 시스템 코드 관리 기능 개발로 반복 작업 최소화 (주소 검색, 품목 선택)  
+								- 시스템 모니터링으로 운영 이슈 사전 감지 및 신속 대응  
+								- 소스 코드·DB 자동 백업 도입으로 서비스 안정화  
+								</p>
 
-								</div>
-								<a href="/communication/?b=B_1_1" class="btn-more-view">
-									<span class="txt">더보기</span>
-								</a>
+								<p style="font-size: 18rem; line-height: 10rem; font-weight: 500;">
+								원주미래산업진흥원 (구축) 2024-11 ~ 2025-01
+								</p>
+								<p>
+								- 소통마당·회원시스템·시설예약 등 주요 기능 설계·개발  
+								- CMS 관리자 페이지 개발 (회원·시설·예약 관리)  
+								- 소스 코드·DB 자동 백업 도입으로 서비스 안정화  
+								</p>
+
+								<!-- 디센트 -->
+								<p style="font-size: 20rem; line-height: 20rem; font-weight: 600;">
+								디센트 개발 2팀 | 백엔드 연구원 (2022-09 ~ 2023-12)
+								</p>
+								<p style="font-size: 18rem; line-height: 10rem; font-weight: 500;">
+								DproCloud 개발
+								</p>
+								<p>
+								- 주문을 웨이브 단위로 그룹화해 피킹 최적화 기능 개발  
+								- Nexacro 이용 빠른 관리자 페이지 구현  
+								- 실무 경험 기반 Spring Framework, OracleDB 활용  
+								</p>
+
+								<!-- 사이드 프로젝트 -->
+								<p style="font-size: 28rem; line-height: 40rem; font-weight: 700;">
+								사이드 프로젝트
+								</p>
+								<!-- 필요시 프로젝트 리스트를 <ul><li> 형태로 추가 -->
+
+								<!-- 강의 & 강연 -->
+								<p style="font-size: 28rem; line-height: 40rem; font-weight: 700;">
+								강의 &amp; 강연
+								</p>
+								<p style="font-size: 20rem; line-height: 20rem; font-weight: 600;">
+								상일미디어고등학교 (2024-10-06)
+								</p>
+								<p>
+								- 도제학교 우수학생으로 모교 초청 강연  
+								- 소프트웨어 전공 소개, 도제학교 과정 설명, 예제 코드 시연  
+								</p>
+
+								<!-- 학력 -->
+								<p style="font-size: 28rem; line-height: 40rem; font-weight: 700;">
+								학력
+								</p>
+								<p style="font-size: 20rem; line-height: 20rem; font-weight: 600;">
+								한국폴리텍대학(성남)  2024-03 ~ 현재  
+								</p>
+								<p>
+								- 전공: IoT 소프트웨어  
+								- Arduino, Java, Ubuntu 학습  
+								</p>
+								<p style="font-size: 20rem; line-height: 20rem; font-weight: 600;">
+								상일미디어고(도제학교)  2022-03 ~ 2024-02  
+								</p>
+								<p>
+								- 웹 개발자 과정 (JSP, OracleDB)  
+								</p>
+								<p style="font-size: 20rem; line-height: 20rem; font-weight: 600;">
+								상일미디어고  2021-03 ~ 2024-02  
+								</p>
+								<p>
+								- 전공: 스마트소프트웨어  
+								- 동아리: 여울컴  
+								</p>
+
+								<!-- 자격증 및 시험 -->
+								<p style="font-size: 28rem; line-height: 40rem; font-weight: 700;">
+								자격증 및 시험
+								</p>
+								<p>
+								- 정보처리산업기사 (2023년)  
+								- SW개발_L3 (2023년)  
+								</p>
+
+
 							</div>
 						</div>
 					</div>
-					<!-- e: 03_소통마당 -->
-					
-					
-					<!-- 2025-01-21 홍보배너 변경
-						<div class="inner adBanner">
-							<div class="sec-inner">
-								<div class="swiper swiper-ad">
-									<div class="swiper-wrapper">
-										<? if (!empty($banners)): ?>
-											<? foreach ($banners as $banner): ?>
-												<div class="swiper-slide">
-													<a href="#">
-														<img src="/upload_data/banner/<?= $banner['BANNER_IMG'] ?>" alt="<?= $banner['TITLE_NM'] ?>" />
-													</a>
-												</div>
-											<? endforeach; ?>
-										<? else: ?>
-											<div class="swiper-slide">
-												<p>등록된 배너가 없습니다.</p>
-											</div>
-										<? endif; ?>
-									</div>
-									<div class="swiper-pagination"></div>
-								</div>
-							</div>
-						</div>
-					//홍보배너 변경 -->
-
-					<!-- s: 05_보도자료 -->
-					<div class="inner notice">
-						<div class="sec-inner">
-							<div class="inner-tit-wrap">
-								<h2 class="sec-inner-tit"><em>보도자료</em></h2>
-								<p class="sec-inner-txt">언론에 보도되고 있는 WFI의 소식을 빠르게 전달합니다.</p>
-							</div>
-							<div class="inner-area">
-								<div class="media-wrap">
-									<ul class="media-list">
-										<?
-										// 배열에서 처음 4개만 가져오도록 제한
-										$limited_arr = array_slice($arr_rs, 0, 4);
-
-										if (sizeof($limited_arr) > 0) {
-											foreach ($limited_arr as $row) {
-
-												$title = $row["TITLE"];
-												$thumbnail = !empty($row["FILE_NM"])
-													? "/upload_data/board/B_1_2/" . $row["FILE_NM"]
-													: "/assets/images/content/img-media-list-ex01.jpg";
-												$reg_date = date("Y.m.d", strtotime($row["REG_DATE"]));
-												$b_code = $row['B_CODE'];
-												$b_no = $row['B_NO'];
-												?>
-												<li>
-													 <a href="/communication/view.do?b=<?= urlencode($b_code); ?>&bn=<?= urlencode($b_no); ?>">
-														<div class="img-wrap">
-															<img src="<?= $thumbnail ?>" alt="<?= $title ?>">
-														</div>
-														<p class="subject"><?= $title ?></p>
-														<span class="date"><?= $reg_date ?></span>
-													</a>
-												</li>
-											<?
-											}
-										} else {
-											?>
-											<p>등록된 게시물이 없습니다.</p>
-										<?
-										}
-										?>
-									</ul>
-								</div>
-								<a href="/communication/?b=B_1_2" class="btn-more-view">
-									<span class="txt">더보기</span>
-								</a>
-							</div>
-						</div>
-					</div>
-					<!-- e: 05_보도자료 -->
-
-					<!-- e: 03_소통마당 -->
-
-					<!-- s: 06_푸터 -->
-
-					<div class="inner">
-						<footer class="footer">
-							<?
-							require $_SERVER['DOCUMENT_ROOT'] . "/_common/front_footer.php";
-							?>
-						</footer>
-					</div>
-					<!-- e: 06_푸터 -->
 				</div>
+				<!-- // content-body -->
 			</div>
-		</section>
-		<!-- 2024-12-06 시설 예약현황 구조 수정
-					1. reservation-wrap ~ modal-body 까지 모달 구조가 수정됨.
-					2. z-index 이슈로 모달위치 변경.
-					3. modal-body 내부는 수정 없음
-				 -->
-		<div class="reservation-wrap">
-			<div class="reservation-top">
-				<p class="tit">시설 예약현황</p>
-				<button type="button" class="calendar-open" data-bs-toggle="modal" data-bs-target="#carendar"
-					aria-expanded="true" aria-controls="carendar">
-					<span class="blind">열기</span>
-				</button>
-			</div>
-		</div>
-	</div>
-	</div>
-	<!-- // content -->
-</main>
+			<!-- // content -->
+		</main>
 <!-- // Container -->
-<!-- 시설현황 모달 -->
-<!-- <div class="reservation-modal modal fade" id="carendar" tabindex="-1" aria-labelledby="carendarModalLabel"
-	aria-hidden="true">
-	<? require $_SERVER['DOCUMENT_ROOT'] . "/_common/reservation_status_modal.php";?>
-</div> -->
-<!-- //시설현황 모달 -->
-
-<!-- 이메일무단수집거부 모달 -->
-<div class="modal fade policy-modal" id="mainEmailPolicyModal" tabindex="-1" role="dialog" aria-labelledby="mainEmailPolicyModalLabel" aria-hidden="true">
-	<? require $_SERVER['DOCUMENT_ROOT'] . "/_common/email_policy_modal.php";?>
-</div>
-<!-- // 이메일무단수집거부 모달 -->
-<!-- include_footer.html -->
-<!-- // include_footer.html -->
-
-	<!-- 홍보배너 팝업 -->
-	<!-- <div class="modal fade" id="adModal" tabindex="-1" role="dialog" aria-labelledby="adModalLabel" aria-hidden="true">
-		<div class="modal-dialog ad-modal">
-			<div class="modal-content">
-				<div class="modal-header blind">
-					<h3 class="modal-title" id="adModalLabel">배너모음</h3>
-				</div>
-				<div class="modal-body">
-					<div class="swiper swiper-ad">
-						<div class="swiper-wrapper">
-							<div class="swiper-slide">
-								<a href="#">
-									<img src="https://img.freepik.com/premium-vector/anxiety-concept-illustration-mental-disorders-sad-desperate-flat-vector-design_722351-22.jpg?w=826" alt="" />
-								</a>
-							</div>
-							<div class="swiper-slide">
-								<a href="#">
-									<img src="https://img.freepik.com/free-vector/savings-concept-illustration_114360-1526.jpg?t=st=1736470862~exp=1736474462~hmac=7d078aff48c21b6bb722faf4049d831439531024da5035a3510134b110de04ac&w=826" alt="" />
-								</a>
-							</div>
-						</div>
-						<div class="swiper-pagination"></div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn" id="todayModalHidden">오늘 하루 보지않기</button>
-					<button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">닫기</button>
-				</div>
-			</div>
-		</div>
-	</div> -->
-	<!-- // 홍보배너 팝업 -->
 </body>
-<script type="text/javascript" nonce="<?= $nonce; ?>">
-	// 비주얼 슬라이드
-	let slideVisual = new Swiper('.swiper-visual .swiper-container', {
-		autoplay:
-		{
-			delay: 4000,
-			disableOnInteraction: false
-		},
-		loop: true,
-		// navigation: {
-		// 	nextEl: '.swiper-button-next', // 다음 슬라이드로 이동하는 버튼
-		// 	prevEl: '.swiper-button-prev' // 이전 슬라이드로 이동하는 버튼
-		// },
-		effect: 'fade',
-		fadeEffect: {
-			crossFade: true, // 필수
-		},
-		// observer: true,
-		// observeParents: true,
-		pagination: {
-			el: '.swiper-visual .swiper-pagination',
-			clickable: true,
-			renderBullet: function (index, className) {
-				return `<li class="${className}"><span>${index + 1}</span></li>`;
-			}
-		},
-	});
-	var sw = 0;
-	$('.btn-pause').click(function () {
-		if (sw == 0) {
-			$('.btn-pause').addClass('on');
-			slideVisual.autoplay.stop();
-			sw = 1;
-		} else {
-			$('.btn-pause').removeClass('on');
-			slideVisual.autoplay.start();
-			sw = 0;
-		}
-	});
-
-	slideVisual.on('slideChange', function () {
-		$('.swiper-pagination-bullet').removeClass('current');
-		$('.swiper-pagination-bullet').eq(slideVisual.realIndex).addClass('current');
-	});
-
-
-	//시설 예약
-	document.addEventListener('DOMContentLoaded', function () {
-
-		const calendarEl = document.getElementById('calendar');
-		const today = new Date().toISOString().slice(0, 10); //오늘 날짜 검색
-		var calendar = new FullCalendar.Calendar(calendarEl, {
-			initialView: 'dayGridMonth',
-			titleFormat: function (date) {
-				// YYYY년 MM월
-				if (date.date.month < 9) {
-					return `${date.date.year}. ${"0" + (date.date.month + 1)}`;
-				}
-				return `${date.date.year}. ${date.date.month + 1}`;
-			},
-			columnFormat: {
-				day: 'M월d일'
-			},
-			dayCellContent: function (info) {
-				var number = document.createElement("a");
-				number.classList.add("fc-daygrid-day-number");
-				number.innerHTML = info.dayNumberText.replace("일", "");
-				if (info.view.type === "dayGridMonth") {
-					return {
-						html: number.outerHTML
-					};
-				}
-			},
-			dateClick: function (info) {
-
-				var today = new Date();
-				today.setHours(0, 0, 0, 0); // 시간 정보 초기화 (비교를 위해)
-				var clickDate = new Date(info.dateStr);
-
-				// 오늘 날짜 이전을 클릭하면 아무 동작도 하지 않음
-				if (clickDate < today) {
-					return;
-				}
-				// 기존 스타일 제거
-				document.querySelectorAll('.is-clicked').forEach(el => {
-					el.classList.remove('is-clicked');
-				});
-
-				// 선택한 날짜에 클래스 추가
-				info.dayEl.classList.add('is-clicked');
-
-				fetchReservations(info.dateStr); // AJAX 함수 호출, 클릭된 날짜 정보를 가져와 처리
-
-			},
-			headerToolbar: {
-				left: 'prev',
-				center: 'title',
-				right: 'next'
-			},
-			locale: 'ko' // 한국어 설정
-		});
-		calendar.render();
-
-		setTimeout(() => {
-			//this.calendarComponent.getApi().updateSize();
-			const todayElement = calendarEl.querySelector('.fc-day-today');
-			if (todayElement) {
-				todayElement.classList.add('fc-day-clicked'); // 오늘 날짜에 클래스 추가
-				todayElement.dispatchEvent(new CustomEvent('click')); // 오늘 날짜에 클릭 이벤트 발생
-			}
-		}, 10);
-
-		fetchReservations(today);
-
-		// 예약 현황 데이터 가져오기
-		function fetchReservations(date) {
-			$.ajax({
-				url: `/_common/ajax_reservation_status.php?rv_date=${date}`,
-				type: 'GET',
-				dataType: 'json',
-				success: function (data) {
-					updateReservationChoice(data);
-				},
-				error: function () {
-					alert('예약 데이터를 가져오는 중 오류가 발생했습니다.');
-				}
-			});
-		}
-		// 예약 현황 업데이트
-		function updateReservationChoice(reservations) {
-			const choiceWrap = document.querySelector('.reservation-choice-wrap .reservation-choice');
-
-			choiceWrap.innerHTML = reservations.length
-				? reservations.map(res => `
-					<div class="radio_area">
-						<input type="radio" name="it_radio" id="it_radio_${res.ID}">
-						<label for="it_radio_${res.ID}">
-							<p class="title">${res.ROOM_NAME}</p>
-							<div class="cont">
-								<span class="txt">시설규모 : ${res.ROOM_SCALE}</span>
-								<span class="txt">수용인원 : ${res.ROOM_CAPACITY}</span>
-							</div>
-							<p class="price">이용료 : ${Number(res.RV_COST).toLocaleString('ko-KR')}원</p>
-						</label>
-					</div>
-				`).join('')
-				: '<p>예약된 시설이 없습니다.</p>';
-		}
-	});
-
-	document.querySelector('.calendar-open').addEventListener('click', function () {
-		document.querySelector('.reservation-top').classList.toggle('open');
-	});
-
-	document.addEventListener("DOMContentLoaded", function () {
-		const choiceWrap = document.querySelector('.reservation-choice-wrap');
-
-		// 예약 선택 영역에 이벤트 리스너 추가
-		choiceWrap.addEventListener('click', function (event) {
-			// 'radio_area' 클래스를 가진 요소에서 클릭 이벤트가 발생했을 경우
-			if (event.target.closest('.radio_area')) {
-				// 이벤트 전파 중지
-				event.stopPropagation();
-				// 클릭 이벤트 무시
-				event.preventDefault();
-				console.log('이 요소에서는 클릭 이벤트가 동작하지 않습니다.');
-			}
-		}, true); // 이벤트 캡처링 사용
-	});
-
-
-	document.addEventListener("DOMContentLoaded", function () {
-		document.getElementById("btnReservationStatus").addEventListener("click", function () {
-			window.location.href = "/facility/reservation_status.do";
-		});
-
-		document.getElementById("btnReservationForm").addEventListener("click", function () {
-			window.location.href = "/facility/reservation_form.do";
-		});
-	});
-
-	//시설예약
-
-
-	//sec_02 호버 백그라운드 변경
-	document.addEventListener('DOMContentLoaded', function () {
-		// sec_02 섹션 가져오기
-		const sec02 = document.querySelector('.sec_02');
-
-
-		// 해상도가 768px 이상일 때만 실행
-		if ($(window).width() > 767) {
-			// 기본 배경 이미지 설정
-			const defaultBackgroundImage = "url('/assets/images/main/img-sec_02-bg1.jpg')";
-			sec02.style.backgroundImage = defaultBackgroundImage;
-			sec02.style.backgroundSize = 'cover';
-			sec02.style.backgroundPosition = 'center';
-			sec02.style.transition = '.2s background';
-
-			// 모든 team-card 항목 가져오기
-			const teamCards = document.querySelectorAll('.team-card');
-
-			// 각 team-card 항목에 이벤트 리스너 추가
-			teamCards.forEach((card, index) => {
-				card.addEventListener('mouseover', () => {
-					// 각 card에 따라 다른 배경 이미지를 적용
-					switch (index) {
-						case 0:
-							sec02.style.backgroundImage = "url('/assets/images/main/img-sec_02-bg1.jpg')"; // 첫 번째 카드 이미지
-							break;
-						case 1:
-							sec02.style.backgroundImage = "url('/assets/images/main/img-sec_02-bg2.jpg')"; // 두 번째 카드 이미지
-							break;
-						case 2:
-							sec02.style.backgroundImage = "url('/assets/images/main/img-sec_02-bg3.jpg')"; // 세 번째 카드 이미지
-							break;
-						default:
-							sec02.style.backgroundImage = defaultBackgroundImage; // 기본 이미지
-					}
-					sec02.style.backgroundSize = 'cover';
-					sec02.style.backgroundPosition = 'center';
-
-					// team-card에 active 클래스 추가
-					card.classList.add('active');
-				});
-
-				// 마우스가 빠져나가면 디폴트 배경 이미지로 복원 및 active 클래스 제거
-				card.addEventListener('mouseout', () => {
-					sec02.style.backgroundImage = defaultBackgroundImage;
-
-					// team-card의 active 클래스 제거
-					card.classList.remove('active');
-				});
-			});
-		}
-	});
-	
-	//s: 2025-01-21 홍보배너 변경
-	document.addEventListener("DOMContentLoaded", function() {
-		// 비주얼 슬라이드
-		let adSwiper = new Swiper('.swiper-ad', {
-			autoplay: {
-				delay: 4000,
-				disableOnInteraction: false
-			},
-			loop: true,
-			pagination: {
-				el: '.swiper-ad .swiper-pagination',
-			},
-		});
-	});
-
-    //s: 홍보배너
-	document.addEventListener("DOMContentLoaded", function() {
-		// 퍼블리싱 바로 볼 수 있도록 호출
-		var adModalElement = document.getElementById("adModal");
-		var adModal = new bootstrap.Modal(adModalElement);
-
-		// 쿠키 확인
-		if (!getCookie("hideAdModal")) {
-			adModal.show();
-		}
-
-		// "오늘 하루 보지 않기" 버튼 클릭 이벤트
-		document.getElementById("todayModalHidden").addEventListener("click", function () {
-			// 쿠키 설정: hideAdModal=1; expires=오늘 자정까지
-			setCookie("hideAdModal", "1", 1); // 1은 하루 유지 의미
-			adModal.hide(); // 모달 닫기
-		});
-
-		// 모달이 표시된 후 실행할 콜백
-		adModalElement.addEventListener("shown.bs.modal", function () {
-			// 비주얼 슬라이드
-			let adSwiper = new Swiper('.swiper-ad', {
-				autoplay: {
-					delay: 4000,
-					disableOnInteraction: false
-				},
-				loop: true,
-				pagination: {
-					el: '.swiper-ad .swiper-pagination',
-				},
-			});
-			console.log('show', adSwiper);
-		});
-	});
-
-	// 쿠키 설정 함수
-	function setCookie(name, value, days) {
-		var date = new Date();
-		date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000); // 하루
-		var expires = "expires=" + date.toUTCString();
-		document.cookie = name + "=" + value + ";" + expires + ";path=/";
-	}
-
-	// 쿠키 가져오기 함수
-	function getCookie(name) {
-		var nameEQ = name + "=";
-		var ca = document.cookie.split(";");
-		for (var i = 0; i < ca.length; i++) {
-			var c = ca[i];
-			while (c.charAt(0) === " ") c = c.substring(1, c.length);
-			if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
-		}
-		return null;
-	}
-	//e: 홍보배너
-
-
-
-
-</script>

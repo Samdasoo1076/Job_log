@@ -12,6 +12,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    height: 100%;
 }
 
 .wrapper {
@@ -85,14 +86,18 @@ body {
 
 main {
     margin-left: 200px;
-    padding: 60px 40px;
+    padding: 0px 0px;
     flex: 1;
     overflow-y: auto;
 }
 
+.home {
+    height: 100%;
+}
+
 .intro {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 0px;
 }
 
 .intro h1 {
@@ -106,40 +111,74 @@ main {
     color: #555;
 }
 
-.info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 30px;
-}
-
+/* 1) 카드 형태 유지하면서 두 개 컬럼으로 분할 */
 .info-item {
     background-color: #fff;
-    border-radius: 10px;
-    padding: 24px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s;
-}
-
-.info-item:hover {
-    transform: translateY(-4px);
-}
-
-.info-item h2 {
-    font-size: 1.6rem;
-    margin-bottom: 12px;
+  border-radius: 10px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  
+  /* ↓ 추가: 세로 스크롤 박스 */
+  max-height: 100%;      /* 원하는 높이로 조정 */
+  overflow-y: auto;       /* 수직 스크롤 활성화 */
+  /* columns: 2; column-gap: 40px; 삭제 */
+  }
+  
+  /* 2) 컬럼 단에서 헤딩이나 리스트가 잘리지 않도록 */
+  .info-item h2,
+  .info-item h3,
+  .info-item h4,
+  .info-item ul {
+    break-inside: avoid-column;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  
+  /* 3) 각 레벨별 헤딩 스타일 */
+  .info-item h2 {
+    font-size: 1.8rem;
     color: #222;
-}
-
-.info-item p,
-.info-item ul {
-    font-size: 1rem;
-    color: #666;
+    margin-bottom: 16px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 8px;
+  }
+  
+  .info-item h3 {
+    font-size: 1.4rem;
+    color: #444;
+    margin: 24px 0 12px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 4px;
+  }
+  
+  .info-item h4 {
+    font-size: 1.2rem;
+    color: #555;
+    margin: 16px 0 8px;
+  }
+  
+  /* 4) 문단과 리스트 간 여백 */
+  .info-item p,
+  .info-item ul {
+    margin-bottom: 16px;
     line-height: 1.5;
-}
-
-.info-item ul {
+  }
+  
+  /* 5) 리스트 스타일 정리 */
+  .info-item ul {
     list-style: disc inside;
-}
+  }
+  
+  .info-item ul ul {
+    list-style: circle inside;
+    margin-top: 8px;
+  }
+  
+  /* 6) 컬럼 안에서 너무 길어지면 스크롤 대신 자연스럽게 이어지게 */
+  .info-item {
+    max-height: calc(100vh - 200px);
+    overflow: auto;
+  }
 
 footer {
     text-align: center;

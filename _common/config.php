@@ -67,7 +67,7 @@ define('_SPECIAL_', 64); // 특수문자
 	//echo $g_physical_path;
  
 	Global  $g_site_domain;
-	$g_site_domain	= "dasoo.hopto.org";
+	$g_site_domain	= "leejimin.kr";
  
 	Global  $g_site_url;
 	$g_site_url	= "https://144.24.85.101";

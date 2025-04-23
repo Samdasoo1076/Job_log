@@ -71,7 +71,7 @@
 		<div class="gnb-area">
 			<!-- 로고 -->
 			<div class="header-logo">
-				<a href="/indextest.php">
+				<a href="/index.do">
 					<img class="down" src="/assets/images/common/img-logo-wh.svg" alt="WFI (재)원주미래산업진흥원" />
 					<img class="up" src="/assets/images/common/img-logo-bk.svg" alt="WFI (재)원주미래산업진흥원" />
 					<span class="blind">이지민 블로그</span>

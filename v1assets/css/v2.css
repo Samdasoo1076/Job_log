@@ -1218,7 +1218,7 @@ html {
 .header .header-pc-sec .header-logo {
     display: flex;
     width: 216rem;
-    height: 26rem;
+    height: 45rem;
     vertical-align: top
 }
 
@@ -15237,12 +15237,15 @@ body.modal-open {
 .greeting-wrap .profile-img {
     width: 508rem;
     min-width: 508rem;
-    position: relative;
+    position: fixed;
+    top: 20%;
+    left: 10%;
     z-index: 2
 }
 
 .greeting-wrap .profile-img img {
-    width: 100%
+    width: 80%;
+    border-radius: 25px
 }
 
 .greeting-wrap .profile-img .mo {
@@ -15256,6 +15259,7 @@ body.modal-open {
     margin-top: 80rem;
     margin-left: -156rem;
     padding: 72rem 88rem 80rem 264rem;
+    left: 30%;
     background: linear-gradient(-45deg, transparent 30rem, #fff 0)
 }
 
@@ -15301,7 +15305,9 @@ body.modal-open {
     .greeting-wrap .profile-img {
         width: 508rem;
         min-width: 408rem;
-        position: relative;
+        position: fixed;
+        top: 20%;
+        left: 10%;
         z-index: 2
     }
 
