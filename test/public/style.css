@@ -1,0 +1,41 @@
+body { margin:0; font-family: sans-serif; display:flex; height:100vh; }
+#sidebar { width:250px; background:#1e1e1e; color:#ccc; overflow:auto; padding:10px; }
+#sidebar a { color:#ccc; text-decoration:none; display:block; padding:2px 0; }
+#sidebar ul { list-style:none; padding-left:10px; }
+#sidebar li:hover > a { background:rgba(255,255,255,0.1); }
+#content { flex:1; padding:20px; overflow:auto; }
+#content h1 { margin-top:0; }
+
+
+.tree ul,
+.posts {
+  display: none;
+  margin-left: 10px;
+}
+
+/* expanded 클래스 붙은 <li>의 자식 목록 보이기 */
+.tree li.expanded > ul,
+.tree li.expanded > .posts {
+  display: block;
+}
+
+/* 폴더 영역 */
+.folder {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.arrow {
+  width: 1em;
+  display: inline-block;
+  border: solid #ccc;
+  border-width: 0 2px 2px 0;
+  padding: 3px;
+  transition: transform .2s ease;
+}
+li.expanded > .folder .arrow {
+  transform: rotate(90deg);
+}
+.folder-name {
+  margin-left: 5px;
+}

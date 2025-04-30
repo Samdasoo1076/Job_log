@@ -43,8 +43,7 @@ $depth_03_page_name = "";
 						</div>
 						<div class="greeting-cont">
 							<h3>안녕하십니까?<br class="pc" /><br class="mo" />
-								먼저 저의 홈페이지에<br class="mo" /> 방문해주신 여러분께 <br class="pc" />
-								깊은 감사의<br class="mo" /> 말씀을 드립니다.
+								웹 엔지니어 이지민 입니다.
 							</h3>
 							<div class="text">
 								<p>웹 프론트엔드와 백엔드에 모두 관심이 있으며, 여러 환경에서 풀스택 개발자로서 일했습니다.

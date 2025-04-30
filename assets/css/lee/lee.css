@@ -1,0 +1,79 @@
+/* ───────────────────────────────────────── */
+/* 부모 flex 컨테이너 */
+.greeting-wrap {
+    display: flex;
+    align-items: flex-start;   /* 위쪽 기준 정렬 */
+    gap: 60px;                 /* 좌/우 사이 여백 */
+    padding: 60px 80px;
+    box-sizing: border-box;
+  }
+  
+  /* ───────────────────────────────────────── */
+  /* 왼쪽 고정 너비 컬럼 */
+  .profile-left {
+    flex: 0 0 300px;           /* 너비 300px 고정 */
+    text-align: center;
+  }
+  
+  .profile-left h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* ───────────────────────────────────────── */
+  /* 원형 프로필 이미지 */
+  .profile-img {
+    width: 240px;              /* 너비 240px */
+    height: 240px;             /* 높이 240px */
+    margin: 0 auto 20px;       /* 중앙정렬 + 아래여백 */
+    border: 2px solid #000;
+    border-radius: 50%;        /* 1:1 비율일 때 진짜 원형 */
+    overflow: hidden;
+  }
+  .profile-img img {
+    display: block;            /* inline-block 기본 공백 제거 */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;         /* 잘라내기 없이 비율 유지하며 꽉 채움 */
+  }
+  
+  /* ───────────────────────────────────────── */
+  /* 인사말 + 개발자 배지 */
+  .greeting {
+    font-size: 28px;
+    line-height: 1.2;
+    font-weight: bold;
+    margin: 0 0 12px;
+  }
+  .badge {
+    display: inline-block;
+    background: #000;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 18px;
+    vertical-align: middle;
+  }
+  
+  /* ───────────────────────────────────────── */
+  /* 구분선 */
+  .divider {
+    width: 40px;
+    border: none;
+    border-top: 2px solid #000;
+    margin: 0 auto 20px;
+  }
+  
+  /* ───────────────────────────────────────── */
+  /* 연락처 */
+  .contact p {
+    font-size: 18px;
+    margin: 6px 0;
+  }
+  
+  /* ───────────────────────────────────────── */
+  /* 오른쪽 본문 (수정 불필요) */
+  .profile-right {
+    flex: 1;                   /* 나머지 공간 전부 차지 */
+  }
+  

@@ -1,0 +1,82 @@
+/* admin/style.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fa;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 16px;
+  }
+  
+  form {
+    background: #fff;
+    padding: 16px;
+    border: 1px solid #dde2e6;
+    border-radius: 6px;
+    margin-bottom: 24px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 12px;
+    color: #34495e;
+    font-weight: 500;
+  }
+  
+  input[type="text"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    font-size: 1rem;
+    margin-top: 4px;
+  }
+  
+  button {
+    display: inline-block;
+    background: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background: #2980b9;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+  }
+  
+  th, td {
+    padding: 12px 10px;
+    border: 1px solid #dde2e6;
+    text-align: left;
+  }
+  
+  th {
+    background: #ecf0f1;
+    font-weight: 600;
+  }
+  
+  a {
+    color: #3498db;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  

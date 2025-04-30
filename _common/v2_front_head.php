@@ -14,21 +14,21 @@
 
 ?>
 <meta name="naver-site-verification" content="cd95a5e08f9136b587255a1f9529026302b2069d" />
-<meta name="description" content="<?=$seo_description?>" />
+<meta name="description" content="이지민 자기소개" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="<?=$seo_title?>" />
+<meta property="og:title" content="이지민 자기소개" />
 <meta property="og:url" content="<?=$g_url?>" />
 <meta property="og:site_name" content="<?=$g_front_title?>" />
-<meta property="og:description" content="<?=$seo_description?>" />
+<meta property="og:description" content="이지민 자기소개" />
 <meta property="og:image" content="<?=$seo_og_image ?? ''?>" />
 <meta property="og:updated_time" content="<?=$rs_iso_up_date?>" />
 <meta property="fb:admins" content="" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="<?=$seo_title?>" />
-<meta name="twitter:description" content="<?=$seo_description?>" />
+<meta name="twitter:description" content="이지민 자기소개" />
 <meta name="twitter:image" content="<?=$seo_og_image ?? ''?>" />
 <meta name="twitter:creator" content="<?=$g_front_title?>" />
-<meta name="keywords" content="<?=$seo_keywords?>" />
+<meta name="keywords" content="이지민 자기소개" />
 
 <link rel="shortcut icon" href="/manager/images/mobile.png" />
 <link rel="apple-touch-icon" href="/manager/images/mobile.png" />
