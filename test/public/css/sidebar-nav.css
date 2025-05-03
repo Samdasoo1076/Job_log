@@ -1,0 +1,73 @@
+/* ── sidebar-nav 컴포넌트 ── */
+#sidebar-nav {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+  }
+  #sidebar-nav .nav-btn {
+    background: none;
+    border: none;
+    padding: 6px;
+    margin: 0 4px;
+    cursor: pointer;
+    color: #ccc;
+    border-radius: 4px;
+    transition: background 0.2s;
+  }
+  #sidebar-nav .nav-btn:hover,
+  #sidebar-nav .nav-btn.active {
+    background: rgba(255,255,255,0.1);
+  }
+  #sidebar-nav .nav-spacer {
+    flex: 1;
+  }
+  #sidebar-nav img {
+    width: 1em;
+    height: 1em;
+    display: block;
+  }
+  
+  /* ── search 컴포넌트 ── */
+  #search-container {
+    padding: 0.5em 0;
+  }
+  #search-container label {
+    font-size: 0.75em;
+    color: #777;
+    letter-spacing: 0.05em;
+  }
+  #search-input {
+    width: 100%;
+    padding: 6px 8px;
+    margin: 4px 0 8px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background: #2b2b2b;
+    color: #ccc;
+    font-size: 0.9em;
+  }
+  #search-input::placeholder {
+    color: #666;
+  }
+  #search-results {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  #search-results li {
+    display: flex;
+    align-items: center;
+    padding: 6px 4px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  #search-results li strong {
+    flex-shrink: 0;
+    color: #999;
+    font-size: 0.8em;
+    margin-right: 0.5em;
+  }
+  #search-results li:hover {
+    background: rgba(255,255,255,0.1);
+  }
+  

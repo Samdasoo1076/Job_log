@@ -1,0 +1,85 @@
+/* File: public/css/sidebar.css */
+
+/* ── 사이드바 기본 ── */
+#sidebar {
+  width: 250px;
+  background: #1e1e1e;
+  color: #ccc;
+  overflow: auto;
+  padding: 10px;
+}
+#sidebar a {
+  color: #ccc;
+  text-decoration: none;
+  display: block;
+  padding: 2px 0;
+}
+#sidebar li:hover > a {
+  background: rgba(255,255,255,0.1);
+}
+
+/* ── 트리 구조 토글 ── */
+.sidebar-tree,
+.sidebar-tree ul,
+.posts-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.sidebar-tree ul,
+.posts-list {
+  display: none;
+  margin-left: 1em;
+  border-left: 1px solid #444;
+}
+.sidebar-tree li.expanded > ul,
+.sidebar-tree li.expanded > .posts-list {
+  display: block;
+}
+
+/* ── 커넥터 선 ── */
+.sidebar-tree li {
+  position: relative;
+}
+.sidebar-tree li::before {
+  content: "";
+  position: absolute;
+  top: 0.75em;
+  left: 0;
+  width: 1em;
+  border-top: 1px solid #444;
+}
+
+/* ── 폴더 아이템 ── */
+.folder {
+  display: grid;
+  grid-template-columns: 1em 1em auto;  /* connector / arrow / name */
+  align-items: center;
+  cursor: pointer;
+  white-space: nowrap;
+  column-gap: 0.5em;
+  padding: 2px 0;
+}
+
+/* 2열: arrow 은 항상 폴더 아이콘 */
+.folder .arrow {
+  width: 1em;
+  height: 1em;
+  background: url("/test/assets/icon/folder.svg") no-repeat center/contain;
+  transition: background-image .2s ease;
+}
+/* 펼쳐진 폴더일 때만 arrow 아이콘 교체 */
+.sidebar-tree li.expanded > .folder .arrow {
+  background-image: url("/test/assets/icon/folder-open.svg");
+}
+
+/* ── 파일(post) 링크 전용 아이콘 ── */
+.posts-list li .post-link::before {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-right: 0.5em;
+  vertical-align: middle;
+  background: url("/test/assets/icon/file-document.svg") no-repeat center/contain;
+}

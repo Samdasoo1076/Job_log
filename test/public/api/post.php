@@ -13,7 +13,7 @@ if (!$postId) {
 $stmt = $pdo->prepare("UPDATE post SET view_count = view_count + 1 WHERE id = ?");
 $stmt->execute([$postId]);
 
-$stmt = $pdo->prepare("SELECT id, title, content, view_count FROM post WHERE id = ?");
+$stmt = $pdo->prepare("SELECT id, title, description, content, view_count FROM post WHERE id = ?");
 $stmt->execute([$postId]);
 $post = $stmt->fetch();
 if (!$post) {
@@ -28,6 +28,7 @@ $comments = $stmt->fetchAll();
 
 echo json_encode([
     'title'    => $post['title'],
+    'description'    => $post['description'],
     'content'  => $post['content'],
     'views'    => $post['view_count'],
     'comments' => $comments

@@ -1,1 +1,0 @@
-<object type="image/svg+xml" data="https://criminal-vivyanne-lucidus-346ca075.koyeb.app/lucidus/card_v1?theme=blue&name=Lee%20Ji%20Min&job=Server%20Engineer%20&company=Ucomp%20Co%2C.%20Ltd.&address=Seoul%2C%20Songpa&about=Design%20is%20so%20hard..&email=myucheu0617%40gmail.com&linkedin=https%3A%2F%2Fgithub.com%2FSamdasoo1076"></object>

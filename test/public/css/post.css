@@ -1,0 +1,48 @@
+/* 포스트 상세 컴포넌트 */
+.post-detail h1 {
+    margin-bottom: 0.5em;
+  }
+  .post-detail .meta {
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 1em;
+  }
+  .post-detail .description {
+    font-style: italic;
+    margin-bottom: 1em;
+  }
+  .post-detail .content {
+    margin-bottom: 2em;
+  }
+  
+  /* 댓글 */
+  .comments {
+    margin-top: 2em;
+  }
+  .comment {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+  }
+  .comment-form h3 {
+    margin-top: 2em;
+  }
+  .comment-form input,
+  .comment-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  .comment-form button {
+    background: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .comment-form button:hover {
+    background: #2980b9;
+  }
+  
