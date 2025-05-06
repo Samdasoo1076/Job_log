@@ -1,0 +1,54 @@
+/* File: public/css/nav.css */
+
+/* ── 전체 레이아웃 껍질 (index.php 의 #app) ── */
+#app {
+    display: flex;
+    height: 100vh;
+}
+
+/* ── 네비 아이콘 바 ── */
+#nav-bar {
+    width: 48px;
+    background: #272822;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 0;
+}
+
+/* 버튼 공통 */
+.nav-btn {
+    background: none;
+    border: none;
+    padding: 8px 0;
+    cursor: pointer;
+    transition: background 0.2s, border-left-color 0.2s;
+    /* 왼쪽에 3px 빈 공간 확보 */
+    width: 100%;
+    box-sizing: border-box;
+    border-left: 2px solid transparent;
+}
+
+/* hover 및 active 상태 */
+.nav-btn:hover,
+.nav-btn.active {
+    /* background: rgba(255, 255, 255, 0.1); */
+}
+
+/* active 상태에서만 왼쪽 컬러 바 */
+.nav-btn.active {
+    border-left-color: #aaa;
+    /* 원하는 강조 색으로 변경 */
+}
+
+.nav-btn img {
+    width: 24px;
+    height: 24px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* 버튼 사이 여백 없이 아래로 채우기 위해 spacer */
+.nav-spacer {
+    flex: 1;
+}

@@ -1,0 +1,42 @@
+/* 적용 대상: #content 스크롤바 */
+#content {
+    scrollbar-color: #555 #2b2b2b;
+    /* Firefox */
+    scrollbar-width: auto;
+    /* auto / thin / none */
+}
+
+/* WebKit 브라우저 */
+#content::-webkit-scrollbar {
+    width: 12px;
+    height: 8px;
+}
+
+#content::-webkit-scrollbar-track {
+    background: #2b2b2b;
+    border-radius: 4px;
+}
+
+#content::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border: 2px solid #2b2b2b;
+    border-radius: 4px;
+}
+
+#content::-webkit-scrollbar-thumb:hover {
+    background-color: #777;
+}
+
+/* ❌ 여기까지는 버튼 숨김 안 될 수 있어서… */
+/* 스크롤바 위/아래 화살표 버튼 없애기 (WebKit 보다 더 구체적으로) */
+#content::-webkit-scrollbar-button:vertical:start:decrement,
+#content::-webkit-scrollbar-button:vertical:end:increment {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+/* 우측 하단 코너 영역 투명 처리 */
+#content::-webkit-scrollbar-corner {
+    background: transparent;
+}

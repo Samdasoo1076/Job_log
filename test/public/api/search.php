@@ -1,7 +1,7 @@
 <?php
 // public/api/search.php
 header('Content-Type: application/json; charset=utf-8');
-require __DIR__ . '/../db.php';
+require  '../../db.php';
 
 // 폴더 경로 계산 헬퍼
 function getFolderPath($id) {
