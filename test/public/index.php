@@ -10,6 +10,7 @@ require __DIR__ . '/components/sidebar.php';
 require __DIR__ . '/components/post_detail.php';
 require __DIR__ . '/components/tabs.php';
 require __DIR__ . '/components/sidebar_header.php';
+require __DIR__ . '/components/footer.php';
 ?>
 <!DOCTYPE html>
 <html lang="ko">
@@ -23,6 +24,12 @@ require __DIR__ . '/components/sidebar_header.php';
   <link rel="stylesheet" href="css/comment.css">
   <link rel="stylesheet" href="css/tabs.css">
   <link rel="stylesheet" href="css/sidebar_header.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="shortcut icon" href="../assets/icon/favicon.svg" />
+  <link rel="apple-touch-icon" href="../assets/icon/favicon.svg" />
+
+  <link rel="icon" href="../assets/icon/favicon.svg" type="image/png">
+  <link rel="shortcut icon" href="../assets/icon/favicon.svg" type="image/png">
 </head>
 <body>
   <div id="app">
@@ -56,6 +63,14 @@ require __DIR__ . '/components/sidebar_header.php';
     </div>
   </div>
       </div>
+
+      <!-- 여기에 job log를 붙여 줍니다 -->
+<div id="footer">
+  <span class= "code"> 
+    <img src="../assets/icon/code.svg" class="code-icon">
+  </span>
+  <?php renderJobLog('Samdasoo1076'); ?>
+</div>
 
       <script src="js/sidebar.js" defer></script>
 <script type="module" src="js/post.js"></script>

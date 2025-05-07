@@ -17,7 +17,7 @@ function renderNav() {
     echo '    <img src="../assets/images/github.png" alt="GitHub">';
     echo '  </a>';
     echo '  <a href="https://linkedin.com/in/yourprofile" class="nav-btn" target="_blank" title="LinkedIn">';
-    echo '    <img src="../assets/images/Linked.jpg" alt="LinkedIn">';
+    echo '    <img src="../assets/icon/Linked.svg" alt="LinkedIn">';
     echo '  </a>';
     echo '</div>';
 }

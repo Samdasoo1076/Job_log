@@ -1,0 +1,71 @@
+/* File: public/css/github.css */
+
+/* ── 하단 GitHub 커밋 로그 (항상 고정) ── */
+#footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 24px;
+    /* height: auto; */
+    box-sizing: border-box;
+    min-height: 28px;
+    /* padding: 8px 2px; */
+    background: #414339;
+    color: #ccc;
+    font-size: 0.85em;
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    white-space: nowrap;
+    z-index: 100;
+}
+
+/* 로그 항목 링크 */
+#footer a {
+    color: #ccc;
+    text-decoration: none;
+    margin-right: 1.5em;
+}
+
+#footer a:hover {
+    text-decoration: underline;
+}
+
+#footer .code {
+    background-color: #1e1f1c;
+    padding: 0px 6px;
+}
+
+/* 코드 아이콘 */
+#footer .code-icon {
+    left: 0;
+    width: 32.5px;
+    height: 24px;
+    object-fit: contain;
+    /* padding: 0px 6px; */
+}
+
+#footer .commit {
+    display: flex;
+    padding-left: 10px;
+    padding-right: 20px;
+    padding-bottom: 4px;
+    gap: 10px;
+    align-items: center;
+    flex: 1;
+}
+
+#footer .commit .message {
+    flex: 1;
+    overflow-x: auto;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+#footer .commit .time {
+    flex-shrink: 0;
+    margin-left: 12px;
+    color: #ccc;
+    font-size: 12px;
+  }
