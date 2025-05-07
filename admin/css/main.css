@@ -1,0 +1,36 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+
+/* admin/css/main.css */
+/* 본문(main) 레이아웃: 좌측 사이드바 공간 확보 */
+main.admin-container {
+  margin-left: 180px;     /* sidebar 너비만큼 여백 */
+  padding: 2rem 2rem 2rem 4rem;
+  min-height: calc(100vh - 60px); /* footer 높이 고려 */
+  background-color: #f5f5f5;
+}
+main.admin-container h2 {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+  
+  main.admin-container ul {
+    list-style: disc inside;
+    margin-top: 1rem;
+  }
+  
+  main.admin-container a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  main.admin-container a:hover {
+    text-decoration: underline;
+  }
+  
