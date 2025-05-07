@@ -1,5 +1,4 @@
+# robots.txt
 User-agent: *
 Allow: /
-Disallow: /manager/
-Disallow: /upload_data/
 Sitemap: https://leejimin.kr/sitemap.php

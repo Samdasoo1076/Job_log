@@ -1,0 +1,59 @@
+/* ── 사이드바 최상단 헤더 ── */
+.sidebar-header {
+    padding: 8px 12px;
+    background: #1f1f1c;
+}
+
+.header-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.header-arrow {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 6px;
+    background: url("/assets/icon/chevron-down.svg") no-repeat center/contain;
+    transition: transform .2s ease;
+}
+
+/* 사이드바가 접힌 상태에서 화살표 회전 */
+.sidebar-collapsed .header-arrow {
+    transform: rotate(-90deg);
+}
+
+.header-title {
+    color: #ccc;
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 부제목 */
+.sidebar-sub {
+    padding: 4px 12px;
+    background: #272822;
+    color: #aaa;
+    font-size: 12px;
+    font-weight: 800;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sidebar-sub .header-arrow {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 6px;
+    background: url("/assets/icon/arrow-down.svg") no-repeat center/contain;
+    transition: transform .2s ease;
+}
