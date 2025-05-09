@@ -16,20 +16,61 @@
     padding: 0.75em 0;
 }
 
-.comment strong {
+/* ── 댓글 헤더: 작성자 · 시간 · 삭제 버튼 ── */
+.comment-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 0.5em;
+}
+
+.comment-header .author {
     color: #aaa;
+    font-weight: 500;
 }
 
-.comment time {
-    font-size: 0.8em;
+.comment-header .time {
     color: #666;
-    margin-left: 0.5em;
+    font-size: 0.8em;
+    margin-left: 1em;
+    flex-shrink: 0;
 }
 
+.comment-header .delete-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.2em;
+    line-height: 1;
+    color: #a33;
+    cursor: pointer;
+    padding: 0;
+}
+.comment-header .delete-btn:hover {
+    color: #e55;
+}
+
+/* ── 본문 클릭 가능 표시 ── */
+.comment .text {
+    cursor: pointer;
+    margin: 0.5em 0;
+    line-height: 1.4;
+    color: #ddd;
+}
+
+/* ── 댓글 본문 (원래 p 스타일) ── */
 .comment p {
     margin: 0.5em 0 0;
     line-height: 1.4;
     color: #ddd;
+}
+
+/* ── 수정 폼 ── */
+.comment .edit-form {
+    padding: 0.75em;
+    background: #2b2b2b;
+    border: 1px solid #444;
+    border-radius: 4px;
+    margin-top: 0.5em;
 }
 
 /* ── 댓글 작성 폼 ── */
@@ -62,7 +103,7 @@
 
 .comment-form button {
     background: #61dafb;
-    color: #272822;
+    color: #1e1e1e;
     border: none;
     padding: 0.6em 1.2em;
     border-radius: 4px;
@@ -73,4 +114,57 @@
 
 .comment-form button:hover {
     background: #52c4e7;
+}
+
+/* ── 댓글 작성 및 관리 버튼 ── */
+.comment-form button,
+.comment .delete-btn,
+.comment .save-btn,
+.comment .cancel-btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 4px 6px 4px 0;
+    font-size: 0.9em;
+    font-weight: 500;
+    line-height: 1;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+/* 댓글 작성 버튼 */
+.comment-form button {
+    background-color: #414339;
+    color: #fff;
+}
+.comment-form button:hover {
+    background-color: #69695e;
+}
+
+/* 댓글 삭제 버튼 */
+.comment .delete-btn {
+    background-color: #a33;
+    color: #fff;
+}
+.comment .delete-btn:hover {
+    background-color: #8e2a2a;
+}
+
+/* 수정 폼 저장 버튼 */
+.comment .save-btn {
+    background-color: #66b246;
+    color: #fff;
+}
+.comment .save-btn:hover {
+    background-color: #5a9b3f;
+}
+
+/* 수정 폼 취소 버튼 */
+.comment .cancel-btn {
+    background-color: #555;
+    color: #fff;
+}
+.comment .cancel-btn:hover {
+    background-color: #444;
 }

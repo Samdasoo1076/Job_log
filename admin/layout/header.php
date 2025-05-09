@@ -11,7 +11,6 @@ require_once __DIR__ . '/../common/common_inc.php';
   <title><?= SITE_TITLE ?></title>
   <link rel="stylesheet" href="/admin/css/header.css">
   <link rel="stylesheet" href="/admin/css/main.css">
-  <link rel="stylesheet" href="/admin/css/footer.css">
 </head>
 <body>
   <aside class="sidebar">

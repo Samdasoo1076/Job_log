@@ -34,7 +34,7 @@ h2 {
 
 #content {
   flex: 1;
-  padding: 0 30px;
+  padding: 0 30px 60px;
   overflow: auto;
   background-color: #272822;
 }

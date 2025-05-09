@@ -32,6 +32,7 @@ function renderPostDetail(array $post, array $comments) {
     echo '  <form id="comment-form">';
     echo '    <input type="hidden" name="post_id" value="' . $post['id'] . '">';
     echo '    <input name="author" placeholder="Names" required><br>';
+    echo '    <input name="password" type="password" placeholder="Password" required><br>';
     echo '    <textarea name="content" rows="4" placeholder="do it comment" required></textarea><br>';
     echo '    <button type="submit">Submit</button>';
     echo '  </form>';

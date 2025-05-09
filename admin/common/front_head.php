@@ -11,7 +11,6 @@ header('Content-Type: text/html; charset=utf-8');
   <title><?= SITE_TITLE ?></title>
   <link rel="stylesheet" href="/admin/css/header.css">
   <link rel="stylesheet" href="/admin/css/main.css">
-  <link rel="stylesheet" href="/admin/css/footer.css">
   <link rel="stylesheet" href="/admin/css/dashboard.css"> <!-- 추가 -->
 </head>
 <body>
