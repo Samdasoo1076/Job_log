@@ -1,6 +1,6 @@
 <?php
 // admin/common/front_head.php
-// HTML head 시작부 (공통 CSS/메타 등 로드)
+// 이 파일은 <head> 부분만 담당하도록 수정
 header('Content-Type: text/html; charset=utf-8');
 ?>
 <!DOCTYPE html>
@@ -11,6 +11,7 @@ header('Content-Type: text/html; charset=utf-8');
   <title><?= SITE_TITLE ?></title>
   <link rel="stylesheet" href="/admin/css/header.css">
   <link rel="stylesheet" href="/admin/css/main.css">
-  <link rel="stylesheet" href="/admin/css/dashboard.css"> <!-- 추가 -->
+  <link rel="stylesheet" href="/admin/css/dashboard.css">
+  <link rel="stylesheet" href="/admin/css/post.css">
 </head>
 <body>

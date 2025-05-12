@@ -26,28 +26,9 @@ $stmt->bindValue(':offset', $offset,  PDO::PARAM_INT);
 $stmt->execute();
 $comments = $stmt->fetchAll();
 ?>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <title>댓글 관리</title>
-  <link rel="stylesheet" href="styles/admin.css">
-  <style>
-    table { width:100%; border-collapse: collapse; }
-    th, td { padding:8px; border:1px solid #444; text-align:left; }
-    th { background:#2b2b2b; color:#fff; }
-    td { background:#1e1f1c; color:#ccc; }
-    .pagination { margin-top:1em; text-align:center; }
-    .pagination a {
-      margin:0 4px; padding:4px 8px; background:#333; color:#ccc;
-      text-decoration:none; border-radius:4px;
-    }
-    .pagination .current { background:#5a9b3f; color:#fff; }
-  </style>
-</head>
-<body>
+
   <?php include __DIR__ . '/nav.php'; // 관리자 네비 ?>
-  <main>
+
     <h1>댓글 관리</h1>
     <table>
       <thead>
@@ -88,6 +69,3 @@ $comments = $stmt->fetchAll();
       endfor;
     ?>
     </div>
-  </main>
-</body>
-</html>
