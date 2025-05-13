@@ -2,7 +2,10 @@
 #folder-list,
 #folder-list ul {
   list-style: none;
-  padding-left: 20px;
+  min-height: 1.5em;
+  /* 빈 ul도 드랍을 위한 영역 확보 */
+  padding-left: 1.5em;
+  /* 들여쓰기 */
   margin: 0;
 }
 
@@ -66,4 +69,35 @@
   border-radius: 4px;
   background: #1e1e1e;
   color: #fff;
+}
+
+/* 빈 하위 리스트에도 보이도록 */
+#folder-list ul.nested-list {
+  min-height: 1.5em;
+  margin-left: 1.5em;
+  border: 1px dashed #555;
+  padding: 4px 0;
+  list-style: none;
+}
+
+#folder-list ul.nested-list li {
+  padding: 2px 0;
+}
+
+/* handle 커서 표시 */
+.handle {
+  cursor: grab;
+  margin-right: 0.5em;
+}
+
+/* 드래그 중 ghost 스타일 */
+.sortable-ghost {
+  opacity: 0.5;
+}
+
+/* 인라인 에디트 input */
+.inline-edit {
+  font-size: 1em;
+  padding: 2px 4px;
+  width: 60%;
 }

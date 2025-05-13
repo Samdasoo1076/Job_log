@@ -65,7 +65,7 @@ $tree = getFolderTree();
 
 ?>
 <?php include __DIR__ . '/../layout/header.php'; ?>
-<link rel="stylesheet" href="/admin/vendor/nestable/jquery.nestable.css">
+<!-- <link rel="stylesheet" href="/admin/vendor/nestable/jquery.nestable.css"> -->
 
 <div class="folder-container">
   <h1>폴더 관리</h1>

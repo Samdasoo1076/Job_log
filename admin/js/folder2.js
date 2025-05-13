@@ -1,14 +1,23 @@
 // admin/js/folder.js
 document.addEventListener('DOMContentLoaded', () => {
-    // #folder-list 와 그 안의 <ul>들 전부를 Sortable로 묶어 줍니다
-    document.querySelectorAll('#folder-list, #folder-list ul').forEach(ul => {
-        new Sortable(ul, {
-            group: 'nested',
-            handle: '.handle',
+    /**
+     * 주어진 <ul>에 Sortable 을 붙이고,
+     * 하위의 <ul>에도 재귀 적용
+     */
+    function initNestedSortable(ul) {
+        Sortable.create(ul, {
+            group: {
+                name: 'nested',
+                pull: true,
+                put: true
+            },
+            handle: '.handle',       // ☰ 아이콘만 drag
+            draggable: 'li',         // li 전체가 draggable
             animation: 150,
             fallbackOnBody: true,
-            swapThreshold: 0.6,
             ghostClass: 'sortable-ghost',
+            swapThreshold: 0.6,
+            emptyInsert: true,       // 빈 ul에도 drop 허용
             onEnd: evt => {
                 const movedId = evt.item.dataset.id;
                 const newParent = evt.to.closest('li')?.dataset.id || '';
@@ -28,9 +37,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
             }
         });
-    });
 
-    // 인라인 수정
+        ul.querySelectorAll(':scope > li > ul.nested-list').forEach(initNestedSortable);
+    }
+
+    // 최상위부터 시작
+    const root = document.getElementById('folder-list');
+    initNestedSortable(root);
+
+
+    // ─── 인라인 수정 ───
     document.querySelectorAll('.edit-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             const li = btn.closest('li');
@@ -43,7 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
             input.className = 'inline-edit';
             span.replaceWith(input);
             input.focus();
-            function save() {
+
+            function saveOrCancel() {
                 const v = input.value.trim();
                 if (v && v !== oldName) {
                     fetch('folder_list2.php', {
@@ -55,17 +72,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     input.replaceWith(span);
                 }
             }
-            input.addEventListener('blur', save);
-            input.addEventListener('keydown', e => { if (e.key === 'Enter') input.blur() });
+
+            input.addEventListener('blur', saveOrCancel);
+            input.addEventListener('keydown', e => {
+                if (e.key === 'Enter') input.blur();
+            });
         });
     });
 
-    // 인라인 삭제
+    // ─── 인라인 삭제 ───
     document.querySelectorAll('.delete-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-            if (!confirm('정말 삭제하시겠습니까?')) return;
+            if (!confirm('정말 이 폴더를 삭제하시겠습니까?')) return;
             const id = btn.closest('li').dataset.id;
-            fetch('folder_list2.php', {
+            fetch('folder_lis2.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: `delete_id=${id}`

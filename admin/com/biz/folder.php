@@ -184,11 +184,13 @@ function _renderItems(array $folders): void {
         echo '<button class="edit-btn"   title="수정">✎</button>';
         echo '<button class="delete-btn" title="삭제">🗑</button>';
         // 항상 빈 <ul>을 찍어 줍니다
-        echo '<ul>';
-          if ($hasChildren) {
+        echo '  <ul class="nested-list">';  
+        if (!empty($f['children'])) {
+          renderList($f['children']);
+        } else if(($f['children'])) {
             _renderItems($f['children']);
-          }
-        echo '</ul>';
+        }
+        echo '  </ul>';
       echo '</li>';
     }
 }
