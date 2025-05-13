@@ -1,26 +1,69 @@
-/* ── 폴더 관리 전용 ── */
-.folder-form {
-    margin-bottom: 1em;
-    display: flex;
-    gap: .5em;
-  }
-  .folder-form select,
-  .folder-form input {
-    padding: .5em;
-    border: 1px solid #444;
-    border-radius: 4px;
-    background: #1e1f1c;
-    color: #ccc;
-  }
-  .folder-form button {
-    background: #66b246;
-    color: #fff;
-    border: none;
-    padding: .5em 1em;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  .folder-form button:hover {
-    background: #5a9b3f;
-  }
-  
+/* ── 전체 리스트 ── */
+#folder-list,
+#folder-list ul {
+  list-style: none;
+  padding-left: 20px;
+  margin: 0;
+}
+
+/* ── 각 아이템 ── */
+#folder-list li {
+  display: flex;
+  align-items: center;
+  background: #2b2b2b;
+  margin: 4px 0;
+  padding: 6px 8px;
+  border-radius: 4px;
+  position: relative;
+}
+
+/* ── 드래그 핸들 ── */
+#folder-list .handle {
+  cursor: move;
+  margin-right: 8px;
+  color: #aaa;
+  font-size: 1.1em;
+}
+
+/* ── 폴더명 ── */
+#folder-list .name {
+  flex: 1;
+  color: #eee;
+}
+
+/* ── 버튼 공통 ── */
+#folder-list .edit-btn,
+#folder-list .delete-btn {
+  background: #444;
+  border: none;
+  color: #fff;
+  font-size: 0.9em;
+  padding: 2px 6px;
+  margin-left: 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#folder-list .edit-btn:hover {
+  background: #5a5;
+}
+
+#folder-list .delete-btn:hover {
+  background: #a33;
+}
+
+/* ── 드래그 중인 아이템 ── */
+.sortable-ghost {
+  opacity: 0.4;
+}
+
+/* ── 인라인 편집 input ── */
+.inline-edit {
+  flex: 1;
+  padding: 4px 6px;
+  border: 1px solid #666;
+  border-radius: 4px;
+  background: #1e1e1e;
+  color: #fff;
+}

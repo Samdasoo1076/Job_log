@@ -41,6 +41,6 @@ function renderJobLog(string $owner) {
             <strong>Latest Commit </strong>
             <a href=\"{$link}\" target=\"_blank\">{$commit}</a>
             </span>
-            <span class=\"time\">Samdasoo1076 &nbsp {$when}</span>
+            <span class=\"time\" ><a href=\"admin/\">Samdasoo1076</a> &nbsp {$when}</span>
           </div>";
 }

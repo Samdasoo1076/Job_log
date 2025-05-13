@@ -12,10 +12,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->execute([$username]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // 비밀번호 검증 (DB에 평문으로 저장되어 있다면 == 으로, 해시된 경우엔 password_verify 로)
+    // 비밀번호 검증 
     if ($user && $user['password_hash'] === $password) {
         $_SESSION['admin_id'] = $user['id'];
-        header('Location: dashboard.php');
+        ?>
+  
+    <script>
+      alert('로그인에 성공했습니다!');
+      window.location.href = 'dashboard.php';
+    </script>
+        <?
         exit;
     } else {
         $error = '아이디 또는 비밀번호가 올바르지 않습니다.';
@@ -24,6 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 include __DIR__ . '/common/front_head.php';
 ?>
+<link rel="stylesheet" href="/admin/css/login.css">
+<div class="login-box">
 <h1>관리자 로그인</h1>
 <?php if (!empty($error)): ?>
   <p class="error"><?=htmlspecialchars($error)?></p>
@@ -39,5 +47,6 @@ include __DIR__ . '/common/front_head.php';
   </label><br><br>
   <button type="submit">로그인</button>
 </form>
+</div>
 </body>
 </html>

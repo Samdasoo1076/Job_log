@@ -3,8 +3,7 @@
 require __DIR__ . '/../common/common_inc.php';
 require __DIR__ . '/../com/biz/folder.php';
 
-// 3) 화면용 데이터
-$tree = getFolderTree();
+
 
 // 1) 드래그&드롭 순서 변경 요청 처리
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order'])) {
@@ -35,6 +34,8 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
     exit;
 }
 
+// 3) 화면용 데이터
+$tree = getFolderTree();
 
 ?>
 <?php include __DIR__ . '/../layout/header.php'; ?>

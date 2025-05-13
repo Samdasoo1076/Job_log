@@ -66,6 +66,21 @@ function updateOrder(array $nodes, ?int $parentId = null): void {
         }
     }
 }
+
+function moveFolder(int $id, ?int $parentId, int $sortOrder): void {
+    global $pdo;
+    $stmt = $pdo->prepare("
+      UPDATE folder
+         SET parent_id  = :pid
+           , sort_order = :ord
+       WHERE id         = :id
+    ");
+    $stmt->execute([
+      ':pid' => $parentId,
+      ':ord' => $sortOrder,
+      ':id'  => $id,
+    ]);
+  }
  
 /**
 * 단일 폴더 조회
@@ -118,45 +133,62 @@ function deleteFolder(int $id): void {
 }
 
 /**
- * Nestable용 트리 렌더러
- * @param array      $folders  getFolderTree() 결과
+ * renderNestable: 네스터블용 OL/LI + 인라인 버튼 렌더러
  */
-/**
- * 네스터블 트리 + 인라인 편집/삭제 버튼 렌더러
- */
-function renderNestable(array $folders, ?int $expandedRoot = null, $currentPostId = null): bool {
+function renderNestable(array $folders): bool {
     echo '<ol class="dd-list">';
-    $thisLevelHasActive = false;
-
     foreach ($folders as $f) {
-        $hasChildren = ! empty($f['children']);
-        // 자식 HTML 버퍼링
-        $childHtml      = '';
-        $childHasActive = false;
+        $hasChildren = !empty($f['children']);
+        // 자식 버퍼링
+        $childHtml = '';
         if ($hasChildren) {
             ob_start();
-            $childHasActive = renderNestable($f['children'], $expandedRoot, $currentPostId);
-            $childHtml      = ob_get_clean();
+            renderNestable($f['children']);
+            $childHtml = ob_get_clean();
         }
 
         echo '<li class="dd-item" data-id="'. $f['id'] .'">';
-          // handle 영역: 드래그 & 폴더명 + 버튼
+          // 핸들(드래그 영역)
           echo '<div class="dd-handle">';
-          echo '  <span class="folder-name">'. htmlspecialchars($f['name']) .'</span>';
-          // 인라인 버튼
-          echo '  <button class="edit-btn" data-nodrag  title="수정">✎</button>';
-          echo '  <button class="delete-btn" data-nodrag  title="삭제">🗑</button>';
+          echo '  <span class="folder-name">'.htmlspecialchars($f['name']).'</span>';
+          echo '  <button class="edit-btn"    data-nodrag="true" title="수정">✎</button>';
+          echo '  <button class="delete-btn"  data-nodrag="true" title="삭제">🗑</button>';
           echo '</div>';
 
-          // 자식 목록
           if ($hasChildren) {
-              echo $childHtml;
+            echo $childHtml;
           }
         echo '</li>';
-
-        if ($childHasActive) $thisLevelHasActive = true;
     }
-
     echo '</ol>';
-    return $thisLevelHasActive;
+    return true;
+}
+
+/**
+ * SortableJS 용 폴더 트리 렌더러
+ *
+ * @param array $folders getFolderTree() 결과
+ */
+function renderList(array $folders): void {
+    echo '<ul id="folder-list">';
+    _renderItems($folders);
+    echo '</ul>';
+}
+
+function _renderItems(array $folders): void {
+    foreach($folders as $f) {
+        $hasChildren = ! empty($f['children']);
+        echo '<li data-id="'. $f['id'] .'">';
+        echo '<span class="handle">☰</span>';
+        echo '<span class="name">'.htmlspecialchars($f['name']).'</span>';
+        echo '<button class="edit-btn"   title="수정">✎</button>';
+        echo '<button class="delete-btn" title="삭제">🗑</button>';
+        // 항상 빈 <ul>을 찍어 줍니다
+        echo '<ul>';
+          if ($hasChildren) {
+            _renderItems($f['children']);
+          }
+        echo '</ul>';
+      echo '</li>';
+    }
 }
