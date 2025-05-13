@@ -13,5 +13,9 @@ header('Content-Type: text/html; charset=utf-8');
   <link rel="stylesheet" href="/admin/css/main.css">
   <link rel="stylesheet" href="/admin/css/dashboard.css">
   <link rel="stylesheet" href="/admin/css/post.css">
+  <link rel="stylesheet" href="/admin/css/folder.css">
 </head>
 <body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="/admin/vendor/nestable/jquery.nestable.js"></script>
+  <script src="/admin/js/folder.js" defer></script>

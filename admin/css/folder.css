@@ -1,0 +1,26 @@
+/* ── 폴더 관리 전용 ── */
+.folder-form {
+    margin-bottom: 1em;
+    display: flex;
+    gap: .5em;
+  }
+  .folder-form select,
+  .folder-form input {
+    padding: .5em;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background: #1e1f1c;
+    color: #ccc;
+  }
+  .folder-form button {
+    background: #66b246;
+    color: #fff;
+    border: none;
+    padding: .5em 1em;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .folder-form button:hover {
+    background: #5a9b3f;
+  }
+  
