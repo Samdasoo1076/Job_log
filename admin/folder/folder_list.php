@@ -16,23 +16,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order'])) {
 }
 
 // 2) 생성/수정/삭제 처리
-if ($_SERVER['REQUEST_METHOD']==='POST') {
-    if (isset($_POST['delete_id'])) {
-        deleteFolder((int)$_POST['delete_id']);
-    } elseif (!empty($_POST['edit_id'])) {
-        updateFolder((int)$_POST['edit_id'], [
-            'parent_id' => $_POST['parent_id'] !== '' ? (int)$_POST['parent_id'] : null,
-            'name'      => trim($_POST['name'])
-        ]);
-    } elseif (!empty($_POST['new_name'])) {
-        createFolder([
-            'parent_id' => $_POST['new_parent'] !== '' ? (int)$_POST['new_parent'] : null,
-            'name'      => trim($_POST['new_name'])
-        ]);
-    }
-    header('Location: folder_list.php');
-    exit;
-}
+// if ($_SERVER['REQUEST_METHOD']==='POST') {
+//     if (isset($_POST['delete_id'])) {
+//         deleteFolder((int)$_POST['delete_id']);
+//     } elseif (!empty($_POST['edit_id'])) {
+//         updateFolder((int)$_POST['edit_id'], [
+//             'parent_id' => $_POST['parent_id'] !== '' ? (int)$_POST['parent_id'] : null,
+//             'name'      => trim($_POST['name'])
+//         ]);
+//     } elseif (!empty($_POST['new_name'])) {
+//         createFolder([
+//             'parent_id' => $_POST['new_parent'] !== '' ? (int)$_POST['new_parent'] : null,
+//             'name'      => trim($_POST['new_name'])
+//         ]);
+//     }
+//     header('Location: folder_list.php');
+//     exit;
+// }
 
 // 3) 화면용 데이터
 $tree = getFolderTree();

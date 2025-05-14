@@ -34,18 +34,29 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
     echo json_encode(['success'=>true]);
     exit;
   }
-  // 2) 인라인 수정
-  if (!empty($_POST['edit_id'])) {
-    updateFolder(
-      intval($_POST['edit_id']),
-      ['parent_id'=>null, 'name'=>trim($_POST['name'])]
-    );
-    echo json_encode(['success'=>true]);
-    exit;
-  }
+    // 2) 인라인 수정
+    if (!empty($_POST['edit_id'])) {
+      $id   = (int)$_POST['edit_id'];
+      $name = trim($_POST['name']);
+
+      // 기존 레코드에서 parent_id 꺼내오기
+      $stmt = $pdo->prepare("SELECT parent_id FROM folder WHERE id = ?");
+      $stmt->execute([$id]);
+      $row = $stmt->fetch();
+      $parentId = $row ? $row['parent_id'] : null;
+
+      // 이름만 변경, 부모는 그대로
+      updateFolder($id, [
+          'parent_id' => $parentId,
+          'name'      => $name
+      ]);
+
+      echo json_encode(['success' => true]);
+      exit;
+}
   // 3) 삭제
   if (!empty($_POST['delete_id'])) {
-    deleteFolder(intval($_POST['delete_id']));
+    softDeleteFolder(intval($_POST['delete_id']));
     echo json_encode(['success'=>true]);
     exit;
   }

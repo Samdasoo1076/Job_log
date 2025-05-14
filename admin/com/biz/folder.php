@@ -122,15 +122,22 @@ function updateFolder(int $id, array $data): void {
     ]);
 }
  
+
+
 /**
-* 폴더 삭제
-* @param int $id
-*/
-function deleteFolder(int $id): void {
+ * 폴더 “소프트 삭제”(use_tf=N, del_tf=Y)
+ */
+function softDeleteFolder(int $id): void {
     global $pdo;
-    $stmt = $pdo->prepare("DELETE FROM folder WHERE id = ?");
+    $stmt = $pdo->prepare("
+        UPDATE folder
+           SET use_tf = 'N',
+               del_tf = 'Y'
+         WHERE id     = ?
+    ");
     $stmt->execute([$id]);
 }
+
 
 /**
  * renderNestable: 네스터블용 OL/LI + 인라인 버튼 렌더러
@@ -139,6 +146,7 @@ function renderNestable(array $folders): bool {
     echo '<ol class="dd-list">';
     foreach ($folders as $f) {
         $hasChildren = !empty($f['children']);
+        
         // 자식 버퍼링
         $childHtml = '';
         if ($hasChildren) {
@@ -178,15 +186,21 @@ function renderList(array $folders): void {
 function _renderItems(array $folders): void {
     foreach($folders as $f) {
         $hasChildren = ! empty($f['children']);
-        echo '<li data-id="'. $f['id'] .'">';
+
+        // use_tf, del_tf 플래그에 따라 'deleted' 클래스
+        $cls = ($f['use_tf'] === 'N' || $f['del_tf'] === 'Y') ? 'deleted' : '';
+        // data-parent-id 추가
+        $pid = $f['parent_id'] !== null ? $f['parent_id'] : '';
+
+        echo "<li data-id=\"{$f['id']}\" data-parent-id=\"{$pid}\" class=\"{$cls}\">";
         echo '<span class="handle">☰</span>';
         echo '<span class="name">'.htmlspecialchars($f['name']).'</span>';
         echo '<button class="edit-btn"   title="수정">✎</button>';
         echo '<button class="delete-btn" title="삭제">🗑</button>';
         // 항상 빈 <ul>을 찍어 줍니다
         echo '  <ul class="nested-list">';  
-        if (!empty($f['children'])) {
-          renderList($f['children']);
+        if ($hasChildren) {
+            _renderItems($f['children']);
         } else if(($f['children'])) {
             _renderItems($f['children']);
         }

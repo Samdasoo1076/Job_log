@@ -6,13 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     function initNestedSortable(ul) {
         Sortable.create(ul, {
-            group: {
-                name: 'nested',
-                pull: true,
-                put: true
-            },
+            group:  'nested',
             handle: '.handle',       // ☰ 아이콘만 drag
-            draggable: 'li',         // li 전체가 draggable
+            // draggable: 'li',         // li 전체가 draggable
             animation: 150,
             fallbackOnBody: true,
             ghostClass: 'sortable-ghost',
@@ -38,7 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        ul.querySelectorAll(':scope > li > ul.nested-list').forEach(initNestedSortable);
+        ul.querySelectorAll(':scope > li > ul.nested-list')
+        .forEach(initNestedSortable);
     }
 
     // 최상위부터 시작
@@ -79,17 +76,16 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
-
-    // ─── 인라인 삭제 ───
-    document.querySelectorAll('.delete-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            if (!confirm('정말 이 폴더를 삭제하시겠습니까?')) return;
-            const id = btn.closest('li').dataset.id;
-            fetch('folder_lis2.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `delete_id=${id}`
-            }).then(() => location.reload());
-        });
+    // 인라인 삭제(소프트)
+  document.querySelectorAll('.delete-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      if (!confirm('정말 이 폴더를 삭제하시겠습니까?')) return;
+      const id = btn.closest('li').dataset.id;
+      fetch('folder_list2.php', {
+        method: 'POST',
+        headers:{ 'Content-Type':'application/x-www-form-urlencoded' },
+        body: `delete_id=${id}`
+      }).then(() => location.reload());
     });
+  });
 });

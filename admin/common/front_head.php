@@ -18,7 +18,7 @@ header('Content-Type: text/html; charset=utf-8');
 <body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="/admin/vendor/nestable/jquery.nestable.js"></script>
-  <script src="/admin/js/folder.js" defer></script>
+  <!-- <script src="/admin/js/folder.js" defer></script> -->
 
   <!-- admin/folder/folder_list.php -->
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>

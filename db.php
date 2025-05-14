@@ -21,10 +21,10 @@
     function getFolders($parentId = null) {
         global $pdo;
         if ($parentId === null) {
-            $stmt = $pdo->prepare("SELECT * FROM folder WHERE parent_id IS NULL ORDER BY name");
+            $stmt = $pdo->prepare("SELECT * FROM folder WHERE parent_id IS NULL AND use_tf = 'Y' AND del_tf = 'N'  ORDER BY sort_order");
             $stmt->execute();
         } else {
-            $stmt = $pdo->prepare("SELECT * FROM folder WHERE parent_id = :pid ORDER BY name");
+            $stmt = $pdo->prepare("SELECT * FROM folder WHERE parent_id = :pid AND use_tf = 'Y' AND del_tf = 'N'  ORDER BY sort_order");
             $stmt->execute([':pid' => $parentId]);
         }
         $folders = $stmt->fetchAll();

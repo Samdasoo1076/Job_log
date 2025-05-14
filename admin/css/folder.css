@@ -30,6 +30,7 @@
 
 /* ── 폴더명 ── */
 #folder-list .name {
+  font-size: 20px;
   flex: 1;
   color: #eee;
 }
@@ -75,13 +76,14 @@
 #folder-list ul.nested-list {
   min-height: 1.5em;
   margin-left: 1.5em;
-  border: 1px dashed #555;
+  border: 2px solid #555;
   padding: 4px 0;
   list-style: none;
 }
 
 #folder-list ul.nested-list li {
   padding: 2px 0;
+  border: 2px solid #555;
 }
 
 /* handle 커서 표시 */
@@ -93,6 +95,16 @@
 /* 드래그 중 ghost 스타일 */
 .sortable-ghost {
   opacity: 0.5;
+}
+
+/* 삭제된(soft) 항목 스타일 */
+#folder-list li.deleted {
+  opacity: 0.4;
+}
+
+#folder-list li.deleted .name {
+  text-decoration: line-through;
+  color: #888;
 }
 
 /* 인라인 에디트 input */
