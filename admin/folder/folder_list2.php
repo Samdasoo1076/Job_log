@@ -69,6 +69,21 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
     header('Location: folder_list.php');
     exit;
   }
+
+  if ($_SERVER['REQUEST_METHOD']==='POST' && isset($_POST['create_parent_id'], $_POST['create_name'])) {
+    createFolder([
+      'parent_id' => ($_POST['create_parent_id']===''? null : intval($_POST['create_parent_id'])),
+      'name'      => trim($_POST['create_name'])
+    ]);
+    echo json_encode(['success'=>true]);
+    exit;
+}
+// restore(복원) 요청 처리
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['restore_id'])) {
+  restoreFolder((int)$_POST['restore_id']);
+  echo json_encode(['success' => true]);
+  exit;
+}
 }
 
 // 3) 화면용 데이터

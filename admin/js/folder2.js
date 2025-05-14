@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     function initNestedSortable(ul) {
         Sortable.create(ul, {
-            group:  'nested',
-            handle: '.handle',       // ☰ 아이콘만 drag
+            group: 'nested',
+            handle: '.handle, .name',       // ☰ 아이콘만 drag
             // draggable: 'li',         // li 전체가 draggable
             animation: 150,
             fallbackOnBody: true,
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         ul.querySelectorAll(':scope > li > ul.nested-list')
-        .forEach(initNestedSortable);
+            .forEach(initNestedSortable);
     }
 
     // 최상위부터 시작
@@ -76,16 +76,81 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+
     // 인라인 삭제(소프트)
-  document.querySelectorAll('.delete-btn').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      if (!confirm('정말 이 폴더를 삭제하시겠습니까?')) return;
-      const id = btn.closest('li').dataset.id;
-      fetch('folder_list2.php', {
-        method: 'POST',
-        headers:{ 'Content-Type':'application/x-www-form-urlencoded' },
-        body: `delete_id=${id}`
-      }).then(() => location.reload());
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (!confirm('정말 이 폴더를 삭제하시겠습니까?')) return;
+            const id = btn.closest('li').dataset.id;
+            fetch('folder_list2.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `delete_id=${id}`
+            }).then(() => location.reload());
+        });
     });
-  });
+
+    // … 기존 코드 …
+
+    // ─── 인라인 복원 ───
+    document.querySelectorAll('.restore-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const id = btn.closest('li').dataset.id;
+            fetch('folder_list2.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `restore_id=${id}`
+            })
+                .then(r => r.json())
+                .then(json => {
+                    if (json.success) location.reload();
+                    else alert('복구에 실패했습니다.');
+                });
+        });
+    });
+
+
+
+    // ─── 인라인 생성 ───
+    document.querySelectorAll('.create-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const li = btn.closest('li');
+            const id = li.dataset.id;
+            // 이미 입력중이면 중복 방지
+            if (li.querySelector('.inline-create')) return;
+
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.placeholder = '하위 폴더명';
+            input.className = 'inline-create';
+            btn.after(input);
+            input.focus();
+
+            function saveOrCancel() {
+                const name = input.value.trim();
+                if (name) {
+                    fetch('folder_list2.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: new URLSearchParams({
+                            create_parent_id: id,
+                            create_name: name
+                        })
+                    })
+                        .then(r => r.json())
+                        .then(json => {
+                            if (json.success) location.reload();
+                            else alert('생성에 실패했습니다.');
+                        });
+                } else {
+                    input.remove();
+                }
+            }
+
+            input.addEventListener('blur', saveOrCancel);
+            input.addEventListener('keydown', e => {
+                if (e.key === 'Enter') input.blur();
+            });
+        });
+    });
 });

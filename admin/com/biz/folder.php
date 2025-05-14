@@ -138,6 +138,23 @@ function softDeleteFolder(int $id): void {
     $stmt->execute([$id]);
 }
 
+/**
+ * 삭제된 폴더를 복구합니다.
+ *
+ * @param int $id
+ */
+function restoreFolder(int $id): void {
+    global $pdo;
+    $stmt = $pdo->prepare("
+        UPDATE folder
+           SET use_tf = 'Y',
+               del_tf = 'N'
+         WHERE id     = :id
+    ");
+    $stmt->execute([':id' => $id]);
+}
+
+
 
 /**
  * renderNestable: 네스터블용 OL/LI + 인라인 버튼 렌더러
@@ -186,6 +203,7 @@ function renderList(array $folders): void {
 function _renderItems(array $folders): void {
     foreach($folders as $f) {
         $hasChildren = ! empty($f['children']);
+        $deleted     = ($f['del_tf'] ?? 'N') === 'Y';
 
         // use_tf, del_tf 플래그에 따라 'deleted' 클래스
         $cls = ($f['use_tf'] === 'N' || $f['del_tf'] === 'Y') ? 'deleted' : '';
@@ -195,8 +213,15 @@ function _renderItems(array $folders): void {
         echo "<li data-id=\"{$f['id']}\" data-parent-id=\"{$pid}\" class=\"{$cls}\">";
         echo '<span class="handle">☰</span>';
         echo '<span class="name">'.htmlspecialchars($f['name']).'</span>';
+        echo '<button class="create-btn" title="하위 폴더 추가">＋</button>';
         echo '<button class="edit-btn"   title="수정">✎</button>';
-        echo '<button class="delete-btn" title="삭제">🗑</button>';
+        if ($deleted) {
+            // 복원 버튼
+            echo '<button class="restore-btn" title="복구">🛟</button>';
+        } else {
+            // 기존 삭제 버튼
+            echo '<button class="delete-btn" title="삭제">🗑</button>';
+        }
         // 항상 빈 <ul>을 찍어 줍니다
         echo '  <ul class="nested-list">';  
         if ($hasChildren) {

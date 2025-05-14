@@ -1,15 +1,28 @@
-/* ── 전체 리스트 ── */
+/* ========================================================================
+   admin/css/folder.css
+   ────────────────────────────────────────────────────────────────────────
+   SortableJS 기반의 폴더 트리 스타일
+   ======================================================================== */
+
+/* ── 1. 전체 리스트 컨테이너 ───────────────────────────────────────────── */
 #folder-list,
 #folder-list ul {
   list-style: none;
-  min-height: 1.5em;
-  /* 빈 ul도 드랍을 위한 영역 확보 */
-  padding-left: 1.5em;
-  /* 들여쓰기 */
   margin: 0;
+  padding-left: 1.5em;
+  /* 들여쓰기 + 빈 영역 확보 */
+  min-height: 1.5em;
+  /* 빈 ul도 드랍 가능 */
 }
 
-/* ── 각 아이템 ── */
+/* 빈 하위 리스트에도 경계선 표시 (드랍 대상 강조) */
+#folder-list ul.nested-list {
+  border: 2px solid #555;
+  padding: 4px 0;
+  margin-left: 1.5em;
+}
+
+/* ── 2. 각 아이템 ─────────────────────────────────────────────────────── */
 #folder-list li {
   display: flex;
   align-items: center;
@@ -20,84 +33,95 @@
   position: relative;
 }
 
-/* ── 드래그 핸들 ── */
-#folder-list .handle {
-  cursor: move;
-  margin-right: 8px;
+/* ── 3. 드래그 핸들 ──────────────────────────────────────────────────── */
+.handle {
+  cursor: grab;
+  margin-right: 0.5em;
   color: #aaa;
   font-size: 1.1em;
+  user-select: none;
 }
 
-/* ── 폴더명 ── */
-#folder-list .name {
-  font-size: 20px;
+/* ── 4. 폴더명 ───────────────────────────────────────────────────────── */
+.name {
   flex: 1;
+  font-size: 1em;
   color: #eee;
 }
 
-/* ── 버튼 공통 ── */
-#folder-list .edit-btn,
-#folder-list .delete-btn {
-  background: #444;
+/* ── 5. 버튼 공통 ─────────────────────────────────────────────────────── */
+.edit-btn,
+.delete-btn,
+.restore-btn,
+.create-btn {
   border: none;
-  color: #fff;
-  font-size: 0.9em;
+  border-radius: 4px;
   padding: 2px 6px;
   margin-left: 6px;
-  border-radius: 4px;
+  font-size: 0.9em;
+  color: #fff;
   cursor: pointer;
   transition: background 0.2s;
 }
 
-#folder-list .edit-btn:hover {
+/* 수정 버튼 */
+.edit-btn {
+  background: #444;
+}
+
+.edit-btn:hover {
   background: #5a5;
 }
 
-#folder-list .delete-btn:hover {
+/* 삭제(soft-delete) 버튼 */
+.delete-btn {
   background: #a33;
 }
 
-/* ── 드래그 중인 아이템 ── */
-.sortable-ghost {
-  opacity: 0.4;
+.delete-btn:hover {
+  background: #8e2a2a;
 }
 
-/* ── 인라인 편집 input ── */
-.inline-edit {
-  flex: 1;
-  padding: 4px 6px;
+/* 복원 버튼 */
+.restore-btn {
+  background: #ffa500;
+}
+
+.restore-btn:hover {
+  background: #e59400;
+}
+
+/* 신규 인라인 생성 버튼 */
+.create-btn {
+  background: #6c8;
+}
+
+.create-btn:hover {
+  background: #5a7;
+}
+
+/* ── 6. 인라인 입력 필드 ───────────────────────────────────────────────── */
+.inline-edit,
+.inline-create {
+  font-size: 1em;
+  padding: 2px 4px;
   border: 1px solid #666;
   border-radius: 4px;
   background: #1e1e1e;
   color: #fff;
 }
 
-/* 빈 하위 리스트에도 보이도록 */
-#folder-list ul.nested-list {
-  min-height: 1.5em;
-  margin-left: 1.5em;
-  border: 2px solid #555;
-  padding: 4px 0;
-  list-style: none;
+/* inline-create 위치 보정 */
+.inline-create {
+  margin-left: 0.5em;
 }
 
-#folder-list ul.nested-list li {
-  padding: 2px 0;
-  border: 2px solid #555;
-}
-
-/* handle 커서 표시 */
-.handle {
-  cursor: grab;
-  margin-right: 0.5em;
-}
-
-/* 드래그 중 ghost 스타일 */
+/* ── 7. 드래그 중 ghost 스타일 ─────────────────────────────────────────── */
 .sortable-ghost {
   opacity: 0.5;
 }
 
-/* 삭제된(soft) 항목 스타일 */
+/* ── 8. soft-deleted(숨김) 스타일 ────────────────────────────────────── */
 #folder-list li.deleted {
   opacity: 0.4;
 }
@@ -105,11 +129,4 @@
 #folder-list li.deleted .name {
   text-decoration: line-through;
   color: #888;
-}
-
-/* 인라인 에디트 input */
-.inline-edit {
-  font-size: 1em;
-  padding: 2px 4px;
-  width: 60%;
 }
