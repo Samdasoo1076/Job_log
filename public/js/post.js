@@ -36,8 +36,8 @@ export function loadPost(postId) {
         <section class="comment-form">
           <form id="comment-form">
             <input type="hidden" name="post_id" value="${postId}">
-            <input name="author"   placeholder="Names"    required><br>
-            <input name="password" type="password" placeholder="Password" required><br>
+            <input name="author"   placeholder="Names"    required autocomplete="off"><br>
+            <input name="password" type="password" placeholder="Password" required autocomplete="off"><br>
             <textarea name="content" rows="4" placeholder="leave a comment" required></textarea><br>
             <button type="submit">댓글 달기</button>
           </form>
@@ -169,7 +169,13 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+
   // 새로고침/직접 URL 진입 시
-  const pid = +new URLSearchParams(location.search).get('post_id');
-  if (pid) loadPost(pid);
+   const pid = +new URLSearchParams(location.search).get('post_id');
+   if (pid) loadPost(pid);
+
+  // 새로고침/직접 URL 진입 시
+  // const pid = +new URLSearchParams(location.search).get('post_id') || 1;
+  // loadPost(pid);
+  // if (pid) loadPost(pid);
 });

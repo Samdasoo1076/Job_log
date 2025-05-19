@@ -24,6 +24,7 @@ define('_NUMERIC_', 8); // 숫자
 define('_HANGUL_', 16); // 한글
 define('_SPACE_', 32); // 공백
 define('_SPECIAL_', 64); // 특수문자
+define('CV_POST_ID', 1); // 메인 자기소개 글 번호
  
 #====================================================================
 # SITE_INFO

@@ -1,0 +1,38 @@
+/* ── 전체 트리 ── */
+#folder-list, #folder-list ul {
+    list-style:none; margin:0; padding-left:1em;
+  }
+  /* ── 항목 ── */
+  #folder-list li {
+    display:flex; align-items:center;
+    background:#2b2b2b; margin:4px 0; padding:6px 8px;
+    border-radius:4px; position:relative;
+  }
+  #folder-list .handle {
+    cursor:grab; margin-right:8px; color:#aaa;
+  }
+  #folder-list .folder-name,
+  #folder-list .post-name {
+    flex:1; color:#eee;
+  }
+  #folder-list .post-name { font-style:italic; }
+  #folder-list .edit-btn,
+  #folder-list .delete-btn {
+    background:#444; border:none; color:#fff;
+    font-size:0.9em; padding:2px 6px; margin-left:4px;
+    border-radius:4px; cursor:pointer; transition:0.2s;
+  }
+  #folder-list .delete-btn { background:#a33; }
+  #folder-list .edit-btn:hover { background:#5a5; }
+  #folder-list .delete-btn:hover { background:#922; }
+  .sortable-ghost { opacity:0.5; }
+  .inline-edit {
+    flex:1; padding:4px 6px; border:1px solid #666;
+    border-radius:4px; background:#1e1e1e; color:#fff;
+  }
+  /* ── 게시글 리스트 ── */
+  #folder-list ul {
+    margin-left:1.5em; border-left:2px solid #444;
+    padding-left:0.5em;
+  }
+  

@@ -28,6 +28,14 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
+/* 폴더명 옆의 (폴더수 / 포스트수) 표시 */
+.sidebar-tree .folder-name .count {
+  font-size: 0.9em;
+  color: #ccc;
+  margin-left: 4px;
+}
+
+
 /* ── 트리 구조 토글 ── */
 .sidebar-tree,
 .sidebar-tree ul,

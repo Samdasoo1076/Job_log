@@ -36,10 +36,33 @@
 
     function getPostsByFolder($folderId) {
         global $pdo;
-        $stmt = $pdo->prepare("SELECT * FROM post WHERE folder_id = :fid ORDER BY created_at DESC");
+        $sql = "
+          SELECT *
+            FROM post
+           WHERE folder_id = :fid
+             AND use_tf = 'Y'
+             AND del_tf = 'N'
+        ";
+        $sql .= " ORDER BY sort_order ASC, created_at DESC";
+        $stmt = $pdo->prepare($sql);
         $stmt->execute([':fid' => $folderId]);
         return $stmt->fetchAll();
     }
+
+    // 최상위(folder_id IS NULL)용 포스트 가져오기
+function getTopPosts() {
+    global $pdo;
+    $stmt = $pdo->prepare("
+      SELECT *
+        FROM post
+       WHERE folder_id IS NULL
+         AND use_tf = 'Y'
+         AND del_tf = 'N'
+       ORDER BY sort_order ASC
+    ");
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
 
     function getPost($postId) {
         global $pdo;

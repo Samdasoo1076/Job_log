@@ -36,7 +36,14 @@
 
     function getPostsByFolder($folderId) {
         global $pdo;
-        $stmt = $pdo->prepare("SELECT * FROM post WHERE folder_id = :fid ORDER BY created_at DESC");
+        $stmt = $pdo->prepare("
+            SELECT * 
+              FROM post 
+             WHERE folder_id = :fid
+               AND use_tf = 'Y'
+               AND del_tf = 'N'
+          ORDER BY sort_order ASC, created_at DESC
+        ");
         $stmt->execute([':fid' => $folderId]);
         return $stmt->fetchAll();
     }
@@ -55,4 +62,21 @@
         return $stmt->fetchAll();
     }
     
+
+// db.php (기존에 있던 부분 위쪽에 삽입)
+function getRootPosts() {
+    global $pdo;
+    $stmt = $pdo->prepare("
+        SELECT * 
+          FROM post 
+         WHERE folder_id IS NULL 
+           AND use_tf = 'Y' 
+           AND del_tf = 'N'
+      ORDER BY sort_order ASC, created_at DESC
+    ");
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
+
     ?>

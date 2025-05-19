@@ -28,8 +28,8 @@ $comments = $stmt->fetchAll();
 
   <?php include __DIR__ . '/../layout/header.php'; // 관리자 네비 ?>
 
-    <h1>댓글 관리</h1>
-    <table>
+    <h1 style="color: #fff;">댓글 관리</h1>
+    <table style="color: #fff;">
       <thead>
         <tr>
           <th>#</th>

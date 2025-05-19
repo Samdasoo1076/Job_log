@@ -18,6 +18,14 @@ $posts   = $result['rows'];
 $totalPages = (int)ceil($total / $perPage);
 
 include __DIR__ . '/../layout/header.php';
+
+// ▶ 삭제 요청 처리
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
+  deletePost((int)$_POST['delete_id']);
+  header('Location: posts_list.php?folder_id=' . $filterFolder . '&page=' . $page);
+  exit;
+}
+
 ?>
 
 <h1>게시글 관리</h1>
@@ -33,6 +41,7 @@ include __DIR__ . '/../layout/header.php';
       <th>제목</th>
       <th>폴더</th>
       <th>작성일</th>
+      <th>댓글 허용</th>
       <th>액션</th>
     </tr>
   </thead>
@@ -42,10 +51,16 @@ include __DIR__ . '/../layout/header.php';
       <td><?= $total - ($offset + $i) /* 역순 번호 */ ?></td>
       <td><?= $p['id'] ?></td>
       <td><?= htmlspecialchars($p['title']) ?></td>
-      <td><?= htmlspecialchars($p['folder_name']) ?></td>
+      <td><?= htmlspecialchars($p['folder_name'] ?? '(최상위)') ?></td>
       <td><?= $p['created_at'] ?></td>
+      <td><?= $p['allow_comment'] ?></td>
       <td>
         <a class="btn edit" href="posts_form.php?id=<?= $p['id'] ?>&folder_id=<?= $filterFolder ?>&page=<?= $page ?>">Edit</a>
+        <!-- soft delete 폼 -->
+        <form method="post" style="display:inline;" onsubmit="return confirm('정말 이 글을 삭제하시겠습니까?');">
+          <input type="hidden" name="delete_id" value="<?= $p['id'] ?>">
+          <button class="btn delete">Delete</button>
+        </form>
       </td>
     </tr>
   <?php endforeach; ?>

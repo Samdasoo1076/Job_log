@@ -6,6 +6,20 @@
     /* auto / thin / none */
 }
 
+#content h2 {
+    color: #fff;
+    font-weight: 900;
+}
+
+#content h3 {
+    color: #fff;
+    font-weight: 600;
+}
+
+#content p {
+    color: #fff;
+}
+
 /* WebKit 브라우저 */
 #content::-webkit-scrollbar {
     width: 12px;

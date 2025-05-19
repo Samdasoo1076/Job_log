@@ -17,36 +17,56 @@
  */
 function getPostList(?int $folderId, int $limit, int $offset): array {
     global $pdo;
-    // 총 개수 조회
+    // 총 개수 조회 (del_tf = 'N' 조건 추가)
     if ($folderId) {
-        $totalStmt = $pdo->prepare("SELECT COUNT(*) FROM post WHERE folder_id = :fid");
-        $totalStmt->execute([':fid'=>$folderId]);
+        $totalStmt = $pdo->prepare("
+            SELECT COUNT(*) 
+              FROM post 
+             WHERE folder_id = :fid 
+               AND del_tf = 'N'
+        ");
+        $totalStmt->execute([':fid' => $folderId]);
     } else {
-        $totalStmt = $pdo->query("SELECT COUNT(*) FROM post");
+        $totalStmt = $pdo->query("
+            SELECT COUNT(*) 
+              FROM post 
+             WHERE del_tf = 'N'
+        ");
     }
     $total = (int)$totalStmt->fetchColumn();
 
-    // 페이징 데이터 조회
-    $sql = "SELECT p.*, f.name AS folder_name
-            FROM post p
-            JOIN folder f ON p.folder_id = f.id";
+    // 페이징 데이터 조회 (LEFT JOIN으로 폴더 이름 가져오기, del_tf 필터링)
+    $sql = "
+        SELECT p.*, f.name AS folder_name
+          FROM post p
+     LEFT JOIN folder f ON p.folder_id = f.id
+         WHERE p.del_tf = 'N'
+    ";
     $params = [];
     if ($folderId) {
-        $sql .= " WHERE p.folder_id = :fid";
+        $sql .= " AND p.folder_id = :fid";
         $params[':fid'] = $folderId;
     }
-    $sql .= " ORDER BY p.created_at DESC
-              LIMIT :lim OFFSET :off";
+    $sql .= "
+         ORDER BY p.created_at DESC
+         LIMIT :lim 
+        OFFSET :off
+    ";
     $stmt = $pdo->prepare($sql);
-    if ($folderId) {
-        $stmt->bindValue(':fid', $folderId, PDO::PARAM_INT);
+    // 바인딩
+    foreach ($params as $key => $val) {
+        $stmt->bindValue($key, $val, PDO::PARAM_INT);
     }
-    $stmt->bindValue(':lim', $limit, PDO::PARAM_INT);
+    $stmt->bindValue(':lim', $limit,  PDO::PARAM_INT);
     $stmt->bindValue(':off', $offset, PDO::PARAM_INT);
     $stmt->execute();
+
     $rows = $stmt->fetchAll();
 
-    return ['total'=>$total, 'rows'=>$rows];
+    return [
+        'total' => $total,
+        'rows'  => $rows,
+    ];
 }
 
 /**
@@ -64,18 +84,27 @@ function getPost(int $id) {
 
 /**
  * 새 게시글을 저장합니다.
- *
- * @param array $data ['title','content','description','folder_id']
+ * sort_order 는 해당 폴더의 max+1 로 설정
  */
 function createPost(array $data): void {
     global $pdo;
-    $stmt = $pdo->prepare("INSERT INTO post (title, content, description, folder_id)
-                           VALUES (:t, :c, :d, :f)");
+    // 현재 폴더의 max sort_order 조회
+    $stmt = $pdo->prepare("SELECT COALESCE(MAX(sort_order),-1) FROM post WHERE folder_id = :fid");
+    $stmt->execute([':fid' => $data['folder_id']]);
+    $max = (int)$stmt->fetchColumn();
+
+    $stmt = $pdo->prepare("
+        INSERT INTO post
+          (title, content, description, folder_id, sort_order)
+        VALUES
+          (:t, :c, :d, :f, :ord)
+    ");
     $stmt->execute([
-        ':t' => $data['title'],
-        ':c' => $data['content'],
-        ':d' => $data['description'],
-        ':f' => $data['folder_id'],
+        ':t'   => $data['title'],
+        ':c'   => $data['content'],
+        ':d'   => $data['description'],
+        ':f'   => $data['folder_id'],
+        ':ord' => $max + 1,
     ]);
 }
 
@@ -91,7 +120,8 @@ function updatePost(int $id, array $data): void {
                           title       = :t,
                           content     = :c,
                           description = :d,
-                          folder_id   = :f
+                          folder_id   = :f,
+                          allow_comment = :ac
                         WHERE id     = :id");
     $stmt->execute([
         ':t'  => $data['title'],
@@ -99,6 +129,7 @@ function updatePost(int $id, array $data): void {
         ':d'  => $data['description'],
         ':f'  => $data['folder_id'],
         ':id' => $id,
+        ':ac'  => $data['allow_comment'] ?? 'Y',
     ]);
 }
 
@@ -109,8 +140,12 @@ function updatePost(int $id, array $data): void {
  */
 function deletePost(int $id): void {
     global $pdo;
-    $stmt = $pdo->prepare("DELETE FROM post WHERE id = ?");
-    $stmt->execute([$id]);
+    $stmt = $pdo->prepare("
+        UPDATE post
+           SET del_tf = 'Y'
+         WHERE id     = :id
+    ");
+    $stmt->execute([':id' => $id]);
 }
 
 /**

@@ -44,7 +44,7 @@ require __DIR__ . '/components/footer.php';
       </div>
       <div id="search-view">
         <label>SEARCH</label><br>
-        <input id="search-input" type="text" placeholder="Search..."><br>
+        <input id="search-input" type="text" placeholder="Search..." autocomplete="off"><br>
         <div id="search-tree"></div>
         <!-- <ul id="search-results"></ul> -->
       </div>
