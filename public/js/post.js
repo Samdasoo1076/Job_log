@@ -8,13 +8,18 @@ export function loadPost(postId) {
       return res.json();
     })
     .then(data => {
-      // 1) 본문 및 댓글 렌더링
-      const content = document.getElementById('content');
-      content.innerHTML = `
+      // 1) 본문 및 댓글(옵션) 렌더링
+      let html = `
         <h2>${data.title}</h2>
         ${data.description ? `<h3 class="description">${data.description}</h3>` : ''}
         <div>${data.content}</div>
-        <p>Views: ${data.views}</p>
+        <p>조회수: ${data.views}</p>
+      `;
+
+
+         // allow_comment가 Y일 때만 댓글 섹션 추가
+        if (data.allow_comment === 'Y') {
+        html += `
         <h3>댓글</h3>
         ${data.comments.map(c => `
           <div class="comment" data-comment-id="${c.id}">
@@ -36,13 +41,19 @@ export function loadPost(postId) {
         <section class="comment-form">
           <form id="comment-form">
             <input type="hidden" name="post_id" value="${postId}">
-            <input name="author"   placeholder="Names"    required autocomplete="off"><br>
-            <input name="password" type="password" placeholder="Password" required autocomplete="off"><br>
+            <input name="author" placeholder="Names" autocomplete="off" required><br>
+            <input name="password" type="password" placeholder="Password" autocomplete="off" required ><br>
             <textarea name="content" rows="4" placeholder="leave a comment" required></textarea><br>
             <button type="submit">댓글 달기</button>
           </form>
         </section>
       `;
+        }
+
+        // inject it
+      const content = document.getElementById('content');
+      content.innerHTML = html;
+        
 
       // 2) SEO 메타 태그 동적 갱신
       document.title = data.title;
@@ -68,8 +79,9 @@ export function loadPost(postId) {
       upsertMeta('meta[name="twitter:description"]','content', data.description || '');
 
       // 3) 댓글 작성 바인딩
-      document.getElementById('comment-form')
-        .addEventListener('submit', ev => {
+      const form = document.getElementById('comment-form');
+      if (form) {
+        form.addEventListener('submit', ev => {
           ev.preventDefault();
           const fd = new FormData(ev.target);
           fetch('/public/api/comment.php', { method: 'POST', body: fd })
@@ -84,6 +96,7 @@ export function loadPost(postId) {
               }
             });
         });
+      }
 
       // 4) 댓글 삭제
       document.querySelectorAll('.comment .delete-btn')
@@ -146,7 +159,7 @@ export function loadPost(postId) {
         .forEach(btn => btn.addEventListener('click', () => {
           btn.closest('.edit-form').style.display = 'none';
         }));
-
+      
       return data;
     })
     .catch(err => console.error(err));

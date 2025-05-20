@@ -16,6 +16,8 @@ function renderPostDetail(array $post, array $comments) {
     echo '  <div class="content">' . nl2br(htmlspecialchars($post['content'])) . '</div>';
     echo '</article>';
 
+    // allow_comment 체크
+    if ($post['allow_comment'] === 'Y') {
     echo '<section class="comments">';
     echo '  <h2>댓글</h2>';
     foreach ($comments as $c) {
@@ -31,10 +33,11 @@ function renderPostDetail(array $post, array $comments) {
     echo '  <h3>댓글 달기</h3>';
     echo '  <form id="comment-form">';
     echo '    <input type="hidden" name="post_id" value="' . $post['id'] . '">';
-    echo '    <input name="author" placeholder="Names" required> autocomplete="off"<br>';
-    echo '    <input name="password" type="password" placeholder="Password" required autocomplete="off"><br>';
+    echo '    <input name="author" placeholder="Names" autocomplete="off" required> <br>';
+    echo '    <input name="password" type="password" placeholder="Password" autocomplete="off" required ><br>';
     echo '    <textarea name="content" rows="4" placeholder="do it comment" required></textarea><br>';
     echo '    <button type="submit">Submit</button>';
     echo '  </form>';
     echo '</section>';
+    }
 }
