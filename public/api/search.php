@@ -8,7 +8,7 @@ function getFolderPath($id) {
     global $pdo;
     $parts = [];
     while ($id) {
-        $stmt = $pdo->prepare("SELECT id,name,parent_id FROM folder WHERE id = ?");
+        $stmt = $pdo->prepare("SELECT id,name,parent_id FROM folder WHERE id = ? AND del_tf = 'N'");
         $stmt->execute([$id]);
         $f = $stmt->fetch();
         if (!$f) break;
@@ -28,7 +28,7 @@ $q = "%$q%";
 $stmt = $pdo->prepare("
     SELECT id, title, folder_id
       FROM post
-     WHERE title LIKE :q OR content LIKE :q
+     WHERE title LIKE :q AND del_tf = 'Y'
      ORDER BY created_at DESC
      LIMIT 20
 ");
