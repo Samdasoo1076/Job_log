@@ -14,6 +14,7 @@ header('Content-Type: text/html; charset=utf-8');
   <link rel="stylesheet" href="/admin/css/dashboard.css">
   <link rel="stylesheet" href="/admin/css/post.css">
   <link rel="stylesheet" href="/admin/css/folder.css">
+  <link rel="stylesheet" href="/admin/css/popular.css">
 </head>
 <body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -24,4 +25,5 @@ header('Content-Type: text/html; charset=utf-8');
   <!-- admin/folder/folder_list.php -->
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 <script src="/admin/js/folder2.js"></script>
+<script src="/admin/js/popular.js"></script>
 
