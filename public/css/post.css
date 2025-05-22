@@ -1,51 +1,59 @@
 /* 포스트 상세 컴포넌트 */
 .post-detail h1 {
-    margin-bottom: 0.5em;
-  }
-  .post-detail .meta {
-    color: #666;
-    font-size: 0.9em;
-    margin-bottom: 1em;
-  }
-  .post-detail .description {
-    font-style: italic;
-    margin-bottom: 1em;
-  }
-  .post-detail .content {
-    margin-bottom: 2em;
-  }
-  
-  /* 댓글 */
-  .comments {
-    margin-top: 2em;
-  }
-  .comment {
-    padding: 8px 0;
-    border-bottom: 1px solid #eee;
-  }
-  .comment-form h3 {
-    margin-top: 2em;
-  }
-  .comment-form input,
-  .comment-form textarea {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  .comment-form button {
-    background: #3498db;
-    color: #fff;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  .comment-form button:hover {
-    background: #2980b9;
-  }
-  
+  margin-bottom: 0.5em;
+}
+
+.post-detail .meta {
+  color: #666;
+  font-size: 0.9em;
+  margin-bottom: 1em;
+}
+
+.post-detail .description {
+  font-style: italic;
+  margin-bottom: 1em;
+}
+
+.post-detail .content {
+  margin-bottom: 2em;
+}
+
+/* 댓글 */
+.comments {
+  margin-top: 2em;
+}
+
+.comment {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.comment-form h3 {
+  margin-top: 2em;
+}
+
+.comment-form input,
+.comment-form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.comment-form button {
+  background: #3498db;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.comment-form button:hover {
+  background: #2980b9;
+}
+
 /* common.css (또는 front_head.php <style> 내부) */
 
 .tech-item {
@@ -71,18 +79,124 @@
   margin-right: 0.5rem;
 }
 
-.tech-item .Spring_boot {background-image: url('/assets/icon/contents/Spring_boot.svg');}
+.tech-item .Spring_boot {
+  background-image: url('/assets/icon/contents/Spring_boot.svg');
+}
 
-.tech-item .Spring_framework {background-image: url('/assets/icon/contents/Spring_framework.svg');}
+.tech-item .Spring_framework {
+  background-image: url('/assets/icon/contents/Spring_framework.svg');
+}
 
-.tech-item .Mariadb_white {background-image: url('/assets/icon/contents/Mariadb_white.svg');}
+.tech-item .Mariadb_white {
+  background-image: url('/assets/icon/contents/Mariadb_white.svg');
+}
 
-.tech-item .Mariadb_blue {background-image: url('/assets/icon/contents/Mariadb_blue.svg');}
+.tech-item .Mariadb_blue {
+  background-image: url('/assets/icon/contents/Mariadb_blue.svg');
+}
 
-.tech-item .Php {background-image: url('/assets/icon/contents/Php.svg');}
+.tech-item .Php {
+  background-image: url('/assets/icon/contents/Php.svg');
+}
 
-.tech-item .Oracle {background-image: url('/assets/icon/contents/Oracle.svg');}
+.tech-item .Oracle {
+  background-image: url('/assets/icon/contents/Oracle.svg');
+}
 
-.tech-item .Mssql {background-image: url('/assets/icon/contents/Mssql.svg');}
+.tech-item .Mssql {
+  background-image: url('/assets/icon/contents/Mssql.svg');
+}
 
-.tech-item .Jquery {background-image: url('/assets/icon/contents/Jquery.svg');}
+.tech-item .Jquery {
+  background-image: url('/assets/icon/contents/Jquery.svg');
+}
+
+
+/* common.css 또는 front_head.php <style> 내부에 추가 */
+
+/* 기존 색상 */
+.text-orange {
+  color: #FF8A65 !important;
+}
+
+.text-green {
+  color: #AED581 !important;
+}
+
+.text-blue {
+  color: #4FC3F7 !important;
+}
+
+.text-yellow {
+  color: #FFCA28 !important;
+}
+
+.text-white {
+  color: #FFFFFF !important;
+}
+
+/* 추가 컬러 팔레트 */
+.text-red {
+  color: #E57373 !important;
+}
+
+.text-pink {
+  color: #F06292 !important;
+}
+
+.text-purple {
+  color: #BA68C8 !important;
+}
+
+.text-indigo {
+  color: #7986CB !important;
+}
+
+.text-teal {
+  color: #4DB6AC !important;
+}
+
+.text-gray {
+  color: #9E9E9E !important;
+}
+
+.text-gray-dark {
+  color: #616161 !important;
+}
+
+.text-black {
+  color: #000000 !important;
+}
+
+/* Bootstrap 스타일의 의미론적 클래스 (필요 시) */
+.text-primary {
+  color: #0d6efd !important;
+}
+
+.text-secondary {
+  color: #6c757d !important;
+}
+
+.text-success {
+  color: #198754 !important;
+}
+
+.text-danger {
+  color: #dc3545 !important;
+}
+
+.text-warning {
+  color: #ffc107 !important;
+}
+
+.text-info {
+  color: #0dcaf0 !important;
+}
+
+.text-light {
+  color: #f8f9fa !important;
+}
+
+.text-dark {
+  color: #212529 !important;
+}
