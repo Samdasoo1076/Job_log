@@ -15,7 +15,6 @@ if (session_status() === PHP_SESSION_NONE) {
 function log_user_activity(?int $postId = null): void {
     global $pdo;
     $now = new DateTime();
-
     $data = [
         ':log_date'     => $now->format('Y-m-d'),
         ':log_hour'     => (int)$now->format('H'),

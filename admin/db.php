@@ -34,7 +34,7 @@
     //     return $folders;
     // }
 
-    function getPostsByFolderAdmin($folderId) {
+    function getPostsByFolder($folderId) {
         global $pdo;
         $stmt = $pdo->prepare("
             SELECT * 

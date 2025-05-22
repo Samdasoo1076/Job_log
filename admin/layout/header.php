@@ -12,6 +12,7 @@ include_once __DIR__ . '/../common/front_head.php';
         <li><a href="/admin/post/posts_list.php">게시글 관리</a></li>
         <li><a href="/admin/comment/comment_list.php">댓글 관리</a></li>
         <li><a href="/admin/Integration/list.php">폴더 & 게시글 관리</a></li>
+        <li><a href="/admin/popular/popular.php">인기 게시글</a></li>
         <li><a href="/admin/logout.php">로그아웃</a></li>
       </ul>
     </nav>

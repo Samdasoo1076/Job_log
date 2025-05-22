@@ -8,7 +8,7 @@ require __DIR__ . '/common/logger.php';
 
 
 // 홈 화면 접속 로그
-log_user_activity(null);
+log_user_activity(0);
 
 // ★ 여기서 SEO용 변수를 준비합니다.
 if ($currentPost) {
