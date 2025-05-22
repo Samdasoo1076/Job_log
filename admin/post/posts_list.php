@@ -41,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
       <th>제목</th>
       <th>폴더</th>
       <th>작성일</th>
+      <th>대표</th>
       <th>댓글 허용</th>
       <th>액션</th>
     </tr>
@@ -53,7 +54,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
       <td><?= htmlspecialchars($p['title']) ?></td>
       <td><?= htmlspecialchars($p['folder_name'] ?? '(최상위)') ?></td>
       <td><?= $p['created_at'] ?></td>
-      <td><?= $p['allow_comment'] ?></td>
+      <td>
+        <input type="checkbox"
+              data-id="<?= $p['id'] ?>"
+              class="feature-toggle"
+              <?= $p['is_featured'] ? 'checked' : '' ?>>
+      </td>
+      <td><input
+          type="checkbox"
+          class="comment-toggle"
+          data-id="<?= $p['id'] ?>"
+          <?= $p['allow_comment'] === 'Y' ? 'checked' : '' ?>></td>
       <td>
         <a class="btn edit" href="posts_form.php?id=<?= $p['id'] ?>&folder_id=<?= $filterFolder ?>&page=<?= $page ?>">Edit</a>
         <!-- soft delete 폼 -->

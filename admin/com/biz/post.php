@@ -181,3 +181,22 @@ function getFeaturedPost() {
     $stmt->execute();
     return $stmt->fetch();
 }
+
+
+/**
+ * 게시글 댓글 허용 상태 업데이트
+ *
+ * @param int    $id
+ * @param string $allow 'Y' 또는 'N'
+ * @return bool
+ */
+function updateAllowComment(int $id, string $allow): bool
+{
+    global $pdo;
+    $sql  = "UPDATE post SET allow_comment = :ac WHERE id = :id";
+    $stmt = $pdo->prepare($sql);
+    return $stmt->execute([
+        ':ac' => $allow,
+        ':id' => $id,
+    ]);
+}

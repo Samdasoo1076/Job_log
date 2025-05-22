@@ -5,6 +5,13 @@ body {
   height: 100%;
 }
 
+body h1{
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
 
 /* admin/css/main.css */
 /* 본문(main) 레이아웃: 좌측 사이드바 공간 확보 */
