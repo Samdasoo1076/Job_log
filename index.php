@@ -37,7 +37,7 @@ if ($currentPost) {
 
 
 require $_SERVER['DOCUMENT_ROOT'] . '/common/common_inc.php';
-
+require __DIR__ . '/admin/com/biz/post.php'; 
 
 // 컴포넌트 로드
 require __DIR__ . '/public/components/nav.php';
@@ -46,6 +46,8 @@ require __DIR__ . '/public/components/post_detail.php';
 require __DIR__ . '/public/components/tabs.php';
 require __DIR__ . '/public/components/sidebar_header.php';
 require __DIR__ . '/public/components/footer.php';
+
+$featured = getFeaturedPost();
 ?>
 <!DOCTYPE html>
 <html lang="ko">
@@ -90,12 +92,23 @@ require __DIR__ . '/public/components/footer.php';
     <?php renderTabsContainer(); ?>
 
     <div id="content">
+      <?
+      if ($featured) {
+        // 대표 포스트가 있으면 이걸 렌더링
+        echo "<article class=\"featured-post\">";
+        echo "<h1>" . htmlspecialchars($featured['title']) . "</h1>";
+        echo "<p class=\"meta\">작성: {$featured['created_at']} | 수정: {$featured['updated_at']}</p>";
+        echo "<div class=\"content\">{$featured['content']}</div>";
+        echo "</article>";
+    } else {
+      ?>
       <?php if ($currentPost): ?>
         <?php renderPostDetail($currentPost, $currentComments); ?>
       <?php else: ?>
-        <h1>Welcome!</h1>
+        <h1>Welcome!gd</h1>
         <p>Select a folder or search for a post.</p>
       <?php endif; ?>
+      <? }?>
     </div>
   </div>
       </div>

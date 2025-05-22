@@ -160,3 +160,24 @@ function savePost(array $data): void {
         createPost($data);
     }
 }
+
+/**
+ * 메인에 노출할 대표 포스트 한 건을 반환합니다.
+ * is_featured=1, use_tf='Y', del_tf='N' 인 것 중 sort_order 순으로
+ *
+ * @return array|false
+ */
+function getFeaturedPost() {
+    global $pdo;
+    $stmt = $pdo->prepare("
+        SELECT id, title, description, content, created_at, updated_at
+          FROM post
+         WHERE is_featured = 1
+           AND use_tf      = 'Y'
+           AND del_tf      = 'N'
+         ORDER BY updated_at DESC
+         LIMIT 1
+    ");
+    $stmt->execute();
+    return $stmt->fetch();
+}
