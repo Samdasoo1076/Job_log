@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // 수정 모드: 기존 데이터 로드
 $post = null;
 if (!empty($_GET['id'])) {
-    $post = getPost(intval($_GET['id']));
+    $post = getPostAdmin(intval($_GET['id']));
 }
 
 include __DIR__ . '/../layout/header.php';

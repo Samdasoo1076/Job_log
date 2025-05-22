@@ -5,7 +5,13 @@
 // require_once __DIR__ . '/../../db.php';
 
 
-
+function getPostAdmin($postId) {
+    global $pdo;
+    $pdo->prepare("UPDATE post SET view_count = view_count + 1 WHERE id = :id")->execute([':id' => $postId]);
+    $stmt = $pdo->prepare("SELECT * FROM post WHERE id = :id");
+    $stmt->execute([':id' => $postId]);
+    return $stmt->fetch();
+}
 
 /**
  * 게시글 리스트를 반환합니다.
@@ -69,18 +75,6 @@ function getPostList(?int $folderId, int $limit, int $offset): array {
     ];
 }
 
-/**
- * 단일 게시글을 반환합니다.
- *
- * @param int $id
- * @return array|false
- */
-function getPost(int $id) {
-    global $pdo;
-    $stmt = $pdo->prepare("SELECT * FROM post WHERE id = ?");
-    $stmt->execute([$id]);
-    return $stmt->fetch();
-}
 
 /**
  * 새 게시글을 저장합니다.

@@ -4,7 +4,11 @@ $tree   = getFolders();
 $postId = isset($_GET['post_id']) ? intval($_GET['post_id']) : null;
 $currentPost     = $postId ? getPost($postId) : null;
 $currentComments = $postId ? getComments($postId) : [];
+require __DIR__ . '/common/logger.php';
 
+
+// 홈 화면 접속 로그
+log_user_activity(null);
 
 // ★ 여기서 SEO용 변수를 준비합니다.
 if ($currentPost) {

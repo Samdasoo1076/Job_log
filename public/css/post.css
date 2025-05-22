@@ -46,3 +46,43 @@
     background: #2980b9;
   }
   
+/* common.css (또는 front_head.php <style> 내부) */
+
+.tech-item {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 1em;
+}
+
+/* 아이콘 공통 스타일 */
+.tech-item span[class$="_boot"],
+.tech-item span[class$="_framework"],
+.tech-item span[class^="Mariadb"],
+.tech-item span[class^="Php"],
+.tech-item span[class^="Oracle"],
+.tech-item span[class^="Mssql"],
+.tech-item span[class^="Jquery"] {
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-right: 0.5rem;
+}
+
+.tech-item .Spring_boot {background-image: url('/assets/icon/contents/Spring_boot.svg');}
+
+.tech-item .Spring_framework {background-image: url('/assets/icon/contents/Spring_framework.svg');}
+
+.tech-item .Mariadb_white {background-image: url('/assets/icon/contents/Mariadb_white.svg');}
+
+.tech-item .Mariadb_blue {background-image: url('/assets/icon/contents/Mariadb_blue.svg');}
+
+.tech-item .Php {background-image: url('/assets/icon/contents/Php.svg');}
+
+.tech-item .Oracle {background-image: url('/assets/icon/contents/Oracle.svg');}
+
+.tech-item .Mssql {background-image: url('/assets/icon/contents/Mssql.svg');}
+
+.tech-item .Jquery {background-image: url('/assets/icon/contents/Jquery.svg');}
