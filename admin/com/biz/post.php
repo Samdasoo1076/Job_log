@@ -114,8 +114,7 @@ function updatePost(int $id, array $data): void {
                           title       = :t,
                           content     = :c,
                           description = :d,
-                          folder_id   = :f,
-                          allow_comment = :ac
+                          folder_id   = :f
                         WHERE id     = :id");
     $stmt->execute([
         ':t'  => $data['title'],
@@ -123,7 +122,6 @@ function updatePost(int $id, array $data): void {
         ':d'  => $data['description'],
         ':f'  => $data['folder_id'],
         ':id' => $id,
-        ':ac'  => $data['allow_comment'] ?? 'Y',
     ]);
 }
 
