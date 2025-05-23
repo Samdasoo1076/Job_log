@@ -139,6 +139,15 @@ function softDeleteFolder(int $id): void {
 }
 
 /**
+ * 하드 삭제: 레코드 완전 삭제
+ */
+function hardDeleteFolder(int $id): void {
+    global $pdo;
+    $stmt = $pdo->prepare("DELETE FROM folder WHERE id = ?");
+    $stmt->execute([$id]);
+}
+
+/**
  * 삭제된 폴더를 복구합니다.
  *
  * @param int $id
@@ -216,7 +225,8 @@ function _renderItems(array $folders): void {
         echo '<button class="create-btn" title="하위 폴더 추가">＋</button>';
         echo '<button class="edit-btn"   title="수정">✎</button>';
         if ($deleted) {
-            // 복원 버튼
+            // 하드 삭제 & 복원 버튼
+            echo '<button class="hard-delete-btn" title="완전 삭제">✖</button>';
             echo '<button class="restore-btn" title="복구">🛟</button>';
         } else {
             // 기존 삭제 버튼

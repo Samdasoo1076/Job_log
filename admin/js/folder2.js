@@ -90,6 +90,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // 하드 삭제
+  document.querySelectorAll('.hard-delete-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (!confirm('폴더를 완전 삭제하시겠습니까? 복구할 수 없습니다.')) return;
+      const id = btn.closest('li').dataset.id;
+      fetch('folder_list2.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `hard_delete_id=${id}`
+      })
+      .then(r => r.json())
+      .then(json => {
+        if (json.success) location.reload();
+        else alert('완전 삭제에 실패했습니다.');
+      })
+      .catch(() => alert('네트워크 오류'));
+    });
+  });
+
     // … 기존 코드 …
 
     // ─── 인라인 복원 ───

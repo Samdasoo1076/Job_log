@@ -60,13 +60,20 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
     echo json_encode(['success'=>true]);
     exit;
   }
+
+   // 하드 삭제
+   if (!empty($_POST['hard_delete_id'])) {
+    hardDeleteFolder(intval($_POST['hard_delete_id']));
+    exit(json_encode(['success'=>true]));
+}
+
   // 4) 신규
   if (!empty($_POST['new_name'])) {
     createFolder([
       'parent_id'=>($_POST['new_parent']!==''?intval($_POST['new_parent']):null),
       'name'=>trim($_POST['new_name'])
     ]);
-    header('Location: folder_list.php');
+    header('Location: folder_list2.php');
     exit;
   }
 
