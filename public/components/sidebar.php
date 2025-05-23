@@ -10,12 +10,16 @@
  * @return bool   이 폴더(또는 하위)에 currentPost 가 있으면 true
  */
 function renderSidebar(array $folders, $expandedRoot = null, $currentPostId = null): bool {
-
+    // 최상위 호출 시 단 한 번만 최상위(폴더 없는) 포스트 출력
+    static $printedTops = false;
     
     
     echo '<ul class="sidebar-tree">';
 
-    $tops = getTopPosts();
+     // 변경: 최초 호출 시에만 최상위 포스트 리스트 렌더링
+     if (!$printedTops) {
+        $printedTops = true; // 변경: 이후 재귀 호출에서는 실행되지 않도록 설정
+        $tops = getTopPosts();
     if ($tops) {
         echo '<li class="expanded">';       // ← expanded 붙이기!
         echo '<ul class="posts-list">';
@@ -32,6 +36,7 @@ function renderSidebar(array $folders, $expandedRoot = null, $currentPostId = nu
         echo '</ul>';
         echo '</li>';
     }
+}
     $thisLevelHasActive = false;
 
     foreach ($folders as $f) {
