@@ -53,9 +53,7 @@ function moveFolder(int $id, ?int $parentId, int $order): void {
 }
 
 // 게시글 CRUD
-function createPost(array $data): void { /* POST INSERT */ }
-function updatePost(int $id, array $data): void { /* POST UPDATE */ }
-function deletePost(int $id): void { /* soft-delete: set del_tf='Y' */ }
+
 function movePost(int $id, ?int $folderId, int $order): void {
     global $pdo;
     $stmt = $pdo->prepare("
