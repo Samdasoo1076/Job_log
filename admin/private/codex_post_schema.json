@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["title", "description", "content"],
+  "properties": {
+    "title": {"type": "string", "maxLength": 255},
+    "description": {"type": "string", "maxLength": 500},
+    "content": {"type": "string"}
+  }
+}

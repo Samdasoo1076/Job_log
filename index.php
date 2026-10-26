@@ -61,7 +61,7 @@ $featured = getFeaturedPost();
   <link rel="stylesheet" href="/public/css/content.css">
   <link rel="stylesheet" href="/public/css/nav.css">
   <link rel="stylesheet" href="/public/css/sidebar.css">
-  <link rel="stylesheet" href="/public/css/post.css">
+  <link rel="stylesheet" href="/public/css/post.css?v=<?= filemtime(__DIR__ . '/public/css/post.css') ?>">
   <link rel="stylesheet" href="/public/css/comment.css">
   <link rel="stylesheet" href="/public/css/tabs.css">
   <link rel="stylesheet" href="/public/css/sidebar_header.css">
@@ -126,7 +126,10 @@ $featured = getFeaturedPost();
 </div>
 
       <script src="/public/js/sidebar.js" defer></script>
-<script type="module" src="/public/js/post.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" defer></script>
+<script src="/public/js/code_blocks.js" defer></script>
+<script type="module" src="/public/js/post.js?v=<?= filemtime(__DIR__ . '/public/js/post.js') ?>"></script>
 <script type="module" src="/public/js/nav.js"></script>
 <script type="module" src="/public/js/tabs.js"></script>
 </body>

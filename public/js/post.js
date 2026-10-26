@@ -1,8 +1,21 @@
 // public/js/post.js
 
 // 글 불러오는 공용 함수 (메타 태그 동적 갱신 포함)
+const postRequests = new Map();
+
 export function loadPost(postId) {
-  return fetch(`/public/api/post.php?post_id=${postId}`)
+  postId = String(postId);
+  const content = document.getElementById('content');
+
+  if (content?.dataset.loadedPostId === postId) {
+    return Promise.resolve(null);
+  }
+
+  if (postRequests.has(postId)) {
+    return postRequests.get(postId);
+  }
+
+  const request = fetch(`/public/api/post.php?post_id=${postId}`)
     .then(res => {
       if (!res.ok) throw new Error(res.statusText);
       return res.json();
@@ -12,7 +25,7 @@ export function loadPost(postId) {
       let html = `
         <h2>${data.title}</h2>
         ${data.description ? `<h3 class="description">${data.description}</h3>` : ''}
-        <div>${data.content}</div>
+        <div class="content">${data.content}</div>
         <p>조회수: ${data.views}</p>
       `;
 
@@ -53,6 +66,8 @@ export function loadPost(postId) {
         // inject it
       const content = document.getElementById('content');
       content.innerHTML = html;
+      content.dataset.loadedPostId = postId;
+      window.CodeBlocks?.enhance(content);
         
 
       // 2) SEO 메타 태그 동적 갱신
@@ -162,7 +177,13 @@ export function loadPost(postId) {
       
       return data;
     })
-    .catch(err => console.error(err));
+    .catch(err => console.error(err))
+    .finally(() => {
+      postRequests.delete(postId);
+    });
+
+  postRequests.set(postId, request);
+  return request;
 }
 
 // 전역 노출 (탭 컴포넌트 등에서 사용)

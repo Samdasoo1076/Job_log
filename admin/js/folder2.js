@@ -40,7 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 최상위부터 시작
     const root = document.getElementById('folder-list');
-    initNestedSortable(root);
+    if (root) {
+        initNestedSortable(root);
+    }
 
 
     // ─── 인라인 수정 ───
@@ -74,6 +76,29 @@ document.addEventListener('DOMContentLoaded', () => {
             input.addEventListener('keydown', e => {
                 if (e.key === 'Enter') input.blur();
             });
+        });
+    });
+
+    // 인라인 삭제(소프트)
+    document.querySelectorAll('.visibility-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const li = btn.closest('li');
+            const id = li.dataset.id;
+            const useTf = btn.dataset.useTf;
+            fetch('folder_list2.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({
+                    visibility_id: id,
+                    use_tf: useTf
+                })
+            })
+                .then(r => r.json())
+                .then(json => {
+                    if (json.success) location.reload();
+                    else alert('공개 상태 변경에 실패했습니다.');
+                })
+                .catch(() => alert('네트워크 오류'));
         });
     });
 

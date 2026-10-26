@@ -20,7 +20,7 @@ require __DIR__ . '/components/footer.php';
   <link rel="stylesheet" href="css/content.css">
   <link rel="stylesheet" href="css/nav.css">
   <link rel="stylesheet" href="css/sidebar.css">
-  <link rel="stylesheet" href="css/post.css">
+  <link rel="stylesheet" href="css/post.css?v=<?= filemtime(__DIR__ . '/css/post.css') ?>">
   <link rel="stylesheet" href="css/comment.css">
   <link rel="stylesheet" href="css/tabs.css">
   <link rel="stylesheet" href="css/sidebar_header.css">
@@ -73,7 +73,10 @@ require __DIR__ . '/components/footer.php';
 </div>
 
       <script src="js/sidebar.js" defer></script>
-<script type="module" src="js/post.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" defer></script>
+<script src="js/code_blocks.js" defer></script>
+<script type="module" src="js/post.js?v=<?= filemtime(__DIR__ . '/js/post.js') ?>"></script>
 <script type="module" src="js/nav.js"></script>
 <script type="module" src="js/tabs.js"></script>
 </body>

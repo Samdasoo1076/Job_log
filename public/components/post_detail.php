@@ -13,7 +13,7 @@ function renderPostDetail(array $post, array $comments) {
     if (!empty($post['description'])) {
         echo '<p class="description">' . htmlspecialchars($post['description']) . '</p>';
     }
-    echo '  <div class="content">' . nl2br(htmlspecialchars($post['content'])) . '</div>';
+    echo '  <div class="content">' . ($post['content'] ?? '') . '</div>';
     echo '</article>';
 
     // allow_comment 체크

@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
 <h1>게시글 관리</h1>
 <p>
   <a href="posts_form.php?folder_id=<?= $filterFolder ?>&page=<?= $page ?>">✚ New Post</a>
+  <a href="posts_form_pro.php?folder_id=<?= $filterFolder ?>&page=<?= $page ?>">✚ Advanced Post</a>
 </p>
 
 <table class="admin-table">
@@ -67,6 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
           <?= $p['allow_comment'] === 'Y' ? 'checked' : '' ?>></td>
       <td>
         <a class="btn edit" href="posts_form.php?id=<?= $p['id'] ?>&folder_id=<?= $filterFolder ?>&page=<?= $page ?>">Edit</a>
+        <a class="btn edit" href="posts_form_pro.php?id=<?= $p['id'] ?>">Advanced</a>
         <!-- soft delete 폼 -->
         <form method="post" style="display:inline;" onsubmit="return confirm('정말 이 글을 삭제하시겠습니까?');">
           <input type="hidden" name="delete_id" value="<?= $p['id'] ?>">

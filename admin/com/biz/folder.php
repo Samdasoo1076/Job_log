@@ -121,6 +121,15 @@ function updateFolder(int $id, array $data): void {
         ':id'   => $id,
     ]);
 }
+
+function updateFolderVisibility(int $id, string $useTf): void {
+    global $pdo;
+    $stmt = $pdo->prepare("UPDATE folder SET use_tf = :use_tf WHERE id = :id AND del_tf = 'N'");
+    $stmt->execute([
+        ':use_tf' => $useTf === 'Y' ? 'Y' : 'N',
+        ':id' => $id,
+    ]);
+}
  
 
 
@@ -212,10 +221,12 @@ function renderList(array $folders): void {
 function _renderItems(array $folders): void {
     foreach($folders as $f) {
         $hasChildren = ! empty($f['children']);
-        $deleted     = ($f['del_tf'] ?? 'N') === 'Y';
-
-        // use_tf, del_tf 플래그에 따라 'deleted' 클래스
-        $cls = ($f['use_tf'] === 'N' || $f['del_tf'] === 'Y') ? 'deleted' : '';
+        $deleted = ($f['del_tf'] ?? 'N') === 'Y';
+        $hidden = !$deleted && ($f['use_tf'] ?? 'Y') === 'N';
+        $classes = [];
+        if ($deleted) $classes[] = 'deleted';
+        if ($hidden) $classes[] = 'hidden';
+        $cls = implode(' ', $classes);
         // data-parent-id 추가
         $pid = $f['parent_id'] !== null ? $f['parent_id'] : '';
 
@@ -229,6 +240,11 @@ function _renderItems(array $folders): void {
             echo '<button class="hard-delete-btn" title="완전 삭제">✖</button>';
             echo '<button class="restore-btn" title="복구">🛟</button>';
         } else {
+            $isVisible = ($f['use_tf'] ?? 'Y') === 'Y';
+            $visibilityValue = ($f['use_tf'] ?? 'Y') === 'Y' ? 'N' : 'Y';
+            $visibilityClass = $isVisible ? ' is-visible' : ' is-hidden';
+            $visibilityLabel = $isVisible ? '폴더 비공개로 변경' : '폴더 공개로 변경';
+            echo '<button class="visibility-btn' . $visibilityClass . '" data-use-tf="' . $visibilityValue . '" title="' . $visibilityLabel . '" aria-label="' . $visibilityLabel . '"><span class="eye-icon" aria-hidden="true"></span></button>';
             // 기존 삭제 버튼
             echo '<button class="delete-btn" title="삭제">🗑</button>';
         }

@@ -18,6 +18,271 @@
   margin-bottom: 2em;
 }
 
+.content .code-block,
+.preview-body .code-block,
+.preview-content .code-block,
+.featured-post .code-block {
+  margin: 18px 0;
+  padding: 16px;
+  overflow-x: auto;
+  border: 1px solid #343a46;
+  border-radius: 6px;
+  background: #11151c;
+  color: #d9e2f1;
+  white-space: pre-wrap;
+  tab-size: 2;
+  font: 0.92rem/1.65 Consolas, Monaco, "Courier New", monospace;
+}
+
+.code-block code {
+  color: inherit;
+  font: inherit;
+  text-shadow: none;
+}
+
+.code-block .token.comment,
+.code-block .token.prolog,
+.code-block .token.doctype,
+.code-block .token.cdata {
+  color: #8b949e;
+}
+
+.code-block .token.punctuation {
+  color: #c9d1d9;
+}
+
+.code-block .token.operator,
+.code-block .token.entity,
+.code-block .token.url {
+  color: #ffb86c;
+}
+
+.code-block .token.string,
+.code-block .token.char,
+.code-block .token.attr-value,
+.code-block .token.regex {
+  color: #a5d6ff;
+}
+
+.code-block .token.number,
+.code-block .token.boolean,
+.code-block .token.constant {
+  color: #f2cc60;
+}
+
+.code-block .token.function,
+.code-block .token.class-name {
+  color: #d2a8ff;
+}
+
+.code-block .token.keyword,
+.code-block .token.atrule,
+.code-block .token.selector,
+.code-block .token.important {
+  color: #ff7b72;
+}
+
+.code-block code.language-sql .token.keyword,
+.code-block code.lang-sql .token.keyword {
+  color: #7dd3fc;
+  text-transform: uppercase;
+}
+
+.code-block code.language-sql .token.function {
+  color: #c084fc;
+}
+
+.code-block code.language-java .token.keyword,
+.code-block code.lang-java .token.keyword {
+  color: #f472b6;
+}
+
+.code-block code.language-java .token.class-name {
+  color: #fde68a;
+}
+
+.code-block code.language-javascript .token.keyword,
+.code-block code.lang-javascript .token.keyword,
+.code-block code.language-js .token.keyword,
+.code-block code.lang-js .token.keyword {
+  color: #c084fc;
+}
+
+.code-block code.language-javascript .token.function,
+.code-block code.lang-javascript .token.function,
+.code-block code.language-js .token.function,
+.code-block code.lang-js .token.function {
+  color: #67e8f9;
+}
+
+.content .dev-note,
+.content .dev-warning,
+.content .dev-summary,
+.content .dev-problem,
+.content .dev-solution,
+.preview-body .dev-note,
+.preview-body .dev-warning,
+.preview-body .dev-summary,
+.preview-body .dev-problem,
+.preview-body .dev-solution,
+.preview-content .dev-note,
+.preview-content .dev-warning,
+.preview-content .dev-summary,
+.preview-content .dev-problem,
+.preview-content .dev-solution,
+.featured-post .dev-note,
+.featured-post .dev-warning,
+.featured-post .dev-summary,
+.featured-post .dev-problem,
+.featured-post .dev-solution {
+  margin: 18px 0;
+  padding: 14px 16px;
+  border: 1px solid #3a4658;
+  border-left-width: 4px;
+  border-radius: 6px;
+  background: #151a22;
+  color: #d8dee9;
+  line-height: 1.7;
+}
+
+.content .dev-note > :first-child,
+.content .dev-warning > :first-child,
+.content .dev-summary > :first-child,
+.content .dev-problem > :first-child,
+.content .dev-solution > :first-child,
+.preview-body .dev-note > :first-child,
+.preview-body .dev-warning > :first-child,
+.preview-body .dev-summary > :first-child,
+.preview-body .dev-problem > :first-child,
+.preview-body .dev-solution > :first-child,
+.preview-content .dev-note > :first-child,
+.preview-content .dev-warning > :first-child,
+.preview-content .dev-summary > :first-child,
+.preview-content .dev-problem > :first-child,
+.preview-content .dev-solution > :first-child,
+.featured-post .dev-note > :first-child,
+.featured-post .dev-warning > :first-child,
+.featured-post .dev-summary > :first-child,
+.featured-post .dev-problem > :first-child,
+.featured-post .dev-solution > :first-child {
+  margin-top: 0;
+}
+
+.content .dev-note > :last-child,
+.content .dev-warning > :last-child,
+.content .dev-summary > :last-child,
+.content .dev-problem > :last-child,
+.content .dev-solution > :last-child,
+.preview-body .dev-note > :last-child,
+.preview-body .dev-warning > :last-child,
+.preview-body .dev-summary > :last-child,
+.preview-body .dev-problem > :last-child,
+.preview-body .dev-solution > :last-child,
+.preview-content .dev-note > :last-child,
+.preview-content .dev-warning > :last-child,
+.preview-content .dev-summary > :last-child,
+.preview-content .dev-problem > :last-child,
+.preview-content .dev-solution > :last-child,
+.featured-post .dev-note > :last-child,
+.featured-post .dev-warning > :last-child,
+.featured-post .dev-summary > :last-child,
+.featured-post .dev-problem > :last-child,
+.featured-post .dev-solution > :last-child {
+  margin-bottom: 0;
+}
+
+.content .dev-note,
+.preview-body .dev-note,
+.preview-content .dev-note,
+.featured-post .dev-note {
+  border-left-color: #4fc3f7;
+  background: #10202a;
+}
+
+.content .dev-warning,
+.preview-body .dev-warning,
+.preview-content .dev-warning,
+.featured-post .dev-warning {
+  border-left-color: #ffca28;
+  background: #241f10;
+}
+
+.content .dev-summary,
+.preview-body .dev-summary,
+.preview-content .dev-summary,
+.featured-post .dev-summary {
+  border-left-color: #a6e22e;
+  background: #14210f;
+}
+
+.content .dev-problem,
+.preview-body .dev-problem,
+.preview-content .dev-problem,
+.featured-post .dev-problem {
+  border-left-color: #ff6b6b;
+  background: #261516;
+}
+
+.content .dev-solution,
+.preview-body .dev-solution,
+.preview-content .dev-solution,
+.featured-post .dev-solution {
+  border-left-color: #4db6ac;
+  background: #102321;
+}
+
+.content .term-tip,
+.preview-body .term-tip,
+.preview-content .term-tip,
+.featured-post .term-tip {
+  position: relative;
+  display: inline;
+  border-bottom: 1px dotted #7dd3fc;
+  color: #93c5fd;
+  cursor: help;
+}
+
+.content .term-tip::after,
+.preview-body .term-tip::after,
+.preview-content .term-tip::after,
+.featured-post .term-tip::after {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  z-index: 20;
+  width: max-content;
+  max-width: min(320px, calc(100vw - 40px));
+  padding: 9px 11px;
+  border: 1px solid #3a4658;
+  border-radius: 6px;
+  background: #10151d;
+  color: #d8dee9;
+  content: attr(data-tip);
+  font: 0.82rem/1.5 Arial, sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  white-space: normal;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+  transform: translate(-50%, 4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.content .term-tip:hover::after,
+.content .term-tip:focus::after,
+.content .term-tip.is-open::after,
+.preview-body .term-tip:hover::after,
+.preview-body .term-tip:focus::after,
+.preview-body .term-tip.is-open::after,
+.preview-content .term-tip:hover::after,
+.preview-content .term-tip:focus::after,
+.preview-content .term-tip.is-open::after,
+.featured-post .term-tip:hover::after,
+.featured-post .term-tip:focus::after,
+.featured-post .term-tip.is-open::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
 /* 댓글 */
 .comments {
   margin-top: 2em;

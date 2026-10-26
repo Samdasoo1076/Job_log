@@ -1,83 +1,137 @@
 <?php
-// admin/folder/folder_list.php
 require __DIR__ . '/../common/common_inc.php';
 require __DIR__ . '/../com/biz/Integration.php';
 
-// JSON 요청 처리
-if ($_SERVER['REQUEST_METHOD']==='POST') {
+if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     header('Content-Type: application/json; charset=utf-8');
-    // 1) 폴더 이동
-    if (!empty($_POST['move_folder_id'])) {
-        moveFolder(
-            intval($_POST['move_folder_id']),
-            ($_POST['parent_folder_id']!=='' ? intval($_POST['parent_folder_id']) : null),
-            intval($_POST['folder_order'])
-        );
-        echo json_encode(['success'=>true]); exit;
-    }
-    // 2) 게시글 이동
-    if (!empty($_POST['move_post_id'])) {
-        movePost(
-            intval($_POST['move_post_id']),
-            ($_POST['target_folder_id']!=='' ? intval($_POST['target_folder_id']) : null),
-            intval($_POST['post_order'])
-        );
-        echo json_encode(['success'=>true]); exit;
-    }
-    // 3) 폴더 인라인 수정
-    if (!empty($_POST['edit_folder_id'])) {
-        updateFolder(
-            intval($_POST['edit_folder_id']),
-            ['parent_id'=>null, 'name'=>trim($_POST['folder_name'])]
-        );
-        echo json_encode(['success'=>true]); exit;
-    }
-    // 4) 게시글 인라인 수정
-    if (!empty($_POST['edit_post_id'])) {
-        updatePost(
-            intval($_POST['edit_post_id']),
-            ['title'=>trim($_POST['post_title']), 'content'=>'', 'description'=>'','folder_id'=>null]
-        );
-        echo json_encode(['success'=>true]); exit;
-    }
-    // 5) 폴더 삭제
-    if (!empty($_POST['delete_folder_id'])) {
-        deleteFolder(intval($_POST['delete_folder_id']));
-        echo json_encode(['success'=>true]); exit;
-    }
-    // 6) 게시글 삭제(soft)
-    if (!empty($_POST['delete_post_id'])) {
-        deletePost(intval($_POST['delete_post_id']));
-        echo json_encode(['success'=>true]); exit;
-    }
-    // 7) 신규 폴더/게시글 생성 (폼 제출)
-    if (!empty($_POST['new_folder_name'])) {
-        createFolder([
-            'parent_id'=>($_POST['new_folder_parent']!==''?intval($_POST['new_folder_parent']):null),
-            'name'=>trim($_POST['new_folder_name'])
+
+    try {
+        $action = $_POST['action'] ?? '';
+
+        switch ($action) {
+            case 'create_folder':
+                $name = trim($_POST['name'] ?? '');
+                if ($name === '') {
+                    throw new InvalidArgumentException('폴더명을 입력해 주세요.');
+                }
+                $id = integratedCreateFolder(
+                    ($_POST['parent_id'] ?? '') === '' ? null : (int)$_POST['parent_id'],
+                    $name
+                );
+                echo json_encode(['success' => true, 'id' => $id]);
+                exit;
+
+            case 'rename_folder':
+                $name = trim($_POST['name'] ?? '');
+                if ($name === '') {
+                    throw new InvalidArgumentException('폴더명을 입력해 주세요.');
+                }
+                integratedRenameFolder((int)$_POST['id'], $name);
+                echo json_encode(['success' => true]);
+                exit;
+
+            case 'delete_folder':
+                integratedSoftDeleteFolder((int)$_POST['id']);
+                echo json_encode(['success' => true]);
+                exit;
+
+            case 'restore_folder':
+                integratedRestoreFolder((int)$_POST['id']);
+                echo json_encode(['success' => true]);
+                exit;
+
+            case 'move_folder':
+                integratedMoveFolder(
+                    (int)$_POST['id'],
+                    ($_POST['parent_id'] ?? '') === '' ? null : (int)$_POST['parent_id'],
+                    (int)($_POST['sort_order'] ?? 0)
+                );
+                echo json_encode(['success' => true]);
+                exit;
+
+            case 'create_post':
+                $title = trim($_POST['title'] ?? '');
+                if ($title === '') {
+                    throw new InvalidArgumentException('게시글 제목을 입력해 주세요.');
+                }
+                $id = integratedCreatePost(
+                    ($_POST['folder_id'] ?? '') === '' ? null : (int)$_POST['folder_id'],
+                    $title
+                );
+                echo json_encode(['success' => true, 'id' => $id]);
+                exit;
+
+            case 'rename_post':
+                $title = trim($_POST['title'] ?? '');
+                if ($title === '') {
+                    throw new InvalidArgumentException('게시글 제목을 입력해 주세요.');
+                }
+                integratedRenamePost((int)$_POST['id'], $title);
+                echo json_encode(['success' => true]);
+                exit;
+
+            case 'delete_post':
+                integratedSoftDeletePost((int)$_POST['id']);
+                echo json_encode(['success' => true]);
+                exit;
+
+            case 'restore_post':
+                integratedRestorePost((int)$_POST['id']);
+                echo json_encode(['success' => true]);
+                exit;
+
+            case 'move_post':
+                integratedMovePost(
+                    (int)$_POST['id'],
+                    ($_POST['folder_id'] ?? '') === '' ? null : (int)$_POST['folder_id'],
+                    (int)($_POST['sort_order'] ?? 0)
+                );
+                echo json_encode(['success' => true]);
+                exit;
+        }
+
+        throw new InvalidArgumentException('알 수 없는 요청입니다.');
+    } catch (Throwable $e) {
+        http_response_code(400);
+        echo json_encode([
+            'success' => false,
+            'message' => $e->getMessage(),
         ]);
-        echo json_encode(['success'=>true]); exit;
-    }
-    if (!empty($_POST['new_post_title'])) {
-        createPost([
-            'folder_id'=>($_POST['new_post_parent']!==''?intval($_POST['new_post_parent']):null),
-            'title'=>trim($_POST['new_post_title']), 'content'=>'', 'description'=>''
-        ]);
-        echo json_encode(['success'=>true]); exit;
+        exit;
     }
 }
 
-// 트리+게시글 데이터
-$tree = getFolderPostTree();
+$folders = getIntegratedManagerTree();
+$rootPosts = getIntegratedPostsByFolder(null);
+
 include __DIR__ . '/../layout/header.php';
 ?>
-<link rel="stylesheet" href="/admin/css/folder_post.css">
 
-<main class="admin-container">
-  <h1>폴더·게시글 통합 관리</h1>
-  <div id="folder-list-container">
-    <?php renderListWithPosts($tree); ?>
+<link rel="stylesheet" href="/admin/css/Integration.css">
+
+<div class="integration-manager">
+  <div class="integration-header">
+    <div>
+      <h1>폴더 & 게시글 관리</h1>
+      <p>폴더와 게시글을 한 화면에서 생성, 이동, 수정, 삭제합니다.</p>
+    </div>
+    <div class="integration-actions">
+      <button type="button" data-action="add-root-folder">최상위 폴더 추가</button>
+      <button type="button" data-action="add-root-post">최상위 글 추가</button>
+    </div>
   </div>
-</main>
+
+  <div class="integration-guide">
+    <span>드래그로 폴더/게시글 위치 변경</span>
+    <span>게시글의 본문은 “본문 편집”에서 수정</span>
+    <span>삭제는 소프트 삭제이며 복구 가능</span>
+  </div>
+
+  <div class="integration-tree-wrap">
+    <?php renderIntegratedManager($folders, $rootPosts); ?>
+  </div>
+</div>
+
+<script src="/admin/js/Integration.js"></script>
 
 <?php include __DIR__ . '/../layout/footer.php'; ?>

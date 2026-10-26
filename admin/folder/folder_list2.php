@@ -54,6 +54,12 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
       echo json_encode(['success' => true]);
       exit;
 }
+  // 3) 공개/비공개
+  if (!empty($_POST['visibility_id'])) {
+    updateFolderVisibility((int)$_POST['visibility_id'], $_POST['use_tf'] ?? 'N');
+    echo json_encode(['success'=>true]);
+    exit;
+  }
   // 3) 삭제
   if (!empty($_POST['delete_id'])) {
     softDeleteFolder(intval($_POST['delete_id']));

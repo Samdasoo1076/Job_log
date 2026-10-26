@@ -66,7 +66,6 @@ function getTopPosts() {
 
     function getPost($postId) {
         global $pdo;
-        $pdo->prepare("UPDATE post SET view_count = view_count + 1 WHERE id = :id")->execute([':id' => $postId]);
         $stmt = $pdo->prepare("SELECT * FROM post WHERE id = :id");
         $stmt->execute([':id' => $postId]);
         return $stmt->fetch();

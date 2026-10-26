@@ -34,13 +34,8 @@ window.addEventListener('DOMContentLoaded', () => {
     input.value = initSearch;
     currentQuery = initSearch;
     input.dispatchEvent(new Event('input'));
-    if (initPostId) {
-      // 검색 이후 바로 포스트 로드
-      loadPost(initPostId);
-    }
   } else if (initPostId) {
-    // 검색 없이 바로 포스트 로드
-    loadPost(initPostId);
+    activate('folders');
   } else {
     activate('folders');
   }

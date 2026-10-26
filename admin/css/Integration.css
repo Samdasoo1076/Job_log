@@ -1,38 +1,181 @@
-/* ── 전체 트리 ── */
-#folder-list, #folder-list ul {
-    list-style:none; margin:0; padding-left:1em;
+.integration-manager {
+  color: #eee;
+}
+
+.integration-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.integration-header h1 {
+  margin: 0 0 8px;
+}
+
+.integration-header p,
+.integration-guide {
+  color: #aaa;
+}
+
+.integration-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.integration-actions button,
+.integration-row button,
+.integration-row .row-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 6px 10px;
+  border: 1px solid #555;
+  border-radius: 3px;
+  background: #414339;
+  color: #fff;
+  font-size: 0.85rem;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.integration-actions button {
+  background: #61dafb;
+  color: #272822;
+  border-color: #61dafb;
+}
+
+.integration-row button.danger {
+  background: #8e2a2a;
+  border-color: #a33;
+}
+
+.integration-guide {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+}
+
+.integration-guide span {
+  padding: 5px 8px;
+  border: 1px solid #444;
+  background: #1f1f1c;
+}
+
+.integration-tree-wrap {
+  padding: 12px;
+  border: 1px solid #444;
+  background: #1f1f1c;
+  overflow-x: auto;
+}
+
+.integration-list {
+  min-height: 14px;
+  margin: 0;
+  padding-left: 22px;
+  list-style: none;
+}
+
+#integration-tree {
+  min-width: 1040px;
+  padding-left: 0;
+}
+
+.integration-item {
+  margin: 6px 0;
+}
+
+.integration-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 7px 9px;
+  border: 1px solid #444;
+  background: #272822;
+}
+
+.folder-row {
+  background: #242722;
+}
+
+.post-row {
+  background: #202321;
+}
+
+.drag-handle {
+  flex: 0 0 22px;
+  color: #aaa;
+  cursor: grab;
+  text-align: center;
+}
+
+.item-kind {
+  flex: 0 0 58px;
+  padding: 4px 6px;
+  border: 1px solid #555;
+  color: #ddd;
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+.folder-row .item-kind {
+  color: #61dafb;
+}
+
+.post-row .item-kind {
+  color: #ffd866;
+}
+
+.item-title {
+  flex: 1 1 auto;
+  min-width: 180px;
+  overflow: hidden;
+  color: #fff;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.item-meta {
+  flex: 0 0 130px;
+  color: #aaa;
+  font-size: 0.82rem;
+}
+
+.toggle-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #bbb;
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.is-deleted > .integration-row {
+  opacity: 0.62;
+  background: #2a2020;
+}
+
+.is-deleted > .integration-row .item-title {
+  color: #aaa;
+  text-decoration: line-through;
+}
+
+.sortable-ghost {
+  opacity: 0.45;
+}
+
+@media (max-width: 980px) {
+  .integration-header {
+    display: block;
   }
-  /* ── 항목 ── */
-  #folder-list li {
-    display:flex; align-items:center;
-    background:#2b2b2b; margin:4px 0; padding:6px 8px;
-    border-radius:4px; position:relative;
+
+  .integration-actions {
+    margin-top: 12px;
   }
-  #folder-list .handle {
-    cursor:grab; margin-right:8px; color:#aaa;
-  }
-  #folder-list .folder-name,
-  #folder-list .post-name {
-    flex:1; color:#eee;
-  }
-  #folder-list .post-name { font-style:italic; }
-  #folder-list .edit-btn,
-  #folder-list .delete-btn {
-    background:#444; border:none; color:#fff;
-    font-size:0.9em; padding:2px 6px; margin-left:4px;
-    border-radius:4px; cursor:pointer; transition:0.2s;
-  }
-  #folder-list .delete-btn { background:#a33; }
-  #folder-list .edit-btn:hover { background:#5a5; }
-  #folder-list .delete-btn:hover { background:#922; }
-  .sortable-ghost { opacity:0.5; }
-  .inline-edit {
-    flex:1; padding:4px 6px; border:1px solid #666;
-    border-radius:4px; background:#1e1e1e; color:#fff;
-  }
-  /* ── 게시글 리스트 ── */
-  #folder-list ul {
-    margin-left:1.5em; border-left:2px solid #444;
-    padding-left:0.5em;
-  }
-  
+}

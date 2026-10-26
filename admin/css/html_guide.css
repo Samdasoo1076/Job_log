@@ -1,0 +1,96 @@
+.html-guide {
+  color: #eee;
+}
+
+.guide-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.guide-head h1 {
+  margin: 0 0 8px;
+}
+
+.guide-head p,
+.guide-note {
+  margin: 0;
+  color: #aaa;
+}
+
+.guide-head a {
+  padding: 8px 12px;
+  border: 1px solid #66b246;
+  border-radius: 3px;
+  background: #66b246;
+  color: #fff;
+  text-decoration: none;
+}
+
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.guide-panel {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid #444;
+  background: #1f1f1c;
+}
+
+.guide-panel.wide {
+  grid-column: 1 / -1;
+}
+
+.guide-panel h2 {
+  margin: 0 0 12px;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.guide-preview {
+  margin-bottom: 12px;
+  padding: 12px;
+  border: 1px solid #3b3b35;
+  background: #272822;
+}
+
+.guide-preview p {
+  margin: 0;
+}
+
+.guide-preview .tech-item {
+  margin-bottom: 8px;
+}
+
+.guide-code {
+  margin: 0;
+  padding: 12px;
+  overflow-x: auto;
+  border: 1px solid #343a46;
+  border-radius: 4px;
+  background: #11151c;
+  color: #d9e2f1;
+  white-space: pre-wrap;
+  font: 0.86rem/1.55 Consolas, Monaco, "Courier New", monospace;
+}
+
+.guide-code + .guide-note {
+  margin-top: 8px;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 900px) {
+  .guide-head,
+  .guide-grid {
+    display: block;
+  }
+
+  .guide-panel {
+    margin-bottom: 14px;
+  }
+}

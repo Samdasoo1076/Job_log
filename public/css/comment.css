@@ -85,6 +85,7 @@
 }
 
 .comment-form input[name="author"],
+.comment-form input[name="password"],
 .comment-form textarea[name="content"] {
     width: 100%;
     padding: 8px;

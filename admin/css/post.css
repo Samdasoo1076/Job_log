@@ -135,4 +135,148 @@
   .post-form .form-actions .btn.cancel:hover {
     background: #444;
   }
+
+  .admin-filter {
+    margin: 1rem 0;
+    padding: 16px;
+    border: 1px solid #444;
+    background: #1f1f1c;
+    color: #ddd;
+  }
+
+  .admin-filter .filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-end;
+    margin-bottom: 12px;
+  }
+
+  .admin-filter .filter-row:last-child {
+    margin-bottom: 0;
+  }
+
+  .admin-filter label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: #bbb;
+  }
+
+  .admin-filter input,
+  .admin-filter select {
+    min-width: 140px;
+    padding: 7px 9px;
+    border: 1px solid #555;
+    border-radius: 3px;
+    background: #272822;
+    color: #eee;
+  }
+
+  .admin-filter .filter-keyword {
+    flex: 1 1 340px;
+  }
+
+  .admin-filter .filter-keyword input {
+    width: 100%;
+  }
+
+  .btn.filter,
+  .btn.reset {
+    display: inline-block;
+    min-height: 34px;
+    padding: 8px 12px;
+    border: 0;
+    border-radius: 3px;
+    background: #61dafb;
+    color: #272822;
+    font-size: 0.9rem;
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .btn.reset {
+    background: #555;
+    color: #fff;
+  }
+
+  .log-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 10px;
+    margin: 1rem 0;
+  }
+
+  .log-summary div {
+    padding: 12px;
+    border: 1px solid #444;
+    background: #1f1f1c;
+    color: #ddd;
+  }
+
+  .log-summary strong {
+    display: block;
+    color: #fff;
+    font-size: 1.35rem;
+  }
+
+  .log-summary span {
+    display: block;
+    margin-top: 4px;
+    color: #aaa;
+    font-size: 0.85rem;
+  }
+
+  .activity-table {
+    table-layout: fixed;
+    font-size: 0.85rem;
+    min-width: 1400px;
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+  }
+
+  .activity-table th:nth-child(1),
+  .activity-table td:nth-child(1) {
+    width: 54px;
+  }
+
+  .activity-table th:nth-child(2),
+  .activity-table td:nth-child(2) {
+    width: 145px;
+  }
+
+  .activity-table th:nth-child(3),
+  .activity-table td:nth-child(3),
+  .activity-table th:nth-child(7),
+  .activity-table td:nth-child(7),
+  .activity-table th:nth-child(8),
+  .activity-table td:nth-child(8) {
+    width: 70px;
+  }
+
+  .activity-table .nowrap {
+    white-space: nowrap;
+  }
+
+  .activity-table .muted {
+    color: #aaa;
+    font-size: 0.8rem;
+  }
+
+  .activity-table .empty {
+    padding: 24px;
+    text-align: center;
+    color: #aaa;
+  }
+
+  .activity-table .log-url,
+  .activity-table .log-agent {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
   

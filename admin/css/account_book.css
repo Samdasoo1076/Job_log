@@ -1,0 +1,214 @@
+.account-book {
+  color: #eee;
+}
+
+.account-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.account-head p,
+.account-help {
+  margin: 0;
+  color: #aaa;
+  line-height: 1.5;
+}
+
+.account-notice,
+.account-error {
+  margin: 12px 0;
+  padding: 12px 14px;
+  border: 1px solid #3f6f3a;
+  background: #20351f;
+  color: #d8ffd0;
+}
+
+.account-error {
+  border-color: #8d3b3b;
+  background: #3a1f1f;
+  color: #ffd7d7;
+}
+
+.account-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.account-summary div,
+.account-panel {
+  border: 1px solid #444;
+  background: #1f1f1c;
+}
+
+.account-summary div {
+  padding: 14px;
+}
+
+.account-summary span {
+  display: block;
+  color: #aaa;
+  font-size: 0.85rem;
+}
+
+.account-summary strong {
+  display: block;
+  margin-top: 6px;
+  color: #fff;
+  font-size: 1.35rem;
+}
+
+.account-grid {
+  display: grid;
+  grid-template-columns: minmax(420px, 1fr) minmax(280px, 0.45fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.account-panel {
+  padding: 16px;
+}
+
+.account-panel h2 {
+  color: #fff;
+}
+
+.account-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.account-form h2,
+.account-form .wide,
+.account-actions {
+  grid-column: 1 / -1;
+}
+
+.account-form label,
+.csv-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #bbb;
+  font-size: 0.9rem;
+}
+
+.account-form input,
+.account-form select,
+.account-form textarea,
+.csv-form input,
+.account-filter input,
+.account-filter select {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #555;
+  border-radius: 3px;
+  background: #272822;
+  color: #eee;
+}
+
+.account-form textarea {
+  resize: vertical;
+}
+
+.account-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.account-actions button,
+.csv-form button {
+  width: fit-content;
+  padding: 8px 13px;
+  border: 0;
+  border-radius: 3px;
+  background: #61dafb;
+  color: #272822;
+  cursor: pointer;
+}
+
+.account-actions a {
+  padding: 8px 13px;
+  border-radius: 3px;
+  background: #555;
+  color: #fff;
+  text-decoration: none;
+}
+
+.btn.export {
+  display: inline-block;
+  min-height: 34px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 3px;
+  background: #8bd46e;
+  color: #1f1f1c;
+  font-size: 0.9rem;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.csv-form {
+  margin-top: 14px;
+}
+
+.account-filter {
+  margin-top: 16px;
+}
+
+.account-table {
+  min-width: 1100px;
+  font-size: 0.9rem;
+}
+
+.account-table .empty {
+  text-align: center;
+  color: #aaa;
+}
+
+.amount-income {
+  color: #8bd46e !important;
+  font-weight: 700;
+  text-align: right !important;
+}
+
+.amount-expense {
+  color: #ff9a8a !important;
+  font-weight: 700;
+  text-align: right !important;
+}
+
+.account-row-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.account-row-actions form {
+  display: inline;
+  margin: 0;
+}
+
+.account-row-actions button {
+  border: 0;
+  cursor: pointer;
+}
+
+@media (max-width: 980px) {
+  .account-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .account-form {
+    grid-template-columns: 1fr;
+  }
+}

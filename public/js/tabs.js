@@ -15,7 +15,9 @@ window.addEventListener('DOMContentLoaded', () => {
       openTabs = tabs;
       activeId = active;
       drawTabs();
-      if (activeId) window.loadPost(activeId);
+      if (activeId && !new URLSearchParams(location.search).get('post_id')) {
+        window.loadPost(activeId);
+      }
     } catch { }
   }
 
