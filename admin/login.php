@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // 비밀번호 검증 
     if ($user && $user['password_hash'] === $password) {
+        session_regenerate_id(true);
         $_SESSION['admin_id'] = $user['id'];
         ?>
   
@@ -21,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       alert('로그인에 성공했습니다!');
       window.location.href = 'dashboard.php';
     </script>
-        <?
+        <?php
         exit;
     } else {
         $error = '아이디 또는 비밀번호가 올바르지 않습니다.';
