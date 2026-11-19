@@ -57,6 +57,8 @@ $featured = getFeaturedPost();
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
+  <script src="/public/js/theme.js?v=<?= filemtime(__DIR__ . '/public/js/theme.js') ?>"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <link rel="stylesheet" href="/public/css/layout.css">
   <link rel="stylesheet" href="/public/css/content.css">
   <link rel="stylesheet" href="/public/css/nav.css">
@@ -66,6 +68,9 @@ $featured = getFeaturedPost();
   <link rel="stylesheet" href="/public/css/tabs.css">
   <link rel="stylesheet" href="/public/css/sidebar_header.css">
   <link rel="stylesheet" href="/public/css/footer.css">
+  <link rel="stylesheet" href="/public/css/mobile.css?v=<?= filemtime(__DIR__ . '/public/css/mobile.css') ?>">
+  <link rel="stylesheet" href="/public/css/theme.css?v=<?= filemtime(__DIR__ . '/public/css/theme.css') ?>">
+  <link rel="stylesheet" href="/public/css/blocks.php">
 
   <link rel="shortcut icon" href="/assets/icon/favicon.svg" />
   <link rel="apple-touch-icon" href="/assets/icon/favicon.svg" />
@@ -74,6 +79,8 @@ $featured = getFeaturedPost();
   <link rel="shortcut icon" href="/assets/icon/favicon.svg" type="image/png">
 </head>
 <body>
+  <header class="mobile-header"><button type="button" id="mobile-menu" aria-label="폴더 메뉴" aria-controls="sidebar" aria-expanded="false"><img src="/assets/icon/folder-menu.svg" alt=""></button><a href="/">이지민 블로그</a><button type="button" id="mobile-search" aria-label="검색"><img src="/assets/icon/magnify.svg" alt=""></button></header>
+  <button type="button" id="mobile-backdrop" aria-label="메뉴 닫기" hidden></button>
   <div id="app">
     <?php renderNav(); ?>
 
@@ -126,11 +133,12 @@ $featured = getFeaturedPost();
 </div>
 
       <script src="/public/js/sidebar.js" defer></script>
+<script src="/public/js/mobile.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" defer></script>
 <script src="/public/js/code_blocks.js" defer></script>
 <script type="module" src="/public/js/post.js?v=<?= filemtime(__DIR__ . '/public/js/post.js') ?>"></script>
-<script type="module" src="/public/js/nav.js"></script>
+<script type="module" src="/public/js/nav.js?v=<?= filemtime(__DIR__ . '/public/js/nav.js') ?>"></script>
 <script type="module" src="/public/js/tabs.js"></script>
 </body>
 </html>

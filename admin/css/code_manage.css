@@ -1,0 +1,30 @@
+.code-manager { color: #e1e4e7; }
+.code-manager header { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:16px; }
+.code-manager h1 { font-size:22px; margin:0; }
+.code-manager h2 { font-size:16px; margin:0; }
+.code-manager small, .code-memo { color:#a6adb5; }
+.code-layout { display:grid; grid-template-columns:260px minmax(0,1fr); gap:24px; }
+.code-groups { border-right:1px solid #45494d; padding-right:16px; max-height:75vh; overflow:auto; }
+.code-groups h2 { margin-bottom:12px; }
+.code-groups a { display:flex; flex-direction:column; gap:5px; padding:12px; color:#dde1e5; text-decoration:none; border-radius:4px; overflow-wrap:anywhere; }
+.code-groups a span { color:#a0a9b3; font-size:12px; }
+.code-groups a.selected { background:#303c46; box-shadow:inset 3px 0 #73b9de; }
+.code-detail { min-width:0; }
+.code-actions { display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
+.code-actions form { margin:0; }
+.code-manager button, dialog[id^="code-"] button { padding:7px 10px; border:1px solid #565d64; border-radius:4px; background:#343a40; color:#eee; cursor:pointer; }
+.code-manager button:hover { background:#46515a; }
+.code-table-wrap { overflow:auto; }
+.code-manager table { width:100%; border-collapse:collapse; font-size:13px; }
+.code-manager th, .code-manager td { padding:10px; border-bottom:1px solid #42474b; text-align:left; overflow-wrap:anywhere; max-width:240px; }
+.code-manager th { color:#a8b2bc; font-weight:500; background:#252a2e; }
+.code-error { color:#ff9c9c; }
+dialog[id^="code-"] { box-sizing:border-box; width:min(480px,calc(100% - 32px)); max-height:85vh; overflow:auto; background:#262a2e; color:#e1e4e7; border:1px solid #59616a; border-radius:6px; padding:22px; }
+dialog[id^="code-"]::backdrop { background:rgb(0 0 0 / 65%); }
+dialog[id^="code-"] form { display:grid; gap:12px; }
+dialog[id^="code-"] h2 { margin:0 0 4px; font-size:18px; }
+dialog[id^="code-"] label { display:grid; gap:6px; font-size:13px; }
+dialog[id^="code-"] input:not([type="checkbox"]), dialog[id^="code-"] textarea { box-sizing:border-box; width:100%; padding:8px; background:#1d2125; color:#eee; border:1px solid #505963; border-radius:3px; }
+dialog[id^="code-"] .code-check { display:flex; align-items:center; }
+dialog[id^="code-"] footer { display:flex; justify-content:flex-end; gap:8px; }
+@media(max-width:850px) { .code-layout { grid-template-columns:minmax(0,1fr); } .code-groups { max-height:220px; border-right:0; border-bottom:1px solid #45494d; padding:0 0 12px; } }

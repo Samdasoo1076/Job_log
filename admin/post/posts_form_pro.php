@@ -184,6 +184,7 @@ include __DIR__ . '/../layout/header.php';
 
 <link rel="stylesheet" href="/public/css/post.css?v=<?= filemtime(__DIR__ . '/../../public/css/post.css') ?>">
 <link rel="stylesheet" href="/admin/css/post_pro.css?v=<?= filemtime(__DIR__ . '/../css/post_pro.css') ?>">
+<link rel="stylesheet" href="/public/css/blocks.php">
 
 <form id="pro-post-form" class="pro-editor" method="post" action="posts_form_pro.php<?= $postId ? '?id=' . $postId : '' ?>" novalidate>
   <input type="hidden" name="action" value="publish">

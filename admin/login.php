@@ -33,6 +33,7 @@ include __DIR__ . '/common/front_head.php';
 ?>
 <link rel="stylesheet" href="/admin/css/login.css">
 <div class="login-box">
+<label class="admin-theme-control">테마 <select id="admin-theme" aria-label="관리자 테마"><option value="light">라이트</option><option value="dark">다크</option></select></label>
 <h1>관리자 로그인</h1>
 <?php if (!empty($error)): ?>
   <p class="error"><?=htmlspecialchars($error)?></p>

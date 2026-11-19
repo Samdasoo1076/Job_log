@@ -5,6 +5,9 @@ include_once __DIR__ . '/../common/front_head.php';
 ?>
   <aside class="sidebar">
     <h1><a href="/"><?= SITE_TITLE ?></a></h1>
+    <label class="admin-theme-control">테마
+      <select id="admin-theme" aria-label="관리자 테마"><option value="light">라이트</option><option value="dark">다크</option></select>
+    </label>
     <nav>
       <ul>
         <li><a href="/admin/dashboard.php">대시보드</a></li>

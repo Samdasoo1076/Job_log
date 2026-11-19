@@ -1,10 +1,12 @@
 <?php
 require __DIR__ . '/../common/common_inc.php';
+require __DIR__ . '/../com/biz/common_code.php';
 include __DIR__ . '/../layout/header.php';
 ?>
 
 <link rel="stylesheet" href="/public/css/post.css?v=<?= filemtime(__DIR__ . '/../../public/css/post.css') ?>">
 <link rel="stylesheet" href="/admin/css/html_guide.css?v=<?= filemtime(__DIR__ . '/../css/html_guide.css') ?>">
+<link rel="stylesheet" href="/public/css/blocks.php">
 
 <section class="html-guide">
   <div class="guide-head">
@@ -16,6 +18,14 @@ include __DIR__ . '/../layout/header.php';
   </div>
 
   <div class="guide-grid">
+    <article class="guide-panel wide">
+      <h2>공통 코드 색상 블록</h2>
+      <?php foreach (commonCodeOptions($pdo, 'POST_BLOCK') as $block): ?>
+        <?php if (!preg_match('/^dev-[a-z][a-z0-9-]{0,44}$/D', $block['DCODE'])) continue; ?>
+        <div class="guide-preview content"><div class="<?= htmlspecialchars($block['DCODE'], ENT_QUOTES) ?>"><p><?= htmlspecialchars($block['DCODE_NM']) ?></p></div></div>
+        <pre class="guide-code"><?= htmlspecialchars('<div class="' . $block['DCODE'] . '"><p>내용</p></div>') ?></pre>
+      <?php endforeach; ?>
+    </article>
     <article class="guide-panel">
       <h2>텍스트 색상</h2>
       <div class="guide-preview content">

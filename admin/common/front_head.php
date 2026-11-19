@@ -9,6 +9,12 @@ header('Content-Type: text/html; charset=utf-8');
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><?= SITE_TITLE ?></title>
+  <script>
+    try { document.documentElement.dataset.adminTheme = localStorage.getItem('admin-theme') === 'dark' ? 'dark' : 'light'; }
+    catch (_) { document.documentElement.dataset.adminTheme = 'light'; }
+  </script>
+  <link rel="stylesheet" href="/admin/css/theme.css?v=<?= filemtime(__DIR__ . '/../css/theme.css') ?>">
+  <script src="/admin/js/theme.js" defer></script>
   <link rel="stylesheet" href="/admin/css/header.css">
   <link rel="stylesheet" href="/admin/css/main.css">
   <link rel="stylesheet" href="/admin/css/dashboard.css">

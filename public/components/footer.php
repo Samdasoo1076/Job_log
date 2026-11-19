@@ -6,6 +6,37 @@
  * @param string $owner GitHub 사용자명
  */
 function renderJobLog(string $owner) {
+    $cachePath = sys_get_temp_dir() . '/blog-github-' . hash('sha256', $owner) . '.json';
+    $cache = @fopen($cachePath, 'c+');
+    $data = [];
+    if ($cache && flock($cache, LOCK_EX)) {
+        $saved = json_decode(stream_get_contents($cache), true) ?: [];
+        $data = $saved['data'] ?? [];
+        if (time() - (int)($saved['checked_at'] ?? 0) >= 600) {
+            $context = stream_context_create(['http' => [
+                'method' => 'GET',
+                'header' => ['User-Agent: ' . $owner . '-blog', 'Accept: application/vnd.github+json'],
+                'timeout' => 3,
+            ]]);
+            $raw = @file_get_contents('https://api.github.com/repos/' . rawurlencode($owner) . '/job_log/commits?per_page=1', false, $context);
+            $fresh = $raw !== false ? json_decode($raw, true) : null;
+            if (isset($fresh[0]['commit']['message'], $fresh[0]['commit']['author']['date'], $fresh[0]['html_url'])) {
+                $data = $fresh;
+            }
+            rewind($cache);
+            ftruncate($cache, 0);
+            fwrite($cache, json_encode(['checked_at' => time(), 'data' => $data]));
+            fflush($cache);
+        }
+        flock($cache, LOCK_UN);
+    }
+    if (is_resource($cache)) fclose($cache);
+    if (empty($data[0])) {
+        $repo = htmlspecialchars('https://github.com/' . rawurlencode($owner) . '/job_log/commits', ENT_QUOTES, 'UTF-8');
+        echo '<div class="job-log"><a href="' . $repo . '" target="_blank" rel="noopener noreferrer">GitHub 커밋 기록</a></div>';
+        return;
+    }
+/*
     $apiUrl = "https://api.github.com/repos/{$owner}/job_log/commits?per_page=1";
     $opts = [
         'http' => [
@@ -27,6 +58,7 @@ function renderJobLog(string $owner) {
         return;
     }
 
+*/
      $isoDate = $data[0]['commit']['author']['date'];
  
      // DateTime 객체로 변환 (로컬 타임존으로 포맷)
@@ -34,12 +66,14 @@ function renderJobLog(string $owner) {
      $dt->setTimezone(new DateTimeZone(date_default_timezone_get()));
      $when = $dt->format('Y-m-d H:i');
 
-    $commit = htmlspecialchars($data[0]['commit']['message'], ENT_QUOTES, 'UTF-8');
+    $message = $data[0]['commit']['message'];
+    $fullCommit = htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
+    $commit = htmlspecialchars(mb_strlen($message, 'UTF-8') > 20 ? mb_substr($message, 0, 20, 'UTF-8') . '...' : $message, ENT_QUOTES, 'UTF-8');
     $link   = htmlspecialchars($data[0]['html_url'], ENT_QUOTES, 'UTF-8');
     echo "<div class=\"commit\">
             <span class=\"message\">
             <strong>Latest Commit </strong>
-            <a href=\"{$link}\" target=\"_blank\">{$commit}</a>
+            <a href=\"{$link}\" target=\"_blank\" rel=\"noopener noreferrer\" title=\"{$fullCommit}\">{$commit}</a>
             </span>
             <span class=\"time\" ><a href=\"admin/\">Samdasoo1076</a> &nbsp {$when}</span>
           </div>";

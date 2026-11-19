@@ -16,6 +16,7 @@ require __DIR__ . '/components/footer.php';
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
+  <script src="/public/js/theme.js?v=<?= filemtime(__DIR__ . '/js/theme.js') ?>"></script>
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/content.css">
   <link rel="stylesheet" href="css/nav.css">
@@ -25,6 +26,8 @@ require __DIR__ . '/components/footer.php';
   <link rel="stylesheet" href="css/tabs.css">
   <link rel="stylesheet" href="css/sidebar_header.css">
   <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="/public/css/theme.css?v=<?= filemtime(__DIR__ . '/css/theme.css') ?>">
+  <link rel="stylesheet" href="/public/css/blocks.php">
   <link rel="shortcut icon" href="/assets/icon/favicon.svg" />
   <link rel="apple-touch-icon" href="/assets/icon/favicon.svg" />
 

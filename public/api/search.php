@@ -1,7 +1,7 @@
 <?php
 // public/api/search.php
 header('Content-Type: application/json; charset=utf-8');
-require  '../../db.php';
+require __DIR__ . '/../../db.php';
 
 // 폴더 경로 계산 헬퍼
 function getFolderPath($id) {
@@ -19,6 +19,11 @@ function getFolderPath($id) {
 }
 
 $q = trim($_GET['q'] ?? '');
+if (($_GET['mode'] ?? '') === 'latest') {
+    $stmt = $pdo->query("SELECT id, title FROM post WHERE del_tf='N' AND use_tf='Y' ORDER BY created_at DESC, id DESC LIMIT 5");
+    echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC), JSON_UNESCAPED_UNICODE);
+    exit;
+}
 if ($q === '') {
     echo json_encode([]);
     exit;
@@ -28,7 +33,7 @@ $q = "%$q%";
 $stmt = $pdo->prepare("
     SELECT id, title, folder_id
       FROM post
-     WHERE title LIKE :q AND del_tf = 'Y'
+     WHERE title LIKE :q AND del_tf = 'N' AND use_tf = 'Y'
      ORDER BY created_at DESC
      LIMIT 20
 ");

@@ -1,5 +1,10 @@
 <?php
 require __DIR__ . '/../common/common_inc.php';
+require __DIR__ . '/../com/biz/common_code.php';
+$tagOptions = [];
+foreach (commonCodeOptions($pdo, 'NOTE_TAG') as $code) {
+    $tagOptions[$code['DCODE_EXT'] !== '' ? $code['DCODE_EXT'] : $code['DCODE']] = $code['DCODE_NM'];
+}
 
 $pdo->exec("
     CREATE TABLE IF NOT EXISTS secret_note (
@@ -58,13 +63,13 @@ function secretText(?string $value): string
 
 function secretSave(array $input): void
 {
-    global $pdo;
+    global $pdo, $tagOptions;
 
     $id = (int)($input['id'] ?? 0);
     $title = secretText($input['title'] ?? '');
     $body = secretText($input['note_body'] ?? '');
     $tag = ($input['tag_type'] ?? '일반') === 'custom' ? secretText($input['custom_tag'] ?? '') : (string)$input['tag_type'];
-    if (!in_array($input['tag_type'] ?? '', ['계정', '일반', 'custom'], true) || $tag === '' || mb_strlen($tag) > 255) {
+    if ((!array_key_exists($input['tag_type'] ?? '', $tagOptions) && ($input['tag_type'] ?? '') !== 'custom') || $tag === '' || mb_strlen($tag) > 255) {
         throw new InvalidArgumentException('태그를 확인해 주세요.');
     }
     $accountId = $tag === '계정' ? (string)($input['account_id'] ?? '') : '';
@@ -158,7 +163,7 @@ if (isset($_GET['saved'])) {
 
 $keyword = trim($_GET['keyword'] ?? '');
 $important = ($_GET['important'] ?? '') === '1';
-$tagFilter = in_array($_GET['tag'] ?? '', ['계정', '일반'], true) ? $_GET['tag'] : '';
+$tagFilter = array_key_exists($_GET['tag'] ?? '', $tagOptions) ? $_GET['tag'] : '';
 
 $where = ["use_tf = 'Y'", "del_tf = 'N'"];
 $params = [];
@@ -229,10 +234,11 @@ include __DIR__ . '/../layout/header.php';
 
       <label>
         <span>태그</span>
-        <?php $tag = $editNote['tags'] ?? '일반'; $type = in_array($tag, ['계정', '일반'], true) ? $tag : 'custom'; ?>
+        <?php $tag = $editNote['tags'] ?? (array_key_exists('일반', $tagOptions) ? '일반' : 'custom'); $type = array_key_exists($tag, $tagOptions) ? $tag : 'custom'; ?>
         <select name="tag_type" id="secret-tag">
-          <option value="일반" <?= $type === '일반' ? 'selected' : '' ?>>일반</option>
-          <option value="계정" <?= $type === '계정' ? 'selected' : '' ?>>계정</option>
+          <?php foreach ($tagOptions as $value => $label): ?>
+            <option value="<?= htmlspecialchars($value, ENT_QUOTES) ?>" <?= $type === $value ? 'selected' : '' ?>><?= htmlspecialchars($label) ?></option>
+          <?php endforeach; ?>
           <option value="custom" <?= $type === 'custom' ? 'selected' : '' ?>>직접 입력</option>
         </select>
         <input id="secret-custom-tag" type="text" name="custom_tag" maxlength="255" value="<?= htmlspecialchars($type === 'custom' ? $tag : '') ?>" aria-label="직접 입력 태그" placeholder="태그 입력">
@@ -270,8 +276,9 @@ include __DIR__ . '/../layout/header.php';
             태그
             <select name="tag" class="secret-tag-filter">
               <option value="">전체</option>
-              <option value="계정" <?= $tagFilter === '계정' ? 'selected' : '' ?>>계정</option>
-              <option value="일반" <?= $tagFilter === '일반' ? 'selected' : '' ?>>일반</option>
+              <?php foreach ($tagOptions as $value => $label): ?>
+                <option value="<?= htmlspecialchars($value, ENT_QUOTES) ?>" <?= $tagFilter === $value ? 'selected' : '' ?>><?= htmlspecialchars($label) ?></option>
+              <?php endforeach; ?>
             </select>
           </label>
           <label class="filter-keyword">
@@ -302,7 +309,7 @@ include __DIR__ . '/../layout/header.php';
               <?php endif; ?>
             </div>
             <?php if ($note['tags'] !== ''): ?>
-              <div class="secret-tags"><?= htmlspecialchars($note['tags']) ?></div>
+              <div class="secret-tags"><?= htmlspecialchars($tagOptions[$note['tags']] ?? $note['tags']) ?></div>
             <?php endif; ?>
             </div>
             <div class="secret-details">

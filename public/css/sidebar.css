@@ -1,4 +1,11 @@
 /* File: public/css/sidebar.css */
+.search-default-heading { display:flex; align-items:center; justify-content:space-between; gap:8px; margin:12px 0 6px; color:#aab2bb; font-size:12px; }
+.search-default-heading button, .search-recent-row button { border:0; background:transparent; color:#bbc3cb; cursor:pointer; font:inherit; }
+.search-recent-row { display:flex; align-items:center; gap:8px; min-width:0; }
+.search-recent-row button:first-child { flex:1; min-width:0; padding:10px 0; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.search-recent-row button:last-child { flex:0 0 32px; height:36px; font-size:20px; }
+.search-recent-row button:hover { color:#fff; }
+#search-tree > .post-link { padding:10px 0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 
 /* ── 사이드바 기본 ── */
 #sidebar {
