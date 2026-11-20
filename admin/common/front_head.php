@@ -14,7 +14,7 @@ header('Content-Type: text/html; charset=utf-8');
     catch (_) { document.documentElement.dataset.adminTheme = 'light'; }
   </script>
   <link rel="stylesheet" href="/admin/css/theme.css?v=<?= filemtime(__DIR__ . '/../css/theme.css') ?>">
-  <script src="/admin/js/theme.js" defer></script>
+  <script src="/admin/js/theme.js?v=<?= filemtime(__DIR__ . '/../js/theme.js') ?>" defer></script>
   <link rel="stylesheet" href="/admin/css/header.css">
   <link rel="stylesheet" href="/admin/css/main.css">
   <link rel="stylesheet" href="/admin/css/dashboard.css">

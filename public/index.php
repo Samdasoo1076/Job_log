@@ -28,6 +28,7 @@ require __DIR__ . '/components/footer.php';
   <link rel="stylesheet" href="css/footer.css">
   <link rel="stylesheet" href="/public/css/theme.css?v=<?= filemtime(__DIR__ . '/css/theme.css') ?>">
   <link rel="stylesheet" href="/public/css/blocks.php">
+  <link rel="stylesheet" href="/public/css/minimap.css?v=<?= filemtime(__DIR__ . '/css/minimap.css') ?>">
   <link rel="shortcut icon" href="/assets/icon/favicon.svg" />
   <link rel="apple-touch-icon" href="/assets/icon/favicon.svg" />
 
@@ -76,6 +77,7 @@ require __DIR__ . '/components/footer.php';
 </div>
 
       <script src="js/sidebar.js" defer></script>
+<script src="/public/js/minimap.js?v=<?= filemtime(__DIR__ . '/js/minimap.js') ?>" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" defer></script>
 <script src="js/code_blocks.js" defer></script>

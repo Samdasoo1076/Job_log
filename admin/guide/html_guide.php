@@ -17,6 +17,50 @@ include __DIR__ . '/../layout/header.php';
     <a href="/admin/post/posts_form_pro.php">글쓰기</a>
   </div>
 
+  <section class="writing-guide" aria-labelledby="writing-guide-title">
+    <h2 id="writing-guide-title">글 작성 가이드</h2>
+    <p>기준 글: <a href="/?post_id=16" target="_blank" rel="noopener noreferrer">leejimin.cv</a>. 색상은 문장의 역할을 구분할 때 사용하고, 본문 전체를 강조하지 않습니다.</p>
+    <div class="writing-guide-table"><table>
+      <thead><tr><th>역할</th><th>표현</th><th>기준 글에서의 사용</th></tr></thead>
+      <tbody>
+        <tr><td>섹션 제목</td><td><code>h2</code> + <code>text-blue</code></td><td>인사말, 직무 경험, 사이드 프로젝트, 학력 등 큰 구분</td></tr>
+        <tr><td>제목 앞 기호</td><td><code>text-yellow</code>로 감싼 <code>&amp;lt;/&amp;gt;</code></td><td>주요 섹션 앞의 &lt;/&gt; 표시. 모든 문단에 반복하지 않음</td></tr>
+        <tr><td>프로젝트·조직·기술 개념</td><td><code>text-green</code>, 필요하면 <code>strong</code></td><td>프로젝트명, 소속명, 모놀리식 아키텍처</td></tr>
+        <tr><td>역할·핵심 표현</td><td><code>text-orange</code></td><td>백엔드 엔지니어, 기대 이상의 것, 평가 결과</td></tr>
+        <tr><td>중요한 기능·이름</td><td><code>strong</code></td><td>이름과 UX 통계 수집 기능처럼 짧은 단어만 강조</td></tr>
+        <tr><td>설명·기간</td><td><code>p</code>, 기본 글자색</td><td>프로젝트 설명과 날짜는 보통 색상으로 유지</td></tr>
+        <tr><td>업무와 세부 작업</td><td><code>ul</code> / <code>li</code></td><td>프로젝트 아래 수행한 작업을 항목으로 구분</td></tr>
+        <tr><td>근거 링크·기술 스택</td><td><code>a.text-blue</code>, <code>tech-item</code></td><td>관련 기사 링크와 기술 아이콘</td></tr>
+      </tbody>
+    </table></div>
+    <h3>색상과 구조를 함께 사용하는 예시</h3>
+    <div class="guide-preview content">
+      <h2><span class="text-yellow">&lt;/&gt;</span> <span class="text-blue">게시글 조회 구조</span></h2>
+      <p><strong class="text-green">Joblog</strong>의 <span class="text-orange">사용자 화면</span>에서 글을 선택하면 본문 API를 호출한다.</p>
+      <p>첫 화면은 PHP가 구성하고, 다른 글을 선택할 때는 <strong>본문 영역만 교체</strong>한다.</p>
+      <ul><li>PHP에서 게시글을 조회한다.</li><li>JavaScript가 응답을 받아 본문에 반영한다.</li></ul>
+    </div>
+    <pre class="guide-code">&lt;h2&gt;&lt;span class="text-yellow"&gt;&amp;lt;/&amp;gt;&lt;/span&gt; &lt;span class="text-blue"&gt;게시글 조회 구조&lt;/span&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;strong class="text-green"&gt;Joblog&lt;/strong&gt;의 &lt;span class="text-orange"&gt;사용자 화면&lt;/span&gt;에서 글을 선택하면 본문 API를 호출한다.&lt;/p&gt;
+&lt;p&gt;첫 화면은 PHP가 구성하고, 다른 글을 선택할 때는 &lt;strong&gt;본문 영역만 교체&lt;/strong&gt;한다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;PHP에서 게시글을 조회한다.&lt;/li&gt;
+  &lt;li&gt;JavaScript가 응답을 받아 본문에 반영한다.&lt;/li&gt;
+&lt;/ul&gt;</pre>
+    <h3>내용을 작성할 때</h3>
+    <ul class="writing-guide-rules">
+      <li>소개글은 기준 글처럼 존댓말로, 기술 경험 글은 실제 상황과 판단을 담은 짧은 회고체로 작성합니다. 글 안에서는 말투를 통일합니다.</li>
+      <li>상황 → 문제 → 확인한 내용 → 처리 방법 순서로 풀되, 불필요한 서론과 거창한 결론은 덜어냅니다.</li>
+      <li>한 문단에 1~3문장을 담고, 새 주제는 새 문단으로 나눕니다. 기준 글의 br은 소개·역할·기간처럼 묶인 정보에만 참고하고 모바일 줄 길이를 맞추려고 강제 줄바꿈하지 않습니다.</li>
+      <li>여러 작업을 나열할 때 목록을 사용합니다. 하위 목록은 상위 li 안에 넣고, 깊게 중첩하지 않습니다.</li>
+      <li>코드는 실제 설명에 필요한 부분만 언어별 코드 블록으로 보여줍니다. 파일명과 컬럼명처럼 짧은 값은 인라인 code를 사용합니다.</li>
+      <li>문제·주의·정리 블록은 필요한 지점에만 사용합니다. 모든 문단에 박스나 색상을 적용하지 않습니다.</li>
+      <li>경험하지 않은 작업, 측정하지 않은 수치, 확인하지 않은 성과는 추가하지 않습니다. CV의 성과 표현도 새 글의 사실로 가져오지 않습니다.</li>
+    </ul>
+    <h3>저장 전 확인</h3>
+    <p>에디터에서는 본문 스타일이 모두 표시되지 않을 수 있습니다. 미리보기에서 소제목 색상, 코드 언어·줄바꿈, 블록과 링크를 확인하고 사용자 화면의 라이트·다크 모드와 모바일에서도 읽히는지 확인합니다. 색상은 고정 인라인 스타일보다 기존 클래스를 사용합니다.</p>
+  </section>
+  <h2>HTML 구성요소</h2>
   <div class="guide-grid">
     <article class="guide-panel wide">
       <h2>공통 코드 색상 블록</h2>

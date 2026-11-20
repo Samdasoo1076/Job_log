@@ -2,6 +2,18 @@
   color: #eee;
 }
 
+.writing-guide { margin:0 0 28px; padding:0 0 24px; border-bottom:1px solid #596052; line-height:1.75; }
+.writing-guide h2 { font-size:20px; margin:0 0 12px; }
+.writing-guide h3 { font-size:16px; margin:20px 0 10px; }
+.writing-guide p { margin:10px 0; }
+.writing-guide-table { overflow-x:auto; margin:16px 0; }
+.writing-guide table { width:100%; border-collapse:collapse; font-size:14px; }
+.writing-guide th,.writing-guide td { padding:10px 12px; text-align:left; border-bottom:1px solid #454b40; vertical-align:top; }
+.writing-guide th { font-weight:600; }
+.writing-guide-rules li { margin:8px 0; }
+.writing-guide .guide-preview h2 { font-size:20px; }
+.writing-guide .guide-code { margin:12px 0; }
+
 .guide-head {
   display: flex;
   justify-content: space-between;

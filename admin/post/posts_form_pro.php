@@ -1,6 +1,8 @@
 <?php
 require __DIR__ . '/../common/common_inc.php';
 require __DIR__ . '/../com/biz/folder.php';
+require __DIR__ . '/../com/biz/common_code.php';
+$writingBlocks = commonCodeOptions($pdo, 'POST_BLOCK');
 
 $pdo->exec("
     CREATE TABLE IF NOT EXISTS post_draft (
@@ -222,6 +224,16 @@ include __DIR__ . '/../layout/header.php';
         <em id="description-count">0 / 255</em>
       </label>
 
+      <div class="body-tools" role="toolbar" aria-label="본문 서식">
+        <button type="button" data-body-style="heading" title="선택한 텍스트를 파란 소제목으로">H2</button>
+        <button type="button" data-body-style="strong" title="선택한 텍스트 굵게"><b>B</b></button>
+        <button type="button" data-body-style="text-green" class="body-swatch green" title="초록 강조" aria-label="초록 강조"></button>
+        <button type="button" data-body-style="text-orange" class="body-swatch orange" title="주황 강조" aria-label="주황 강조"></button>
+        <button type="button" data-body-style="text-blue" class="body-swatch blue" title="파랑 강조" aria-label="파랑 강조"></button>
+        <button type="button" id="body-block-open">문장 블록</button>
+        <button type="button" id="body-code-open">&lt;/&gt; 코드</button>
+        <span id="body-tools-status" role="status"></span>
+      </div>
       <label class="field">
         <span>본문</span>
         <textarea name="content" id="editor" rows="16" required><?= htmlspecialchars($source['content'] ?? '') ?></textarea>
@@ -305,6 +317,24 @@ include __DIR__ . '/../layout/header.php';
   <article id="preview-content" class="preview-content"></article>
 </dialog>
 
+<dialog id="body-insert-dialog" class="body-insert-dialog">
+  <form id="body-insert-form">
+    <h2 id="body-insert-title">블록 삽입</h2>
+    <label id="body-block-label">문장 블록<select id="body-block-type">
+      <?php foreach ($writingBlocks as $block): ?>
+        <?php if (!preg_match('/^dev-[a-z][a-z0-9-]{0,44}$/D', $block['DCODE'])) continue; ?>
+        <option value="<?= htmlspecialchars($block['DCODE'], ENT_QUOTES) ?>"><?= htmlspecialchars($block['DCODE_NM']) ?></option>
+      <?php endforeach; ?>
+    </select></label>
+    <label id="body-language-label">언어<select id="body-code-language">
+      <?php foreach (['sql'=>'SQL','java'=>'Java','javascript'=>'JavaScript','php'=>'PHP','html'=>'HTML','css'=>'CSS','bash'=>'Bash','json'=>'JSON'] as $value=>$label): ?>
+        <option value="<?= $value ?>"><?= $label ?></option>
+      <?php endforeach; ?>
+    </select></label>
+    <label>내용<textarea id="body-insert-text" rows="9" required spellcheck="false"></textarea></label>
+    <div class="secret-actions"><button type="button" id="body-insert-cancel">취소</button><button type="submit">삽입</button></div>
+  </form>
+</dialog>
 <script src="/SE2-2.8.2.3/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" defer></script>
@@ -317,5 +347,6 @@ window.proPostEditorConfig = {
 };
 </script>
 <script src="/admin/js/post_pro.js?v=<?= filemtime(__DIR__ . '/../js/post_pro.js') ?>"></script>
+<script src="/admin/js/body_tools.js?v=<?= filemtime(__DIR__ . '/../js/body_tools.js') ?>" defer></script>
 
 <?php include __DIR__ . '/../layout/footer.php'; ?>

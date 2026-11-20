@@ -1,6 +1,19 @@
 .pro-editor {
   color: #eee;
 }
+.body-tools { display:flex; gap:6px; align-items:center; flex-wrap:wrap; margin:0 0 10px; }
+.body-tools button { box-sizing:border-box; min-width:34px; height:34px; padding:5px 9px; border:1px solid #62685d; border-radius:4px; background:#34392f; color:#eee; cursor:pointer; }
+.body-tools .body-swatch { position:relative; width:34px; padding:0; }
+.body-swatch::after { content:''; position:absolute; inset:9px; border-radius:50%; background:var(--swatch); }
+.body-swatch.green { --swatch:#82ac58; }.body-swatch.orange { --swatch:#df8959; }.body-swatch.blue { --swatch:#459bc0; }
+#body-tools-status { font-size:12px; color:#8b9c85; }
+.body-insert-dialog { box-sizing:border-box; width:min(620px,calc(100% - 32px)); max-height:85vh; overflow:auto; padding:22px; border:1px solid #596052; border-radius:6px; background:#252922; color:#eee; }
+.body-insert-dialog::backdrop { background:rgb(0 0 0 / 60%); }
+.body-insert-dialog form,.body-insert-dialog label { display:grid; gap:10px; }
+.body-insert-dialog label { margin-bottom:12px; }
+.body-insert-dialog [hidden] { display:none; }
+.body-insert-dialog :is(select,textarea) { box-sizing:border-box; width:100%; padding:10px; background:#1e211b; color:#eee; border:1px solid #596052; border-radius:3px; font:inherit; }
+.body-insert-dialog textarea { resize:vertical; font-family:Consolas,monospace; }
 
 .pro-editor-head {
   display: flex;

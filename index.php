@@ -71,6 +71,7 @@ $featured = getFeaturedPost();
   <link rel="stylesheet" href="/public/css/mobile.css?v=<?= filemtime(__DIR__ . '/public/css/mobile.css') ?>">
   <link rel="stylesheet" href="/public/css/theme.css?v=<?= filemtime(__DIR__ . '/public/css/theme.css') ?>">
   <link rel="stylesheet" href="/public/css/blocks.php">
+  <link rel="stylesheet" href="/public/css/minimap.css?v=<?= filemtime(__DIR__ . '/public/css/minimap.css') ?>">
 
   <link rel="shortcut icon" href="/assets/icon/favicon.svg" />
   <link rel="apple-touch-icon" href="/assets/icon/favicon.svg" />
@@ -134,6 +135,7 @@ $featured = getFeaturedPost();
 
       <script src="/public/js/sidebar.js" defer></script>
 <script src="/public/js/mobile.js" defer></script>
+<script src="/public/js/minimap.js?v=<?= filemtime(__DIR__ . '/public/js/minimap.js') ?>" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" defer></script>
 <script src="/public/js/code_blocks.js" defer></script>
