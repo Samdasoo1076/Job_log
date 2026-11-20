@@ -1,5 +1,39 @@
 document.addEventListener('DOMContentLoaded', () => {
   window.lucide?.createIcons();
+  const cards = [...document.querySelectorAll('.secret-card')];
+  cards.forEach((card, index) => {
+    const heading = card.querySelector('.secret-card-head h2');
+    const details = card.querySelector('.secret-details');
+    const actions = card.querySelector('.secret-card-actions');
+    const button = document.createElement('button');
+    button.type = 'button'; button.className = 'secret-note-toggle';
+    button.textContent = heading.textContent;
+    heading.replaceChildren(button);
+    details.id = 'secret-note-details-' + index;
+    button.setAttribute('aria-controls', details.id);
+    button.setAttribute('aria-expanded', 'false');
+    details.hidden = true; actions.hidden = true;
+    button.onclick = () => {
+      const open = button.getAttribute('aria-expanded') !== 'true';
+      button.setAttribute('aria-expanded', String(open));
+      details.hidden = !open; actions.hidden = !open;
+      card.classList.toggle('is-open', open);
+    };
+  });
+  const quick = document.getElementById('secret-quick-find');
+  const count = document.getElementById('secret-quick-count');
+  function filterCards() {
+    const query = quick.value.trim().toLocaleLowerCase();
+    let visible = 0;
+    cards.forEach(card => {
+      const haystack = card.querySelector('.secret-identity').textContent.toLocaleLowerCase();
+      card.hidden = !haystack.includes(query);
+      if (!card.hidden) visible++;
+    });
+    count.textContent = visible ? visible + '개' : '일치하는 메모가 없습니다.';
+  }
+  quick.addEventListener('input', filterCards);
+  filterCards();
   const editor = document.getElementById('secret-editor');
   const form = editor.querySelector('form');
   const tag = document.getElementById('secret-tag');
@@ -19,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('secret-create').addEventListener('click', () => {
     form.reset();
     form.elements.id.value = '0';
-    for (const name of ['title', 'note_body', 'account_id', 'account_password', 'custom_tag']) form.elements[name].value = '';
+    for (const name of ['title', 'note_body', 'account_id', 'account_password', 'custom_tag', 'note_url']) form.elements[name].value = '';
     form.elements.is_important.checked = false;
     tag.value = [...tag.options].some(option => option.value === '일반') ? '일반' : 'custom';
     form.querySelector('h2').textContent = '새 메모';

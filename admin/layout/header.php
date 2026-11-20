@@ -3,7 +3,13 @@
 require_once __DIR__ . '/../common/common_inc.php'; // 세션 체크, DB
 include_once __DIR__ . '/../common/front_head.php';
 ?>
-  <aside class="sidebar">
+  <header class="admin-mobile-header">
+    <button type="button" id="admin-menu-toggle" aria-controls="admin-sidebar" aria-expanded="false" aria-label="관리자 메뉴 열기"><span aria-hidden="true">☰</span></button>
+    <a href="/admin/secret/secret_note.php">비밀 메모장</a>
+    <a href="/" class="admin-mobile-home">블로그</a>
+  </header>
+  <button type="button" id="admin-menu-backdrop" aria-label="관리자 메뉴 닫기" hidden></button>
+  <aside class="sidebar" id="admin-sidebar">
     <h1><a href="/"><?= SITE_TITLE ?></a></h1>
     <label class="admin-theme-control">테마
       <select id="admin-theme" aria-label="관리자 테마"><option value="light">라이트</option><option value="dark">다크</option></select>

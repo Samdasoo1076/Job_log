@@ -8,6 +8,7 @@ header('Content-Type: text/html; charset=utf-8');
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive">
   <title><?= SITE_TITLE ?></title>
   <script>
     try { document.documentElement.dataset.adminTheme = localStorage.getItem('admin-theme') === 'dark' ? 'dark' : 'light'; }
@@ -22,7 +23,9 @@ header('Content-Type: text/html; charset=utf-8');
   <link rel="stylesheet" href="/admin/css/folder.css">
   <link rel="stylesheet" href="/admin/css/popular.css">
   <link rel="stylesheet" href="/admin/css/account_book.css">
-  <link rel="stylesheet" href="/admin/css/secret_note.css">
+  <link rel="stylesheet" href="/admin/css/secret_note.css?v=<?= filemtime(__DIR__ . '/../css/secret_note.css') ?>">
+  <link rel="stylesheet" href="/admin/css/mobile.css?v=<?= filemtime(__DIR__ . '/../css/mobile.css') ?>">
+  <script src="/admin/js/mobile.js?v=<?= filemtime(__DIR__ . '/../js/mobile.js') ?>" defer></script>
 </head>
 <body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

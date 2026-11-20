@@ -23,7 +23,7 @@ export function loadPost(postId) {
     .then(data => {
       // 1) 본문 및 댓글(옵션) 렌더링
       let html = `
-        <h2>${data.title}</h2>
+        <h1>${data.title}</h1>
         ${data.description ? `<h3 class="description">${data.description}</h3>` : ''}
         <div class="content">${data.content}</div>
         <p>조회수: ${data.views}</p>
@@ -89,7 +89,11 @@ export function loadPost(postId) {
       upsertMeta('meta[name="keywords"]',    'content', data.keywords    || '');
       upsertMeta('meta[property="og:title"]',       'content', data.title);
       upsertMeta('meta[property="og:description"]', 'content', data.description || '');
-      upsertMeta('meta[property="og:url"]',         'content', location.href);
+      const canonicalUrl = 'https://leejimin.kr/?post_id=' + encodeURIComponent(postId);
+      upsertMeta('meta[property="og:url"]',         'content', canonicalUrl);
+      let canonical = document.querySelector('link[rel="canonical"]');
+      if (!canonical) { canonical = document.createElement('link'); canonical.rel = 'canonical'; head.appendChild(canonical); }
+      canonical.href = canonicalUrl;
       upsertMeta('meta[name="twitter:title"]',      'content', data.title);
       upsertMeta('meta[name="twitter:description"]','content', data.description || '');
 
@@ -193,6 +197,7 @@ window.loadPost = loadPost;
 window.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.post-link').forEach(link => {
     link.addEventListener('click', e => {
+      if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.button !== 0) return;
       e.preventDefault();
       const id    = +link.dataset.postId;
       const title = link.dataset.title;

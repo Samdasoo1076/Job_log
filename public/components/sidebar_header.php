@@ -10,9 +10,9 @@
 function renderSidebarHeader(string $title, string $subtitle) {
     ?>
     <div class="sidebar-header">
-      <button class="header-btn" id="sidebar-toggle">
+      <a class="header-btn" href="/admin/login.php" title="관리자 로그인">
         <span class="header-title"><?= htmlspecialchars($title, ENT_QUOTES, 'UTF-8') ?></span>
-      </button>
+      </a>
     </div>
     <div class="sidebar-sub">
         <span class="header-arrow"></span>

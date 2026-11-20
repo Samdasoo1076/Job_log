@@ -19,6 +19,6 @@
 #=====================================================================
 # common head
 #=====================================================================
-require $_SERVER['DOCUMENT_ROOT'] . "/common/front_head.php";
+if (empty($seoHeadInline)) require $_SERVER['DOCUMENT_ROOT'] . "/common/front_head.php";
 
 ?>

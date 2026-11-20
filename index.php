@@ -3,6 +3,12 @@ require __DIR__ . '/db.php';
 $tree   = getFolders();
 $postId = isset($_GET['post_id']) ? intval($_GET['post_id']) : null;
 $currentPost     = $postId ? getPost($postId) : null;
+$notFound = isset($_GET['post_id']) && (!$postId || !$currentPost || ($currentPost['del_tf'] ?? 'N') === 'Y');
+if ($notFound) {
+    $currentPost = null;
+    http_response_code(404);
+    header('X-Robots-Tag: noindex');
+}
 $currentComments = $postId ? getComments($postId) : [];
 require __DIR__ . '/common/logger.php';
 
@@ -40,7 +46,11 @@ if ($currentPost) {
 }
 
 
+$seoHeadInline = true;
 require $_SERVER['DOCUMENT_ROOT'] . '/common/common_inc.php';
+$canonicalUrl = 'https://leejimin.kr/' . ($currentPost ? '?post_id=' . (int)$currentPost['id'] : '');
+$g_url = $canonicalUrl;
+if ($currentPost && ($currentPost['use_tf'] ?? 'Y') !== 'Y') header('X-Robots-Tag: noindex');
 require __DIR__ . '/admin/com/biz/post.php'; 
 
 // 컴포넌트 로드
@@ -52,10 +62,24 @@ require __DIR__ . '/public/components/sidebar_header.php';
 require __DIR__ . '/public/components/footer.php';
 
 $featured = getFeaturedPost();
+$recentPosts = $pdo->query("SELECT id,title FROM post WHERE use_tf='Y' AND del_tf='N' ORDER BY created_at DESC,id DESC LIMIT 5")->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+  <?php require __DIR__ . '/common/front_head.php'; ?>
+  <link rel="canonical" href="<?= htmlspecialchars($canonicalUrl, ENT_QUOTES, 'UTF-8') ?>">
+  <?php if ($currentPost && ($currentPost['use_tf'] ?? 'Y') === 'Y'): ?>
+  <script type="application/ld+json"><?= json_encode([
+      '@context'=>'https://schema.org', '@type'=>'BlogPosting',
+      'headline'=>$currentPost['title'], 'description'=>$seo_description,
+      'url'=>$canonicalUrl, 'mainEntityOfPage'=>$canonicalUrl,
+      'author'=>['@type'=>'Person','name'=>'이지민','url'=>'https://leejimin.kr/?post_id=16'],
+      'datePublished'=>date(DATE_ATOM,strtotime($currentPost['created_at'])),
+      'dateModified'=>date(DATE_ATOM,strtotime($currentPost['updated_at'])),
+      'inLanguage'=>'ko-KR'
+  ], JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?></script>
+  <?php endif; ?>
   <meta charset="UTF-8">
   <script src="/public/js/theme.js?v=<?= filemtime(__DIR__ . '/public/js/theme.js') ?>"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -98,6 +122,12 @@ $featured = getFeaturedPost();
         <div id="search-tree"></div>
         <!-- <ul id="search-results"></ul> -->
       </div>
+      <section class="sidebar-latest" aria-label="최신 게시글">
+        <h2>최신 게시글</h2>
+        <?php foreach ($recentPosts as $recent): ?>
+          <a class="post-link" href="/?post_id=<?= (int)$recent['id'] ?>" data-post-id="<?= (int)$recent['id'] ?>" data-title="<?= htmlspecialchars($recent['title'], ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($recent['title'], ENT_QUOTES, 'UTF-8') ?></a>
+        <?php endforeach; ?>
+      </section>
     </div>
 </div>
     <div id="main">
@@ -105,7 +135,11 @@ $featured = getFeaturedPost();
 
     <div id="content">
       <?
-      if ($featured) {
+      if ($currentPost) {
+        renderPostDetail($currentPost, $currentComments);
+      } elseif ($notFound) {
+        echo '<h1>게시글을 찾을 수 없습니다.</h1><p>주소를 확인해 주세요.</p>';
+      } elseif ($featured) {
         // 대표 포스트가 있으면 이걸 렌더링
         echo "<article class=\"featured-post\">";
         echo "<h1>" . htmlspecialchars($featured['title']) . "</h1>";

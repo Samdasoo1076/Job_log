@@ -28,7 +28,7 @@ function renderSidebar(array $folders, $expandedRoot = null, $currentPostId = nu
             $title = htmlspecialchars($p['title']);
             $isAct = $id === $currentPostId ? ' active' : '';
             echo '<li>';
-            echo "  <a href=\"#\" class=\"post-link{$isAct}\" data-post-id=\"{$id}\" data-title=\"{$title}\">";
+            echo "  <a href=\"/?post_id={$id}\" class=\"post-link{$isAct}\" data-post-id=\"{$id}\" data-title=\"{$title}\">";
             echo $title;
             echo '</a>';
             echo '</li>';
@@ -94,7 +94,7 @@ function renderSidebar(array $folders, $expandedRoot = null, $currentPostId = nu
                   $title = htmlspecialchars($p['title']);
                   $isAct = $id === $currentPostId ? ' active' : '';
                   echo '<li>';
-                  echo "  <a href=\"#\" class=\"post-link{$isAct}\""
+                  echo "  <a href=\"/?post_id={$id}\" class=\"post-link{$isAct}\""
                      . " data-post-id=\"{$id}\" data-title=\"{$title}\">"
                      . $title
                      . '</a>';

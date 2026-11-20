@@ -66,7 +66,7 @@ function getTopPosts() {
 
     function getPost($postId) {
         global $pdo;
-        $stmt = $pdo->prepare("SELECT * FROM post WHERE id = :id");
+        $stmt = $pdo->prepare("SELECT * FROM post WHERE id = :id AND del_tf = 'N'");
         $stmt->execute([':id' => $postId]);
         return $stmt->fetch();
     }
@@ -80,7 +80,7 @@ function getTopPosts() {
 
     function getAllPosts() {
         global $pdo;
-        $stmt = $pdo->query("SELECT id, updated_at FROM post");
+        $stmt = $pdo->query("SELECT id, updated_at FROM post WHERE use_tf = 'Y' AND del_tf = 'N'");
         return $stmt->fetchAll();
     }
     

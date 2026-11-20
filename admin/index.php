@@ -1,4 +1,5 @@
 <?php
+header('X-Robots-Tag: noindex, nofollow, noarchive');
 // admin/index.php
 session_start();
 

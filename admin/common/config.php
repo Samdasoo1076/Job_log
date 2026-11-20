@@ -1,6 +1,7 @@
 <?php
 // admin/common/config.php
 // 세션 시작 및 전역 설정
+if (PHP_SAPI !== 'cli') header('X-Robots-Tag: noindex, nofollow, noarchive');
 $adminSessionLifetime = 10 * 365 * 24 * 60 * 60;
 // Isolate admin sessions from PHP's shared session cleanup policy.
 $adminSessionPath = sys_get_temp_dir() . '/cms-admin-sessions-' . substr(hash('sha256', __DIR__), 0, 16);

@@ -107,7 +107,8 @@ define('CV_POST_ID', 1); // 메인 자기소개 글 번호
  
 	// 댓글 아이디 닉 금지어 
 	$g_prohibit_id = "admin,administrator,system,운영자,어드민,주인장,웹마스터,sysop,시삽,시샵,manager,매니저,메니저,관리자,root,루트,su,guest,방문객";
-	$g_url = 'http://' . $http_host . $request_uri;
+	$g_site_url = 'https://leejimin.kr';
+	$g_url = $g_site_url . $request_uri;
 
  
 ?>

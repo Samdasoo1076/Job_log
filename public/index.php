@@ -1,4 +1,6 @@
 <?php
+header('Location: https://leejimin.kr/' . (!empty($_GET['post_id']) ? '?post_id=' . (int)$_GET['post_id'] : ''), true, 301);
+exit;
 require __DIR__ . '/../db.php';
 $tree   = getFolders();
 $postId = isset($_GET['post_id']) ? intval($_GET['post_id']) : null;

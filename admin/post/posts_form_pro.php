@@ -209,6 +209,9 @@ include __DIR__ . '/../layout/header.php';
 
   <?php if (isset($_GET['saved'])): ?>
     <div class="save-notice">게시글이 저장되었습니다.</div>
+    <?php if (($source['use_tf'] ?? 'N') === 'Y'): ?>
+      <p><a href="https://search.google.com/search-console/inspect?resource_id=sc-domain%3Aleejimin.kr&amp;url=<?= urlencode('https://leejimin.kr/?post_id=' . $postId) ?>" target="_blank" rel="noopener noreferrer">Search Console에서 게시글 확인</a></p>
+    <?php endif; ?>
   <?php endif; ?>
 
   <div class="pro-layout">

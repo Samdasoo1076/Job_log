@@ -5,6 +5,8 @@ html[data-admin-theme="light"] .login-box { background:#fffefa !important; color
 .admin-theme-control select { min-width:100px; padding:7px 10px; border:1px solid #666; border-radius:4px; background:#333; color:#eee; }
 html[data-admin-theme="light"] { color-scheme:light; --admin-bg:#f7f6f2; --admin-surface:#fffefa; --admin-border:#deded6; --admin-text:#303631; --admin-muted:#68716a; }
 html[data-admin-theme="dark"] { color-scheme:dark; }
+html[data-admin-theme="light"] #secret-create { background:#e2ecdf !important; color:#34583e !important; border-color:#b7cbb3 !important; }
+html[data-admin-theme="light"] .secret-note .secret-note-toggle { background:transparent !important; color:var(--admin-text) !important; }
 html[data-admin-theme="light"] .pro-main { background:var(--admin-surface); border-color:var(--admin-border); }
 html[data-admin-theme="light"] :is(.pro-editor-head p,.field > span,.field em,.switch-line,#autosave-state,#ai-helper-state,#publish-checklist li) { color:var(--admin-muted); }
 html[data-admin-theme="light"] :is(.pro-actions a,.preview-head button) { background:#e8ece5; border-color:#cbd3c8; color:#35473b; }

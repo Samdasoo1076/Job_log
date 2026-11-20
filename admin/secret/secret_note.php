@@ -36,6 +36,10 @@ foreach (['account_id', 'account_password'] as $column) {
         $pdo->exec("ALTER TABLE secret_note ADD COLUMN $column TEXT NULL");
     }
 }
+$urlColumn = $pdo->query("SHOW COLUMNS FROM secret_note LIKE 'note_url'");
+if (!$urlColumn->fetch()) {
+    $pdo->exec("ALTER TABLE secret_note ADD COLUMN note_url VARCHAR(2048) NOT NULL DEFAULT ''");
+}
 $pdo->exec("CREATE TABLE IF NOT EXISTS secret_note_history (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     note_id INT NOT NULL,
@@ -68,6 +72,10 @@ function secretSave(array $input): void
     $id = (int)($input['id'] ?? 0);
     $title = secretText($input['title'] ?? '');
     $body = secretText($input['note_body'] ?? '');
+    $url = secretText($input['note_url'] ?? '');
+    if ($url !== '' && (strlen($url) > 2048 || !filter_var($url, FILTER_VALIDATE_URL) || !in_array(strtolower((string)parse_url($url, PHP_URL_SCHEME)), ['http', 'https'], true))) {
+        throw new InvalidArgumentException('URL은 http:// 또는 https://로 시작하는 올바른 주소로 입력해 주세요.');
+    }
     $tag = ($input['tag_type'] ?? '일반') === 'custom' ? secretText($input['custom_tag'] ?? '') : (string)$input['tag_type'];
     if ((!array_key_exists($input['tag_type'] ?? '', $tagOptions) && ($input['tag_type'] ?? '') !== 'custom') || $tag === '' || mb_strlen($tag) > 255) {
         throw new InvalidArgumentException('태그를 확인해 주세요.');
@@ -85,6 +93,7 @@ function secretSave(array $input): void
     $params = [
         ':title' => $title,
         ':note_body' => $body,
+        ':note_url' => $url,
         ':tags' => $tag,
         ':account_id' => $accountId,
         ':account_password' => $accountPassword,
@@ -106,6 +115,7 @@ function secretSave(array $input): void
             UPDATE secret_note
                SET title = :title,
                    note_body = :note_body,
+                   note_url = :note_url,
                    tags = :tags,
                    account_id = :account_id,
                    account_password = :account_password,
@@ -124,8 +134,8 @@ function secretSave(array $input): void
     }
 
     $stmt = $pdo->prepare("
-        INSERT INTO secret_note (title, note_body, tags, is_important, account_id, account_password)
-        VALUES (:title, :note_body, :tags, :is_important, :account_id, :account_password)
+        INSERT INTO secret_note (title, note_body, tags, is_important, account_id, account_password, note_url)
+        VALUES (:title, :note_body, :tags, :is_important, :account_id, :account_password, :note_url)
     ");
     $stmt->execute($params);
 }
@@ -209,7 +219,7 @@ include __DIR__ . '/../layout/header.php';
     <div>
       <h1>비밀 메모장</h1>
     </div>
-    <button type="button" class="btn" id="secret-create">+ 비밀 메모 등록</button>
+    <button type="button" id="secret-create"><i data-lucide="plus" aria-hidden="true"></i><span>메모 등록</span></button>
   </div>
 
   <?php if ($message): ?>
@@ -251,6 +261,10 @@ include __DIR__ . '/../layout/header.php';
       <label class="secret-check">
         <input type="checkbox" name="is_important" value="1" <?= (int)($editNote['is_important'] ?? 0) === 1 ? 'checked' : '' ?>>
         <span>중요 메모</span>
+      </label>
+      <label>
+        <span>URL (선택)</span>
+        <input type="url" name="note_url" maxlength="2048" placeholder="https://example.com" value="<?= htmlspecialchars($editNote['note_url'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
       </label>
 
       <label>
@@ -294,6 +308,10 @@ include __DIR__ . '/../layout/header.php';
         </div>
       </form>
 
+      <div class="secret-quick-find">
+        <input type="search" id="secret-quick-find" placeholder="현재 목록에서 제목·태그 바로 찾기" aria-label="메모 빠른 찾기">
+        <span id="secret-quick-count" role="status"></span>
+      </div>
       <div class="secret-list">
         <?php if (!$notes): ?>
           <div class="secret-empty">등록된 메모가 없습니다.</div>
@@ -323,6 +341,9 @@ include __DIR__ . '/../layout/header.php';
             <?php endif; ?>
             <?php if (trim($note['note_body']) !== ''): ?>
               <pre><?= htmlspecialchars($note['note_body']) ?></pre>
+            <?php endif; ?>
+            <?php if (!empty($note['note_url'])): ?>
+              <a class="secret-note-url" href="<?= htmlspecialchars($note['note_url'], ENT_QUOTES, 'UTF-8') ?>" target="_blank" rel="noopener noreferrer" title="<?= htmlspecialchars($note['note_url'], ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($note['note_url'], ENT_QUOTES, 'UTF-8') ?></a>
             <?php endif; ?>
             </div>
             <div class="secret-card-actions">

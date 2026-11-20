@@ -127,7 +127,7 @@ window.addEventListener('DOMContentLoaded', () => {
             if (data.postId) {
               html += `
                 <li class="posts-list-item">
-                  <a href="#" class="post-link" data-post-id="${data.postId}">
+                  <a href="/?post_id=${encodeURIComponent(data.postId)}" class="post-link" data-post-id="${data.postId}">
                     ${escapeSearchHtml(name)}
                   </a>
                 </li>`;
@@ -151,6 +151,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // 클릭 바인딩 (검색 모드 그대로 유지)
         searchTree.querySelectorAll('.post-link').forEach(link => {
           link.addEventListener('click', e => {
+            if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.button !== 0) return;
             e.preventDefault();
             const id = link.dataset.postId;
             rememberSearch();

@@ -7,23 +7,26 @@ require __DIR__ . '/../../common/com/etc.php';      // getBrowserName()
 
 $postId = intval($_GET['post_id'] ?? 0);
 if (!$postId) {
+    http_response_code(404);
     echo json_encode(['error'=>'Invalid post_id']);
     exit;
 }
 
 // 뷰 카운트 증가
-$stmt = $pdo->prepare("UPDATE post SET view_count = view_count + 1 WHERE id = ?");
-$stmt->execute([$postId]);
 
 
 // 2) 포스트 조회
-$stmt = $pdo->prepare("SELECT id, title, description, content, created_at, updated_at, view_count, allow_comment FROM post WHERE id = ?");
+$stmt = $pdo->prepare("SELECT id, title, description, content, created_at, updated_at, view_count, allow_comment FROM post WHERE id = ? AND del_tf = 'N'");
 $stmt->execute([$postId]);
 $post = $stmt->fetch();
 if (!$post) {
+    http_response_code(404);
     echo json_encode(['error'=>'Not found']);
     exit;
 }
+$stmt = $pdo->prepare("UPDATE post SET view_count = view_count + 1 WHERE id = ?");
+$stmt->execute([$postId]);
+$post['view_count']++;
 
 
 // 3) 로그 남기기 (글 조회 이벤트)

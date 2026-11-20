@@ -1,4 +1,7 @@
 /* File: public/css/sidebar.css */
+.sidebar-latest { margin-top:20px; padding-top:12px; border-top:1px solid #7774; }
+.sidebar-latest h2 { font-size:12px; color:inherit; margin:0 0 8px; font-weight:500; }
+.sidebar-latest .post-link { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; line-height:1.8; }
 .search-default-heading { display:flex; align-items:center; justify-content:space-between; gap:8px; margin:12px 0 6px; color:#aab2bb; font-size:12px; }
 .search-default-heading button, .search-recent-row button { border:0; background:transparent; color:#bbc3cb; cursor:pointer; font:inherit; }
 .search-recent-row { display:flex; align-items:center; gap:8px; min-width:0; }
